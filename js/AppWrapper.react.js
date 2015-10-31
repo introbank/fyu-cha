@@ -21,14 +21,19 @@
  */
 
 var React = require('react');
-var Parse = require('parse');
 
-// Insert your app's keys here:
-Parse.initialize('LID0MpbVk0JBivgVMSO6hXO5cQ3wBdlgvA8eEbES', 'VXP7SEeJtZs02Qch88qpi0olZZCoXxVRgM2dmCyO');
+var AppWrapper = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
 
-var LoginWrapper = require('./LoginWrapper.react.js');
+  render: function() {
+    return (
+      <div>
+        <p>ろぐいんできたかも</p>
+      </div>
+    );
+  },
+});
 
-React.render(
-  <LoginWrapper />,
-  document.getElementById('app')
-);
+module.exports = AppWrapper;
