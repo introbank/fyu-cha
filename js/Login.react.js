@@ -24,9 +24,9 @@ var React = require('react');
 var Parse = require('parse').Parse;
 var ParseReact = require('parse-react');
 
-var AppWrapper = require('./AppWrapper.react.js');
+var App = require('./App.react.js');
 
-var LoginWrapper = React.createClass({
+var Login = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState: function() {
@@ -52,7 +52,7 @@ var LoginWrapper = React.createClass({
               <path d="M20,23 L40,23 L40,10 L60,30 L40,50 L40,37 L20,37 Z"></path>
             </svg>
           </a>
-          <AppWrapper />
+          <App />
         </div>
       );
     }
@@ -146,4 +146,4 @@ var LoginWrapper = React.createClass({
 
 });
 
-module.exports = LoginWrapper;
+module.exports = Login;

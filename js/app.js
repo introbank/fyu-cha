@@ -20,15 +20,89 @@
  *
  */
 
-var React = require('react');
-var Parse = require('parse');
 
-// Insert your app's keys here:
-Parse.initialize('LID0MpbVk0JBivgVMSO6hXO5cQ3wBdlgvA8eEbES', 'VXP7SEeJtZs02Qch88qpi0olZZCoXxVRgM2dmCyO');
+// var React = require('react');
+// var Parse = require('parse');
 
-var LoginWrapper = require('./LoginWrapper.react.js');
+// import { render } from 'react-dom'
+// import { Router, Route, Link } from 'react-router'
+//
+// // var Router = require('react-router');
+//
+// console.log('Router', Router)
+// console.log('Route', Route);
+// console.log('Link', Link);
+// console.log('render', render);
+//
+// var App = require('./App.react.js');
+// // var Login = require('./Login.react.js');
+// // var NotFound = require('./NotFound.react.js');
+//
+// // Insert your app's keys here:
+// Parse.initialize('LID0MpbVk0JBivgVMSO6hXO5cQ3wBdlgvA8eEbES', 'VXP7SEeJtZs02Qch88qpi0olZZCoXxVRgM2dmCyO');
+//
+// React.render((
+//     <Route path="/" component={App} />
+// ), document.body)
+//
+//         // <Route path="login" component={Login}/>
+//         // <Route path="*" component={NotFound}/>
 
-React.render(
-  <LoginWrapper />,
-  document.getElementById('app')
-);
+// var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+
+// var DefaultRoute = Router.DefaultRoute;
+// var Link = Router.Link;
+// var Route = Router.Route;
+// // var RouteHandler = Router.RouteHandler;
+//
+// var routes = (
+//   <Route name="app" path="/" handler={App} />
+// );
+//   // <Route name="app" path="/" handler={App}>
+//   //   <Route name="inbox" handler={Inbox}/>
+//   //   <Route name="calendar" handler={Calendar}/>
+//   //   <DefaultRoute handler={Dashboard}/>
+//   // </Route>
+//   //
+// Router.run(routes, function (Handler) {
+//   React.render(<Handler/>, document.body);
+// });
+
+
+var Router = ReactRouter;
+var Route = ReactRouter.Route;
+var Routes = ReactRouter.Routes;
+var DefaultRoute = ReactRouter.DefaultRoute;
+var Link = Router.Link;
+
+// var React = require('react'),
+//     {Route, DefaultRoute} = require('react-router'),
+//     Router = require('react-router'),
+var App = require('./App.react.js')
+    // App = require('./components/app'),
+    // YouTube = require('./components/youtube'),
+    // Vimeo = require('./components/vimeo'),
+    // Top = require('./components/top')
+;
+
+var routes = function() {
+  // return (
+  //   <Route name="app" path="/" handler={App}>
+  //   </Route>
+  // );
+};
+
+Router.run(routes, function(Handler) {
+    React.render(<Handler/>, document.body);
+    // res.send(template({
+    //     initialData: JSON.stringify(data),
+    //     markup: React.renderToString(React.createElement(Handler, {params: {videos: data}}))
+    // }));
+});
+
+
+    // <Route name="app" path="/" handler={App}>
+    //   <Route name="youtube" handler={YouTube} />
+    //   <Route name="vimeo" handler={Vimeo} />
+    //   <DefaultRoute handler={Top} />
+    // </Route>
