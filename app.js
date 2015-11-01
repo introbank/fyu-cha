@@ -1,14 +1,13 @@
 'use strict';
 
-var express     = require('express'),
-    app         = express(),
-    fs          = require('fs'),
-    browserify  = require('browserify'),
-    reactify    = require('reactify'),
-    Handlebars  = require('handlebars'),
-    React       = require('react'),
-    Router      = require('react-router')
-;
+var express     = require('express');
+var app         = express();
+var fs          = require('fs');
+var browserify  = require('browserify');
+var reactify    = require('reactify');
+var Handlebars  = require('handlebars');
+var React       = require('react');
+var Router      = require('react-router');
 
 require('node-jsx').install({ harmony: true });
 var routes = require('./routes')();
