@@ -1,13 +1,12 @@
-var React = require('react');
-// var Parse = require('parse').Parse;
-// var ParseReact = require('parse-react');
+var React  = require('react');
+var Header = require('./Header.react.js');
 
 var Dashboard = React.createClass({
-  // mixins: [ParseReact.Mixin],
 
   render() {
     return (
       <div>
+        <Header />
         <h2>ダッシュボード</h2>
       </div>
     );

@@ -1,34 +1,26 @@
 'use strict';
 
-var express     = require('express');
-var app         = express();
-var fs          = require('fs');
-var browserify  = require('browserify');
-var reactify    = require('reactify');
-var Handlebars  = require('handlebars');
-var React       = require('react');
-var Router      = require('react-router');
+var express = require('express');
+var app     = express();
+var React   = require('react');
+var exphbs  = require('express-handlebars');
 
-require('node-jsx').install({ harmony: true });
-var routes = require('./routes')();
+require('node-jsx').install({harmony: true});
 
-var template = Handlebars.compile(fs.readFileSync('./templates/index.hbs').toString());
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
 
-app.get('/bundle.js', function(req, res) {
-  res.setHeader('content-type', 'application/javascript');
-  browserify('./browser')
-    .transform({ harmony: true }, reactify)
-    .bundle()
-    .pipe(res)
-  ;
+var Dashboard = React.createFactory(require('./components/Dashboard.react.js'));
+var Login     = React.createFactory(require('./components/Login.react.js'));
+
+app.get('/', function(req, res) {
+    var body = React.renderToString(Dashboard({}));
+    res.render('main', {body: body});
 });
 
-app.use(function(req, res) {
-  Router.run(routes, req.path, function(Handler) {
-    res.send(template({
-      markup: React.renderToString(React.createElement(Handler, {}))
-    }));
-  });
+app.get('/login', function(req, res) {
+    var body = React.renderToString(Login({}));
+    res.render('main', {body: body});
 });
 
 var port = process.env.PORT || 5000;
