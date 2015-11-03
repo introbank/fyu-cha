@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 
 app.get('/login', function(req, res) {
     var body = React.renderToString(Login({}));
-    var script = './';
+    var script = '/login.js';
     res.render('main', {body: body, script: script});
 });
 

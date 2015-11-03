@@ -1,14 +1,11 @@
-var React = require('react');
-var Parse = require('parse/node');
+var React      = require('react');
+var Parse      = require('../lib/parse');
 var ParseReact = require('parse-react');
-// var {Navbar, NavBrand, Nav, NavItem} = require('react-bootstrap');
-var bootstrap = require('react-bootstrap');
-var Navbar = bootstrap.Navbar;
-var NavBrand = bootstrap.NavBrand;
-var Nav = bootstrap.Nav;
-var NavItem = bootstrap.NavItem;
-
-Parse.initialize('LID0MpbVk0JBivgVMSO6hXO5cQ3wBdlgvA8eEbES', 'VXP7SEeJtZs02Qch88qpi0olZZCoXxVRgM2dmCyO');
+var bootstrap  = require('react-bootstrap');
+var Navbar     = bootstrap.Navbar;
+var NavBrand   = bootstrap.NavBrand;
+var Nav        = bootstrap.Nav;
+var NavItem    = bootstrap.NavItem;
 
 var Header = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -31,7 +28,7 @@ var Header = React.createClass({
           }
           {
             this.data.user
-            ? ''
+            ? null
             : <NavItem eventKey={'signup'} href="/singup">ユーザ登録</NavItem>
           }
         </Nav>

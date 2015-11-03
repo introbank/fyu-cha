@@ -3,7 +3,7 @@ var browserify = require('gulp-browserify');
 var react      = require('react');
 
 gulp.task('scripts', function() {
-  gulp.src(['app/signup.js'])
+  gulp.src('app/*.js')
     .pipe(browserify({
       debug: true,
       transform: ["reactify"],
