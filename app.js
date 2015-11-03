@@ -11,10 +11,11 @@ require('node-jsx').install({harmony: true});
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
-var Top     = React.createFactory(require('./components/Top.react.js'));
-var Login   = React.createFactory(require('./components/Login.react.js'));
-var Signup  = React.createFactory(require('./components/Signup.react.js'));
-var Profile = React.createFactory(require('./components/Profile.react.js'));
+var Top       = React.createFactory(require('./components/Top.react.js'));
+var Login     = React.createFactory(require('./components/Login.react.js'));
+var Signup    = React.createFactory(require('./components/Signup.react.js'));
+var Profile   = React.createFactory(require('./components/Profile.react.js'));
+var Performer = React.createFactory(require('./components/Performer.react.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -40,6 +41,14 @@ app.get('/profile/:id', function(req, res) {
     var params = {id: req.params.id};
     var body   = React.renderToString(Profile({params: params}));
     var script = '/profile.js';
+    var json   = JSON.stringify(params);
+    res.render('main', {body: body, script: script, params: json});
+});
+
+app.get('/performers/:id', function(req, res) {
+    var params = {id: req.params.id};
+    var body   = React.renderToString(Performer({params: params}));
+    var script = '/performer.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });
