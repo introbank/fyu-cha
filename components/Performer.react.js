@@ -17,21 +17,12 @@ var Performer = React.createClass({
   },
 
   render() {
-    var performer;
-    if (this.data.performer && this.data.performer[0]) {
+    var performer = null;
+    if (this.data.performer && this.data.performer.length !== 0) {
       performer = this.data.performer[0];
-    } else {
-      performer = null;
     }
 
     if (performer) {
-      return (
-        <div>
-          <Header />
-          <h2>パフォーマー</h2>
-        </div>
-      );
-    } else {
       return (
         <div>
           <Header />
@@ -40,6 +31,13 @@ var Performer = React.createClass({
             <h3>{performer.name}</h3>
             <p>{performer.info}</p>
           </Jumbotron>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Header />
+          <h2>パフォーマー</h2>
         </div>
       );
     }
