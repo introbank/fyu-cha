@@ -6,6 +6,7 @@ var bootstrap   = require('react-bootstrap');
 var Input       = bootstrap.Input;
 var ButtonInput = bootstrap.ButtonInput;
 var Button      = bootstrap.Button;
+var Alert       = bootstrap.Alert;
 
 var Login = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -29,11 +30,7 @@ var Login = React.createClass({
 
     Parse.User.logIn(username, password, {
       success: function(user) {
-        console.log('success');
-        console.log(user);
-        console.log(this.data);
-        // console.log(this.data.user);
-
+        // 更新するために無理やり発火してる
         self.setState({
           error: null
         });
