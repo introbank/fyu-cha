@@ -6,7 +6,6 @@ var Dashboard = React.createClass({
   render() {
     return (
       <div>
-        <Header />
         <h2>ダッシュボード</h2>
       </div>
     );

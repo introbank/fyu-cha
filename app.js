@@ -11,15 +11,15 @@ require('node-jsx').install({harmony: true});
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
-var Dashboard = React.createFactory(require('./components/Dashboard.react.js'));
-var Login     = React.createFactory(require('./components/Login.react.js'));
-var Signup    = React.createFactory(require('./components/Signup.react.js'));
+var Top    = React.createFactory(require('./components/Top.react.js'));
+var Login  = React.createFactory(require('./components/Login.react.js'));
+var Signup = React.createFactory(require('./components/Signup.react.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
-    var body = React.renderToString(Dashboard({}));
-    var script = './';
+    var body = React.renderToString(Top({}));
+    var script = '/top.js';
     res.render('main', {body: body, script: script});
 });
 
