@@ -28,7 +28,7 @@ var Header = React.createClass({
           }
           {
             this.data.user
-            ? null
+            ? <NavItem eventKey={'profile'} onClick={this.profile}>プロフィール</NavItem>
             : <NavItem eventKey={'signup'} onClick={this.signup}>ユーザ登録</NavItem>
           }
         </Nav>
@@ -55,6 +55,11 @@ var Header = React.createClass({
 
   signup() {
     location.href = '/signup';
+  },
+
+  profile() {
+    console.log(this.data.user);
+    location.href = '/profile/' + this.data.user.username;
   },
 
 });
