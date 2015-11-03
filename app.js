@@ -16,6 +16,7 @@ var Login     = React.createFactory(require('./components/Login.react.js'));
 var Signup    = React.createFactory(require('./components/Signup.react.js'));
 var Profile   = React.createFactory(require('./components/Profile.react.js'));
 var Performer = React.createFactory(require('./components/Performer.react.js'));
+var NotFound  = React.createFactory(require('./components/NotFound.react.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -51,6 +52,12 @@ app.get('/performers/:id', function(req, res) {
     var script = '/performer.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
+});
+
+app.get('*', function(req, res) {
+    var body = React.renderToString(NotFound({}));
+    var script = '/notfound.js';
+    res.render('main', {body: body, script: script});
 });
 
 var port = process.env.PORT || 5000;
