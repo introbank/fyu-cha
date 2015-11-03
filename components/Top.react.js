@@ -5,7 +5,7 @@ var Header    = require('./Header.react.js');
 var Dashboard = require('./Dashboard.react.js');
 var LP        = require('./LP.react.js');
 
-var TOP = React.createClass({
+var Top = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe() {
@@ -35,4 +35,4 @@ var TOP = React.createClass({
 
 });
 
-module.exports = TOP;
+module.exports = Top;
