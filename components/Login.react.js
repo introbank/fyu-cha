@@ -23,6 +23,12 @@ var Login = React.createClass({
     };
   },
 
+  componentWillMount() {
+    if (this.data.user) {
+      location.href = '/';
+    }
+  },
+
   login() {
     var self = this;
     var username = this.refs.username.getValue();
@@ -30,10 +36,7 @@ var Login = React.createClass({
 
     Parse.User.logIn(username, password, {
       success: function(user) {
-        // 更新するために無理やり発火してる
-        self.setState({
-          error: null
-        });
+        location.href = '/';
       },
       error: function(user, error) {
         console.error(error);
@@ -49,17 +52,6 @@ var Login = React.createClass({
   },
 
   render() {
-    console.log('render', this.data.user);
-
-    if (this.data.user) {
-      return (
-        <div>
-          <Header />
-          <Button onClick={this.logout}>ログアウト</Button>
-        </div>
-      );
-    }
-
     return (
       <div>
         <Header />

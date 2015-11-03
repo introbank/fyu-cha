@@ -24,12 +24,12 @@ var Header = React.createClass({
           {
             this.data.user
             ? <NavItem eventKey={'logout'}>ログアウト</NavItem>
-            : <NavItem eventKey={'login'} href="/login">ログイン</NavItem>
+            : <NavItem eventKey={'login'} onClick={this.login}>ログイン</NavItem>
           }
           {
             this.data.user
             ? null
-            : <NavItem eventKey={'signup'} href="/singup">ユーザ登録</NavItem>
+            : <NavItem eventKey={'signup'} onClick={this.signup}>ユーザ登録</NavItem>
           }
         </Nav>
       </Navbar>
@@ -46,6 +46,15 @@ var Header = React.createClass({
 
   logout() {
     Parse.User.logOut();
+    location.href = '/';
+  },
+
+  login() {
+    location.href = '/login';
+  },
+
+  signup() {
+    location.href = '/signup';
   },
 
 });

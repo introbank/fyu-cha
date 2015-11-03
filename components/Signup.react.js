@@ -30,6 +30,12 @@ var Signup = React.createClass({
     };
   },
 
+  componentWillMount() {
+    if (this.data.user) {
+      location.href = '/';
+    }
+  },
+
   getPin() {
     var self = this;
     var popup = window.open('', null, 'width=400, height=400');
