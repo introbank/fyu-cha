@@ -1,5 +1,5 @@
 var React      = require('react');
-var Parse      = require('../lib/parse');
+var Parse      = require('parse');
 var ParseReact = require('parse-react');
 var bootstrap  = require('react-bootstrap');
 var Navbar     = bootstrap.Navbar;
