@@ -90,8 +90,8 @@ var Signup = React.createClass({
         cb.setToken(reply.oauth_token, reply.oauth_token_secret);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://api.parse.com/1/users', true);
-        xhr.setRequestHeader('X-Parse-Application-Id', setting.appId);
-        xhr.setRequestHeader('X-Parse-REST-API-Key', setting.restKey);
+        xhr.setRequestHeader('X-Parse-Application-Id', setting.parse.appId);
+        xhr.setRequestHeader('X-Parse-REST-API-Key', setting.parse.restKey);
         xhr.setRequestHeader('X-Parse-Revocable-Session', '1');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function() {
