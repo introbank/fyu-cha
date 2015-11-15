@@ -12,7 +12,7 @@ var Performer = React.createClass({
   observe() {
     var id = this.props.params.id;
     return {
-      performer: (new Parse.Query('Performer')).equalTo('twitterUsername', id),
+      performer: (new Parse.Query('Performer')).equalTo('twitterId', id),
     };
   },
 
