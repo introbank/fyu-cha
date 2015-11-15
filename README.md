@@ -23,3 +23,5 @@ react componentをサーバサイドとクライアントサイドで使い回�
 performerのサンプルURL: http://localhost:5000/performers/aina_BiSH
 
 編集ボタンは2回押さないと効き始めない。
+
+profileのサンプルURL: http://localhost:5000/profile/shogo
