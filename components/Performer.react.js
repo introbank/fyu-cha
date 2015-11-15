@@ -18,7 +18,7 @@ var Performer = React.createClass({
     var isViewable = this.state.editMode;
 
     var performerQuery = new Parse.Query('Performer');
-    performerQuery.equalTo('twitterId', id);
+    performerQuery.equalTo('twitterUsername', id);
     var albumQuery = new Parse.Query('Album');
     albumQuery.matchesQuery('performer', performerQuery);
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
@@ -27,7 +27,7 @@ var Performer = React.createClass({
     mediaMapQuery.include('media')
 
     return {
-      performer: new Parse.Query('Performer').equalTo('twitterId', id),
+      performer: performerQuery,
       mediaMap: mediaMapQuery,
     };
   },

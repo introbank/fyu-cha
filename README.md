@@ -18,5 +18,8 @@ react componentをサーバサイドとクライアントサイドで使い回�
 
 `npm run build`はgulpでクライアント側のjsを生成している。
 
-performerのサンプルURL: http://localhost:5000/performers/3062547956
+## サンプル
+
+performerのサンプルURL: http://localhost:5000/performers/aina_BiSH
+
 編集ボタンは2回押さないと効き始めない。
