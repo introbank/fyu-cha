@@ -9,23 +9,42 @@ var Jumbotron    = bootstrap.Jumbotron;
 var Performer = React.createClass({
   mixins: [ParseReact.Mixin],
 
+  getInitialState() {
+    return {editMode: false};
+  },
+
   observe() {
     var id = this.props.params.id;
+    var isViewable = this.state.editMode;
+
+    var performerQuery = new Parse.Query('Performer');
+    performerQuery.equalTo('twitterId', id);
+    var albumQuery = new Parse.Query('Album');
+    albumQuery.matchesQuery('performer', performerQuery);
+    var mediaMapQuery = new Parse.Query('AlbumMediaMap')
+    mediaMapQuery.matchesQuery('album', albumQuery);
+    mediaMapQuery.equalTo('isViewable', isViewable);
+    mediaMapQuery.include('media')
+
     return {
-      performer: (new Parse.Query('Performer')).equalTo('twitterId', id),
-      media: (new Parse.Query('Media')).equalTo('twitterId', id),
+      performer: new Parse.Query('Performer').equalTo('twitterId', id),
+      mediaMap: mediaMapQuery,
     };
+  },
+
+  switchEditMode(event) {
+    this.setState({editMode: !this.state.editMode});
   },
 
   render() {
     var performer = null;
-    var media = [];
     if (this.data.performer && this.data.performer.length !== 0) {
       performer = this.data.performer[0];
     }
-    if (this.data.media && this.data.media.length !== 0) {
-      for (var i = 0; i < this.data.media.length; i++) {
-        media.push(this.data.media[i].mediaUri)
+    var media = [];
+    if (this.data.mediaMap && this.data.mediaMap.length !== 0) {
+      for (var i = 0; i < this.data.mediaMap.length; i++) {
+        media.push(this.data.mediaMap[i].media.mediaUri)
       }
     }
 
@@ -40,6 +59,7 @@ var Performer = React.createClass({
             {media.map(function (image) {
               return <img src={image} height="150" />
             })}
+            <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
         </div>
       );
