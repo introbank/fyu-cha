@@ -13,13 +13,20 @@ var Performer = React.createClass({
     var id = this.props.params.id;
     return {
       performer: (new Parse.Query('Performer')).equalTo('twitterId', id),
+      media: (new Parse.Query('Media')).equalTo('twitterId', id),
     };
   },
 
   render() {
     var performer = null;
+    var media = [];
     if (this.data.performer && this.data.performer.length !== 0) {
       performer = this.data.performer[0];
+    }
+    if (this.data.media && this.data.media.length !== 0) {
+      for (var i = 0; i < this.data.media.length; i++) {
+        media.push(this.data.media[i].mediaUri)
+      }
     }
 
     if (performer) {
@@ -30,6 +37,9 @@ var Performer = React.createClass({
           <Jumbotron>
             <h3>{performer.name}</h3>
             <p>{performer.info}</p>
+            {media.map(function (image) {
+              return <img src={image} height="150" />
+            })}
           </Jumbotron>
         </div>
       );
