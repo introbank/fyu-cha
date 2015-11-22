@@ -15,7 +15,6 @@ var Performer = React.createClass({
 
   observe() {
     var id = this.props.params.id;
-    var isViewable = this.state.editMode;
 
     var performerQuery = new Parse.Query('Performer');
     performerQuery.equalTo('twitterUsername', id);
@@ -23,8 +22,9 @@ var Performer = React.createClass({
     albumQuery.matchesQuery('performer', performerQuery);
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
+    // editMode:: select all data, non editMode:: select viewable data 
     if(!this.state.editMode){
-        mediaMapQuery.equalTo('isViewable', true);
+      mediaMapQuery.equalTo('isViewable', true);
     }
     mediaMapQuery.include('media')
 
@@ -38,10 +38,10 @@ var Performer = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
 
-  setIsViewable(event, albumMediaMap, isViewable){
+  setIsViewable(event, albumMediaMap, isViewable) {
     albumMediaMap.set("isViewable", isViewable);
     albumMediaMap.save(null, {
-      success: function(res){console.log(res);},
+      success: function(res){console.log(res.text);},
       error: function(error){console.log(error.text);}
     });
   },
@@ -67,8 +67,8 @@ var Performer = React.createClass({
             <h3>{performer.name}</h3>
             <p>{performer.info}</p>
             {this.data.mediaMap.map(function (res) {
-              var setViewable = function(event){this.setIsViewable(event, res, true);};
-              var setUnViewable = function(event){this.setIsViewable(event, res, false);};
+              function setViewable(){this.setIsViewable(event, res, true);};
+              function setUnViewable(){this.setIsViewable(event, res, false);};
               return (<p><img src={res.media.mediaUri} height="150" /> <button class="btn" type="button" onClick={setViewable}>view</button> <button class="btn" type="button" onClick={setUnViewable}>unview</button></p>)
             })}
             <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
