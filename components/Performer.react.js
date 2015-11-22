@@ -23,7 +23,9 @@ var Performer = React.createClass({
     albumQuery.matchesQuery('performer', performerQuery);
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
-    mediaMapQuery.equalTo('isViewable', isViewable);
+    if(!this.state.editMode){
+        mediaMapQuery.equalTo('isViewable', true);
+    }
     mediaMapQuery.include('media')
 
     return {
@@ -34,6 +36,14 @@ var Performer = React.createClass({
 
   switchEditMode(event) {
     this.setState({editMode: !this.state.editMode});
+  },
+
+  setIsViewable(albumMediaMap, isViewable){
+    albumMediaMap.set("isViewable", isViewable);
+    albumMediaMap.save(null, {
+      success: function(res){console.log(res);},
+      error: function(error){console.log(error.text);}
+    });
   },
 
   render() {
@@ -56,8 +66,10 @@ var Performer = React.createClass({
           <Jumbotron>
             <h3>{performer.name}</h3>
             <p>{performer.info}</p>
-            {media.map(function (image) {
-              return <img src={image} height="150" />
+            {this.data.mediaMap.map(function (res) {
+              var setViewable = function(event){this.setIsViewable(res, true);};
+              var setUnViewable = function(event){this.setIsViewable(res, false);};
+              return (<p><img src={res.media.mediaUri} height="150" /></p> )
             })}
             <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
