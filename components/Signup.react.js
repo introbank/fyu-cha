@@ -11,8 +11,8 @@ var Codebird    = require("codebird");
 var setting     = require('../setting');
 
 var cb     = new Codebird;
-var key    = "LYiT9cjdJgWypf2MJa7THyLKG";
-var secret = "2jDPDPRm8Ieu3BfaksnekPn7Zri24Krs9xPClafEoQXKnga5Aj";
+var key    = "em7M7qW6NoKhCf9PPGvaLWfmA";
+var secret = "IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U";
 cb.setConsumerKey(key, secret);
 
 var Signup = React.createClass({
@@ -104,7 +104,7 @@ var Signup = React.createClass({
           }
         };
 
-        data = '{"username":"' + username + '","password":"' + password + '","authData": {"twitter": {"id": "' + reply.user_id + '","screen_name": "' + reply.screen_name + '","consumer_key": "LYiT9cjdJgWypf2MJa7THyLKG","consumer_secret": "2jDPDPRm8Ieu3BfaksnekPn7Zri24Krs9xPClafEoQXKnga5Aj","auth_token": "' + reply.oauth_token + '","auth_token_secret": "' + reply.oauth_token_secret + '"}}}'
+        data = '{"username":"' + username + '","password":"' + password + '","authData": {"twitter": {"id": "' + reply.user_id + '","screen_name": "' + reply.screen_name + '","consumer_key": "em7M7qW6NoKhCf9PPGvaLWfmA","consumer_secret": "IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U","auth_token": "' + reply.oauth_token + '","auth_token_secret": "' + reply.oauth_token_secret + '"}}}'
         xhr.send(data);
       }
     );
