@@ -14,8 +14,8 @@ app.set('view engine', '.hbs');
 var Top       = React.createFactory(require('./components/Top.react.js'));
 var Login     = React.createFactory(require('./components/Login.react.js'));
 var Signup    = React.createFactory(require('./components/Signup.react.js'));
-var Profile   = React.createFactory(require('./components/Profile.react.js'));
-var Performer = React.createFactory(require('./components/Performer.react.js'));
+var User   = React.createFactory(require('./components/User.react.js'));
+var Artist = React.createFactory(require('./components/Artist.react.js'));
 var NotFound  = React.createFactory(require('./components/NotFound.react.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,18 +38,18 @@ app.get('/signup', function(req, res) {
     res.render('main', {body: body, script: script});
 });
 
-app.get('/profile/:id', function(req, res) {
+app.get('/users/:id', function(req, res) {
     var params = {id: req.params.id};
-    var body   = React.renderToString(Profile({params: params}));
-    var script = '/profile.js';
+    var body   = React.renderToString(User({params: params}));
+    var script = '/user.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });
 
-app.get('/performers/:id', function(req, res) {
+app.get('/artists/:id', function(req, res) {
     var params = {id: req.params.id};
-    var body   = React.renderToString(Performer({params: params}));
-    var script = '/performer.js';
+    var body   = React.renderToString(Artist({params: params}));
+    var script = '/artist.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });

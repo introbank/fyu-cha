@@ -6,7 +6,7 @@ var bootstrap    = require('react-bootstrap');
 var FormControls = bootstrap.FormControls;
 var Jumbotron    = bootstrap.Jumbotron;
 
-var Performer = React.createClass({
+var Artist = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState() {
@@ -16,10 +16,10 @@ var Performer = React.createClass({
   observe() {
     var id = this.props.params.id;
 
-    var performerQuery = new Parse.Query('Performer');
-    performerQuery.equalTo('twitterUsername', id);
+    var artistQuery = new Parse.Query('Artist');
+    artistQuery.equalTo('twitterUsername', id);
     var albumQuery = new Parse.Query('Album');
-    albumQuery.matchesQuery('performer', performerQuery);
+    albumQuery.matchesQuery('artist', artistQuery);
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
     // editMode:: select all data, non editMode:: select viewable data
@@ -29,7 +29,7 @@ var Performer = React.createClass({
     mediaMapQuery.include('media')
 
     return {
-      performer: performerQuery,
+      artist: artistQuery,
       mediaMap: mediaMapQuery,
     };
   },
@@ -50,9 +50,9 @@ var Performer = React.createClass({
   },
 
   render() {
-    var performer = null;
-    if (this.data.performer && this.data.performer.length !== 0) {
-      performer = this.data.performer[0];
+    var artist = null;
+    if (this.data.artist && this.data.artist.length !== 0) {
+      artist = this.data.artist[0];
     }
     var media = [];
     if (this.data.mediaMap && this.data.mediaMap.length !== 0) {
@@ -61,14 +61,14 @@ var Performer = React.createClass({
       }
     }
 
-    if (performer) {
+    if (artist) {
       return (
         <div>
           <Header />
           <h2>パフォーマー</h2>
           <Jumbotron>
-            <h3>{performer.name}</h3>
-            <p>{performer.info}</p>
+            <h3>{artist.name}</h3>
+            <p>{artist.info}</p>
             {this.data.mediaMap.map(function (mediaMap) {
               return (
                 <p>
@@ -86,7 +86,7 @@ var Performer = React.createClass({
       return (
         <div>
           <Header />
-          <h2>パフォーマー</h2>
+          <h2>アーティスト</h2>
         </div>
       );
     }
@@ -94,4 +94,4 @@ var Performer = React.createClass({
 
 });
 
-module.exports = Performer;
+module.exports = Artist;

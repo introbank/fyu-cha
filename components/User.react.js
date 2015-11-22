@@ -5,7 +5,7 @@ var Header       = require('./Header.react.js');
 var bootstrap    = require('react-bootstrap');
 var FormControls = bootstrap.FormControls;
 
-var Profile = React.createClass({
+var User = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe() {
@@ -52,4 +52,4 @@ var Profile = React.createClass({
 
 });
 
-module.exports = Profile;
+module.exports = User;
