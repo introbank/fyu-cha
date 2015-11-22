@@ -38,7 +38,7 @@ var Performer = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
 
-  setIsViewable(albumMediaMap, isViewable){
+  setIsViewable(event, albumMediaMap, isViewable){
     albumMediaMap.set("isViewable", isViewable);
     albumMediaMap.save(null, {
       success: function(res){console.log(res);},
@@ -67,9 +67,9 @@ var Performer = React.createClass({
             <h3>{performer.name}</h3>
             <p>{performer.info}</p>
             {this.data.mediaMap.map(function (res) {
-              var setViewable = function(event){this.setIsViewable(res, true);};
-              var setUnViewable = function(event){this.setIsViewable(res, false);};
-              return (<p><img src={res.media.mediaUri} height="150" /></p> )
+              var setViewable = function(event){this.setIsViewable(event, res, true);};
+              var setUnViewable = function(event){this.setIsViewable(event, res, false);};
+              return (<p><img src={res.media.mediaUri} height="150" /> <button class="btn" type="button" onClick={setViewable}>view</button></p> <button class="btn" type="button" onClick={setUnViewable}>unview</button></p>)
             })}
             <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
