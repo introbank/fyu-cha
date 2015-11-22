@@ -23,5 +23,8 @@
   "scripts": {
     "build": "gulp",
     "start": "node app.js"
+  },
+  "engines": {
+    "node": "5.1.0"
   }
 }
