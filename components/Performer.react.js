@@ -69,7 +69,7 @@ var Performer = React.createClass({
             {this.data.mediaMap.map(function (res) {
               var setViewable = function(event){this.setIsViewable(event, res, true);};
               var setUnViewable = function(event){this.setIsViewable(event, res, false);};
-              return (<p><img src={res.media.mediaUri} height="150" /> <button class="btn" type="button" onClick={setViewable}>view</button></p> <button class="btn" type="button" onClick={setUnViewable}>unview</button></p>)
+              return (<p><img src={res.media.mediaUri} height="150" /> <button class="btn" type="button" onClick={setViewable}>view</button> <button class="btn" type="button" onClick={setUnViewable}>unview</button></p>)
             })}
             <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
