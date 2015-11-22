@@ -65,7 +65,7 @@ var Artist = React.createClass({
       return (
         <div>
           <Header />
-          <h2>パフォーマー</h2>
+          <h2>アーティスト</h2>
           <Jumbotron>
             <h3>{artist.name}</h3>
             <p>{artist.info}</p>
