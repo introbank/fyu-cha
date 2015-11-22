@@ -22,7 +22,7 @@ var Performer = React.createClass({
     albumQuery.matchesQuery('performer', performerQuery);
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
-    // editMode:: select all data, non editMode:: select viewable data 
+    // editMode:: select all data, non editMode:: select viewable data
     if(!this.state.editMode){
       mediaMapQuery.equalTo('isViewable', true);
     }
@@ -38,8 +38,11 @@ var Performer = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
 
-  setIsViewable(event, albumMediaMap, isViewable) {
-    albumMediaMap.set("isViewable", isViewable);
+  setIsViewable(mediaMapId, isViewable) {
+    var AlbumMediaMap = Parse.Object.extend('AlbumMediaMap');
+    var albumMediaMap = new AlbumMediaMap();
+    albumMediaMap.id = mediaMapId;
+    albumMediaMap.set('isViewable', isViewable);
     albumMediaMap.save(null, {
       success: function(res){console.log(res.text);},
       error: function(error){console.log(error.text);}
@@ -66,11 +69,15 @@ var Performer = React.createClass({
           <Jumbotron>
             <h3>{performer.name}</h3>
             <p>{performer.info}</p>
-            {this.data.mediaMap.map(function (res) {
-              function setViewable(){this.setIsViewable(event, res, true);};
-              function setUnViewable(){this.setIsViewable(event, res, false);};
-              return (<p><img src={res.media.mediaUri} height="150" /> <button class="btn" type="button" onClick={setViewable}>view</button> <button class="btn" type="button" onClick={setUnViewable}>unview</button></p>)
-            })}
+            {this.data.mediaMap.map(function (mediaMap) {
+              return (
+                <p>
+                  <img src={mediaMap.media.mediaUri} height="150" />
+                  <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>
+                  <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>
+                </p>
+              )
+            }, this)}
             <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
         </div>
