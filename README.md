@@ -5,7 +5,7 @@ introbank
 
 ```bash
 npm install
-npm run build
+npm run postinstall
 npm start
 ```
 ## 仕組み
