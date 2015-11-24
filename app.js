@@ -16,6 +16,7 @@ var Login     = React.createFactory(require('./components/Login.react.js'));
 var Signup    = React.createFactory(require('./components/Signup.react.js'));
 var User   = React.createFactory(require('./components/User.react.js'));
 var Artist = React.createFactory(require('./components/Artist.react.js'));
+var Group = React.createFactory(require('./components/Group.react.js'));
 var NotFound  = React.createFactory(require('./components/NotFound.react.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,6 +51,14 @@ app.get('/artists/:id', function(req, res) {
     var params = {id: req.params.id};
     var body   = React.renderToString(Artist({params: params}));
     var script = '/artist.js';
+    var json   = JSON.stringify(params);
+    res.render('main', {body: body, script: script, params: json});
+});
+
+app.get('/groups/:id', function(req, res) {
+    var params = {id: req.params.id};
+    var body   = React.renderToString(Artist({params: params}));
+    var script = '/group.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });

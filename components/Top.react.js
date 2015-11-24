@@ -10,9 +10,11 @@ var Top = React.createClass({
 
   observe() {
     var artistQuery = new Parse.Query('Artist');
+    var groupQuery = new Parse.Query('Group');
     return {
       user: ParseReact.currentUser,
-      artist: artistQuery
+      artist: artistQuery,
+      group: groupQuery
     };
   },
 
@@ -23,11 +25,22 @@ var Top = React.createClass({
         <div>
           <Header />
           <Dashboard />
-          {this.data.artist.map(function (artist) {
-            return (
-              <p><a href={'artists/' + artist.twitterUsername}>{artist.name}</a></p>
-            )
-          })}
+          <h3>アーティスト</h3>
+          <ul>
+            {this.data.artist.map(function (artist) {
+              return (
+                <li><a href={'artists/' + artist.twitterUsername}>{artist.name}</a></li>
+              )
+            })}
+          </ul>
+          <h3>グループ</h3>
+          <ul>
+            {this.data.group.map(function (group) {
+              return (
+                <li><a href={'groups/' + group.twitterUsername}>{group.name}</a></li>
+              )
+            })}
+          </ul>
         </div>
       );
     } else if (this.data.artist) {
@@ -35,11 +48,22 @@ var Top = React.createClass({
         <div>
           <Header />
           <LP />
-          {this.data.artist.map(function (artist) {
-            return (
-              <p><a href={'artists/' + artist.twitterUsername}>{artist.name}</a></p>
-            )
-          })}
+          <h3>アーティスト</h3>
+          <ul>
+            {this.data.artist.map(function (artist) {
+              return (
+                <li><a href={'artists/' + artist.twitterUsername}>{artist.name}</a></li>
+              )
+            })}
+          </ul>
+          <h3>グループ</h3>
+          <ul>
+            {this.data.group.map(function (group) {
+              return (
+                <li><a href={'groups/' + group.twitterUsername}>{group.name}</a></li>
+              )
+            })}
+          </ul>
         </div>
       );
     } else {
