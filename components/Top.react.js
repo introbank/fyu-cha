@@ -9,8 +9,10 @@ var Top = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe() {
+    var artistQuery = new Parse.Query('Artist');
     return {
-      user: ParseReact.currentUser
+      user: ParseReact.currentUser,
+      artist: artistQuery
     };
   },
 
@@ -21,6 +23,23 @@ var Top = React.createClass({
         <div>
           <Header />
           <Dashboard />
+          {this.data.artist.map(function (artist) {
+            return (
+              <p><a href={'artists/' + artist.twitterUsername}>{artist.name}</a></p>
+            )
+          })}
+        </div>
+      );
+    } else if (this.data.artist) {
+      return (
+        <div>
+          <Header />
+          <LP />
+          {this.data.artist.map(function (artist) {
+            return (
+              <p><a href={'artists/' + artist.twitterUsername}>{artist.name}</a></p>
+            )
+          })}
         </div>
       );
     } else {
