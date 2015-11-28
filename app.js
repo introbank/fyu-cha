@@ -23,26 +23,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
     var body = React.renderToString(Top({}));
-    var script = '/top.js';
+    var script = '/javascripts/top.js';
     res.render('main', {body: body, script: script});
 });
 
 app.get('/login', function(req, res) {
     var body = React.renderToString(Login({}));
-    var script = '/login.js';
+    var script = '/javascripts/login.js';
     res.render('main', {body: body, script: script});
 });
 
 app.get('/signup', function(req, res) {
     var body = React.renderToString(Signup({}));
-    var script = '/signup.js';
+    var script = '/javascripts/signup.js';
     res.render('main', {body: body, script: script});
 });
 
 app.get('/users/:id', function(req, res) {
     var params = {id: req.params.id};
     var body   = React.renderToString(User({params: params}));
-    var script = '/user.js';
+    var script = '/javascripts/user.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });
@@ -50,7 +50,7 @@ app.get('/users/:id', function(req, res) {
 app.get('/artists/:id', function(req, res) {
     var params = {id: req.params.id};
     var body   = React.renderToString(Artist({params: params}));
-    var script = '/artist.js';
+    var script = '/javascripts/artist.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });
@@ -58,14 +58,14 @@ app.get('/artists/:id', function(req, res) {
 app.get('/groups/:id', function(req, res) {
     var params = {id: req.params.id};
     var body   = React.renderToString(Artist({params: params}));
-    var script = '/group.js';
+    var script = '/javascripts/group.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
 });
 
 app.get('*', function(req, res) {
     var body = React.renderToString(NotFound({}));
-    var script = '/notfound.js';
+    var script = '/javascripts/notfound.js';
     res.render('main', {body: body, script: script});
 });
 

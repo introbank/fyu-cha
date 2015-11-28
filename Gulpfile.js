@@ -8,8 +8,7 @@ gulp.task('scripts', function() {
       debug: true,
       transform: ["reactify"],
     }))
-    .pipe(gulp.dest('./public/'));
+    .pipe(gulp.dest('./public/javascripts/'));
 });
 
 gulp.task('default', ['scripts']);
-

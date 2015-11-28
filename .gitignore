@@ -2,4 +2,4 @@ node_modules
 bundle.js
 bundle.min.js
 dist/
-public/
+public/javascripts/
