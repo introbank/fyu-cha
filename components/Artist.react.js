@@ -13,8 +13,8 @@ var Artist = React.createClass({
     return {editMode: false};
   },
 
-  observe() {
-    var id = this.props.params.id;
+  observe(props, state) {
+    var id = props.params.id;
 
     var artistQuery = new Parse.Query('Artist');
     artistQuery.equalTo('twitterUsername', id);
@@ -23,7 +23,7 @@ var Artist = React.createClass({
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
     // editMode:: select all data, non editMode:: select viewable data
-    if(!this.state.editMode){
+    if(!state.editMode){
       mediaMapQuery.equalTo('isViewable', true);
     }
     mediaMapQuery.include('media')
