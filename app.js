@@ -57,7 +57,7 @@ app.get('/artists/:id', function(req, res) {
 
 app.get('/groups/:id', function(req, res) {
     var params = {id: req.params.id};
-    var body   = React.renderToString(Artist({params: params}));
+    var body   = React.renderToString(Group({params: params}));
     var script = '/javascripts/group.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
