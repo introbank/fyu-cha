@@ -73,8 +73,8 @@ var Artist = React.createClass({
               return (
                 <p>
                   <img src={mediaMap.media.mediaUri} height="150" />
-                  <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>
-                  <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>
+                  {this.state.editMode && <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>}
+                  {this.state.editMode && <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>}
                 </p>
               )
             }, this)}
