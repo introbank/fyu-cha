@@ -29,6 +29,7 @@ var Artist = React.createClass({
     mediaMapQuery.include('media')
 
     return {
+      user: ParseReact.currentUser,
       artist: artistQuery,
       mediaMap: mediaMapQuery,
     };
@@ -54,6 +55,7 @@ var Artist = React.createClass({
     if (this.data.artist && this.data.artist.length !== 0) {
       artist = this.data.artist[0];
     }
+
     var media = [];
     if (this.data.mediaMap && this.data.mediaMap.length !== 0) {
       for (var i = 0; i < this.data.mediaMap.length; i++) {
@@ -69,6 +71,9 @@ var Artist = React.createClass({
           <Jumbotron>
             <h3>{artist.name}</h3>
             <p>{artist.info}</p>
+            <p>
+              {this.data.user && <button class="btn" type="button" onClick={this.switchEditMode}>編集</button>}
+            </p>
             {this.data.mediaMap.map(function (mediaMap) {
               return (
                 <p>
@@ -78,7 +83,6 @@ var Artist = React.createClass({
                 </p>
               )
             }, this)}
-            <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
         </div>
       );
