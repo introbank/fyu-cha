@@ -62,13 +62,6 @@ var Artist = React.createClass({
       artist = this.data.artist[0];
     }
 
-    var media = [];
-    if (this.data.mediaMap && this.data.mediaMap.length !== 0) {
-      for (var i = 0; i < this.data.mediaMap.length; i++) {
-        media.push(this.data.mediaMap[i].media.mediaUri)
-      }
-    }
-
     if (artist) {
       return (
         <div>
