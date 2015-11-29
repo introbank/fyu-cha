@@ -26,7 +26,6 @@ var Dashboard = React.createClass({
         <div>こんちには、{this.data.user.authData.twitter.screen_name}さん</div>
         <h3>TwitterContributions</h3>
         <p>あなたのTwitter上での貢献は以下のとおりです</p>
-        <p>貢献数：{this.data.twitterCbs.length}</p>
         <ul>
         {this.data.twitterCbs.map(function(twitterCb){
           if (twitterCb.artist){
