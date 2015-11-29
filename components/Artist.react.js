@@ -33,11 +33,16 @@ var Artist = React.createClass({
     var eventQuery = new Parse.Query('Event');
     eventQuery.matchesQuery('artists', artistQuery);
 
+    var twitterContributionQuery = new Parse.Query('TwitterContribution');
+    twitterContributionQuery.matchesQuery("artist", artistQuery);
+    twitterContributionQuery.include("user");
+
     return {
       user: ParseReact.currentUser,
       artist: artistQuery,
       mediaMap: mediaMapQuery,
       events: eventQuery,
+      twitterCbs: twitterContributionQuery,
     };
   },
 
@@ -93,6 +98,17 @@ var Artist = React.createClass({
                 </p>
               )
             }, this)}
+            
+            <h3>ふゅーちゃ！してる人たち</h3>
+            <p>{this.data.twitterCbs.length}ふゅーちゃ！されています</p>
+            {this.data.twitterCbs.map(function(twitterCb){
+              if (twitterCb.user){
+                return(
+                  <li>{twitterCb.user.username}さんが{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
+                )
+              }
+            })}
+
           </Jumbotron>
         </div>
       );
