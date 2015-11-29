@@ -18,8 +18,10 @@ var Group = React.createClass({
 
     var groupQuery = new Parse.Query('Group');
     groupQuery.equalTo('twitterUsername', id);
+
     var albumQuery = new Parse.Query('Album');
     albumQuery.matchesQuery('group', groupQuery);
+
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
     // editMode:: select all data, non editMode:: select viewable data
@@ -28,9 +30,14 @@ var Group = React.createClass({
     }
     mediaMapQuery.include('media')
 
+    var eventQuery = new Parse.Query('Event');
+    eventQuery.matchesQuery('groups', groupQuery);
+
     return {
+      user: ParseReact.currentUser,
       group: groupQuery,
       mediaMap: mediaMapQuery,
+      events: eventQuery,
     };
   },
 
@@ -69,6 +76,20 @@ var Group = React.createClass({
           <Jumbotron>
             <h3>{group.name}</h3>
             <p>{group.info}</p>
+            {this.data.events.map(function(event) {
+              var eventDate = new Date(event.date);
+              return (
+                <li>{event.title}
+                  <ul>
+                    <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日</li>
+                    <li>{event.detail}</li>
+                  </ul>
+                </li>
+              )
+            })}
+            <p>
+              {this.data.user && <button class="btn" type="button" onClick={this.switchEditMode}>編集</button>}
+            </p>
             {this.data.mediaMap.map(function (mediaMap) {
               return (
                 <p>
@@ -78,7 +99,6 @@ var Group = React.createClass({
                 </p>
               )
             }, this)}
-            <p><button class="btn" type="button" onClick={this.switchEditMode}>編集</button></p>
           </Jumbotron>
         </div>
       );

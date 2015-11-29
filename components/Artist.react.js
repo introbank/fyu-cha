@@ -18,8 +18,10 @@ var Artist = React.createClass({
 
     var artistQuery = new Parse.Query('Artist');
     artistQuery.equalTo('twitterUsername', id);
+
     var albumQuery = new Parse.Query('Album');
     albumQuery.matchesQuery('artist', artistQuery);
+
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
     // editMode:: select all data, non editMode:: select viewable data
@@ -28,10 +30,14 @@ var Artist = React.createClass({
     }
     mediaMapQuery.include('media')
 
+    var eventQuery = new Parse.Query('Event');
+    eventQuery.matchesQuery('artists', artistQuery);
+
     return {
       user: ParseReact.currentUser,
       artist: artistQuery,
       mediaMap: mediaMapQuery,
+      events: eventQuery,
     };
   },
 
@@ -71,6 +77,17 @@ var Artist = React.createClass({
           <Jumbotron>
             <h3>{artist.name}</h3>
             <p>{artist.info}</p>
+            {this.data.events.map(function(event) {
+              var eventDate = new Date(event.date);
+              return (
+                <li>{event.title}
+                  <ul>
+                    <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日</li>
+                    <li>{event.detail}</li>
+                  </ul>
+                </li>
+              )
+            })}
             <p>
               {this.data.user && <button class="btn" type="button" onClick={this.switchEditMode}>編集</button>}
             </p>
