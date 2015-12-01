@@ -25,11 +25,11 @@ var Header = React.createClass({
           {
             this.data.user
             ? <li className="mR10"><a eventKey={'logout'}>ログアウト</a></li>
-          : <li><a eventKey={'login'} onClick={this.login}>ログイン</a></li>
+          : <li className="mR10"><a eventKey={'login'} onClick={this.login}>ログイン</a></li>
           }
           {
             this.data.user
-            ? <li className="mR10"><a eventKey={'user'} onClick={this.profile}>プロフィール</a></li>
+            ? <li><a eventKey={'user'} onClick={this.profile}>プロフィール</a></li>
           : <li><a eventKey={'signup'} onClick={this.signup}>ユーザ登録</a></li>
           }
           </ul>
