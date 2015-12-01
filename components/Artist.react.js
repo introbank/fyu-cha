@@ -94,11 +94,11 @@ var Artist = React.createClass({
                   </p>
                   {this.data.mediaMap.map(function (mediaMap) {
                     return (
-                      <p>
+                      <div>
                         <img src={mediaMap.media.mediaUri} />
                         {this.state.editMode && <button className="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>}
                         {this.state.editMode && <button className="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>}
-                      </p>
+                      </div>
                     )
                   }, this)}
                   {this.data.events.map(function(event) {

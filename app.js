@@ -54,6 +54,7 @@ app.get('/users/:id', function(req, res) {
 app.get('/artists/:id', function(req, res) {
     var params = {id: req.params.id};
     var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
+    //var css = '<link rel="stylesheet" href="/stylesheets/sp_style.css">';
     var body   = React.renderToString(Artist({params: params}));
     var script = '/javascripts/artist.js';
     var json   = JSON.stringify(params);
