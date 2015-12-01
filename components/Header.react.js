@@ -18,21 +18,23 @@ var Header = React.createClass({
 
   render() {
     return (
-      <Navbar>
-        <NavBrand><a href="/">Introbank</a></NavBrand>
-        <Nav navbar right onSelect={this.handleSelect}>
+      <div id="header" className="cf">
+        <span className="mainLogo"><a href="/">ふゅーちゃ</a></span>
+        <span className="loginArea cf" onSelect={this.handleSelect}>
+          <ul>
           {
             this.data.user
-            ? <NavItem eventKey={'logout'}>ログアウト</NavItem>
-            : <NavItem eventKey={'login'} onClick={this.login}>ログイン</NavItem>
+            ? <li className="mR10"><a eventKey={'logout'}>ログアウト</a></li>
+          : <li><a eventKey={'login'} onClick={this.login}>ログイン</a></li>
           }
           {
             this.data.user
-            ? <NavItem eventKey={'user'} onClick={this.profile}>プロフィール</NavItem>
-            : <NavItem eventKey={'signup'} onClick={this.signup}>ユーザ登録</NavItem>
+            ? <li className="mR10"><a eventKey={'user'} onClick={this.profile}>プロフィール</a></li>
+          : <li><a eventKey={'signup'} onClick={this.signup}>ユーザ登録</a></li>
           }
-        </Nav>
-      </Navbar>
+          </ul>
+        </span>
+      </div>
     );
   },
 
