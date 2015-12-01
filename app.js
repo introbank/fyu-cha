@@ -56,7 +56,7 @@ app.get('/artists/:id', function(req, res) {
     var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     //var css = '<link rel="stylesheet" href="/stylesheets/sp_style.css">';
     var body   = React.renderToString(Artist({params: params}));
-    var script = '/javascripts/artist.js';
+    var script = 'http://general5.com/nazo/artist.js';
     var json   = JSON.stringify(params);
     res.render('main', {css: css, body: body, script: script, params: json});
 });
