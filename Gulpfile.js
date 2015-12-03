@@ -11,7 +11,6 @@ gulp.task('scripts', function() {
       transform: ["babelify"],
     }))
     .pipe(uglify())
-    .pipe(gzip())
     .pipe(gulp.dest('./public/javascripts/'));
 });
 
