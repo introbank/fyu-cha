@@ -5,6 +5,7 @@ var app     = express();
 var React   = require('react');
 var exphbs  = require('express-handlebars');
 var path    = require('path');
+var compression = require('compression');
 
 require('node-jsx').install({harmony: true});
 
@@ -19,6 +20,7 @@ var Artist = React.createFactory(require('./components/Artist.react.js'));
 var Group = React.createFactory(require('./components/Group.react.js'));
 var NotFound  = React.createFactory(require('./components/NotFound.react.js'));
 
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
