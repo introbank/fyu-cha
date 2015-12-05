@@ -97,8 +97,8 @@ var Artist = React.createClass({
             <div className="tabArea">
             	<div className="contents">
                 <ul className="tabs">
-                  <li id="label__tab1"><a className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
-                  <li id="label__tab2"><a className="tab2" onClick={this.changeTab2}>データ</a></li>
+                  <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
+                  <li id="label__tab2"><a href="#" className="tab2" onClick={this.changeTab2}>データ</a></li>
                 </ul>
                 {this.state.showMedia &&
                 <div id="tab1" className="tab">
