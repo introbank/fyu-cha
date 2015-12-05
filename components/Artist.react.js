@@ -11,7 +11,11 @@ var Artist = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState() {
-    return {editMode: false};
+    return {
+      editMode: false,
+      showMedia: true,
+      showData: false
+    };
   },
 
   observe(props, state) {
@@ -62,6 +66,14 @@ var Artist = React.createClass({
     });
   },
 
+  changeTab1() {
+    this.setState({showMedia: true, showData: false});
+  },
+
+  changeTab2() {
+    this.setState({showMedia: false, showData: true});
+  },
+
   render() {
     var artist = null;
     if (this.data.artist && this.data.artist.length !== 0) {
@@ -85,9 +97,10 @@ var Artist = React.createClass({
             <div className="tabArea">
             	<div className="contents">
                 <ul className="tabs">
-                  <li id="label__tab1"><a href="#tab1" className="tab1 boR">動画/画像</a></li>
-                  <li id="label__tab2"><a href="#tab2" className="tab2">データ</a></li>
+                  <li id="label__tab1"><a className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
+                  <li id="label__tab2"><a className="tab2" onClick={this.changeTab2}>データ</a></li>
                 </ul>
+                {this.state.showMedia &&
                 <div id="tab1" className="tab">
                   <p>
                     {this.data.user && <button className="btn" type="button" onClick={this.switchEditMode}>編集</button>}
@@ -101,6 +114,10 @@ var Artist = React.createClass({
                       </div>
                     )
                   }, this)}
+                </div>
+                }
+                {this.state.showData &&
+                <div id="tab2" class="tab">
                   {this.data.events.map(function(event) {
                     var eventDate = new Date(event.date);
                     return (
@@ -113,8 +130,7 @@ var Artist = React.createClass({
                     )
                   })}
                 </div>
-                <div id="tab2" class="tab">
-                </div>
+                }
               </div>
             </div>
 
@@ -135,7 +151,6 @@ var Artist = React.createClass({
       return (
         <div>
           <Header />
-          <h2>アーティスト</h2>
         </div>
       );
     }
