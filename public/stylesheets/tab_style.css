@@ -237,7 +237,7 @@ h1 {
 	overflow:hidden;
 }
 
-#tab1 ul li {
+#tab1 ul li img {
 	float:left;
 	min-width:288px;
 	max-width:458px;

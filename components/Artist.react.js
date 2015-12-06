@@ -148,15 +148,17 @@ var Artist = React.createClass({
                   <p>
                     {this.data.user && <button className="btn" type="button" onClick={this.switchEditMode}>編集</button>}
                   </p>
+                  <ul>
                   {this.data.mediaMap.map(function (mediaMap) {
                     return (
-                      <div>
+                      <li>
                         <img src={mediaMap.media.mediaUri} />
                         {this.state.editMode && <button className="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>}
                         {this.state.editMode && <button className="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>}
-                      </div>
+                      </li>
                     )
                   }, this)}
+                  </ul>
                 </div>
                 }
                 {this.state.showData &&

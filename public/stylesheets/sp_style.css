@@ -238,7 +238,7 @@ h1 {
 
 /*-----tab1__artistimage-----*/
 
-#tab1 li {
+#tab1 li img {
 	min-width:288px;
 	max-width:458px;
 	height:auto;
