@@ -1,11 +1,6 @@
 var React      = require('react');
 var Parse      = require('../lib/parse');
 var ParseReact = require('parse-react');
-var bootstrap  = require('react-bootstrap');
-var Navbar     = bootstrap.Navbar;
-var NavBrand   = bootstrap.NavBrand;
-var Nav        = bootstrap.Nav;
-var NavItem    = bootstrap.NavItem;
 
 var Header = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -19,18 +14,18 @@ var Header = React.createClass({
   render() {
     return (
       <div id="header" className="cf">
-        <span className="mainLogo"><a href="/">ふゅーちゃ</a></span>
-        <span className="loginArea cf" onSelect={this.handleSelect}>
+        <span className="mainLogo" onClick={this.top}>ふゅーちゃ</span>
+        <span className="loginArea cf">
           <ul>
           {
             this.data.user
-            ? <li className="mR10"><a eventKey={'logout'}>ログアウト</a></li>
-          : <li className="mR10"><a eventKey={'login'} onClick={this.login}>ログイン</a></li>
+            ? <li className="mR10" onClick={this.logout}>ログアウト</li>
+          : <li className="mR10" onClick={this.login}>ログイン</li>
           }
           {
             this.data.user
-            ? <li><a eventKey={'user'} onClick={this.profile}>プロフィール</a></li>
-          : <li><a eventKey={'signup'} onClick={this.signup}>ユーザ登録</a></li>
+            ? <li onClick={this.profile}>プロフィール</li>
+          : <li onClick={this.signup}>ユーザ登録</li>
           }
           </ul>
         </span>
@@ -38,12 +33,8 @@ var Header = React.createClass({
     );
   },
 
-  handleSelect(selected) {
-    switch(selected) {
-      case 'logout':
-        this.logout();
-        break;
-    }
+  top() {
+    location.href = '/';
   },
 
   logout() {
@@ -59,8 +50,7 @@ var Header = React.createClass({
     location.href = '/signup';
   },
 
-  user() {
-    console.log(this.data.user);
+  profile() {
     location.href = '/users/' + this.data.user.username;
   },
 

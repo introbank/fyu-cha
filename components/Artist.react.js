@@ -3,9 +3,7 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
-var bootstrap    = require('react-bootstrap');
-var FormControls = bootstrap.FormControls;
-var Jumbotron    = bootstrap.Jumbotron;
+var AccountInfo   = require('./AccountInfo.react.js');
 
 var Artist = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -14,7 +12,9 @@ var Artist = React.createClass({
     return {
       editMode: false,
       showMedia: true,
-      showData: false
+      showData: false,
+      eventTitle: '',
+      eventDetail: ''
     };
   },
 
@@ -74,6 +74,31 @@ var Artist = React.createClass({
     this.setState({showMedia: false, showData: true});
   },
 
+  handleEventTitleChange: function(e) {
+    this.setState({eventTitle: e.target.value});
+  },
+
+  handleEventDetailChange: function(e) {
+    this.setState({eventDetail: e.target.value});
+  },
+
+  handleEventSubmit(e) {
+    e.preventDefault();
+    var title = this.state.eventTitle.trim();
+    var detail = this.state.eventDetail.trim();
+    if (!title || !detail) {
+      return;
+    }
+    var Event = Parse.Object.extend('Event');
+    var event = new Event();
+    event.set('title', title);
+    event.set('detail', detail);
+    //var relation = event.relation('artists');
+    //relation.add(this.data.artist[0]);
+    event.save();
+    this.setState({author: '', text: ''});
+  },
+
   render() {
     var artist = null;
     if (this.data.artist && this.data.artist.length !== 0) {
@@ -87,14 +112,7 @@ var Artist = React.createClass({
           <Header />
           <Navigation />
           <div id="content">
-            <div className="mainInfo">
-              <div className="contents">
-                <img src={artist.imageUrl} className="artistImage"></img>
-                <h1>{artist.name}</h1>
-                <p className="artistAccount">@{artist.twitterUsername}</p>
-                <span>{artist.info}</span>
-              </div>
-            </div>
+            <AccountInfo account={artist} />
             <div className="tabArea">
             	<div className="contents">
                 <ul className="tabs">
@@ -119,6 +137,21 @@ var Artist = React.createClass({
                 }
                 {this.state.showData &&
                 <div id="tab2" class="tab">
+                  <form className="commentForm" onSubmit={this.handleEventSubmit}>
+                    <input
+                      type="text"
+                      placeholder="イベントタイトル"
+                      value={this.state.eventTitle}
+                      onChange={this.handleEventTitleChange}
+                    />
+                    <input
+                      type="text"
+                      placeholder="イベント詳細"
+                      value={this.state.eventDetail}
+                      onChange={this.handleEventDetailChange}
+                    />
+                    <input type="submit" value="登録" />
+                  </form>
                   {this.data.events.map(function(event) {
                     var eventDate = new Date(event.date);
                     return (

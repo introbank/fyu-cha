@@ -92,6 +92,10 @@ h1 {
 	text-indent:-9999px;
 }
 
+#header .mainLogo:hover {
+	cursor: pointer;
+}
+
 #header .loginArea {
 	position:absolute;
 	top:10px;
@@ -122,8 +126,9 @@ h1 {
 	color:#ffffff;
 }
 
-#header .loginArea ul li a:hover {
+#header .loginArea ul li:hover {
 	background-color:rgba(255,255,255,0.3);
+	cursor: pointer;
 }
 
 /*-----navi-----*/
