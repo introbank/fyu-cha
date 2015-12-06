@@ -82,6 +82,7 @@ var Artist = React.createClass({
 
     if (artist) {
       return (
+
         <div id="wrapper">
           <Header />
           <Navigation />

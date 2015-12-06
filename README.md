@@ -5,7 +5,6 @@ introbank
 
 ```bash
 npm install
-npm run postinstall
 npm start
 ```
 ## 仕組み
@@ -16,12 +15,12 @@ react componentをサーバサイドとクライアントサイドで使い回�
 クライアント側のjs(`app/*.js`)に必要なパラメータを渡し、
 同じコードで実行できるようにしている。
 
-`npm run build`はgulpでクライアント側のjsを生成している。
+`npm run postinstall`はgulpでクライアント側のjsを生成している。
 
-## サンプル
+## 開発スタイル
 
-artistのサンプルURL: http://localhost:5000/artists/aina_BiSH
+reactのファイルを変更していく場合は、
+`npm start`でnodeを動かしつつ、
+`npm run watch`を別で動かし続け、componentsディレクトリ内のファイル変更を監視・自動ビルドしておくと楽。
 
-編集ボタンは2回押さないと効き始めない。
-
-profileのサンプルURL: http://localhost:5000/users/shogo
+`npm run watch`は、componentsディレクトリ内のファイルに変更があった場合に自動でビルドを行う。
