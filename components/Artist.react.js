@@ -13,6 +13,9 @@ var Artist = React.createClass({
       editMode: false,
       showMedia: true,
       showData: false,
+      eventYear: '',
+      eventMonth: '',
+      eventDay: '',
       eventTitle: '',
       eventDetail: ''
     };
@@ -36,6 +39,7 @@ var Artist = React.createClass({
     mediaMapQuery.include('media')
 
     var eventQuery = new Parse.Query('Event');
+    eventQuery.ascending('date');
     eventQuery.matchesQuery('artists', artistQuery);
 
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
@@ -74,6 +78,18 @@ var Artist = React.createClass({
     this.setState({showMedia: false, showData: true});
   },
 
+  handleEventYearChange: function(e) {
+    this.setState({eventYear: e.target.value});
+  },
+
+  handleEventMonthChange: function(e) {
+    this.setState({eventMonth: e.target.value});
+  },
+
+  handleEventDayChange: function(e) {
+    this.setState({eventDay: e.target.value});
+  },
+
   handleEventTitleChange: function(e) {
     this.setState({eventTitle: e.target.value});
   },
@@ -84,17 +100,25 @@ var Artist = React.createClass({
 
   handleEventSubmit(e) {
     e.preventDefault();
+    var year = this.state.eventYear;
+    var month = this.state.eventMonth;
+    var day = this.state.eventDay;
     var title = this.state.eventTitle.trim();
     var detail = this.state.eventDetail.trim();
-    if (!title || !detail) {
+    if (!year || !month || !day || !title || !detail) {
       return;
     }
     var Event = Parse.Object.extend('Event');
     var event = new Event();
+    var date = new Date(year, month-1, day);
+    event.set('date', date);
     event.set('title', title);
     event.set('detail', detail);
-    //var relation = event.relation('artists');
-    //relation.add(this.data.artist[0]);
+    var Artist = Parse.Object.extend('Artist');
+    var artist = new Artist();
+    artist.id = this.data.artist[0].id.objectId;
+    var relation = event.relation('artists');
+    relation.add(artist);
     event.save();
     this.setState({author: '', text: ''});
   },
@@ -138,6 +162,24 @@ var Artist = React.createClass({
                 {this.state.showData &&
                 <div id="tab2" class="tab">
                   <form className="commentForm" onSubmit={this.handleEventSubmit}>
+                    <input
+                      type="text"
+                      value={this.state.eventYear}
+                      onChange={this.handleEventYearChange}
+                    />
+                    年
+                    <input
+                      type="text"
+                      value={this.state.eventMonth}
+                      onChange={this.handleEventMonthChange}
+                    />
+                    月
+                    <input
+                      type="text"
+                      value={this.state.eventDay}
+                      onChange={this.handleEventDayChange}
+                    />
+                    日　　　
                     <input
                       type="text"
                       placeholder="イベントタイトル"
