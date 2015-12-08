@@ -80,7 +80,7 @@ var Dashboard = React.createClass({
                     return (
                       <li>
                         <a href={'artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
-                        <a href={'artists/' + artist.twitterUsername}><h2>{artist.name}</h2></a>
+                        <h2>{artist.name}</h2>
                       </li>
                     )
                   })}
