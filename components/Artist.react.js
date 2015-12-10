@@ -130,6 +130,7 @@ var Artist = React.createClass({
     }
 
     if (artist) {
+      var totalFyucha = 0;
       return (
 
         <div id="wrapper">
@@ -215,13 +216,14 @@ var Artist = React.createClass({
             <h3>ふゅーちゃ！してる人たち</h3>
             <p>{this.data.twitterCbs.length}ふゅーちゃ！されています</p>
             {this.data.twitterCbs.map(function(twitterCb){
+              totalFyucha += twitterCb.point;
               if (twitterCb.user){
                 return(
                   <li>{twitterCb.user.username}さんが{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
                 )
               }
             })}
-
+            <p> トータル {totalFyucha} ふゅーちゃ！ されています </p>
           </div>
         </div>
       );
