@@ -214,7 +214,6 @@ var Artist = React.createClass({
             </div>
 
             <h3>ふゅーちゃ！してる人たち</h3>
-            <p>{this.data.twitterCbs.length}ふゅーちゃ！されています</p>
             {this.data.twitterCbs.map(function(twitterCb){
               totalFyucha += twitterCb.point;
               if (twitterCb.user){
