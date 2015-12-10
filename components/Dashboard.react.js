@@ -47,6 +47,7 @@ var Dashboard = React.createClass({
 
   render() {
     var account = {'imageUrl':'', 'name':'ユーザダッシュボード（最大全角２０文字）','twitterUsername':'user_max15chars','info':'ユーザーのプロフィール。フリーテキスト。fontsize11pxあああああああああああああああああああああああああああああああああああああああああああああ（最大全角１６０文字）'};
+    var totalFyucha = 0;
 
     return (
       <div id="content">
@@ -112,6 +113,7 @@ var Dashboard = React.createClass({
             <div id="tab4" class="tab">
               <ul>
                 {this.data.twitterCbs.map(function(twitterCb) {
+                  totalFyucha += twitterCb.point;
                   if (twitterCb.artist){
                     return(
                       <li>{twitterCb.artist.name}(@{twitterCb.artist.twitterUsername})さんに{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
@@ -122,8 +124,10 @@ var Dashboard = React.createClass({
                       <li>{twitterCb.group.name}(@{twitterCb.group.twitterUsername})さんに{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
                     )
                   }
-                })}
+                })
+                }
               </ul>
+              <p>合計 {totalFyucha} ふゅーちゃ！しています</p>
             </div>
             }
           </div>
