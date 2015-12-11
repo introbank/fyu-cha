@@ -1,0 +1,116 @@
+var React        = require('react');
+var Parse        = require('../lib/parse');
+var ParseReact   = require('parse-react');
+
+var EventList = React.createClass({
+  mixins: [ParseReact.Mixin],
+
+  getInitialState() {
+    return {
+      eventYear: '',
+      eventMonth: '',
+      eventDay: '',
+      eventTitle: '',
+      eventDetail: ''
+    };
+  },
+
+  observe(props, state) {
+    var type = props.type;
+    var id = props.id;
+
+    var accountQuery = new Parse.Query(type);
+    accountQuery.equalTo('twitterUsername', id);
+
+    var eventQuery = new Parse.Query('Event');
+    eventQuery.ascending('date');
+    eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
+
+    return {
+      user: ParseReact.currentUser,
+      account: accountQuery,
+      events: eventQuery,
+    };
+  },
+
+  handleEventYearChange: function(e) {
+    this.setState({eventYear: e.target.value});
+  },
+
+  handleEventMonthChange: function(e) {
+    this.setState({eventMonth: e.target.value});
+  },
+
+  handleEventDayChange: function(e) {
+    this.setState({eventDay: e.target.value});
+  },
+
+  handleEventTitleChange: function(e) {
+    this.setState({eventTitle: e.target.value});
+  },
+
+  handleEventDetailChange: function(e) {
+    this.setState({eventDetail: e.target.value});
+  },
+
+  handleEventSubmit(e) {
+    e.preventDefault();
+    var year = this.state.eventYear;
+    var month = this.state.eventMonth;
+    var day = this.state.eventDay;
+    var title = this.state.eventTitle.trim();
+    var detail = this.state.eventDetail.trim();
+    if (!year || !month || !day || !title) {
+      return;
+    }
+    var Event = Parse.Object.extend('Event');
+    var event = new Event();
+    var date = new Date(year, month-1, day);
+    event.set('date', date);
+    event.set('title', title);
+    event.set('detail', detail);
+    if (this.props.type === 'Artist') {
+      var Artist = Parse.Object.extend('Artist');
+      var artist = new Artist();
+      artist.id = this.data.account[0].id.objectId;
+      var relation = event.relation('artists');
+      relation.add(artist);
+    } else {
+      var Group = Parse.Object.extend('Group');
+      var group = new Group();
+      group.id = this.data.account[0].id.objectId;
+      var relation = event.relation('groups');
+      relation.add(group);
+    }
+    event.save();
+    this.setState({author: '', text: ''});
+  },
+
+  render() {
+    return (
+      <div>
+        <form className="commentForm" onSubmit={this.handleEventSubmit}>
+          <input type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
+          <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
+          <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
+          <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
+          <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
+          <input type="submit" value="登録" />
+        </form>
+        {this.data.events.map(function(event) {
+          var eventDate = new Date(event.date);
+          return (
+            <li>{event.title}
+              <ul>
+                <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日</li>
+                <li>{event.detail}</li>
+              </ul>
+            </li>
+          )
+        })}
+      </div>
+    );
+  },
+});
+
+module.exports = EventList;

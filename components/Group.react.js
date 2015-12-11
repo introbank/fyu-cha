@@ -2,15 +2,19 @@ var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var Header       = require('./Header.react.js');
-var bootstrap    = require('react-bootstrap');
-var FormControls = bootstrap.FormControls;
-var Jumbotron    = bootstrap.Jumbotron;
+var Navigation   = require('./Navigation.react.js');
+var AccountInfo   = require('./AccountInfo.react.js');
+var MediaList   = require('./MediaList.react.js');
+var EventList   = require('./EventList.react.js');
 
 var Group = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState() {
-    return {editMode: false};
+    return {
+      showMedia: true,
+      showData: false,
+    };
   },
 
   observe() {
@@ -19,41 +23,18 @@ var Group = React.createClass({
     var groupQuery = new Parse.Query('Group');
     groupQuery.equalTo('twitterUsername', id);
 
-    var albumQuery = new Parse.Query('Album');
-    albumQuery.matchesQuery('group', groupQuery);
-
-    var mediaMapQuery = new Parse.Query('AlbumMediaMap')
-    mediaMapQuery.matchesQuery('album', albumQuery);
-    // editMode:: select all data, non editMode:: select viewable data
-    if(!this.state.editMode){
-      mediaMapQuery.equalTo('isViewable', true);
-    }
-    mediaMapQuery.include('media')
-
-    var eventQuery = new Parse.Query('Event');
-    eventQuery.matchesQuery('groups', groupQuery);
-
     return {
       user: ParseReact.currentUser,
       group: groupQuery,
-      mediaMap: mediaMapQuery,
-      events: eventQuery,
     };
   },
 
-  switchEditMode(event) {
-    this.setState({editMode: !this.state.editMode});
+  changeTab1() {
+    this.setState({showMedia: true, showData: false});
   },
 
-  setIsViewable(mediaMapId, isViewable) {
-    var AlbumMediaMap = Parse.Object.extend('AlbumMediaMap');
-    var albumMediaMap = new AlbumMediaMap();
-    albumMediaMap.id = mediaMapId;
-    albumMediaMap.set('isViewable', isViewable);
-    albumMediaMap.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
+  changeTab2() {
+    this.setState({showMedia: false, showData: true});
   },
 
   render() {
@@ -61,52 +42,40 @@ var Group = React.createClass({
     if (this.data.group && this.data.group.length !== 0) {
       group = this.data.group[0];
     }
-    var media = [];
-    if (this.data.mediaMap && this.data.mediaMap.length !== 0) {
-      for (var i = 0; i < this.data.mediaMap.length; i++) {
-        media.push(this.data.mediaMap[i].media.mediaUri)
-      }
-    }
 
     if (group) {
       return (
-        <div>
+        <div id="wrapper">
           <Header />
-          <h2>グループ</h2>
-          <Jumbotron>
-            <h3>{group.name}</h3>
-            <p>{group.info}</p>
-            {this.data.events.map(function(event) {
-              var eventDate = new Date(event.date);
-              return (
-                <li>{event.title}
-                  <ul>
-                    <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日</li>
-                    <li>{event.detail}</li>
-                  </ul>
-                </li>
-              )
-            })}
-            <p>
-              {this.data.user && <button class="btn" type="button" onClick={this.switchEditMode}>編集</button>}
-            </p>
-            {this.data.mediaMap.map(function (mediaMap) {
-              return (
-                <p>
-                  <img src={mediaMap.media.mediaUri} height="150" />
-                  <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>
-                  <button class="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>
-                </p>
-              )
-            }, this)}
-          </Jumbotron>
+          <Navigation />
+          <div id="content">
+            <AccountInfo account={group} />
+            <div className="tabArea">
+            	<div className="contents">
+                <ul className="tabs">
+                  <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
+                  <li id="label__tab2"><a href="#" className="tab2" onClick={this.changeTab2}>データ</a></li>
+                </ul>
+                {this.state.showMedia &&
+                <div id="tab1" className="tab">
+                  <MediaList type="Group" id={this.props.params.id} />
+                </div>
+                }
+                {this.state.showData &&
+                <div id="tab2" class="tab">
+                  <EventList type="Group" id={this.props.params.id} />
+                </div>
+                }
+              </div>
+            </div>
+          </div>
         </div>
       );
     } else {
       return (
-        <div>
+        <div id="wrapper">
           <Header />
-          <h2>グループ</h2>
+          <Navigation />
         </div>
       );
     }

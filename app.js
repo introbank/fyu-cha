@@ -66,7 +66,7 @@ app.get('/artists/:id', function(req, res) {
 
 app.get('/groups/:id', function(req, res) {
     var params = {id: req.params.id};
-    var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
+    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     var body   = React.renderToString(Group({params: params}));
     var script = '/javascripts/group.js';
     var json   = JSON.stringify(params);
