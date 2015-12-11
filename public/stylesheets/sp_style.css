@@ -108,10 +108,10 @@ h1 {
 	-webkit-background-size:34px 34px;
 	-moz-background-size:34px 34px;
 	text-indent:-9999px;
+	cursor: pointer;
 }
 
 #header .mainLogo:hover {
-	cursor: pointer;
 }
 
 #header .loginArea {
@@ -132,6 +132,7 @@ h1 {
 	line-height:1.9;
 	border:1px solid #ffffff;
 	border-radius:5px;
+	cursor: pointer;
 }
 
 #header .loginArea ul li a {
@@ -142,11 +143,11 @@ h1 {
 	left:0;
 	border-radius:5px;
 	color:#ffffff;
+	cursor: pointer;
 }
 
 #header .loginArea ul li:hover {
 	background-color:rgba(255,255,255,0.3);
-	cursor: pointer;
 }
 
 /*-----navi-----*/
