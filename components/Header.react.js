@@ -47,7 +47,7 @@ var Header = React.createClass({
   },
 
   signup() {
-    location.href = '/signup';
+    location.href = '/auth/twitter';
   },
 
   profile() {
