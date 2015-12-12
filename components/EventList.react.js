@@ -11,6 +11,8 @@ var EventList = React.createClass({
       eventMonth: '',
       eventDay: '',
       eventTitle: '',
+      eventPrice: '',
+      eventPlace: '',
       eventDetail: ''
     };
   },
@@ -49,6 +51,14 @@ var EventList = React.createClass({
     this.setState({eventTitle: e.target.value});
   },
 
+  handleEventPriceChange: function(e) {
+    this.setState({eventPrice: e.target.value});
+  },
+
+  handleEventPlaceChange: function(e) {
+    this.setState({eventPlace: e.target.value});
+  },
+
   handleEventDetailChange: function(e) {
     this.setState({eventDetail: e.target.value});
   },
@@ -59,6 +69,8 @@ var EventList = React.createClass({
     var month = this.state.eventMonth;
     var day = this.state.eventDay;
     var title = this.state.eventTitle.trim();
+    var price = this.state.eventPrice;
+    var place = this.state.eventPlace;
     var detail = this.state.eventDetail.trim();
     if (!year || !month || !day || !title) {
       return;
@@ -68,6 +80,8 @@ var EventList = React.createClass({
     var date = new Date(year, month-1, day);
     event.set('date', date);
     event.set('title', title);
+    event.set('price', Number(price));
+    event.set('place', place);
     event.set('detail', detail);
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
@@ -86,6 +100,29 @@ var EventList = React.createClass({
     this.setState({author: '', text: ''});
   },
 
+  attendEvnet: function(targetEvent) {
+    var EventAttendance = Parse.Object.extend("EventAttendance");
+    var eventAttendance = EventAttendance();
+    eventAttendance.set("event", targetEvent);
+    eventAttendance.set("user", this.data.user);
+    if (this.props.type === 'Artist') {
+      var Artist = Parse.Object.extend('Artist');
+      var artist = new Artist();
+      artist.id = this.data.account[0].id.objectId;
+      eventAttendance.set("artist", artist);
+    } else {
+      var Group = Parse.Object.extend('Group');
+      var group = new Group();
+      group.id = this.data.account[0].id.objectId;
+      eventAttendance.set("group", group);
+    }
+    eventAttendance.save(null, {
+      success: function(res){console.log(res.text);},
+      error: function(error){console.log(error.text);}
+    });
+  },
+
+
   render() {
     return (
       <div>
@@ -94,16 +131,19 @@ var EventList = React.createClass({
           <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
           <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
           <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
+          <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
+          <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円 
           <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
           <input type="submit" value="登録" />
         </form>
         {this.data.events.map(function(event) {
           var eventDate = new Date(event.date);
           return (
-            <li>{event.title}
+            <li>{event.title} @ {event.place}
               <ul>
-                <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日</li>
+                <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日 {event.price}円</li>
                 <li>{event.detail}</li>
+                <li><button className="btn" type="button" onClick={this.attendEvnet.bind(this, event)}>attend</button></li>
               </ul>
             </li>
           )
