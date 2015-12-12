@@ -85,7 +85,7 @@ var twitterProfile;
 passport.use(new TwitterStrategy({
     consumerKey: 'em7M7qW6NoKhCf9PPGvaLWfmA',
     consumerSecret: 'IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U',
-    callbackURL: 'http://localhost:5000/auth/twitter/callback'
+    callbackURL: '/auth/twitter/callback'
   },
   function (token, tokenSecret, profile, done) {
     twitterToken = token;

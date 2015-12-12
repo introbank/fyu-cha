@@ -69,7 +69,6 @@ var Signup = React.createClass({
       <div>
         <Header />
         <h2>ユーザ登録</h2>
-        <h2>ユーザーID: {this.props.params.username}</h2>
         {
           this.state.error
           ? <Alert bsStyle="danger">エラーが発生しました</Alert>
@@ -81,7 +80,7 @@ var Signup = React.createClass({
           : null
         }
         <form>
-          <Input ref="password" type="password" label="Password" />
+          <Input ref="password" type="password" label="Passwordを入力して下さい" />
           <ButtonInput value="登録" onClick={this.signup} />
         </form>
       </div>
