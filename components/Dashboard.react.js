@@ -20,12 +20,19 @@ var Dashboard = React.createClass({
     var groupQuery = new Parse.Query('Group');
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     twitterContributionQuery.equalTo("user", Parse.User.current());
+    var twitterContributionQuery = new Parse.Query('TwitterContribution');
+    var eventAttendanceQuery = new Parse.Query('EventAttendance');
+    eventAttendanceQuery.equalTo("user", Parse.User.current());
+    eventAttendanceQuery.include("event");
+    eventAttendanceQuery.include("artist");
+    eventAttendanceQuery.include("group");
 
     return {
       user: ParseReact.currentUser,
       artist: artistQuery,
       group: groupQuery,
-      twitterCbs: twitterContributionQuery
+      twitterCbs: twitterContributionQuery,
+      attendanceEvents: eventAttendanceQuery
     };
   },
 
@@ -106,7 +113,29 @@ var Dashboard = React.createClass({
             }
             {this.state.showSchedule &&
             <div id="tab3" class="tab">
-              <p>別途スケジュールページを作成</p>
+              <ul>
+              {this.data.attendanceEvents.map(function(attendanceEvent) {
+                var eventDate = new Date(attendanceEvent.event.date);
+                var name = "";
+                var place = "";
+                if (attendanceEvent.artist){
+                  name = attendanceEvent.artist.name;
+                }
+                else if (attendanceEvent.group) {
+                  name = attendanceEvent.group.name;
+                }
+                
+                if (attendanceEvent.event.place){
+                  place = attendanceEvent.event.place;
+                }
+
+                return (
+                  <li> {eventDate.getMonth() + 1}月{eventDate.getDate()}日|| {name} || {attendanceEvent.event.title}@{place} </li>
+                )                                               
+                })
+              }
+              
+              </ul>
             </div>
             }
             {this.state.showData &&
