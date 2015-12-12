@@ -147,7 +147,7 @@ var EventList = React.createClass({
               </ul>
             </li>
           )
-        })}
+        }, this)}
       </div>
     );
   },
