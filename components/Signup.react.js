@@ -32,7 +32,37 @@ var Signup = React.createClass({
   },
 
   signup() {
-    var self = this;
+    var username = this.props.params.username;
+    var password = this.refs.password.getValue();
+    var userId = this.props.params.userId;
+    var name = this.props.params.screenname;
+    var info = this.props.params.info;
+    var imageUrl = this.props.params.imageUrl;
+    var consumerKey = 'em7M7qW6NoKhCf9PPGvaLWfmA';
+    var consumerSecret = 'IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U';
+    var oauthToken = this.props.params.token;
+    var oauthTokenSecret = this.props.params.tokenSecret;
+
+    var user = new Parse.User();
+    user.set("username", username);
+    user.set("password", password);
+    user.set("name", name);
+    user.set("info", info);
+    user.set("imageUrl", imageUrl);
+    user.set("authData", {"twitter": {"id": userId,"screen_name": username, "consumer_key": consumerKey, "consumer_secret": consumerSecret, "auth_token": oauthToken, "auth_token_secret": oauthTokenSecret}});
+
+    user.signUp(null, {
+      success: function(user) {
+        location.href = '/';
+      },
+      error: function(user, error) {
+        // Show the error message somewhere and let the user try again.
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+
+
+    /*var self = this;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://api.parse.com/1/users', true);
     xhr.setRequestHeader('X-Parse-Application-Id', setting.parse.appId);
@@ -61,7 +91,7 @@ var Signup = React.createClass({
     var oauthTokenSecret = this.props.params.tokenSecret;
 
     var data = '{"username":"' + username + '","password":"' + password + '","name":"' + name + '","info":"' + info + '","imageUrl":"' + imageUrl + '","authData": {"twitter": {"id": "' + userId + '","screen_name": "' + username + '","consumer_key": "' + consumerKey + '","consumer_secret": "' + consumerSecret + '","auth_token": "' + oauthToken + '","auth_token_secret": "' + oauthTokenSecret + '"}}}'
-    xhr.send(data);
+    xhr.send(data);*/
   },
 
   render() {

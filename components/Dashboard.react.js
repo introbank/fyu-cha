@@ -53,7 +53,11 @@ var Dashboard = React.createClass({
   },
 
   render() {
-    var account = {'imageUrl':'', 'name':'ユーザダッシュボード（最大全角２０文字）','twitterUsername':'user_max15chars','info':'ユーザーのプロフィール。フリーテキスト。fontsize11pxあああああああああああああああああああああああああああああああああああああああああああああ（最大全角１６０文字）'};
+    var account = null;
+    if (this.data.user) {
+      console.log("feaf");
+      account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
+    }
     var totalFyucha = 0;
 
     return (
@@ -124,17 +128,17 @@ var Dashboard = React.createClass({
                 else if (attendanceEvent.group) {
                   name = attendanceEvent.group.name;
                 }
-                
+
                 if (attendanceEvent.event.place){
                   place = attendanceEvent.event.place;
                 }
 
                 return (
                   <li> {eventDate.getMonth() + 1}月{eventDate.getDate()}日|| {name} || {attendanceEvent.event.title}@{place} </li>
-                )                                               
+                )
                 })
               }
-              
+
               </ul>
             </div>
             }
