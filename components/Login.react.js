@@ -62,7 +62,7 @@ var Login = React.createClass({
           : null
         }
         <form>
-          <Input ref="username" type="email" label="Email Address" placeholder="Enter email" />
+          <Input ref="username" type="email" label="Twitter ID" placeholder="Twitter ID" />
           <Input ref="password" type="password" label="Password" />
           <ButtonInput value="ログイン" onClick={this.login} />
         </form>
@@ -73,4 +73,3 @@ var Login = React.createClass({
 });
 
 module.exports = Login;
-

@@ -38,13 +38,6 @@ app.get('/login', function(req, res) {
     res.render('main', {css: css, body: body, script: script});
 });
 
-app.get('/signup', function(req, res) {
-    var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
-    var body = React.renderToString(Signup({}));
-    var script = '/javascripts/signup.js';
-    res.render('main', {css: css, body: body, script: script});
-});
-
 app.get('/users/:id', function(req, res) {
     var params = {id: req.params.id};
     var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
@@ -73,11 +66,65 @@ app.get('/groups/:id', function(req, res) {
     res.render('main', {css: css, body: body, script: script, params: json});
 });
 
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+
+var twitterToken;
+var twitterTokenSecret;
+var twitterProfile;
+
+passport.use(new TwitterStrategy({
+    consumerKey: 'em7M7qW6NoKhCf9PPGvaLWfmA',
+    consumerSecret: 'IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U',
+    callbackURL: 'http://localhost:5000/auth/twitter/callback'
+  },
+  function (token, tokenSecret, profile, done) {
+    twitterToken = token;
+    twitterTokenSecret = tokenSecret;
+    twitterProfile = profile;
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { successRedirect: '/signup',
+                                     failureRedirect: '/login' }));
+
+app.get('/signup', function(req, res) {
+  var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
+  var body = React.renderToString(Signup({}));
+  var script = '/javascripts/signup.js';
+  var params = {token: twitterToken, tokenSecret: twitterTokenSecret, username: twitterProfile.username, userId: twitterProfile.id, screenname: twitterProfile.displayName, info:twitterProfile['_json']['description'],imageUrl:twitterProfile['_json']['profile_image_url']};
+  var json   = JSON.stringify(params);
+  res.render('main', {css: css, body: body, script: script, params: json});
+});
+
 app.get('*', function(req, res) {
-    var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
-    var body = React.renderToString(NotFound({}));
-    var script = '/javascripts/notfound.js';
-    res.render('main', {css: css, body: body, script: script});
+  var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
+  var body = React.renderToString(NotFound({}));
+  var script = '/javascripts/notfound.js';
+  res.render('main', {css: css, body: body, script: script});
 });
 
 var port = process.env.PORT || 5000;

@@ -7,13 +7,7 @@ var Input       = bootstrap.Input;
 var ButtonInput = bootstrap.ButtonInput;
 var Button      = bootstrap.Button;
 var Alert       = bootstrap.Alert;
-var Codebird    = require("codebird");
 var setting     = require('../setting');
-
-var cb     = new Codebird;
-var consumerKey    = "em7M7qW6NoKhCf9PPGvaLWfmA";
-var consumerSecret = "IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U";
-cb.setConsumerKey(consumerKey, consumerSecret);
 
 var Signup = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -37,77 +31,37 @@ var Signup = React.createClass({
     }
   },
 
-  getPin() {
-    var self = this;
-    var popup = window.open('', null, 'width=400, height=400');
-
-    cb.__call(
-      "oauth_requestToken",
-      {oauth_callback: "oob"},
-      function (reply, rate, err) {
-        if (err) {
-          console.error("error response or timeout exceeded" + err.error);
-          self.setState({error: true});
-          return;
-        }
-
-        if (!reply) {
-          return;
-        }
-
-        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-        cb.__call(
-          "oauth_authorize",
-          {},
-          function (auth_url) {
-            popup.location.href = auth_url;
-          }
-        );
-      }
-    );
-  },
-
   signup() {
     var self = this;
-    var username = this.refs.username.getValue();
-    var password = this.refs.password.getValue();
-    var pin      = this.refs.pin.getValue();
-
-    cb.__call(
-      "oauth_accessToken",
-      {oauth_verifier: pin},
-      function (reply, rate, err) {
-        if (err) {
-          console.log("error response or timeout exceeded" + err.error);
-          self.setState({error: true});
-          return;
-        }
-
-        if (!reply) {
-          return;
-        }
-
-        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://api.parse.com/1/users', true);
-        xhr.setRequestHeader('X-Parse-Application-Id', setting.parse.appId);
-        xhr.setRequestHeader('X-Parse-REST-API-Key', setting.parse.restKey);
-        xhr.setRequestHeader('X-Parse-Revocable-Session', '1');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            console.log(xhr.response);
-            self.setState({complete: true});
-          } else {
-            console.error('Error !');
-            self.setState({error: true});
-          }
-        };
-
-        data = '{"username":"' + username + '","password":"' + password + '","authData": {"twitter": {"id": "' + reply.user_id + '","screen_name": "' + reply.screen_name + '","consumer_key": "' + consumerKey + '","consumer_secret": "' + consumerSecret + '","auth_token": "' + reply.oauth_token + '","auth_token_secret": "' + reply.oauth_token_secret + '"}}}'
-        xhr.send(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.parse.com/1/users', true);
+    xhr.setRequestHeader('X-Parse-Application-Id', setting.parse.appId);
+    xhr.setRequestHeader('X-Parse-REST-API-Key', setting.parse.restKey);
+    xhr.setRequestHeader('X-Parse-Revocable-Session', '1');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        console.log(xhr.response);
+        self.setState({complete: true});
+      } else {
+        console.error('Error !');
+        self.setState({error: true});
       }
-    );
+    };
+
+    var username = this.props.params.username;
+    var password = this.refs.password.getValue();
+    var userId = this.props.params.userId;
+    var name = this.props.params.screenname;
+    var info = this.props.params.info;
+    var imageUrl = this.props.params.imageUrl;
+    var consumerKey = 'em7M7qW6NoKhCf9PPGvaLWfmA';
+    var consumerSecret = 'IH4iEnUVPB7BaSFNUGzfuoGPN6FZawawTqbXs619zopyu9E36U';
+    var oauthToken = this.props.params.token;
+    var oauthTokenSecret = this.props.params.tokenSecret;
+
+    var data = '{"username":"' + username + '","password":"' + password + '","name":"' + name + '","info":"' + info + '","imageUrl":"' + imageUrl + '","authData": {"twitter": {"id": "' + userId + '","screen_name": "' + username + '","consumer_key": "' + consumerKey + '","consumer_secret": "' + consumerSecret + '","auth_token": "' + oauthToken + '","auth_token_secret": "' + oauthTokenSecret + '"}}}'
+    xhr.send(data);
   },
 
   render() {
@@ -115,6 +69,7 @@ var Signup = React.createClass({
       <div>
         <Header />
         <h2>ユーザ登録</h2>
+        <h2>ユーザーID: {this.props.params.username}</h2>
         {
           this.state.error
           ? <Alert bsStyle="danger">エラーが発生しました</Alert>
@@ -126,15 +81,12 @@ var Signup = React.createClass({
           : null
         }
         <form>
-          <Input ref="username" type="email" label="Email Address" placeholder="Enter email" />
           <Input ref="password" type="password" label="Password" />
-          <Input ref="pin" type="text" label="PIN" />
-          <ButtonInput value="PIN" onClick={this.getPin} />
           <ButtonInput value="登録" onClick={this.signup} />
         </form>
       </div>
     );
-  },
+  }
 
 });
 
