@@ -123,7 +123,7 @@ var EventList = React.createClass({
 
   attendEvnet: function(targetEvent) {
     var EventAttendance = Parse.Object.extend("EventAttendance");
-    var eventAttendance = EventAttendance();
+    var eventAttendance = new EventAttendance();
     this.setEventStatus(targetEvent, eventAttendance);
   },
 
