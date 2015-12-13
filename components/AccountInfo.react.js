@@ -8,9 +8,9 @@ var AccountInfo = React.createClass({
       <div className="mainInfo">
         {this.props.account &&
           <div className="contents">
-            <img src={this.props.account.imageUrl} className="artistImage"></img>
+            <img src={this.props.account.imageUrl} className="iconImage" />
             <h1>{this.props.account.name}</h1>
-            <p className="artistAccount">@{this.props.account.twitterUsername}</p>
+            <p className="account">@{this.props.account.twitterUsername}</p>
             <span>{this.props.account.info}</span>
           </div>
         }

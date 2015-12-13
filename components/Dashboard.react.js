@@ -71,7 +71,7 @@ var Dashboard = React.createClass({
               <li id="label__tab4"><a href="#" className="tab1 boR" onClick={this.changeTab4}>データ</a></li>
             </ul>
             {this.state.showMedia &&
-            <div id="tab1" className="tab">
+            <div id="images" className="tab">
               <ul>
                 <li>ここに写真が入ります</li>
                 <li>ここに写真が入ります</li>
@@ -83,7 +83,7 @@ var Dashboard = React.createClass({
             </div>
             }
             {this.state.showFollow &&
-            <div id="tab2" className="tab">
+            <div id="followList" className="tab">
               <div className="box">
                 <h1>アーティスト</h1>
                 <ul>
