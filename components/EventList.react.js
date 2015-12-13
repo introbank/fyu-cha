@@ -17,6 +17,7 @@ var EventList = React.createClass({
     };
   },
 
+
   observe(props, state) {
     var type = props.type;
     var id = props.id;
@@ -101,8 +102,8 @@ var EventList = React.createClass({
   },
 
   setEventStatus: function(targetEvent, eventStatus){
-    eventStatus.set("event", targetEvent);
-    eventStatus.set("user", this.data.user);
+    eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
+    eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
@@ -121,10 +122,16 @@ var EventList = React.createClass({
 
   },
 
-  attendEvnet: function(targetEvent) {
+  attendEvent: function(targetEvent) {
     var EventAttendance = Parse.Object.extend("EventAttendance");
     var eventAttendance = new EventAttendance();
     this.setEventStatus(targetEvent, eventAttendance);
+  },
+
+  planEvent: function(targetEvent) {
+    var EventPlan = Parse.Object.extend("EventPlan");
+    var eventPlan = new EventPlan();
+    this.setEventStatus(targetEvent, eventPlan);
   },
 
 
@@ -148,7 +155,8 @@ var EventList = React.createClass({
               <ul>
                 <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日 {event.price}円</li>
                 <li>{event.detail}</li>
-                <li><button className="btn" type="button" onClick={this.attendEvnet.bind(this, event)}>attend</button></li>
+                <li><button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button></li>
+                <li><button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button></li>
               </ul>
             </li>
           )
