@@ -100,26 +100,31 @@ var EventList = React.createClass({
     this.setState({author: '', text: ''});
   },
 
-  attendEvnet: function(targetEvent) {
-    var EventAttendance = Parse.Object.extend("EventAttendance");
-    var eventAttendance = EventAttendance();
-    eventAttendance.set("event", targetEvent);
-    eventAttendance.set("user", this.data.user);
+  setEventStatus: function(targetEvent, eventStatus){
+    eventStatus.set("event", targetEvent);
+    eventStatus.set("user", this.data.user);
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
       artist.id = this.data.account[0].id.objectId;
-      eventAttendance.set("artist", artist);
+      eventStatus.set("artist", artist);
     } else {
       var Group = Parse.Object.extend('Group');
       var group = new Group();
       group.id = this.data.account[0].id.objectId;
-      eventAttendance.set("group", group);
+      eventStatus.set("group", group);
     }
-    eventAttendance.save(null, {
+    eventStatus.save(null, {
       success: function(res){console.log(res.text);},
       error: function(error){console.log(error.text);}
     });
+
+  },
+
+  attendEvnet: function(targetEvent) {
+    var EventAttendance = Parse.Object.extend("EventAttendance");
+    var eventAttendance = EventAttendance();
+    this.setEventStatus(targetEvent, eventAttendance).bind(this);
   },
 
 
