@@ -115,7 +115,7 @@ app.get('/signup', function(req, res) {
   var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
   var body = React.renderToString(Signup({}));
   var script = '/javascripts/signup.js';
-  var params = {token: twitterToken, tokenSecret: twitterTokenSecret, username: twitterProfile.username, userId: twitterProfile.id, screenname: twitterProfile.displayName, info:twitterProfile['_json']['description'],imageUrl:twitterProfile['_json']['profile_image_url']};
+  var params = {token: twitterToken, tokenSecret: twitterTokenSecret, username: twitterProfile.username, userId: twitterProfile.id, screenname: escape(twitterProfile.displayName), info: escape(twitterProfile['_json']['description']), imageUrl: twitterProfile['_json']['profile_image_url']};
   var json   = JSON.stringify(params);
   res.render('main', {css: css, body: body, script: script, params: json});
 });
