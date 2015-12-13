@@ -17,7 +17,9 @@ var Login     = React.createFactory(require('./components/Login.react.js'));
 var Signup    = React.createFactory(require('./components/Signup.react.js'));
 var User   = React.createFactory(require('./components/User.react.js'));
 var Artist = React.createFactory(require('./components/Artist.react.js'));
+var ArtistList = React.createFactory(require('./components/ArtistList.react.js'));
 var Group = React.createFactory(require('./components/Group.react.js'));
+var GroupList = React.createFactory(require('./components/GroupList.react.js'));
 var NotFound  = React.createFactory(require('./components/NotFound.react.js'));
 
 app.use(compression());
@@ -47,12 +49,30 @@ app.get('/users/:id', function(req, res) {
     res.render('main', {css: css, body: body, script: script, params: json});
 });
 
+app.get('/artists', function(req, res) {
+    var params = {id: req.params.id};
+    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
+    var body   = React.renderToString(ArtistList({params: params}));
+    var script = '/javascripts/artist-list.js';
+    var json   = JSON.stringify(params);
+    res.render('main', {css: css, body: body, script: script, params: json});
+});
+
 app.get('/artists/:id', function(req, res) {
     var params = {id: req.params.id};
     var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     //var css = '<link rel="stylesheet" href="/stylesheets/sp_style.css">';
     var body   = React.renderToString(Artist({params: params}));
     var script = '/javascripts/artist.js';
+    var json   = JSON.stringify(params);
+    res.render('main', {css: css, body: body, script: script, params: json});
+});
+
+app.get('/groups', function(req, res) {
+    var params = {id: req.params.id};
+    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
+    var body   = React.renderToString(GroupList({params: params}));
+    var script = '/javascripts/group-list.js';
     var json   = JSON.stringify(params);
     res.render('main', {css: css, body: body, script: script, params: json});
 });
