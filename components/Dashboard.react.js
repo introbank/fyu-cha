@@ -21,6 +21,7 @@ var Dashboard = React.createClass({
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     twitterContributionQuery.equalTo("user", Parse.User.current());
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
+    twitterContributionQuery.equalTo("user", Parse.User.current());
     var eventAttendanceQuery = new Parse.Query('EventAttendance');
     eventAttendanceQuery.equalTo("user", Parse.User.current());
     eventAttendanceQuery.include("event");
