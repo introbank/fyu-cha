@@ -24,7 +24,7 @@ var GroupList = React.createClass({
         <div id="content">
           <div className="tabArea">
             <div className="contents">
-              <div id="tab2" className="tab">
+              <div id="followList" className="tab">
                 <div className="box">
                   <h1>グループ</h1>
                   {this.data.group &&
