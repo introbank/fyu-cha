@@ -124,7 +124,7 @@ var EventList = React.createClass({
   attendEvnet: function(targetEvent) {
     var EventAttendance = Parse.Object.extend("EventAttendance");
     var eventAttendance = EventAttendance();
-    this.setEventStatus(targetEvent, eventAttendance).bind(this);
+    this.setEventStatus(targetEvent, eventAttendance);
   },
 
 
