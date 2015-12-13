@@ -21,8 +21,10 @@ var Registration = React.createClass({
       <div id="wrapper">
         <Header />
         <Navigation />
-        <div id="content">
-        </div>
+        <form>
+          <Input ref="" type="" label="" />
+          <ButtonInput value="登録" onClick={this.signup} />
+        </form>
       </div>
     );
   },
