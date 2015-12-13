@@ -15,25 +15,57 @@ var Dashboard = React.createClass({
     };
   },
 
+  newEventStatusQueryInstance(className) {
+    var query = new Parse.Query(className);
+    query.equalTo("user", Parse.User.current());
+    query.include("event");
+    query.include("artist");
+    query.include("group");
+    return query
+  },
+
+  parseEventData(eventData) {
+    var date = new Date(eventData.date);
+    // var
+    var name = "";
+    var place = "";
+    if (eventData.artist){
+      name = eventData.artist.name;
+    }
+    else if (eventData.group) {
+      name = eventData.group.name;
+    }
+
+    var info = {title: eventData.title, aim: name, place: eventData.place, detail:eventData.detail, price: eventData.price};
+    return {date: date, info: info};
+  },
+
+
+  margeEventList(attend, plan) {
+    var eventList = [];
+    for (var i = 0; i < attend.length; i++){
+      eventList.push(this.parseEventData(attend[i]));
+    }
+    for (var i = 0; i < plan.length; i++){
+      eventList.push(this.parseEventData(plan[i]));
+    }
+  },
+
   observe() {
     var artistQuery = new Parse.Query('Artist');
     var groupQuery = new Parse.Query('Group');
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     twitterContributionQuery.equalTo("user", Parse.User.current());
-    var twitterContributionQuery = new Parse.Query('TwitterContribution');
-    twitterContributionQuery.equalTo("user", Parse.User.current());
-    var eventAttendanceQuery = new Parse.Query('EventAttendance');
-    eventAttendanceQuery.equalTo("user", Parse.User.current());
-    eventAttendanceQuery.include("event");
-    eventAttendanceQuery.include("artist");
-    eventAttendanceQuery.include("group");
+    var eventAttendanceQuery = this.newEventStatusQueryInstance('EventAttendance');
+    var eventPlanQuery = this.newEventStatusQueryInstance('EventPlan');
 
     return {
       user: ParseReact.currentUser,
       artist: artistQuery,
       group: groupQuery,
       twitterCbs: twitterContributionQuery,
-      attendanceEvents: eventAttendanceQuery
+      attendanceEvents: eventAttendanceQuery,
+      planEvents: eventAttendanceQuery
     };
   },
 
@@ -59,7 +91,7 @@ var Dashboard = React.createClass({
       account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
     }
     var totalFyucha = 0;
-
+    //var eventList = this.margeEventList(this.data.attendanceEvents, this.data.planEvents);
     return (
       <div id="content">
         <AccountInfo account={account}/>

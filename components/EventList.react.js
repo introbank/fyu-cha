@@ -17,6 +17,7 @@ var EventList = React.createClass({
     };
   },
 
+
   observe(props, state) {
     var type = props.type;
     var id = props.id;
@@ -100,26 +101,37 @@ var EventList = React.createClass({
     this.setState({author: '', text: ''});
   },
 
-  attendEvnet: function(targetEvent) {
-    var EventAttendance = Parse.Object.extend("EventAttendance");
-    var eventAttendance = EventAttendance();
-    eventAttendance.set("event", targetEvent);
-    eventAttendance.set("user", this.data.user);
+  setEventStatus: function(targetEvent, eventStatus){
+    eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
+    eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
       artist.id = this.data.account[0].id.objectId;
-      eventAttendance.set("artist", artist);
+      eventStatus.set("artist", artist);
     } else {
       var Group = Parse.Object.extend('Group');
       var group = new Group();
       group.id = this.data.account[0].id.objectId;
-      eventAttendance.set("group", group);
+      eventStatus.set("group", group);
     }
-    eventAttendance.save(null, {
+    eventStatus.save(null, {
       success: function(res){console.log(res.text);},
       error: function(error){console.log(error.text);}
     });
+
+  },
+
+  attendEvent: function(targetEvent) {
+    var EventAttendance = Parse.Object.extend("EventAttendance");
+    var eventAttendance = new EventAttendance();
+    this.setEventStatus(targetEvent, eventAttendance);
+  },
+
+  planEvent: function(targetEvent) {
+    var EventPlan = Parse.Object.extend("EventPlan");
+    var eventPlan = new EventPlan();
+    this.setEventStatus(targetEvent, eventPlan);
   },
 
 
@@ -143,7 +155,8 @@ var EventList = React.createClass({
               <ul>
                 <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日 {event.price}円</li>
                 <li>{event.detail}</li>
-                <li><button className="btn" type="button" onClick={this.attendEvnet.bind(this, event)}>attend</button></li>
+                <li><button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button></li>
+                <li><button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button></li>
               </ul>
             </li>
           )
