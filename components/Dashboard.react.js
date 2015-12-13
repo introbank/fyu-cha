@@ -43,12 +43,12 @@ var Dashboard = React.createClass({
 
   margeEventList(attend, plan) {
     var eventList = [];
-    for (var i = 0; i < attend.length; i++){
-      eventList.push(this.parseEventData(attend[i]));
-    }
-    for (var i = 0; i < plan.length; i++){
-      eventList.push(this.parseEventData(plan[i]));
-    }
+    attend.map(function(eventData){
+      eventList.push(this.parseEventData(eventData));
+    });
+    plan.map(function(eventData){
+      eventList.push(this.parseEventData(eventData));
+    });
   },
 
   observe() {
@@ -91,7 +91,7 @@ var Dashboard = React.createClass({
       account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
     }
     var totalFyucha = 0;
-    //var eventList = this.margeEventList(this.data.attendanceEvents, this.data.planEvents);
+    var eventList = this.margeEventList.bind(this, this.data.attendanceEvents, this.data.planEvents);
     return (
       <div id="content">
         <AccountInfo account={account}/>
