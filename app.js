@@ -20,7 +20,8 @@ var Artist = React.createFactory(require('./components/Artist.react.js'));
 var ArtistList = React.createFactory(require('./components/ArtistList.react.js'));
 var Group = React.createFactory(require('./components/Group.react.js'));
 var GroupList = React.createFactory(require('./components/GroupList.react.js'));
-var NotFound  = React.createFactory(require('./components/NotFound.react.js'));
+var Registration = React.createFactory(require('./components/Registration.react.js'));
+var NotFound = React.createFactory(require('./components/NotFound.react.js'));
 
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,12 +51,10 @@ app.get('/users/:id', function(req, res) {
 });
 
 app.get('/artists', function(req, res) {
-    var params = {id: req.params.id};
     var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
-    var body   = React.renderToString(ArtistList({params: params}));
+    var body   = React.renderToString(ArtistList({}));
     var script = '/javascripts/artist-list.js';
-    var json   = JSON.stringify(params);
-    res.render('main', {css: css, body: body, script: script, params: json});
+    res.render('main', {css: css, body: body, script: script});
 });
 
 app.get('/artists/:id', function(req, res) {
@@ -69,12 +68,10 @@ app.get('/artists/:id', function(req, res) {
 });
 
 app.get('/groups', function(req, res) {
-    var params = {id: req.params.id};
     var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
-    var body   = React.renderToString(GroupList({params: params}));
+    var body   = React.renderToString(GroupList({}));
     var script = '/javascripts/group-list.js';
-    var json   = JSON.stringify(params);
-    res.render('main', {css: css, body: body, script: script, params: json});
+    res.render('main', {css: css, body: body, script: script});
 });
 
 app.get('/groups/:id', function(req, res) {
@@ -84,6 +81,13 @@ app.get('/groups/:id', function(req, res) {
     var script = '/javascripts/group.js';
     var json   = JSON.stringify(params);
     res.render('main', {css: css, body: body, script: script, params: json});
+});
+
+app.get('/registration', function(req, res) {
+    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
+    var body   = React.renderToString(Registration({}));
+    var script = '/javascripts/group-list.js';
+    res.render('main', {css: css, body: body, script: script});
 });
 
 var passport = require('passport');

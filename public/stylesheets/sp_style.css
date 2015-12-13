@@ -240,8 +240,8 @@ h1 {
 /*-----tab__images-----*/
 
 #images li img {
-	min-width:288px;
 	max-width:458px;
+	min-width:288px;
 	height:auto;
 	margin:10px auto 0px;
 	border:1px solid #EAEAEA;
@@ -264,10 +264,10 @@ h1 {
 .tabArea #followList ul {
 	overflow:hidden;
 	display:block;
-   	-webkit-margin-before:5px;
-   	-webkit-margin-after:5px;
-   	-webkit-margin-start:0px;
-   	-webkit-margin-end:0px;
+  -webkit-margin-before:5px;
+	-webkit-margin-after:5px;
+  -webkit-margin-start:0px;
+  -webkit-margin-end:0px;
 }
 
 .tabArea #followList ul li {
@@ -276,7 +276,7 @@ h1 {
 	box-sizing:border-box;
 }
 
-.tabArea #followlist ul li img {
+.tabArea #followList ul li img {
 	display:block;
 	width:140px;
 	height:140px;
@@ -286,7 +286,7 @@ h1 {
 	border:1px solid #EAEAEA;
 }
 
-.tabArea #tab2 ul li h2 {
+.tabArea #followList ul li h2 {
 	font-weight:bold;
 	width:140px;
 	height: 30px;

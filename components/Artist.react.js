@@ -63,7 +63,7 @@ var Artist = React.createClass({
                   <li id="label__tab2"><a href="#" className="tab2" onClick={this.changeTab2}>データ</a></li>
                 </ul>
                 {this.state.showMedia &&
-                <div id="tab1" className="tab">
+                <div id="images" className="tab">
                   <MediaList type="Artist" id={this.props.params.id} />
                 </div>
                 }
