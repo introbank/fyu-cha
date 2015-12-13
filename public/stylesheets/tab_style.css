@@ -169,7 +169,7 @@ h1 {
 	width:100%;
 }
 
-.mainInfo .artistImage {
+.mainInfo .images {
 	width:70px;
 	height:70px;
 	margin-bottom:5px;
@@ -177,7 +177,7 @@ h1 {
 	border-radius:4px;
 }
 
-.mainInfo .artistAccount {
+.mainInfo .account {
 	color:#999999;
 	font-size:0.8em;
 }
@@ -231,13 +231,13 @@ h1 {
 	text-align:center;
 }
 
-/*-----tab1__artistimage-----*/
+/*-----tab__images-----*/
 
-#tab1 ul {
+#images ul {
 	overflow:hidden;
 }
 
-#tab1 ul li img {
+#images ul li img {
 	float:left;
 	min-width:288px;
 	max-width:458px;
@@ -248,22 +248,22 @@ h1 {
 
 /*--------------------dashboard----------------------*/
 
-/*-----tab2__followlist-----*/
+/*-----tab__followList-----*/
 .tabArea .box {
 	margin:10px auto;
 }
 
-.tabArea #tab2 h1 {
+.tabArea #followList h1 {
 	color:#e4007f;
 	font-weight:bold;
 }
 
-.tabArea #tab2 ul {
+.tabArea #followList ul {
 	margin:0 auto;
 	overflow:hidden;
 }
 
-.tabArea #tab2 ul li {
+.tabArea #followList ul li {
 	float:left;
 	display:table-cell;
 	width:200px;
@@ -271,13 +271,13 @@ h1 {
 	margin:10px 10px 5px;
 }
 
-.tabArea #tab2 ul li img {
+.tabArea #followList ul li img {
 	width:200px;
 	height:200px;
 	border:1px solid #EAEAEA;
 }
 
-.tabArea #tab2 ul li h2 {
+.tabArea #followList ul li h2 {
 	font-weight:bold;
 	margin-top:10px;
 	height: 30px;
