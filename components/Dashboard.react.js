@@ -55,7 +55,6 @@ var Dashboard = React.createClass({
   render() {
     var account = null;
     if (this.data.user) {
-      console.log("feaf");
       account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
     }
     var totalFyucha = 0;
@@ -84,7 +83,7 @@ var Dashboard = React.createClass({
             </div>
             }
             {this.state.showFollow &&
-            <div id="tab2" class="tab">
+            <div id="tab2" className="tab">
               <div className="box">
                 <h1>アーティスト</h1>
                 <ul>
@@ -97,9 +96,9 @@ var Dashboard = React.createClass({
                     )
                   })}
                 </ul>
-                <p class="cf"></p>
+                <p className="cf"></p>
               </div>
-              <div class="box">
+              <div className="box">
                 <h1>グループ</h1>
                 <ul>
                   {this.data.group.map(function (group) {
@@ -111,12 +110,12 @@ var Dashboard = React.createClass({
                     )
                   })}
                 </ul>
-                <p class="cf"></p>
+                <p className="cf"></p>
               </div>
             </div>
             }
             {this.state.showSchedule &&
-            <div id="tab3" class="tab">
+            <div id="tab3" className="tab">
               <ul>
               {this.data.attendanceEvents.map(function(attendanceEvent) {
                 var eventDate = new Date(attendanceEvent.event.date);
@@ -143,7 +142,7 @@ var Dashboard = React.createClass({
             </div>
             }
             {this.state.showData &&
-            <div id="tab4" class="tab">
+            <div id="tab4" className="tab">
               <ul>
                 {this.data.twitterCbs.map(function(twitterCb) {
                   totalFyucha += twitterCb.point;

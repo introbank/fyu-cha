@@ -280,4 +280,8 @@ h1 {
 .tabArea #tab2 ul li h2 {
 	font-weight:bold;
 	margin-top:10px;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
