@@ -36,19 +36,34 @@ var Dashboard = React.createClass({
       name = eventData.group.name;
     }
 
-    var info = {title: eventData.title, aim: name, place: eventData.place, detail:eventData.detail, price: eventData.price};
-    return {date: date, info: info};
+    var info = {};
+    return {date: date, 
+            title: eventData.title,
+            aim: name,
+            place: eventData.place,
+            detail:eventData.detail,
+            price: eventData.price.toString()
+    };
   },
 
 
-  margeEventList(attend, plan) {
+  mergeEventList(attend, plan) {
     var eventList = [];
+    var strList = [];
     attend.map(function(eventData){
       eventList.push(this.parseEventData(eventData));
     });
     plan.map(function(eventData){
       eventList.push(this.parseEventData(eventData));
     });
+
+    // to do sort by date and xx
+
+    for(var i = 0; i < eventList.length; i++){
+        var e = eventList[0];
+        strList.push(e.date.getDate()+ e.aim + e.place + e.detail + e.price);
+    } 
+    return strList;
   },
 
   observe() {
@@ -91,7 +106,7 @@ var Dashboard = React.createClass({
       account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
     }
     var totalFyucha = 0;
-    var eventList = this.margeEventList.bind(this, this.data.attendanceEvents, this.data.planEvents);
+    var eventStrList = this.mergeEventList.bind(this, this.data.attendanceEvents, this.data.planEvents);
     return (
       <div id="content">
         <AccountInfo account={account}/>
@@ -169,6 +184,7 @@ var Dashboard = React.createClass({
                   <li> {eventDate.getMonth() + 1}月{eventDate.getDate()}日|| {name} || {attendanceEvent.event.title}@{place} </li>
                 )
                 })
+                
               }
 
               </ul>
