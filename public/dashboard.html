@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>アイドルページ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="css/sp_style.css" type="text/css" />
+<link media="screen and (min-device-width:481px)" rel="stylesheet" href="css/tab_style.css" type="text/css"/>
+<!--[if IE]>
+<link href="design.css" type="text/css" rel="stylesheet" />
+<![endif]-->
+<script type="text/javascript">
+	function ChangeTab(tabname) {
+	   document.getElementById('tab1').style.display = 'none';
+	   document.getElementById('tab2').style.display = 'none';
+	   document.getElementById('tab3').style.display = 'none';
+	   document.getElementById('tab4').style.display = 'none';
+	   if(tabname) {
+	   	document.getElementById(tabname).style.display = 'block';
+	   }
+	}
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="header" class="cf">
+        <span class="mainLogo">ふゅーちゃ</span><!--mainLogo-->
+        <span class="loginArea cf">
+            <ul>
+                <li class="mR10"><a href="">新規作成</a></li>
+                <li><a href="">ログイン</a></li>
+            </ul>
+        </span><!--loginArea-->
+    </div><!--header-->
+
+    <div id="nav" class="cf">
+        <ul>
+            <li class="boR">ああ</li>
+            <li class="boR">いい</li>
+            <li>うう</li>
+        </ul>
+    </div><!--nav-->
+
+    <div id="content">
+        <div class="mainInfo">
+        	<div class="contents">
+            	<p class="artistImage"></p>
+                <h1>ユーザダッシュボード（最大全角２０文字）</h1>
+                <p class="artistAccount">@user_max15chars</p>
+                <span>ユーザーのプロフィール。フリーテキスト。fontsize11pxあああああああああああああああああああああああああああああああああああああああああああああ（最大全角１６０文字）</span>
+            </div><!-----contents----->
+        </div><!--mainInfo-->
+            <div class="tabArea">
+            	<div class="contents">
+                   <ul class="tabs">
+                      <li id="label__tab1"><a href="#tab1" class="tab1 boR" onclick="ChangeTab('tab1'); return false">動画/画像</a></li>
+                      <li id="label__tab2"><a href="#tab2" class="tab2 boR" onclick="ChangeTab('tab2'); return false">フォロー</a></li>
+                      <li id="label__tab3"><a href="#tab3" class="tab2 boR" onclick="ChangeTab('tab3'); return false">スケジュール</a></li>
+                      <li id="label__tab4"><a href="#tab4" class="tab2" onclick="ChangeTab('tab4'); return false">データ</a></li>
+                   </ul>
+                   <div id="tab1" class="tab">
+                    <div class="dashboardPhotosEditStartButton">編<br>集</div>
+                    <div class="dashboardPhotos editnow">
+                      <div class="dashboardPhoto">
+                        <div class="dashboardPhotoEditButtonArea appear">
+                          <div class="dashboardPhotoAppearButton">表示</div>
+                          <div class="dashboardPhotoHideButton">非表示</div>
+                        </div>
+                        <img src="images/sample.png" alt="">
+                      </div>
+                      <div class="dashboardPhoto">
+                        <div class="dashboardPhotoEditButtonArea hide">
+                          <div class="dashboardPhotoAppearButton">表示</div>
+                          <div class="dashboardPhotoHideButton">非表示</div>
+                        </div>
+                        <img src="images/sample.png" alt="">
+                      </div>
+                      <div class="dashboardPhoto">
+                        <div class="dashboardPhotoEditButtonArea appear">
+                          <div class="dashboardPhotoAppearButton">表示</div>
+                          <div class="dashboardPhotoHideButton">非表示</div>
+                        </div>
+                        <img src="images/sample.png" alt="">
+                      </div>
+                    </div>
+                    <span class="viewMore">もっと見る</span>
+                   </div>
+                   <div id="tab2" class="tab">
+                   	<div class="box">
+                        <h1>アイドル</h1>
+                        <ul>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>橋本奈々未</h2>
+                            </li>
+                      </ul>
+                      <p class="cf"></p><!--回り込み解除-->
+                    </div><!--box-->
+                    <div class="box">
+                        <h1>グループ</h1>
+                        <ul>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                            <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                             <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                             <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                             <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                             <li>
+                                <p>ここに写真が入ります</p>
+                                <h2>乃木坂46</h2>
+                            </li>
+                      </ul>
+                      <p class="cf"></p><!--回り込み解除-->
+                    </div><!--box-->
+                   </div>
+                   <div id="tab3" class="tab">
+                    <h2 class="schedulePeriod"><span class="scheduleYear">2015</span><span class="scheduleMonth">12月</span></h2>
+                    <div class="scheduleDayWrapper">
+                      <div class="scheduleDayBox finished">
+                        <h3 class="scheduleDay">3</h3>
+                        <p class="scheduleDayOfTheWeek">Thu</p>
+                      </div>
+                      <div class="scheduleContentBox finished">
+                        <p class="scheduleContentTime">12:30 - 14:00</p>
+                        <p class="scheduleContentName">インストアライブ＆特典会</p>
+                        <div class="scheduleStar active"></div>
+                      </div>
+                      <div class="scheduleContentBox finished">
+                        <p class="scheduleContentTime">12:30 - 14:00</p>
+                        <p class="scheduleContentName">インストアライブ＆特典会</p>
+                        <div class="scheduleStar active"></div>
+                      </div>
+                    </div>
+                    <div class="scheduleDayWrapper">
+                      <div class="scheduleDayBox today">
+                        <h3 class="scheduleDay">4</h3>
+                        <p class="scheduleDayOfTheWeek">Fri</p>
+                      </div>
+                      <div class="scheduleContentBox finished">
+                        <p class="scheduleContentTime">12:30 - 14:00</p>
+                        <p class="scheduleContentName">インストアライブ＆特典会</p>
+                        <div class="scheduleStar active"></div>
+                      </div>
+                      <div class="scheduleNowDivider"></div>
+                      <div class="scheduleContentBox">
+                        <p class="scheduleContentTime">12:30 - 14:00</p>
+                        <p class="scheduleContentName">インストアライブ＆特典会</p>
+                        <div class="scheduleStar active"></div>
+                      </div>
+                    </div>
+                    <div class="scheduleDayWrapper">
+                      <div class="scheduleDayBox">
+                        <h3 class="scheduleDay">10</h3>
+                        <p class="scheduleDayOfTheWeek">Thu</p>
+                      </div>
+                      <div class="scheduleContentBox">
+                        <p class="scheduleContentTime">12:30 - 14:00</p>
+                        <p class="scheduleContentName">インストアライブ＆特典会</p>
+                        <p class="scheduleContentDescription">イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細</p>
+                        <p class="scheduleContentReserveButton">予約する</p>
+                        <div class="scheduleStar active"></div>
+                      </div>
+                    </div>
+                   </div>
+                   <div id="tab4" class="tab">
+                   	  <ul>
+                      	<li>ここにデータが入ります</li>
+                        <li>ここにデータが入ります</li>
+                        <li>ここにデータが入ります</li>
+                        <li>ここにデータが入ります</li>
+                        <li>ここにデータが入ります</li>
+                      </ul>
+                   </div>
+                </div><!--tabBox-->
+            </div><!-----contents----->
+    </div><!--content-->
+</div><!-----wrapper----->
+<!--フォロー機能追加時にはデフォルトをtab1に変更-->
+<script type="text/javascript">
+   ChangeTab('tab1');
+</script>
+</body>
+</html>

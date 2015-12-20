@@ -3,9 +3,10 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
-var AccountInfo   = require('./AccountInfo.react.js');
-var MediaList   = require('./MediaList.react.js');
-var EventList   = require('./EventList.react.js');
+var AccountInfo  = require('./AccountInfo.react.js');
+var MediaList    = require('./MediaList.react.js');
+var EventList    = require('./EventList.react.js');
+var Follow       = require('./Follow.react.js');
 
 var Artist = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -74,6 +75,9 @@ var Artist = React.createClass({
                 }
               </div>
             </div>
+
+            <h3> follow </h3>
+            <Follow account={artist} />
 
             <h3>ふゅーちゃ！してる人たち</h3>
             {this.data.twitterCbs.map(function(twitterCb){

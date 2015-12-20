@@ -7,6 +7,9 @@ body {
   color: #5a5a5a;
 }
 
+span.topword1 {font-size: 14px; }
+span.topword2 {font-size: 28px; }
+
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */

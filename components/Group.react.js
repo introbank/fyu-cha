@@ -6,6 +6,7 @@ var Navigation   = require('./Navigation.react.js');
 var AccountInfo   = require('./AccountInfo.react.js');
 var MediaList   = require('./MediaList.react.js');
 var EventList   = require('./EventList.react.js');
+var Follow       = require('./Follow.react.js');
 
 var Group = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -23,9 +24,14 @@ var Group = React.createClass({
     var groupQuery = new Parse.Query('Group');
     groupQuery.equalTo('twitterUsername', id);
 
+    var twitterContributionQuery = new Parse.Query('TwitterContribution');
+    twitterContributionQuery.matchesQuery("group", groupQuery);
+    twitterContributionQuery.include("user");
+
     return {
       user: ParseReact.currentUser,
       group: groupQuery,
+      twitterCbs: twitterContributionQuery,
     };
   },
 
@@ -44,6 +50,7 @@ var Group = React.createClass({
     }
 
     if (group) {
+      var totalFyucha = 0;
       return (
         <div id="wrapper">
           <Header />
@@ -68,6 +75,22 @@ var Group = React.createClass({
                 }
               </div>
             </div>
+
+            <h3> follow </h3>
+            <Follow account={group} />
+
+            <h3>ふゅーちゃ！してる人たち</h3>
+            {this.data.twitterCbs.map(function(twitterCb){
+              totalFyucha += twitterCb.point;
+              if (twitterCb.user){
+                return(
+                  <li>{twitterCb.user.username}さんが{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
+                )
+              }
+            })}
+            <p> トータル {totalFyucha} ふゅーちゃ！ されています </p>
+
+
           </div>
         </div>
       );
