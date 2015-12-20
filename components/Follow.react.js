@@ -33,8 +33,9 @@ var Follow = React.createClass({
 
   follow() {
     var following = this.createFollowingObj();
-    following.save();
-    this.setState({isFollowing: true});
+    following.save().then(
+      this.setState({isFollowing: true}));
+    
   },
 
   unfollow() {
@@ -45,8 +46,8 @@ var Follow = React.createClass({
       following.id = follow.objectId;
       followings.push(following);
     });
-    Parse.Object.destroyAll(followings);
-    this.setState({isFollowing: false});
+    Parse.Object.destroyAll(followings).then(
+      this.setState({isFollowing: false}));
   },
 
   render() {
