@@ -32,8 +32,8 @@ var Following = React.createClass({
             {this.data.followingArtists && this.data.followingArtists.map(function (following) {
               return (
                 <li>
-                  <a href={'artists/' + following.artist}><img src={following.artist} /></a>
-                  <h2>{following.artist}</h2>
+                  <a href={'artists/' + following.artist.twitterUsername}><img src={following.artist.imageUrl} /></a>
+                  <h2>{following.artist.name}</h2>
                 </li>
               )
             })}
@@ -46,8 +46,8 @@ var Following = React.createClass({
             {this.data.followingGroups && this.data.followingGroups.map(function (following) {
               return (
                 <li>
-                  <a href={'groups/' + following.group}><img src={following.group} /></a>
-                  <h2>{following.group}</h2>
+                  <a href={'groups/' + following.group.twitterUsername}><img src={following.group.imageUrl} /></a>
+                  <h2>{following.group.name}</h2>
                 </li>
               )
             })}
