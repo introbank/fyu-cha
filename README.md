@@ -7,6 +7,7 @@ introbank
 npm install
 npm start
 ```
+
 ## 仕組み
 
 react componentをサーバサイドとクライアントサイドで使い回すisomorphicな実装。
@@ -24,3 +25,17 @@ reactのファイルを変更していく場合は、
 `npm run watch`を別で動かし続け、componentsディレクトリ内のファイル変更を監視・自動ビルドしておくと楽。
 
 `npm run watch`は、componentsディレクトリ内のファイルに変更があった場合に自動でビルドを行う。
+
+
+## .scss->.css のコンパイル方法
+
+Sassのインストール
+```bash
+sudo gem install sass
+```
+
+Sassのコンパイル
+```bash
+sass --watch hogehoge.scss
+```
+
