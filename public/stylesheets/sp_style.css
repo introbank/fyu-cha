@@ -339,4 +339,83 @@ h1 {
       background: #d31277;
       border-radius: 50%; }
 
+/*-- fyucha --*/
+.fyuchaTotal {
+  margin-top: 10px;
+  margin-right: 0px;
+  font-size: 12px;
+  color: #db1277;
+  text-align: right; }
+  .fyuchaTotal .fyuchaToalNumerals {
+    margin-left: 5px;
+    font-size: 18px; }
+
+.fyuchaGraph {
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  height: 200px;
+  background: #db1277; }
+
+.fyuchaCommitsTitle {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #db1277; }
+
+.fyuchaCommits .fyuchaCommit {
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  border-bottom: 1px solid #c9caca; }
+  .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea {
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 42px; }
+    .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail {
+      position: absolute;
+      top: 8px;
+      left: 0px;
+      width: 28px;
+      height: 28px; }
+      .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail img {
+        width: 28px;
+        height: auto; }
+    .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
+      position: absolute;
+      top: 5px;
+      left: 35px;
+      color: black;
+      font-size: 12px; }
+    .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserAccount {
+      position: absolute;
+      top: 23px;
+      left: 35px;
+      color: #c9caca;
+      font-size: 10px; }
+  .fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea {
+    position: relative;
+    float: right;
+    width: 50%; }
+    .fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea .fyuchaCommitActionText {
+      position: absolute;
+      top: 12px;
+      right: 40px;
+      color: #333333;
+      font-size: 12px; }
+    .fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea .fyuchaCommitActionNumerals {
+      position: absolute;
+      top: 0px;
+      right: 5px;
+      width: 23px;
+      height: 35px;
+      color: #db1277;
+      font-size: 10px;
+      text-align: center;
+      background: url("../images/diamond.png") no-repeat;
+      background-position: 0px 15px; }
+
 /*# sourceMappingURL=sp_style.css.map */

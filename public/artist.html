@@ -11,128 +11,204 @@
 <link href="design.css" type="text/css" rel="stylesheet" />
 <![endif]-->
 <script type="text/javascript">
-  document.getElementById('tab1').style.display = 'block';
+	document.getElementById('tab1').style.display = 'block';
 	function ChangeTab(tabname) {
-	   document.getElementById('tab1').style.display = 'none';
-	   document.getElementById('tab2').style.display = 'none';
-	   document.getElementById('tab3').style.display = 'none';
-	   if(tabname) {
-	   	document.getElementById(tabname).style.display = 'block';
-	   }
+		 document.getElementById('tab1').style.display = 'none';
+		 document.getElementById('tab2').style.display = 'none';
+		 document.getElementById('tab3').style.display = 'none';
+		 if(tabname) {
+			document.getElementById(tabname).style.display = 'block';
+		 }
 	}
 </script>
 </head>
 
 <body>
 <div id="wrapper">
-    <div id="header" class="cf">
-        <span class="mainLogo">ふゅーちゃ</span><!--mainLogo-->
-        <span class="loginArea cf">
-            <ul>
-                <li class="mR10"><a href="">新規作成</a></li>
-                <li><a href="">ログイン</a></li>
-            </ul>
-        </span><!--loginArea-->
-    </div><!--header-->
+		<div id="header" class="cf">
+				<span class="mainLogo">ふゅーちゃ</span><!--mainLogo-->
+				<span class="loginArea cf">
+						<ul>
+								<li class="mR10"><a href="">新規作成</a></li>
+								<li><a href="">ログイン</a></li>
+						</ul>
+				</span><!--loginArea-->
+		</div><!--header-->
 
-    <div id="nav" class="cf">
-        <ul>
-            <li class="boR">ああ</li>
-            <li class="boR">いい</li>
-            <li>うう</li>
-        </ul>
-    </div><!--nav-->
+		<div id="nav" class="cf">
+				<ul>
+						<li class="boR">ああ</li>
+						<li class="boR">いい</li>
+						<li>うう</li>
+				</ul>
+		</div><!--nav-->
 
-    <div id="content">
-        <div class="mainInfo">
-        	<div class="contents">
-            	<p class="artistImage"></p>
-                <h1>橋本奈々未</h1>
-                <p class="artistAccount">@nanami_hashimoto</p>
-                <span>北海道旭川市出身。23歳。ああああああああああああああああああああああああああああああああああああああ</span>
-            </div><!-----contents----->
-        </div><!--mainInfo-->
-            <div class="tabArea">
-            	<div class="contents">
-                   <ul class="tabs">
-                      <li id="label__tab1"><a href="#tab1" class="tab1 boR current" onclick="ChangeTab('tab1'); return false">動画/画像</a></li>
-                      <li id="label__tab2"><a href="#tab2" class="tab2 boR" onclick="ChangeTab('tab2'); return false">スケジュール</a></li>
-                      <li id="label__tab3"><a href="#tab3" class="tab3" onclick="ChangeTab('tab3'); return false">データ</a></li>
-                   </ul>
-                   </ul>
-                   <div id="tab1" class="tab">
-                      <ul>
-                      	<li>ここに写真が入ります</li>
-                        <li>ここに写真が入ります</li>
-                        <li>ここに写真が入ります</li>
-                        <li>ここに写真が入ります</li>
-                        <li>ここに写真が入ります</li>
-                      </ul>
-                   </div>
-                   <div id="tab2" class="tab">
-                    <h2 class="schedulePeriod"><span class="scheduleYear">2015</span><span class="scheduleMonth">12月</span></h2>
-                    <div class="scheduleDayWrapper">
-                      <div class="scheduleDayBox finished">
-                        <h3 class="scheduleDay">3</h3>
-                        <p class="scheduleDayOfTheWeek">Thu</p>
-                      </div>
-                      <div class="scheduleContentBox finished">
-                        <p class="scheduleContentTime">12:30 - 14:00</p>
-                        <p class="scheduleContentName">インストアライブ＆特典会</p>
-                        <div class="scheduleStar active"></div>
-                      </div>
-                      <div class="scheduleContentBox finished">
-                        <p class="scheduleContentTime">12:30 - 14:00</p>
-                        <p class="scheduleContentName">インストアライブ＆特典会</p>
-                        <div class="scheduleStar active"></div>
-                      </div>
-                    </div>
-                    <div class="scheduleDayWrapper">
-                      <div class="scheduleDayBox today">
-                        <h3 class="scheduleDay">4</h3>
-                        <p class="scheduleDayOfTheWeek">Fri</p>
-                      </div>
-                      <div class="scheduleContentBox finished">
-                        <p class="scheduleContentTime">12:30 - 14:00</p>
-                        <p class="scheduleContentName">インストアライブ＆特典会</p>
-                        <div class="scheduleStar active"></div>
-                      </div>
-                      <div class="scheduleNowDivider"></div>
-                      <div class="scheduleContentBox">
-                        <p class="scheduleContentTime">12:30 - 14:00</p>
-                        <p class="scheduleContentName">インストアライブ＆特典会</p>
-                        <div class="scheduleStar active"></div>
-                      </div>
-                    </div>
-                    <div class="scheduleDayWrapper">
-                      <div class="scheduleDayBox">
-                        <h3 class="scheduleDay">10</h3>
-                        <p class="scheduleDayOfTheWeek">Thu</p>
-                      </div>
-                      <div class="scheduleContentBox">
-                        <p class="scheduleContentTime">12:30 - 14:00</p>
-                        <p class="scheduleContentName">インストアライブ＆特典会</p>
-                        <p class="scheduleContentDescription">イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細</p>
-                        <p class="scheduleContentReserveButton">予約する</p>
-                        <div class="scheduleStar active"></div>
-                      </div>
-                    </div>
-                   </div>
-                   <div id="tab3" class="tab">
-                   	  <ul>
-                      	<li>ここにデータが入ります</li>
-                        <li>ここにデータが入ります</li>
-                        <li>ここにデータが入ります</li>
-                        <li>ここにデータが入ります</li>
-                        <li>ここにデータが入ります</li>
-                      </ul>
-                   </div>
-                </div><!--tabBox-->
-            </div><!-----contents----->
-    </div><!--content-->
+		<div id="content">
+				<div class="mainInfo">
+					<div class="contents">
+							<p class="artistImage"></p>
+								<h1>橋本奈々未</h1>
+								<p class="artistAccount">@nanami_hashimoto</p>
+								<span>北海道旭川市出身。23歳。ああああああああああああああああああああああああああああああああああああああ</span>
+						</div><!-----contents----->
+				</div><!--mainInfo-->
+						<div class="tabArea">
+							<div class="contents">
+									<ul class="tabs">
+											<li id="label__tab1"><a href="#tab1" class="tab1 boR current" onclick="ChangeTab('tab1'); return false">動画/画像</a></li>
+											<li id="label__tab2"><a href="#tab2" class="tab2 boR" onclick="ChangeTab('tab2'); return false">スケジュール</a></li>
+											<li id="label__tab3"><a href="#tab3" class="tab3" onclick="ChangeTab('tab3'); return false">データ</a></li>
+									</ul>
+									</ul>
+									<div id="tab1" class="tab">
+											<ul>
+												<li>ここに写真が入ります</li>
+												<li>ここに写真が入ります</li>
+												<li>ここに写真が入ります</li>
+												<li>ここに写真が入ります</li>
+												<li>ここに写真が入ります</li>
+											</ul>
+									</div>
+									<div id="tab2" class="tab">
+										<h2 class="schedulePeriod"><span class="scheduleYear">2015</span><span class="scheduleMonth">12月</span></h2>
+										<div class="scheduleDayWrapper">
+											<div class="scheduleDayBox finished">
+												<h3 class="scheduleDay">3</h3>
+												<p class="scheduleDayOfTheWeek">Thu</p>
+											</div>
+											<div class="scheduleContentBox finished">
+												<p class="scheduleContentTime">12:30 - 14:00</p>
+												<p class="scheduleContentName">インストアライブ＆特典会</p>
+												<div class="scheduleStar active"></div>
+											</div>
+											<div class="scheduleContentBox finished">
+												<p class="scheduleContentTime">12:30 - 14:00</p>
+												<p class="scheduleContentName">インストアライブ＆特典会</p>
+												<div class="scheduleStar active"></div>
+											</div>
+										</div>
+										<div class="scheduleDayWrapper">
+											<div class="scheduleDayBox today">
+												<h3 class="scheduleDay">4</h3>
+												<p class="scheduleDayOfTheWeek">Fri</p>
+											</div>
+											<div class="scheduleContentBox finished">
+												<p class="scheduleContentTime">12:30 - 14:00</p>
+												<p class="scheduleContentName">インストアライブ＆特典会</p>
+												<div class="scheduleStar active"></div>
+											</div>
+											<div class="scheduleNowDivider"></div>
+											<div class="scheduleContentBox">
+												<p class="scheduleContentTime">12:30 - 14:00</p>
+												<p class="scheduleContentName">インストアライブ＆特典会</p>
+												<div class="scheduleStar active"></div>
+											</div>
+										</div>
+										<div class="scheduleDayWrapper">
+											<div class="scheduleDayBox">
+												<h3 class="scheduleDay">10</h3>
+												<p class="scheduleDayOfTheWeek">Thu</p>
+											</div>
+											<div class="scheduleContentBox">
+												<p class="scheduleContentTime">12:30 - 14:00</p>
+												<p class="scheduleContentName">インストアライブ＆特典会</p>
+												<p class="scheduleContentDescription">イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細イベント詳細</p>
+												<p class="scheduleContentReserveButton">予約する</p>
+												<div class="scheduleStar active"></div>
+											</div>
+										</div>
+									</div>
+									<div id="tab3" class="tab">
+										<p class="fyuchaTotal">TOTAL<span class="fyuchaToalNumerals">123456788</span></p>
+										<div class="fyuchaGraph"></div>
+										<h2 class="fyuchaCommitsTitle"></h2>
+										<div class="fyuchaCommits">
+											<div class="fyuchaCommit">
+												<div class="fyuchaCommitUserArea">
+													<div class="fyuchaCommitUserThumbnail">
+														<img src="" alt="">
+													</div>
+													<p class="fyuchaCommitUserName">ユーザー１</p>
+													<p class="fyuchaCommitUserAccount">@12345</p>
+												</div>
+												<div class="fyuchaCommitActionArea">
+													<p class="fyuchaCommitActionText">リツイート</p>
+													<div class="fyuchaCommitActionNumerals">2</div>
+												</div>
+											</div>
+											<div class="fyuchaCommit">
+												<div class="fyuchaCommitUserArea">
+													<div class="fyuchaCommitUserThumbnail">
+														<img src="" alt="">
+													</div>
+													<p class="fyuchaCommitUserName">ユーザー１</p>
+													<p class="fyuchaCommitUserAccount">@12345</p>
+												</div>
+												<div class="fyuchaCommitActionArea">
+													<p class="fyuchaCommitActionText">リツイート</p>
+													<div class="fyuchaCommitActionNumerals">2</div>
+												</div>
+											</div>
+											<div class="fyuchaCommit">
+												<div class="fyuchaCommitUserArea">
+													<div class="fyuchaCommitUserThumbnail">
+														<img src="" alt="">
+													</div>
+													<p class="fyuchaCommitUserName">ユーザー１</p>
+													<p class="fyuchaCommitUserAccount">@12345</p>
+												</div>
+												<div class="fyuchaCommitActionArea">
+													<p class="fyuchaCommitActionText">リツイート</p>
+													<div class="fyuchaCommitActionNumerals">2</div>
+												</div>
+											</div>
+											<div class="fyuchaCommit">
+												<div class="fyuchaCommitUserArea">
+													<div class="fyuchaCommitUserThumbnail">
+														<img src="" alt="">
+													</div>
+													<p class="fyuchaCommitUserName">ユーザー１</p>
+													<p class="fyuchaCommitUserAccount">@12345</p>
+												</div>
+												<div class="fyuchaCommitActionArea">
+													<p class="fyuchaCommitActionText">リツイート</p>
+													<div class="fyuchaCommitActionNumerals">2</div>
+												</div>
+											</div>
+											<div class="fyuchaCommit">
+												<div class="fyuchaCommitUserArea">
+													<div class="fyuchaCommitUserThumbnail">
+														<img src="" alt="">
+													</div>
+													<p class="fyuchaCommitUserName">ユーザー１</p>
+													<p class="fyuchaCommitUserAccount">@12345</p>
+												</div>
+												<div class="fyuchaCommitActionArea">
+													<p class="fyuchaCommitActionText">リツイート</p>
+													<div class="fyuchaCommitActionNumerals">2</div>
+												</div>
+											</div>
+											<div class="fyuchaCommit">
+												<div class="fyuchaCommitUserArea">
+													<div class="fyuchaCommitUserThumbnail">
+														<img src="" alt="">
+													</div>
+													<p class="fyuchaCommitUserName">ユーザー１</p>
+													<p class="fyuchaCommitUserAccount">@12345</p>
+												</div>
+												<div class="fyuchaCommitActionArea">
+													<p class="fyuchaCommitActionText">リツイート</p>
+													<div class="fyuchaCommitActionNumerals">5</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div><!--tabBox-->
+						</div><!-----contents----->
+		</div><!--content-->
 </div><!-----wrapper----->
 <script type="text/javascript">
-   ChangeTab('tab1');
+	 ChangeTab('tab1');
 </script>
 </body>
 </html>
