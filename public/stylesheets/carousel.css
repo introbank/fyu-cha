@@ -7,6 +7,9 @@ body {
   color: #5a5a5a;
 }
 
+span.topword1 {font-size: 14px; }
+span.topword2 {font-size: 28px; }
+
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -39,7 +42,7 @@ body {
 
 /* Carousel base class */
 .carousel {
-  height: 550px;
+  height: 400px;
   margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
@@ -49,7 +52,7 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 550px;
+  height: 400px;
   background-color: #B993D6; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #B993D6 , #8CA6DB); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #B993D6 , #8CA6DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
