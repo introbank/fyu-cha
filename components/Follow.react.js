@@ -5,6 +5,12 @@ var ParseReact   = require('parse-react');
 var Follow = React.createClass({
   mixins: [ParseReact.Mixin],
 
+  getInitialState() {
+    return {
+      isFollowing: null,
+    };
+  },
+
   observe(props, state) {
   var followingQuery = new Parse.Query("Following");
   var col = this.props.account.className.toLowerCase();
@@ -27,9 +33,8 @@ var Follow = React.createClass({
 
   follow() {
     var following = this.createFollowingObj();
-    return following.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}});
+    following.save();
+    this.setState({isFollowing: true});
   },
 
   unfollow() {
@@ -40,23 +45,28 @@ var Follow = React.createClass({
       following.id = follow.objectId;
       followings.push(following);
     });
-    Parse.Object.destroyAll(followings,{
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.description);}});
+    Parse.Object.destroyAll(followings);
+    this.setState({isFollowing: false});
   },
 
   render() {
-    console.log(this.data.following);
+    var isFollowing = this.state.isFollowing;
+    if (isFollowing == null){
+      isFollowing = (this.data.following.length > 0);
+    }
     return (
       <div className="followInfo">
-        {this.data.user &&
+        {isFollowing
+          ?
           <div className="follow_btn">
-            <ul>
-              <li>{this.data.following}{this.props.account.name}さんを <button className="btn" type="button" onClick={this.follow}>follow</button></li>
-              <li>{this.props.account.name}さんを <button className="btn" type="button" onClick={this.unfollow}>unfollow</button></li>
-            </ul>
+            {this.props.account.name}さんを <button className="btn" type="button" onClick={this.unfollow}>unfollw</button>
+          </div>
+          :
+          <div className="follow_btn">
+            {this.props.account.name}さんを <button className="btn" type="button" onClick={this.follow}>follow</button>
           </div>
         }
+
       </div>
     );
   },
