@@ -17,7 +17,6 @@ var EventList = React.createClass({
     };
   },
 
-
   observe(props, state) {
     var type = props.type;
     var id = props.id;

@@ -2,6 +2,7 @@ var React  = require('react');
 var Parse       = require('../lib/parse');
 var ParseReact  = require('parse-react');
 var AccountInfo   = require('./AccountInfo.react.js');
+var Follow       = require('./Follow.react.js');
 
 var Dashboard = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -67,8 +68,14 @@ var Dashboard = React.createClass({
   },
 
   observe() {
-    var artistQuery = new Parse.Query('Artist');
-    var groupQuery = new Parse.Query('Group');
+    var followingArtistQuery = new Parse.Query('Following');
+    followingArtistQuery.equalTo("user", Parse.User.current());
+    followingArtistQuery.include("artist").select("artist");
+
+    var followingGroupQuery = new Parse.Query('Following');
+    followingGroupQuery.equalTo("user", Parse.User.current());
+    followingGroupQuery.include("group").select("group");
+
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     twitterContributionQuery.equalTo("user", Parse.User.current());
     var eventAttendanceQuery = this.newEventStatusQueryInstance('EventAttendance');
@@ -76,8 +83,8 @@ var Dashboard = React.createClass({
 
     return {
       user: ParseReact.currentUser,
-      artist: artistQuery,
-      group: groupQuery,
+      artist: followingArtistQuery,
+      group: followingGroupQuery,
       twitterCbs: twitterContributionQuery,
       attendanceEvents: eventAttendanceQuery,
       planEvents: eventAttendanceQuery

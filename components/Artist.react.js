@@ -76,6 +76,9 @@ var Artist = React.createClass({
               </div>
             </div>
 
+            <h3> follow </h3>
+            <Follow account={artist} />
+
             <h3>ふゅーちゃ！してる人たち</h3>
             {this.data.twitterCbs.map(function(twitterCb){
               totalFyucha += twitterCb.point;
