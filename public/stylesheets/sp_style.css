@@ -418,4 +418,79 @@ h1 {
       background: url("../images/diamond.png") no-repeat;
       background-position: 0px 15px; }
 
+/* -- ダッシュボード画像/動画 -- */
+.dashboardPhotosEditStartButton {
+  box-sizing: border-box;
+  position: fixed;
+  top: 300px;
+  right: 0px;
+  padding-top: 10px;
+  width: 34px;
+  height: 60px;
+  background: #8eabc8;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  z-index: 30; }
+
+.dashboardPhotos {
+  margin-top: 20px; }
+  .dashboardPhotos.edit .dashboardPhotoEditButtonArea {
+    display: none; }
+
+.dashboardPhoto {
+  margin-top: 10px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 98%;
+  height: auto; }
+  .dashboardPhoto img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    z-index: 10; }
+  .dashboardPhoto .dashboardPhotoEditButtonArea {
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    overflow: hidden;
+    float: right;
+    width: 112px;
+    letter-spacing: 1px;
+    text-align: center;
+    z-index: 20; }
+    .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoAppearButton {
+      box-sizing: border-box;
+      float: left;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      width: 54px;
+      background: #db1277;
+      border: 2px solid #dfdfdf;
+      border-radius: 5px 0 0 5px;
+      color: white;
+      font-size: 14px; }
+    .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
+      box-sizing: border-box;
+      float: left;
+      margin-left: -1px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      width: 54px;
+      background: #999999;
+      border: 2px solid #dfdfdf;
+      border-radius: 0 5px 5px 0;
+      color: white;
+      font-size: 14px; }
+    .dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
+      background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
+      background: linear-gradient(to bottom, #fefefe, #c5c5c5);
+      text-indent: -9999px; }
+    .dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
+      background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
+      background: linear-gradient(to bottom, #fefefe, #c5c5c5);
+      text-indent: -9999px; }
+
 /*# sourceMappingURL=sp_style.css.map */
