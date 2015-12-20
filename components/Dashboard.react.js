@@ -2,7 +2,7 @@ var React  = require('react');
 var Parse       = require('../lib/parse');
 var ParseReact  = require('parse-react');
 var AccountInfo   = require('./AccountInfo.react.js');
-var Follow       = require('./Follow.react.js');
+var FollowingList       = require('./FollowingList.react.js');
 
 var Dashboard = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -68,14 +68,6 @@ var Dashboard = React.createClass({
   },
 
   observe() {
-    var followingArtistQuery = new Parse.Query('Following');
-    followingArtistQuery.equalTo("user", Parse.User.current());
-    followingArtistQuery.include("artist").select("artist");
-
-    var followingGroupQuery = new Parse.Query('Following');
-    followingGroupQuery.equalTo("user", Parse.User.current());
-    followingGroupQuery.include("group").select("group");
-
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     twitterContributionQuery.equalTo("user", Parse.User.current());
     var eventAttendanceQuery = this.newEventStatusQueryInstance('EventAttendance');
@@ -83,8 +75,6 @@ var Dashboard = React.createClass({
 
     return {
       user: ParseReact.currentUser,
-      artist: followingArtistQuery,
-      group: followingGroupQuery,
       twitterCbs: twitterContributionQuery,
       attendanceEvents: eventAttendanceQuery,
       planEvents: eventAttendanceQuery
@@ -120,54 +110,13 @@ var Dashboard = React.createClass({
         <div className="tabArea">
           <div className="contents">
             <ul className="tabs">
-              <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
               <li id="label__tab2"><a href="#" className="tab1 boR" onClick={this.changeTab2}>フォロー</a></li>
               <li id="label__tab3"><a href="#" className="tab1 boR" onClick={this.changeTab3}>スケジュール</a></li>
               <li id="label__tab4"><a href="#" className="tab1 boR" onClick={this.changeTab4}>データ</a></li>
             </ul>
-            {this.state.showMedia &&
-            <div id="images" className="tab">
-              <ul>
-                <li>ここに写真が入ります</li>
-                <li>ここに写真が入ります</li>
-                <li>ここに写真が入ります</li>
-                <li>ここに写真が入ります</li>
-                <li>ここに写真が入ります</li>
-              </ul>
-              <span className="viewMore">もっと見る</span>
-            </div>
-            }
+           
             {this.state.showFollow &&
-            <div id="followList" className="tab">
-              <div className="box">
-                <h1>アーティスト</h1>
-                <ul>
-                  {this.data.artist.map(function (artist) {
-                    return (
-                      <li>
-                        <a href={'artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
-                        <h2>{artist.name}</h2>
-                      </li>
-                    )
-                  })}
-                </ul>
-                <p className="cf"></p>
-              </div>
-              <div className="box">
-                <h1>グループ</h1>
-                <ul>
-                  {this.data.group.map(function (group) {
-                    return (
-                      <li>
-                        <a href={'groups/' + group.twitterUsername}><img src={group.imageUrl} /></a>
-                        <a href={'groups/' + group.twitterUsername}><h2>{group.name}</h2></a>
-                      </li>
-                    )
-                  })}
-                </ul>
-                <p className="cf"></p>
-              </div>
-            </div>
+              <FollowingList />
             }
             {this.state.showSchedule &&
             <div id="tab3" className="tab">

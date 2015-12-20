@@ -118,7 +118,10 @@ var EventList = React.createClass({
       success: function(res){console.log(res.text);},
       error: function(error){console.log(error.text);}
     });
+  },
 
+  editEvent: function(eventObj){
+  
   },
 
   attendEvent: function(targetEvent) {
