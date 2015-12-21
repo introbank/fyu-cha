@@ -6,6 +6,7 @@ var Navigation   = require('./Navigation.react.js');
 var AccountInfo  = require('./AccountInfo.react.js');
 var MediaList    = require('./MediaList.react.js');
 var EventList    = require('./EventList.react.js');
+var ContributionList    = require('./ContributionList.react.js');
 var Follow       = require('./Follow.react.js');
 
 var Artist = React.createClass({
@@ -81,16 +82,7 @@ var Artist = React.createClass({
                 }
                 {this.state.showData &&
                 <div id="tab3" class="tab">
-                  <h3>ふゅーちゃ！してる人たち</h3>
-                  {this.data.twitterCbs.map(function(twitterCb){
-                    totalFyucha += twitterCb.point;
-                    if (twitterCb.user){
-                      return(
-                        <li>{twitterCb.user.username}さんが{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
-                      )
-                    }
-                  })}
-                  <p> トータル {totalFyucha} ふゅーちゃ！ されています </p>
+                  <ContributionList type="Artist" id={this.props.params.id} />
                 </div>
                 }
               </div>
