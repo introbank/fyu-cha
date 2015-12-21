@@ -14,6 +14,7 @@ var Artist = React.createClass({
   getInitialState() {
     return {
       showMedia: true,
+      showSchedule: false,
       showData: false,
     };
   },
@@ -36,11 +37,15 @@ var Artist = React.createClass({
   },
 
   changeTab1() {
-    this.setState({showMedia: true, showData: false});
+    this.setState({showMedia: true, showSchedule: false, showData: false});
   },
 
   changeTab2() {
-    this.setState({showMedia: false, showData: true});
+    this.setState({showMedia: false, showSchedule: true, showData: false});
+  },
+
+  changeTab3() {
+    this.setState({showMedia: false, showSchedule: false, showData: true});
   },
 
   render() {
@@ -61,16 +66,31 @@ var Artist = React.createClass({
             	<div className="contents">
                 <ul className="tabs">
                   <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
-                  <li id="label__tab2"><a href="#" className="tab2" onClick={this.changeTab2}>データ</a></li>
+                  <li id="label__tab2"><a href="#" className="tab2 boR" onClick={this.changeTab2}>スケジュール</a></li>
+                  <li id="label__tab3"><a href="#" className="tab3" onClick={this.changeTab3}>データ</a></li>
                 </ul>
                 {this.state.showMedia &&
                 <div id="images" className="tab">
                   <MediaList type="Artist" id={this.props.params.id} />
                 </div>
                 }
-                {this.state.showData &&
-                <div id="tab2" class="tab">
+                {this.state.showSchedule &&
+                <div id="tab2" className="tab">
                   <EventList type="Artist" id={this.props.params.id} />
+                </div>
+                }
+                {this.state.showData &&
+                <div id="tab3" class="tab">
+                  <h3>ふゅーちゃ！してる人たち</h3>
+                  {this.data.twitterCbs.map(function(twitterCb){
+                    totalFyucha += twitterCb.point;
+                    if (twitterCb.user){
+                      return(
+                        <li>{twitterCb.user.username}さんが{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
+                      )
+                    }
+                  })}
+                  <p> トータル {totalFyucha} ふゅーちゃ！ されています </p>
                 </div>
                 }
               </div>
@@ -78,17 +98,6 @@ var Artist = React.createClass({
 
             <h3> follow </h3>
             <Follow account={artist} />
-
-            <h3>ふゅーちゃ！してる人たち</h3>
-            {this.data.twitterCbs.map(function(twitterCb){
-              totalFyucha += twitterCb.point;
-              if (twitterCb.user){
-                return(
-                  <li>{twitterCb.user.username}さんが{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
-                )
-              }
-            })}
-            <p> トータル {totalFyucha} ふゅーちゃ！ されています </p>
           </div>
         </div>
       );

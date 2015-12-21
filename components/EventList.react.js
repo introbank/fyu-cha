@@ -140,6 +140,7 @@ var EventList = React.createClass({
     var previousEventMonth = -1;
     var previousEventDay = -1;
     var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
+    var isDisplayedNowDivider = false;
     var eventList = this.data.events.map(function(event) {
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
@@ -161,18 +162,35 @@ var EventList = React.createClass({
                 <p className="scheduleDayOfTheWeek">{weekdays[eventDate.getDay()]}</p>
               </div>
             )}
-            <div className="scheduleContentBox finished">
-              <p className="scheduleContentTime">{hour}:{minute} -</p>
-              <p className="scheduleContentName">{event.title}</p>
-              <div className="scheduleStar active"></div>
-              <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
-              <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
-            </div>
+            {new Date() < eventDate && !isDisplayedNowDivider && (
+              <div className="scheduleNowDivider"></div>
+            )}
+            {new Date() > eventDate ? (
+              <div className="scheduleContentBox finished">
+                <p className="scheduleContentTime">{hour}:{minute} -</p>
+                <p className="scheduleContentName">{event.title}</p>
+                <div className="scheduleStar active"></div>
+                <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
+                <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+              </div>
+            ) : (
+              <div className="scheduleContentBox">
+                <p className="scheduleContentTime">{hour}:{minute} -</p>
+                <p className="scheduleContentName">{event.title}</p>
+                <div className="scheduleStar active"></div>
+                <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
+                <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+              </div>
+            )}
+
           </div>
         </div>
       );
       previousEventMonth = eventDate.getMonth();
       previousEventDay = eventDate.getDate();
+      if (new Date() < eventDate) {
+        isDisplayedNowDivider = true;
+      }
       return eventListHtml;
     }, this);
 
