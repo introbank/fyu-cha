@@ -121,7 +121,7 @@ var EventList = React.createClass({
   },
 
   editEvent: function(eventObj){
-  
+
   },
 
   attendEvent: function(targetEvent) {
@@ -136,8 +136,47 @@ var EventList = React.createClass({
     this.setEventStatus(targetEvent, eventPlan);
   },
 
-
   render() {
+    var previousEventMonth = -1;
+    var previousEventDay = -1;
+    var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
+    var eventList = this.data.events.map(function(event) {
+      var eventDate = new Date(event.date);
+      var hour = eventDate.getHours();
+	    if(hour < 10) { hour = "0" + hour; }
+      var minute = eventDate.getMinutes();
+	    if(minute < 10) { minute = "0" + minute; }
+      var eventListHtml = (
+        <div>
+          {previousEventMonth != eventDate.getMonth() && (
+            <h2 className="schedulePeriod">
+              <span className="scheduleYear">{eventDate.getFullYear()}</span>
+              <span className="scheduleMonth">{eventDate.getMonth() + 1}月</span>
+            </h2>
+          )}
+          <div className="scheduleDayWrapper">
+            {previousEventDay != eventDate.getDate() && (
+              <div className="scheduleDayBox finished">
+                <h3 className="scheduleDay">{eventDate.getDate()}</h3>
+                <p className="scheduleDayOfTheWeek">{weekdays[eventDate.getDay()]}</p>
+              </div>
+            )}
+            <div className="scheduleContentBox finished">
+              <p className="scheduleContentTime">{hour}:{minute} -</p>
+              <p className="scheduleContentName">{event.title}</p>
+              <div className="scheduleStar active"></div>
+              <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
+              <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+            </div>
+          </div>
+        </div>
+      );
+      previousEventMonth = eventDate.getMonth();
+      previousEventDay = eventDate.getDate();
+      return eventListHtml;
+    }, this);
+
+
     return (
       <div>
         <form className="commentForm" onSubmit={this.handleEventSubmit}>
@@ -146,23 +185,11 @@ var EventList = React.createClass({
           <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
           <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
           <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-          <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円 
+          <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
           <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
           <input type="submit" value="登録" />
         </form>
-        {this.data.events.map(function(event) {
-          var eventDate = new Date(event.date);
-          return (
-            <li>{event.title} @ {event.place}
-              <ul>
-                <li>{eventDate.getMonth() + 1}月{eventDate.getDate()}日 {event.price}円</li>
-                <li>{event.detail}</li>
-                <li><button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button></li>
-                <li><button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button></li>
-              </ul>
-            </li>
-          )
-        }, this)}
+        {eventList}
       </div>
     );
   },
