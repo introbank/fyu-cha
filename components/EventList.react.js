@@ -7,13 +7,8 @@ var EventList = React.createClass({
 
   getInitialState() {
     return {
-      eventYear: '',
-      eventMonth: '',
-      eventDay: '',
-      eventTitle: '',
-      eventPrice: '',
-      eventPlace: '',
-      eventDetail: ''
+      attend: null,
+      plan: null
     };
   },
 
@@ -35,93 +30,20 @@ var EventList = React.createClass({
     };
   },
 
-  handleEventYearChange: function(e) {
-    this.setState({eventYear: e.target.value});
+  getDefaultProps() {
+    return {
+      isUpdate: false
+    };
   },
 
-  handleEventMonthChange: function(e) {
-    this.setState({eventMonth: e.target.value});
-  },
-
-  handleEventDayChange: function(e) {
-    this.setState({eventDay: e.target.value});
-  },
-
-  handleEventTitleChange: function(e) {
-    this.setState({eventTitle: e.target.value});
-  },
-
-  handleEventPriceChange: function(e) {
-    this.setState({eventPrice: e.target.value});
-  },
-
-  handleEventPlaceChange: function(e) {
-    this.setState({eventPlace: e.target.value});
-  },
-
-  handleEventDetailChange: function(e) {
-    this.setState({eventDetail: e.target.value});
-  },
-
-  handleEventSubmit(e) {
-    e.preventDefault();
-    var year = this.state.eventYear;
-    var month = this.state.eventMonth;
-    var day = this.state.eventDay;
-    var title = this.state.eventTitle.trim();
-    var price = this.state.eventPrice;
-    var place = this.state.eventPlace;
-    var detail = this.state.eventDetail.trim();
-    if (!year || !month || !day || !title) {
-      return;
-    }
-    var Event = Parse.Object.extend('Event');
-    var event = new Event();
-    var date = new Date(year, month-1, day);
-    event.set('date', date);
-    event.set('title', title);
-    event.set('price', Number(price));
-    event.set('place', place);
-    event.set('detail', detail);
-    if (this.props.type === 'Artist') {
-      var Artist = Parse.Object.extend('Artist');
-      var artist = new Artist();
-      artist.id = this.data.account[0].id.objectId;
-      var relation = event.relation('artists');
-      relation.add(artist);
-    } else {
-      var Group = Parse.Object.extend('Group');
-      var group = new Group();
-      group.id = this.data.account[0].id.objectId;
-      var relation = event.relation('groups');
-      relation.add(group);
-    }
-    event.save();
-    this.setState({author: '', text: ''});
-  },
-
-  setEventStatus: function(targetEvent, eventStatus){
-    eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
-    eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
-    if (this.props.type === 'Artist') {
-      var Artist = Parse.Object.extend('Artist');
-      var artist = new Artist();
-      artist.id = this.data.account[0].id.objectId;
-      eventStatus.set("artist", artist);
-    } else {
-      var Group = Parse.Object.extend('Group');
-      var group = new Group();
-      group.id = this.data.account[0].id.objectId;
-      eventStatus.set("group", group);
-    }
-    eventStatus.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
-  },
-
+  // to do
   editEvent: function(eventObj){
 
+  },
+
+  // to do
+  deleteEvent: {
+  
   },
 
   attendEvent: function(targetEvent) {
@@ -194,19 +116,8 @@ var EventList = React.createClass({
       return eventListHtml;
     }, this);
 
-
     return (
       <div>
-        <form className="commentForm" onSubmit={this.handleEventSubmit}>
-          <input type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-          <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-          <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
-          <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
-          <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-          <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
-          <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
-          <input type="submit" value="登録" />
-        </form>
         {eventList}
       </div>
     );

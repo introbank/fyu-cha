@@ -5,7 +5,7 @@ var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
 var AccountInfo  = require('./AccountInfo.react.js');
 var MediaList    = require('./MediaList.react.js');
-var EventList    = require('./EventList.react.js');
+var EventForm   = require('./EventForm.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var Follow       = require('./Follow.react.js');
 
@@ -66,9 +66,9 @@ var Artist = React.createClass({
             <div className="tabArea">
             	<div className="contents">
                 <ul className="tabs">
-                  <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>動画/画像</a></li>
+                  <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>アルバム</a></li>
                   <li id="label__tab2"><a href="#" className="tab2 boR" onClick={this.changeTab2}>スケジュール</a></li>
-                  <li id="label__tab3"><a href="#" className="tab3" onClick={this.changeTab3}>データ</a></li>
+                  <li id="label__tab3"><a href="#" className="tab3" onClick={this.changeTab3}>ふゅーちゃ</a></li>
                 </ul>
                 {this.state.showMedia &&
                 <div id="images" className="tab">
@@ -77,7 +77,7 @@ var Artist = React.createClass({
                 }
                 {this.state.showSchedule &&
                 <div id="tab2" className="tab">
-                  <EventList type="Artist" id={this.props.params.id} />
+                  <EventForm type="Artist" id={this.props.params.id} />
                 </div>
                 }
                 {this.state.showData &&
