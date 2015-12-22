@@ -7,12 +7,14 @@ var EventList = React.createClass({
 
   getInitialState() {
     return {
+      update: null,
       attend: null,
       plan: null
     };
   },
 
   observe(props, state) {
+    console.log(props.count);
     var type = props.type;
     var id = props.id;
 
@@ -32,7 +34,7 @@ var EventList = React.createClass({
 
   getDefaultProps() {
     return {
-      isUpdate: false
+      count: 0
     };
   },
 
@@ -42,8 +44,12 @@ var EventList = React.createClass({
   },
 
   // to do
-  deleteEvent: {
-  
+  deleteEvent(targetEvent){
+    var Event = Parse.Object.extend('Event');
+    var ev = new Event();
+    ev.id = targetEvent.objectId;
+    ev.destroy().then(
+        this.setState({update: true}));
   },
 
   attendEvent: function(targetEvent) {
@@ -57,6 +63,28 @@ var EventList = React.createClass({
     var eventPlan = new EventPlan();
     this.setEventStatus(targetEvent, eventPlan);
   },
+
+  setEventStatus: function(targetEvent, eventStatus){
+    eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
+    eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
+    if (this.props.type === 'Artist') {
+      var Artist = Parse.Object.extend('Artist');
+      var artist = new Artist();
+      artist.id = this.data.account[0].id.objectId;
+      eventStatus.set("artist", artist);
+    } else {
+      var Group = Parse.Object.extend('Group');
+      var group = new Group();
+      group.id = this.data.account[0].id.objectId;
+      eventStatus.set("group", group);
+    }
+    eventStatus.save(null, {
+      success: function(res){console.log(res.text);},
+      error: function(error){console.log(error.text);}
+    });
+  },
+
+
 
   render() {
     var previousEventMonth = -1;
@@ -100,6 +128,7 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
+                <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
                 <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
               </div>

@@ -5,7 +5,7 @@ var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
 var AccountInfo  = require('./AccountInfo.react.js');
 var MediaList    = require('./MediaList.react.js');
-var EventForm   = require('./EventForm.react.js');
+var Schedule   = require('./Schedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var Follow       = require('./Follow.react.js');
 
@@ -77,7 +77,7 @@ var Artist = React.createClass({
                 }
                 {this.state.showSchedule &&
                 <div id="tab2" className="tab">
-                  <EventForm type="Artist" id={this.props.params.id} />
+                  <Schedule type="Artist" id={this.props.params.id} />
                 </div>
                 }
                 {this.state.showData &&

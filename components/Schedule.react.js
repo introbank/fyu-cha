@@ -3,11 +3,12 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var EventList    = require('./EventList.react.js');
 
-var EventForm = React.createClass({
+var Schedule = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState() {
     return {
+      count: 0,
       eventYear: '',
       eventMonth: '',
       eventDay: '',
@@ -98,6 +99,7 @@ var EventForm = React.createClass({
     event.save().then(
       this.setState(
         {
+          count: this.state.count +1,
           eventYear: '',
           eventMonth: '',
           eventDay: '',
@@ -141,11 +143,11 @@ var EventForm = React.createClass({
           <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
           <input type="submit" value="登録" />
         </form>
-        <EventList type={this.props.type} id={this.props.id} />
+        <EventList type={this.props.type} id={this.props.id} count={this.state.count} />
       </div>
     );
   },
 
 });
 
-module.exports = EventForm;
+module.exports = Schedule;
