@@ -26,6 +26,9 @@ var ContributionList = React.createClass({
     var commits = (
       <div className="fyuchaCommits">
         {this.data.twitterCbs.map(function(twitterCb) {
+          if (!twitterCb.user) {
+            return;
+          }
           totalFyucha += twitterCb.point;
           return (
             <div className="fyuchaCommit">
