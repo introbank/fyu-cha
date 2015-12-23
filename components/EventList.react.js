@@ -14,22 +14,34 @@ var EventList = React.createClass({
   },
 
   observe(props, state) {
-    console.log(props.count);
     var type = props.type;
     var id = props.id;
 
-    var accountQuery = new Parse.Query(type);
-    accountQuery.equalTo('twitterUsername', id);
+    if (type == "Dashboard"){
+      var plans = new Parse.Query("EventPlan");
+      plans.equalTo("user", Parse.User.current());
+      plans.include("event");
+      return{
+        user: ParseReact.currentUser,
+        plans: plans
+      };
+    }
+    else{
 
-    var eventQuery = new Parse.Query('Event');
-    eventQuery.ascending('date');
-    eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
 
-    return {
-      user: ParseReact.currentUser,
-      account: accountQuery,
-      events: eventQuery,
-    };
+      var accountQuery = new Parse.Query(type);
+      accountQuery.equalTo('twitterUsername', id);
+
+      var eventQuery = new Parse.Query('Event');
+      eventQuery.ascending('date');
+      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
+
+      return {
+        user: ParseReact.currentUser,
+        account: accountQuery,
+        events: eventQuery,
+      };
+    }
   },
 
   getDefaultProps() {
@@ -143,8 +155,16 @@ var EventList = React.createClass({
     var previousEventDay = -1;
     var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
     var isDisplayedNowDivider = false;
-    var eventList = this.data.events.map(function(event) {
-      return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
+    var eventList = null;
+    if (this.props.type == "Dashboard"){
+      eventList = this.data.plans.map(function(plan) {
+        return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
+
+    }
+    else{
+      eventList = this.data.events.map(function(event) {
+        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
+    }
     return (
       <div>
         {eventList}
