@@ -53,9 +53,8 @@ var MediaList = React.createClass({
   render() {
     return (
       <div>
-        <p>
-          {this.data.user && <button className="btn" type="button" onClick={this.switchEditMode}>編集</button>}
-        </p>
+          {this.data.user && 
+            <div class="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>編集</div>}
         <ul>
           {this.data.mediaMap.map(function (mediaMap) {
             return (
