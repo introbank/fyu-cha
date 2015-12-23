@@ -9,6 +9,7 @@ var ArtistList = React.createClass({
 
   observe(props, state) {
     var artistQuery = new Parse.Query('Artist');
+    artistQuery.limit(1000);
     artistQuery.ascending('name');
 
     return {

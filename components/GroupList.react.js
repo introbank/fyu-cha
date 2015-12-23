@@ -9,6 +9,7 @@ var GroupList = React.createClass({
 
   observe(props, state) {
     var groupQuery = new Parse.Query('Group');
+    groupQuery.limit(1000);
     groupQuery.ascending('name');
 
     return {
