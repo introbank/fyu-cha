@@ -33,7 +33,7 @@ var GroupList = React.createClass({
                       {this.data.group.map(function (group) {
                         return (
                           <li>
-                            <a href={'groups/' + group.twitterUsername}><img src={group.imageUrl} /></a>
+                            <a href={'/groups/' + group.twitterUsername}><img src={group.imageUrl} /></a>
                             <h2>{group.name}</h2>
                           </li>
                         )

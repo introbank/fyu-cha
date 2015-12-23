@@ -33,7 +33,7 @@ var ArtistList = React.createClass({
                       {this.data.artist.map(function (artist) {
                         return (
                           <li>
-                            <a href={'artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
+                            <a href={'/artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
                             <h2>{artist.name}</h2>
                           </li>
                         )
