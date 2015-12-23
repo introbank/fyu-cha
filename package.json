@@ -34,7 +34,10 @@
     "start": "node app.js",
     "build:top": "gulp build:top",
     "build:artist": "gulp build:artist",
-    "build:group": "gulp build:group"
+    "build:group": "gulp build:group",
+    "watch:top": "gulp watch:top",
+    "watch:artist": "gulp watch:artist",
+    "watch:group": "gulp watch:group"
   },
   "engines": {
     "node": "5.3.0"
