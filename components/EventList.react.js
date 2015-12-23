@@ -44,11 +44,6 @@ var EventList = React.createClass({
     }
   },
 
-  getDefaultProps() {
-    return {
-      count: 0
-    };
-  },
 
   // to do
   editEvent: function(eventObj){
@@ -125,7 +120,7 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
-                <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
+                <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
               </div>
             ) : (
@@ -134,7 +129,6 @@ var EventList = React.createClass({
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
                 <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
-                <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
                 <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
               </div>
             )}
