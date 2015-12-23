@@ -162,7 +162,7 @@ var Schedule = React.createClass({
             <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
             <input type="submit" value="登録" />
           </form>
-          <EventList type={this.props.type} id={this.props.id} />
+          <EventList type={this.props.type} id={this.props.id} handle={this.update} />
         </div>
       );
     }

@@ -56,7 +56,8 @@ var EventList = React.createClass({
     var ev = new Event();
     ev.id = targetEvent.objectId;
     ev.destroy().then(
-        this.setState({update: true}));
+        this.props.handle();
+        );
   },
 
   attendEvent: function(targetEvent) {
@@ -85,10 +86,8 @@ var EventList = React.createClass({
       group.id = this.data.account[0].id.objectId;
       eventStatus.set("group", group);
     }
-    eventStatus.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
+    eventStatus.save().then(
+        this.props.handle(););
   },
 
   createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider){
