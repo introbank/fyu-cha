@@ -8,7 +8,6 @@ var Schedule = React.createClass({
 
   getInitialState() {
     return {
-      count: 0,
       eventYear: '',
       eventMonth: '',
       eventDay: '',
