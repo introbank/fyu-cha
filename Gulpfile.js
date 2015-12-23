@@ -30,4 +30,52 @@ gulp.task('js', function() {
 
 gulp.task('watch', function() {
   gulp.watch('./components/*.js', ['js']);
-})
+});
+
+gulp.task('build:top', function() {
+  gulp.src('app/top.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(print(function(filepath) {
+      return "built: " + filepath;
+    }));
+});
+
+gulp.task('build:artist', function() {
+  gulp.src('app/artist.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(print(function(filepath) {
+      return "built: " + filepath;
+    }));
+});
+
+gulp.task('build:group', function() {
+  gulp.src('app/group.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(print(function(filepath) {
+      return "built: " + filepath;
+    }));
+});
+
+gulp.task('watch:top', function() {
+  gulp.watch('./components/*.js', ['build:top']);
+});
+
+gulp.task('watch:artist', function() {
+  gulp.watch('./components/*.js', ['build:artist']);
+});
+
+gulp.task('watch:group', function() {
+  gulp.watch('./components/*.js', ['build:group']);
+});
