@@ -14,7 +14,8 @@ var Schedule = React.createClass({
       eventTitle: '',
       eventPrice: '',
       eventPlace: '',
-      eventDetail: ''
+      eventDetail: '',
+      update: false
     };
   },
 
@@ -41,6 +42,10 @@ var Schedule = React.createClass({
         account: accountQuery,
       };
     }
+  },
+
+  update() {
+    this.setState({update: true});
   },
 
   handleEventYearChange: function(e) {

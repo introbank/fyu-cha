@@ -19,8 +19,8 @@ var EventList = React.createClass({
 
     if (type == "Dashboard"){
       var plans = new Parse.Query("EventPlan");
+      plans.include('event');
       plans.equalTo("user", Parse.User.current());
-      plans.include("event");
       return{
         user: ParseReact.currentUser,
         plans: plans
@@ -92,6 +92,7 @@ var EventList = React.createClass({
   },
 
   createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider){
+    try{
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
       if(hour < 10) { hour = "0" + hour; }
@@ -142,7 +143,11 @@ var EventList = React.createClass({
         isDisplayedNowDivider = true;
       }
       return eventListHtml;
-    },
+    }
+    catch(e) {
+      console.log(e); 
+    }
+  },
 
   render() {
     var previousEventMonth = -1;
@@ -152,6 +157,8 @@ var EventList = React.createClass({
     var eventList = null;
     if (this.props.type == "Dashboard"){
       eventList = this.data.plans.map(function(plan) {
+        console.log(plan);
+        console.log(plan.event);
         return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
 
     }
