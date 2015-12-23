@@ -31,9 +31,12 @@
   "scripts": {
     "watch": "gulp watch",
     "postinstall": "gulp",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build:top": "gulp build:top",
+    "build:artist": "gulp build:artist",
+    "build:group": "gulp build:group"
   },
   "engines": {
-    "node": "5.1.0"
+    "node": "5.3.0"
   }
 }

@@ -30,4 +30,31 @@ gulp.task('js', function() {
 
 gulp.task('watch', function() {
   gulp.watch('./components/*.js', ['js']);
-})
+});
+
+gulp.task('build:top', function() {
+  gulp.src('app/top.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'));
+});
+
+gulp.task('build:artist', function() {
+  gulp.src('app/artist.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'));
+});
+
+gulp.task('build:group', function() {
+  gulp.src('app/group.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'));
+});
