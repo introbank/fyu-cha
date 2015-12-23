@@ -9,6 +9,7 @@ var ArtistList = React.createClass({
 
   observe(props, state) {
     var artistQuery = new Parse.Query('Artist');
+    artistQuery.limit(1000);
     artistQuery.ascending('name');
 
     return {
@@ -32,7 +33,7 @@ var ArtistList = React.createClass({
                       {this.data.artist.map(function (artist) {
                         return (
                           <li>
-                            <a href={'artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
+                            <a href={'/artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
                             <h2>{artist.name}</h2>
                           </li>
                         )
