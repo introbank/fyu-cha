@@ -26,6 +26,10 @@ reactのファイルを変更していく場合は、
 
 `npm run watch`は、componentsディレクトリ内のファイルに変更があった場合に自動でビルドを行う。
 
+`npm run build:top`
+`npm run build:artist`
+`npm run build:group`
+は、個別にreact.jsからjsファイルに変換する。
 
 ## .scss->.css のコンパイル方法
 
@@ -38,4 +42,3 @@ Sassのコンパイル
 ```bash
 sass --watch hogehoge.scss
 ```
-
