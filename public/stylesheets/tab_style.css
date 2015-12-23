@@ -221,7 +221,8 @@ h1 {
   font-weight: bold; }
 
 .tabArea #followList h2 {
-  font-weight: bold; }
+  font-weight: bold;
+  margin-top: 10px; }
 
 .tabArea #followList h2 img {
   margin-right: 10px; }
