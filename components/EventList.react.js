@@ -13,42 +13,29 @@ var EventList = React.createClass({
     };
   },
 
-  newEventStatusQueryInstance(className) {
-    var query = new Parse.Query(className);
-    query.equalTo("user", Parse.User.current());
-    query.include("event");
-    query.include("artist");
-    query.include("group");
-    return query
-  },
-
   observe(props, state) {
+    console.log(props.count);
     var type = props.type;
     var id = props.id;
-    if (type == "Dashboard"){
-      var eventPlanQuery = this.newEventStatusQueryInstance('EventPlan');
 
-      return {
-        user: ParseReact.currentUser,
-        plans: eventPlanQuery,
-      };
-    }
-    else{
-      var accountQuery = new Parse.Query(type);
-      accountQuery.equalTo('twitterUsername', id);
+    var accountQuery = new Parse.Query(type);
+    accountQuery.equalTo('twitterUsername', id);
 
-      var eventQuery = new Parse.Query('Event');
-      eventQuery.ascending('date');
-      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
-      var eventPlanQuery = this.newEventStatusQueryInstance('EventPlan');
+    var eventQuery = new Parse.Query('Event');
+    eventQuery.ascending('date');
+    eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
 
-      return {
-        user: ParseReact.currentUser,
-        account: accountQuery,
-        events: eventQuery,
-        plans: eventPlanQuery,
-      };
-    }
+    return {
+      user: ParseReact.currentUser,
+      account: accountQuery,
+      events: eventQuery,
+    };
+  },
+
+  getDefaultProps() {
+    return {
+      count: 0
+    };
   },
 
   // to do
@@ -97,29 +84,7 @@ var EventList = React.createClass({
     });
   },
 
-  getEvents(){
-    var events = [];
-    if (this.props.type == "Dashboard"){
-      this.data.plans.map(function(plan) {
-        events.push(plan.event);
-      });
-    }
-    else{
-      this.data.events.map(function(event)){
-        events.push(plan.event);
-      }
-    }
-    return events;
-  },
-
-
-  render() {
-    var events = this.getEvents();
-    var previousEventMonth = -1;
-    var previousEventDay = -1;
-    var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
-    var isDisplayedNowDivider = false;
-    var eventList = this.data.events.map(function(event) {
+  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider){
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
       if(hour < 10) { hour = "0" + hour; }
@@ -171,8 +136,15 @@ var EventList = React.createClass({
         isDisplayedNowDivider = true;
       }
       return eventListHtml;
-    }, this);
+    },
 
+  render() {
+    var previousEventMonth = -1;
+    var previousEventDay = -1;
+    var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
+    var isDisplayedNowDivider = false;
+    var eventList = this.data.events.map(function(event) {
+      return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
     return (
       <div>
         {eventList}
