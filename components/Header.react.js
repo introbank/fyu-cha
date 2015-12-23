@@ -5,6 +5,16 @@ var ParseReact = require('parse-react');
 var Header = React.createClass({
   mixins: [ParseReact.Mixin],
 
+  getInitialState() {
+    return {
+      serverSideRendering: true
+    };
+  },
+
+  componentDidMount() {
+    this.setState({serverSideRendering: false});
+  },
+
   observe() {
     return {
       user: ParseReact.currentUser,
@@ -12,7 +22,7 @@ var Header = React.createClass({
   },
 
   render() {
-    return (
+    var headerHtml = (
       <div id="header" className="cf">
         <span className="mainLogo" onClick={this.top}>ふゅーちゃ</span>
         <span className="loginArea cf">
@@ -31,6 +41,17 @@ var Header = React.createClass({
         </span>
       </div>
     );
+
+    if (this.state.serverSideRendering) {
+      var headerHtml = (
+        <div id="header" className="cf">
+          <span className="mainLogo" onClick={this.top}>ふゅーちゃ</span>
+          <span className="loginArea cf" />
+        </div>
+      )
+    }
+
+    return headerHtml;
   },
 
   top() {
