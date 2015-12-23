@@ -7,9 +7,15 @@ var EventView = React.createClass({
 
   getInitialState() {
     return {
-      update: null,
+      update: false,
       attend: null,
       plan: null
+    };
+  },
+
+  getDefaultProps() {
+    return {
+      update: false
     };
   },
 
@@ -20,17 +26,17 @@ var EventView = React.createClass({
   },
 
   // to do
-  editEvent: function(eventObj){
+  editEvent: function(){
 
   },
 
-  // to do
   deleteEvent(){
     var Event = Parse.Object.extend('Event');
     var ev = new Event();
     ev.id = this.props.event.objectId;
     ev.destroy().then(
-        this.setState({update: true}));
+        //this.replaceProps({update: true})
+        );
   },
 
   attendEvent: function() {
@@ -59,10 +65,9 @@ var EventView = React.createClass({
       group.id = this.props.id.objectId;
       eventStatus.set("group", group);
     }
-    eventStatus.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
+    eventStatus.save().then(
+        //this.replaceProps({update: true})
+        );
   },
 
   render() {

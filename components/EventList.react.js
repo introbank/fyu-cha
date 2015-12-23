@@ -39,7 +39,7 @@ var EventList = React.createClass({
       {this.data.events.map && this.data.events.map(function(event){
         return(
            <div>
-             <EventView type={type} id={id} event={event} />
+             <EventView type={type} id={id} event={event}/>
            </div>
          );                                                                
       })}
