@@ -8,7 +8,6 @@ var Schedule = React.createClass({
 
   getInitialState() {
     return {
-      count: 0,
       eventYear: '',
       eventMonth: '',
       eventDay: '',
@@ -23,17 +22,25 @@ var Schedule = React.createClass({
     var type = props.type;
     var id = props.id;
 
-    var accountQuery = new Parse.Query(type);
-    accountQuery.equalTo('twitterUsername', id);
+    if (type == "Dashboard"){
+      return{
+        user: ParseReact.currentUser,
+      };
+    }
+    else{
+      console.log("non dash");
+      var accountQuery = new Parse.Query(type);
+      accountQuery.equalTo('twitterUsername', id);
 
-    var eventQuery = new Parse.Query('Event');
-    eventQuery.ascending('date');
-    eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
+      var eventQuery = new Parse.Query('Event');
+      eventQuery.ascending('date');
+      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
 
-    return {
-      user: ParseReact.currentUser,
-      account: accountQuery,
-    };
+      return {
+        user: ParseReact.currentUser,
+        account: accountQuery,
+      };
+    }
   },
 
   handleEventYearChange: function(e) {
@@ -99,7 +106,6 @@ var Schedule = React.createClass({
     event.save().then(
       this.setState(
         {
-          count: this.state.count +1,
           eventYear: '',
           eventMonth: '',
           eventDay: '',
@@ -131,21 +137,30 @@ var Schedule = React.createClass({
   },
 
   render() {
-    return (
-      <div>
-        <form className="commentForm" onSubmit={this.handleEventSubmit}>
-          <input type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-          <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-          <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
-          <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
-          <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-          <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
-          <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
-          <input type="submit" value="登録" />
-        </form>
-        <EventList type={this.props.type} id={this.props.id} count={this.state.count} />
-      </div>
-    );
+    if (this.props.type == "Dashboard"){
+      return (
+        <div>
+          <EventList type={this.props.type} id={this.props.id} />
+        </div>
+        );
+    }
+    else {
+      return (
+        <div>
+          <form className="commentForm" onSubmit={this.handleEventSubmit}>
+            <input type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
+            <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
+            <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
+            <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
+            <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
+            <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
+            <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
+            <input type="submit" value="登録" />
+          </form>
+          <EventList type={this.props.type} id={this.props.id} />
+        </div>
+      );
+    }
   },
 
 });
