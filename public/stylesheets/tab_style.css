@@ -220,6 +220,12 @@ h1 {
   color: #e4007f;
   font-weight: bold; }
 
+.tabArea #followList h2 {
+  font-weight: bold; }
+
+.tabArea #followList h2 img {
+  margin-right: 10px; }
+
 .tabArea #followList ul {
   margin: 0 auto;
   overflow: hidden; }

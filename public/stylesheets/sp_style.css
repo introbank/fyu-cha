@@ -225,6 +225,10 @@ h1 {
     padding-top: 10px;
     color: #e4007f;
     font-weight: bold; }
+  .tabArea #followList h2 {
+    font-weight: bold; }
+  .tabArea #followList h2 img {
+    margin-right: 5px; }
   .tabArea #followList ul li {
     float: left;
     width: 50%;
