@@ -8,6 +8,7 @@ var MediaList = React.createClass({
   getInitialState() {
     return {
       editMode: false,
+      action: false,
     };
   },
 
@@ -44,10 +45,8 @@ var MediaList = React.createClass({
     var albumMediaMap = new AlbumMediaMap();
     albumMediaMap.id = mediaMapId;
     albumMediaMap.set('isViewable', isViewable);
-    albumMediaMap.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
+    albumMediaMap.save().then(this.setState({action: !this.state.action}));
+    console.log(this.state.action);
   },
 
   render() {
@@ -57,8 +56,23 @@ var MediaList = React.createClass({
           <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>保存</div>
           <div className="dashboardPhotos editnow">
           {this.data.mediaMap.map(function (mediaMap) {
+            console.log(mediaMap.isViewable);
             return (
-                  <img src={mediaMap.media.mediaUri} />
+              <div className="dashboardPhoto">
+              {this.data.mediaMap.isViewable 
+              ? 
+                <div className="dashboardPhotoEditButtonArea appear">
+                  <div className="dashboardPhotoAppearButton" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>表示</div>
+                  <div className="dashboardPhotoHideButton" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>非表示</div>
+                </div>
+              : 
+                <div className="dashboardPhotoEditButtonArea hide">
+                  <div className="dashboardPhotoAppearButton" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>表示</div>
+                  <div className="dashboardPhotoHideButton" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>非表示</div>
+                </div>
+              }
+                <img src={mediaMap.media.mediaUri} />
+              </div>
             )}, this) 
           }
           </div>
