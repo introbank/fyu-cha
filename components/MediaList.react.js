@@ -59,7 +59,7 @@ var MediaList = React.createClass({
             console.log(mediaMap.isViewable);
             return (
               <div className="dashboardPhoto">
-              {this.data.mediaMap.isViewable 
+              {mediaMap.isViewable 
               ? 
                 <div className="dashboardPhotoEditButtonArea appear">
                   <div className="dashboardPhotoAppearButton" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>表示</div>
