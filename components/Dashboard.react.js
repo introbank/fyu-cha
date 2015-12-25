@@ -18,68 +18,9 @@ var Dashboard = React.createClass({
     };
   },
 
-  newEventStatusQueryInstance(className) {
-    var query = new Parse.Query(className);
-    query.equalTo("user", Parse.User.current());
-    query.include("event");
-    query.include("artist");
-    query.include("group");
-    return query
-  },
-
-  parseEventData(eventData) {
-    var date = new Date(eventData.date);
-    // var
-    var name = "";
-    var place = "";
-    if (eventData.artist){
-      name = eventData.artist.name;
-    }
-    else if (eventData.group) {
-      name = eventData.group.name;
-    }
-
-    var info = {};
-    return {date: date, 
-            title: eventData.title,
-            aim: name,
-            place: eventData.place,
-            detail:eventData.detail,
-            price: eventData.price.toString()
-    };
-  },
-
-
-  mergeEventList(attend, plan) {
-    var eventList = [];
-    var strList = [];
-    attend.map(function(eventData){
-      eventList.push(this.parseEventData(eventData));
-    });
-    plan.map(function(eventData){
-      eventList.push(this.parseEventData(eventData));
-    });
-
-    // to do sort by date and xx
-
-    for(var i = 0; i < eventList.length; i++){
-        var e = eventList[0];
-        strList.push(e.date.getDate()+ e.aim + e.place + e.detail + e.price);
-    } 
-    return strList;
-  },
-
   observe() {
-    var twitterContributionQuery = new Parse.Query('TwitterContribution');
-    twitterContributionQuery.equalTo("user", Parse.User.current());
-    var eventAttendanceQuery = this.newEventStatusQueryInstance('EventAttendance');
-    var eventPlanQuery = this.newEventStatusQueryInstance('EventPlan');
-
     return {
       user: ParseReact.currentUser,
-      twitterCbs: twitterContributionQuery,
-      attendanceEvents: eventAttendanceQuery,
-      planEvents: eventAttendanceQuery
     };
   },
 
@@ -104,8 +45,6 @@ var Dashboard = React.createClass({
     if (this.data.user) {
       account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
     }
-    var totalFyucha = 0;
-    var eventStrList = this.mergeEventList.bind(this, this.data.attendanceEvents, this.data.planEvents);
     return (
       <div id="content">
         <AccountInfo account={account}/>
