@@ -40,8 +40,11 @@ var MediaList = React.createClass({
   },
 
   setIsViewable(mediaMap, isViewable) {
-    ParseReact.Mutation.Set(mediaMap, {'isViewable': isViewable})
-    .dispatch({waitForServer:true}).then(this.refreshQueries("mediaMap"));
+    var AlbumMediaMap = Parse.Object.extend('AlbumMediaMap');
+    var albumMediaMap = new AlbumMediaMap();
+    albumMediaMap.id = mediaMap.objectId;
+    albumMediaMap.set('isViewable', isViewable);
+    albumMediaMap.save().then(this.refreshQueries("mediaMap"));
   },
 
 
