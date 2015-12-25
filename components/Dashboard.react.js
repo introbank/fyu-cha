@@ -3,6 +3,7 @@ var Parse       = require('../lib/parse');
 var ParseReact  = require('parse-react');
 var AccountInfo   = require('./AccountInfo.react.js');
 var FollowingList       = require('./FollowingList.react.js');
+var Schedule   = require('./Schedule.react.js');
 
 var Dashboard = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -112,39 +113,14 @@ var Dashboard = React.createClass({
             <ul className="tabs">
               <li id="label__tab2"><a href="#" className="tab1 boR" onClick={this.changeTab2}>フォロー</a></li>
               <li id="label__tab3"><a href="#" className="tab1 boR" onClick={this.changeTab3}>スケジュール</a></li>
-              <li id="label__tab4"><a href="#" className="tab1 boR" onClick={this.changeTab4}>データ</a></li>
+              <li id="label__tab4"><a href="#" className="tab1 boR" onClick={this.changeTab4}>ふゅーちゃ</a></li>
             </ul>
            
             {this.state.showFollow &&
               <FollowingList />
             }
             {this.state.showSchedule &&
-            <div id="tab3" className="tab">
-              <ul>
-              {this.data.attendanceEvents.map(function(attendanceEvent) {
-                var eventDate = new Date(attendanceEvent.event.date);
-                var name = "";
-                var place = "";
-                if (attendanceEvent.artist){
-                  name = attendanceEvent.artist.name;
-                }
-                else if (attendanceEvent.group) {
-                  name = attendanceEvent.group.name;
-                }
-
-                if (attendanceEvent.event.place){
-                  place = attendanceEvent.event.place;
-                }
-
-                return (
-                  <li> {eventDate.getMonth() + 1}月{eventDate.getDate()}日|| {name} || {attendanceEvent.event.title}@{place} </li>
-                )
-                })
-                
-              }
-
-              </ul>
-            </div>
+              <Schedule type="Dashboard" id={this.data.user.username} />
             }
             {this.state.showData &&
             <div id="tab4" className="tab">

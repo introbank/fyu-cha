@@ -28,7 +28,7 @@ var MediaList = React.createClass({
       mediaMapQuery.equalTo('isViewable', true);
     }
     mediaMapQuery.include('media');
-
+    mediaMapQuery.addDescending("createdAt");
     return {
       user: ParseReact.currentUser,
       mediaMap: mediaMapQuery,
@@ -39,36 +39,62 @@ var MediaList = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
 
-  setIsViewable(mediaMapId, isViewable) {
+  setIsViewable(mediaMap, isViewable) {
     var AlbumMediaMap = Parse.Object.extend('AlbumMediaMap');
     var albumMediaMap = new AlbumMediaMap();
-    albumMediaMap.id = mediaMapId;
+    albumMediaMap.id = mediaMap.objectId;
     albumMediaMap.set('isViewable', isViewable);
-    albumMediaMap.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
+    albumMediaMap.save().then(this.refreshQueries("mediaMap"));
   },
 
+
   render() {
-    return (
-      <div>
-        <p>
-          {this.data.user && <button className="btn" type="button" onClick={this.switchEditMode}>編集</button>}
-        </p>
-        <ul>
+    if(this.state.editMode){ 
+      return (
+        <div>
+          <div className="dashboardPhotosEditStartButton" type="button" onClick={this.switchEditMode}>保存</div>
+          <div className="dashboardPhotos editnow">
           {this.data.mediaMap.map(function (mediaMap) {
             return (
-              <li>
+              <div className="dashboardPhoto">
+              {mediaMap.isViewable 
+              ? 
+                <div className="dashboardPhotoEditButtonArea appear">
+                  <div className="dashboardPhotoAppearButton" type="button" onClick={this.setIsViewable.bind(this, mediaMap, false)}>表示</div>
+                  <div className="dashboardPhotoHideButton" type="button" onClick={this.setIsViewable.bind(this, mediaMap, false)}>非表示</div>
+                </div>
+              : 
+                <div className="dashboardPhotoEditButtonArea hide">
+                  <div className="dashboardPhotoAppearButton" type="button" onClick={this.setIsViewable.bind(this, mediaMap, true)}>表示</div>
+                  <div className="dashboardPhotoHideButton" type="button" onClick={this.setIsViewable.bind(this, mediaMap, true)}>非表示</div>
+                </div>
+              }
                 <img src={mediaMap.media.mediaUri} />
-                {this.state.editMode && <button className="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, true)}>view</button>}
-                {this.state.editMode && <button className="btn" type="button" onClick={this.setIsViewable.bind(this, mediaMap.objectId, false)}>unview</button>}
-              </li>
-            );
-          }, this)}
-        </ul>
-      </div>
-    );
+              </div>
+            )}, this) 
+          }
+          </div>
+        </div>
+      )
+    }
+    else {
+      return(
+        <div>
+          {this.data.user &&
+            <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>編集</div>
+          }
+          <ul>
+          {this.data.mediaMap.map(function (mediaMap) {
+          return (
+            <li>
+              <img src={mediaMap.media.mediaUri} />
+            </li>
+          )}, this) 
+          }
+          </ul>
+        </div>
+      )
+    }
   },
 });
 

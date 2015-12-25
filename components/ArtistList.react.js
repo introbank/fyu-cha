@@ -3,16 +3,18 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
+var MemberList   = require('./MemberList.react.js');
 
 var ArtistList = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe(props, state) {
-    var artistQuery = new Parse.Query('Artist');
-    artistQuery.ascending('name');
+    var groupQuery = new Parse.Query('Group');
+    groupQuery.limit(1000);
+    groupQuery.ascending('name');
 
     return {
-      artist: artistQuery,
+      groups: groupQuery
     };
   },
 
@@ -26,18 +28,13 @@ var ArtistList = React.createClass({
             <div className="contents">
               <div id="followList" className="tab">
                 <div className="box">
-                  <h1>アーティスト</h1>
-                  {this.data.artist &&
-                    <ul>
-                      {this.data.artist.map(function (artist) {
-                        return (
-                          <li>
-                            <a href={'artists/' + artist.twitterUsername}><img src={artist.imageUrl} /></a>
-                            <h2>{artist.name}</h2>
-                          </li>
-                        )
-                      })}
-                    </ul>
+                  <h1>アイドル</h1>
+                  {this.data.groups &&
+                    this.data.groups.map(function (group) {
+                      return (
+                        <MemberList group={group} />
+                      );
+                    })
                   }
                   <p className="cf"></p>
                 </div>

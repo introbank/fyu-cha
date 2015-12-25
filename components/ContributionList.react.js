@@ -6,13 +6,14 @@ var ContributionList = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe(props, state) {
+    var type = props.type;
     var id = props.id;
 
-    var artistQuery = new Parse.Query('Artist');
-    artistQuery.equalTo('twitterUsername', id);
+    var accountQuery = new Parse.Query(type);
+    accountQuery.equalTo('twitterUsername', id);
 
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
-    twitterContributionQuery.matchesQuery("artist", artistQuery);
+    twitterContributionQuery.matchesQuery(type.toLowerCase(), accountQuery);
     twitterContributionQuery.include("user");
 
     return {
@@ -25,6 +26,9 @@ var ContributionList = React.createClass({
     var commits = (
       <div className="fyuchaCommits">
         {this.data.twitterCbs.map(function(twitterCb) {
+          if (!twitterCb.user) {
+            return;
+          }
           totalFyucha += twitterCb.point;
           return (
             <div className="fyuchaCommit">

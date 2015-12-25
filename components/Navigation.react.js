@@ -6,12 +6,24 @@ var Navigation = React.createClass({
     return (
       <div id="nav" className="cf">
         <ul>
-            <li className="boR">ああ</li>
-            <li className="boR">いい</li>
-            <li>うう</li>
+            <li className="boR" onClick={this.top}>マイページ</li>
+            <li className="boR" onClick={this.artists}>アイドル</li>
+            <li onClick={this.groups}>グループ</li>
         </ul>
     </div>
     );
+  },
+
+  top() {
+    location.href = '/';
+  },
+
+  artists() {
+    location.href = '/artists';
+  },
+
+  groups() {
+    location.href = '/groups';
   },
 
 });

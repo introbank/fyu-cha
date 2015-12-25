@@ -5,15 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="アイドルを応援するサイトです">
     <meta name="author" content="IntroBank">
     <link rel="icon" href="./favicon.ico">
-    
-    <div align="center">
-    <php $site_title =<a href=""><img src="./images/mainlogo.png" align="" alt="ふゅーちゃ！" width="209" height="48"></a>
-    </div>
-    
-    <title>ふゅーちゃ！</title>
+
+    <title>ふゅーちゃ！ - アイドル応援支援サービス</title>
+    <meta content="ふゅーちゃ！ - アイドル応援支援サービス" name="title">
+    <meta content="アイドルファンの日々の応援活動を今までより簡単にかつ楽しく支援するサービスです。今までそれぞれのサイトで情報を得る必要のあったものをここ一つで確認できます。また応援の履歴をポイント制にすることによって彼女たちへの応援を可視化します。" name="description">
+    <meta content="ファン,アイドル,コール,ライブ,出演情報,アーティスト" name="keywords">
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="ふゅーちゃ！ - アイドル応援支援サービス"/>
+    <meta property="og:description" content="アイドルファンの日々の応援活動を今までより簡単にかつ楽しく支援するサービスです。今までそれぞれのサイトで情報を得る必要のあったものをここ一つで確認できます。また応援の履歴をポイント制にすることによって彼女たちへの応援を可視化します。" />
+    <meta property="og:image" content="http://www.fyu-cha.com/images/mainlogo_sp.png" />
+    <meta property="og:url" content="http://www.fyu-cha.com/lp.html" />
+    <meta property="og:site_name" content="fyu-cha"/>
 
     <!-- Bootstrap core CSS -->
     <link href="./stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -53,14 +58,17 @@
         <div class="item active">
           <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
           <div class="container">
+            <div align="center">
+              <a href=""><img src="./images/mainlogo.png" align="" alt="ふゅーちゃ！" width="209" height="48"></a>
+            </div>
             <div class="carousel-caption">
               <h1><span class="topword2">我々はアイドルの成長を支援します</span></h1>
-              <p><span class="topword1">テレビで人気なアイドル、WEBで人気なアイドル、現場が熱いアイドル、
-              <br>注目のNEWFACEなど素晴らしいアイドルはたくさんいます。
-              <br>私たちはそんなアイドルの力に少しでもなりたいと思っております。
-              <br>彼女たちの最大のファンの皆さんの熱をもっと多くの人に届けることが
-              <br>一番の私たちのできる貢献だと思っています。</span>
-            　</p>
+              <p>
+                <span class="topword1">ファンの皆さんのいつもの応援が
+                <br>もっとアイドルの成長に役立てられるのではと我々は考えています。
+                <br>ファンの皆さんの応援をもっと多くの人に届けることが
+                <br>一番の私たちのできる貢献だと思っています。</span>
+              </p>
               <a class="btn btn-lg btn-primary" href="/auth/twitter" role="button">早速ふゅーちゃ！する</a></p>
             </div>
           </div>
@@ -105,12 +113,12 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
-      
+
       <!-- Three columns of text below the carousel -->
-      
+
         <div class="row text-center margin-top-20">
 
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
               <img src="" alt="">
               <h3>こんなかんじになるよ</h3>
               <p>Twitterで更新される情報やオフィシャルサイト
@@ -118,7 +126,7 @@
               　<br>今までそれぞれのサイトで情報を得る必要のあったものを
               　<br>ここ一つで確認できます。</p>
             </div>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
               <img src="" alt="">
               <h3>アイドルへの応援を見えるように</h3>
               <p>いつものアイドルのツイートの確認や
@@ -127,7 +135,7 @@
                 <br>彼女たちへの応援を可視化します。
               </p>
             </div>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
               <img src="" alt="">
               <h3>今盛り上がっているアイドルは？</h3>
               <p>ファンの皆さんの活動を点数化することによって、
@@ -137,15 +145,15 @@
             </div>
       </div>
     <!--  under idol info jump //-->
-    
+
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img class="img-circle" src="./images/idol_solo.jpg" alt="ソロアイドル画像" width="140" height="140">
           <h2>アイドル</h2>
           <p>ふゅーちゃ！に登録されているアイドル</p>
           <p><a class="btn btn-default" href="/artists" role="button">一覧へ &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img class="img-circle" src="./images/idol_pic.jpg" alt="グループ写真" width="140" height="140">
           <h2>グループ</h2>
           <p>ふゅーちゃ！に登録されているグループ</p>

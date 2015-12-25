@@ -7,13 +7,9 @@ var EventList = React.createClass({
 
   getInitialState() {
     return {
-      eventYear: '',
-      eventMonth: '',
-      eventDay: '',
-      eventTitle: '',
-      eventPrice: '',
-      eventPlace: '',
-      eventDetail: ''
+      update: null,
+      attend: null,
+      plan: null
     };
   },
 
@@ -21,83 +17,58 @@ var EventList = React.createClass({
     var type = props.type;
     var id = props.id;
 
-    var accountQuery = new Parse.Query(type);
-    accountQuery.equalTo('twitterUsername', id);
-
-    var eventQuery = new Parse.Query('Event');
-    eventQuery.ascending('date');
-    eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
-
-    return {
-      user: ParseReact.currentUser,
-      account: accountQuery,
-      events: eventQuery,
-    };
-  },
-
-  handleEventYearChange: function(e) {
-    this.setState({eventYear: e.target.value});
-  },
-
-  handleEventMonthChange: function(e) {
-    this.setState({eventMonth: e.target.value});
-  },
-
-  handleEventDayChange: function(e) {
-    this.setState({eventDay: e.target.value});
-  },
-
-  handleEventTitleChange: function(e) {
-    this.setState({eventTitle: e.target.value});
-  },
-
-  handleEventPriceChange: function(e) {
-    this.setState({eventPrice: e.target.value});
-  },
-
-  handleEventPlaceChange: function(e) {
-    this.setState({eventPlace: e.target.value});
-  },
-
-  handleEventDetailChange: function(e) {
-    this.setState({eventDetail: e.target.value});
-  },
-
-  handleEventSubmit(e) {
-    e.preventDefault();
-    var year = this.state.eventYear;
-    var month = this.state.eventMonth;
-    var day = this.state.eventDay;
-    var title = this.state.eventTitle.trim();
-    var price = this.state.eventPrice;
-    var place = this.state.eventPlace;
-    var detail = this.state.eventDetail.trim();
-    if (!year || !month || !day || !title) {
-      return;
+    if (type == "Dashboard"){
+      var plans = new Parse.Query("EventPlan");
+      plans.include('event');
+      plans.equalTo("user", Parse.User.current());
+      return{
+        user: ParseReact.currentUser,
+        plans: plans
+      };
     }
+    else{
+
+
+      var accountQuery = new Parse.Query(type);
+      accountQuery.equalTo('twitterUsername', id);
+
+      var eventQuery = new Parse.Query('Event');
+      eventQuery.ascending('date');
+      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
+
+      return {
+        user: ParseReact.currentUser,
+        account: accountQuery,
+        events: eventQuery,
+      };
+    }
+  },
+
+
+  // to do
+  editEvent: function(eventObj){
+
+  },
+
+  // to do
+  deleteEvent(targetEvent){
     var Event = Parse.Object.extend('Event');
-    var event = new Event();
-    var date = new Date(year, month-1, day);
-    event.set('date', date);
-    event.set('title', title);
-    event.set('price', Number(price));
-    event.set('place', place);
-    event.set('detail', detail);
-    if (this.props.type === 'Artist') {
-      var Artist = Parse.Object.extend('Artist');
-      var artist = new Artist();
-      artist.id = this.data.account[0].id.objectId;
-      var relation = event.relation('artists');
-      relation.add(artist);
-    } else {
-      var Group = Parse.Object.extend('Group');
-      var group = new Group();
-      group.id = this.data.account[0].id.objectId;
-      var relation = event.relation('groups');
-      relation.add(group);
-    }
-    event.save();
-    this.setState({author: '', text: ''});
+    var ev = new Event();
+    ev.id = targetEvent.objectId;
+    ev.destroy().then(
+        this.props.handle());
+  },
+
+  attendEvent: function(targetEvent) {
+    var EventAttendance = Parse.Object.extend("EventAttendance");
+    var eventAttendance = new EventAttendance();
+    this.setEventStatus(targetEvent, eventAttendance);
+  },
+
+  planEvent: function(targetEvent) {
+    var EventPlan = Parse.Object.extend("EventPlan");
+    var eventPlan = new EventPlan();
+    this.setEventStatus(targetEvent, eventPlan);
   },
 
   setEventStatus: function(targetEvent, eventStatus){
@@ -114,39 +85,17 @@ var EventList = React.createClass({
       group.id = this.data.account[0].id.objectId;
       eventStatus.set("group", group);
     }
-    eventStatus.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
+    eventStatus.save().then(
+        this.props.handle());
   },
 
-  editEvent: function(eventObj){
-
-  },
-
-  attendEvent: function(targetEvent) {
-    var EventAttendance = Parse.Object.extend("EventAttendance");
-    var eventAttendance = new EventAttendance();
-    this.setEventStatus(targetEvent, eventAttendance);
-  },
-
-  planEvent: function(targetEvent) {
-    var EventPlan = Parse.Object.extend("EventPlan");
-    var eventPlan = new EventPlan();
-    this.setEventStatus(targetEvent, eventPlan);
-  },
-
-  render() {
-    var previousEventMonth = -1;
-    var previousEventDay = -1;
-    var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
-    var isDisplayedNowDivider = false;
-    var eventList = this.data.events.map(function(event) {
+  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider){
+    try{
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
-	    if(hour < 10) { hour = "0" + hour; }
+      if(hour < 10) { hour = "0" + hour; }
       var minute = eventDate.getMinutes();
-	    if(minute < 10) { minute = "0" + minute; }
+      if(minute < 10) { minute = "0" + minute; }
       var eventListHtml = (
         <div>
           {previousEventMonth != eventDate.getMonth() && (
@@ -170,7 +119,7 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
-                <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
+                <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
               </div>
             ) : (
@@ -178,7 +127,7 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
-                <button className="btn" type="button" onClick={this.attendEvent.bind(this, event)}>attend</button>
+                <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
               </div>
             )}
@@ -192,21 +141,31 @@ var EventList = React.createClass({
         isDisplayedNowDivider = true;
       }
       return eventListHtml;
-    }, this);
+    }
+    catch(e) {
+      console.log(e); 
+    }
+  },
 
+  render() {
+    var previousEventMonth = -1;
+    var previousEventDay = -1;
+    var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
+    var isDisplayedNowDivider = false;
+    var eventList = null;
+    if (this.props.type == "Dashboard"){
+      eventList = this.data.plans.map(function(plan) {
+        console.log(plan);
+        console.log(plan.event);
+        return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
 
+    }
+    else{
+      eventList = this.data.events.map(function(event) {
+        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
+    }
     return (
       <div>
-        <form className="commentForm" onSubmit={this.handleEventSubmit}>
-          <input type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-          <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-          <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
-          <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
-          <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-          <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
-          <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
-          <input type="submit" value="登録" />
-        </form>
         {eventList}
       </div>
     );
