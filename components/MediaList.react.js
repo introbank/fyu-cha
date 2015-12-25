@@ -8,7 +8,6 @@ var MediaList = React.createClass({
   getInitialState() {
     return {
       editMode: false,
-      action: false,
     };
   },
 
@@ -42,9 +41,9 @@ var MediaList = React.createClass({
 
   setIsViewable(mediaMap, isViewable) {
     ParseReact.Mutation.Set(mediaMap, {'isViewable': isViewable})
-    .dispatch().then(this.setState({editMode: true}));
-    console.log(this.state.action);
+    .dispatch({waitForServer:true}).then(this.refreshQueries("mediaMap"));
   },
+
 
   render() {
     if(this.state.editMode){ 
@@ -53,7 +52,6 @@ var MediaList = React.createClass({
           <div className="dashboardPhotosEditStartButton" type="button" onClick={this.switchEditMode}>保存</div>
           <div className="dashboardPhotos editnow">
           {this.data.mediaMap.map(function (mediaMap) {
-            console.log(mediaMap.isViewable);
             return (
               <div className="dashboardPhoto">
               {mediaMap.isViewable 
