@@ -4,6 +4,7 @@ var ParseReact  = require('parse-react');
 var AccountInfo   = require('./AccountInfo.react.js');
 var FollowingList       = require('./FollowingList.react.js');
 var Schedule   = require('./Schedule.react.js');
+var ContributionList    = require('./ContributionList.react.js');
 
 var Dashboard = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -124,23 +125,7 @@ var Dashboard = React.createClass({
             }
             {this.state.showData &&
             <div id="tab4" className="tab">
-              <ul>
-                {this.data.twitterCbs.map(function(twitterCb) {
-                  totalFyucha += twitterCb.point;
-                  if (twitterCb.artist){
-                    return(
-                      <li>{twitterCb.artist.name}(@{twitterCb.artist.twitterUsername})さんに{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
-                    )
-                  }
-                  else if (twitterCb.group) {
-                    return (
-                      <li>{twitterCb.group.name}(@{twitterCb.group.twitterUsername})さんに{twitterCb.type}して{twitterCb.point}ふゅーちゃ！</li>
-                    )
-                  }
-                })
-                }
-              </ul>
-              <p>合計 {totalFyucha} ふゅーちゃ！しています</p>
+              <ContributionList type="Dashboard" id={this.data.user.username} />
             </div>
             }
           </div>
