@@ -6,18 +6,21 @@ var UserMediaList = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe(props, state) {
-    var albumQuery = new Parse.Query('Album');
     var artists = [];
     for (var following of props.artists) {
       artists.push(following.artist);
     }
-    albumQuery.containedIn('artist', artists);
+    var artistAlbumQuery = new Parse.Query('Album');
+    artistAlbumQuery.containedIn('artist', artists);
 
-    /*var groups = [];
+    var groups = [];
     for (var following of props.groups) {
       groups.push(following.group)
     }
-    albumQuery.containedIn('group', groups);*/
+    var groupAlbumQuery = new Parse.Query('Album');
+    groupAlbumQuery.containedIn('group', groups);
+
+    var albumQuery = new Parse.Query.or(artistAlbumQuery, groupAlbumQuery);
 
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
