@@ -179,14 +179,21 @@ var EventList = React.createClass({
     if (this.props.type == "Dashboard"){
       eventList = this.data.plan.map(function(plan) {
         if (plan.event != null){
-        console.log(plan.event);
         return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}
       }, this);
       
     }
     else{
+      var planHash = {};
+        this.data.plan.map(function(plan){
+        planHash[plan.event.objectId] = plan;}
+      );
       eventList = this.data.events.map(function(event) {
-        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, null)}, this);
+        var plan = null;
+        if (event.objectId in planHash){
+          plan = planHash[event.objectId];
+        }
+        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}, this);
     }
     return (
       <div>
