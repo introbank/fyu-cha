@@ -44,10 +44,6 @@ var Schedule = React.createClass({
     }
   },
 
-  update() {
-    this.setState({update: true});
-  },
-
   handleEventYearChange: function(e) {
     this.setState({eventYear: e.target.value});
   },
@@ -142,7 +138,7 @@ var Schedule = React.createClass({
             <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
             <input type="submit" value="登録" />
           </form>
-          <EventList type={this.props.type} id={this.props.id} handle={this.update} />
+          <EventList type={this.props.type} id={this.props.id} update={this.state.update} />
         </div>
       );
     }

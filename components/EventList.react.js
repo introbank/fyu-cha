@@ -50,13 +50,14 @@ var EventList = React.createClass({
 
   },
 
-  // to do
+  // to do handling plan/attend data
   deleteEvent(targetEvent){
     var Event = Parse.Object.extend('Event');
     var ev = new Event();
     ev.id = targetEvent.objectId;
     ev.destroy().then(
-        this.props.handle());
+      this.refreshQueries(["plans", "events"])
+    );
   },
 
   attendEvent: function(targetEvent) {
@@ -69,6 +70,15 @@ var EventList = React.createClass({
     var EventPlan = Parse.Object.extend("EventPlan");
     var eventPlan = new EventPlan();
     this.setEventStatus(targetEvent, eventPlan);
+  },
+
+  quitPlanEvent(plan) {
+    var EventPlan = Parse.Object.extend("EventPlan");
+    var eventPlan = new EventPlan();  
+    eventPlan.id = plan.objectId;
+    eventPlan.destroy().then(
+      this.refreshQueries(["plans", "events"])
+    );
   },
 
   setEventStatus: function(targetEvent, eventStatus){
@@ -86,10 +96,11 @@ var EventList = React.createClass({
       eventStatus.set("group", group);
     }
     eventStatus.save().then(
-        this.props.handle());
+      this.refreshQueries(["plans", "events"])
+    );
   },
 
-  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider){
+  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan = null){
     try{
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
@@ -119,16 +130,26 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
+                {this.props.type != "Dashboard" &&
                 <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
-                <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+                }
+                {plan == null 
+                ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+                : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
+                }
               </div>
             ) : (
               <div className="scheduleContentBox">
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
+                {this.props.type != "Dashboard" &&
                 <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
-                <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+                }
+                {plan == null 
+                ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+                : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
+                }
               </div>
             )}
 
@@ -157,7 +178,7 @@ var EventList = React.createClass({
       eventList = this.data.plans.map(function(plan) {
         if (plan.event != null){
         console.log(plan.event);
-        return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}
+        return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}
       }, this);
       
     }
