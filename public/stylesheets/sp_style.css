@@ -189,6 +189,9 @@ h1 {
       margin-right: -1px; }
     .tabArea .tabs a.boR {
       border-right: 1px solid #999999; }
+    .tabArea .tabs a.active {
+      color: #ffffff;
+      background-color: #999999; }
     .tabArea .tabs a:hover {
       color: #ffffff;
       background-color: #999999;
@@ -209,6 +212,7 @@ h1 {
 
 /*-----tab__images-----*/
 #images li img {
+  width: 100%;
   max-width: 458px;
   min-width: 288px;
   height: auto;
