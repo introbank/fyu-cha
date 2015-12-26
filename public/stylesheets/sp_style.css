@@ -212,6 +212,7 @@ h1 {
 
 /*-----tab__images-----*/
 #images li img {
+  width: 100%;
   max-width: 458px;
   min-width: 288px;
   height: auto;
