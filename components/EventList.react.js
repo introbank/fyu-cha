@@ -80,8 +80,12 @@ var EventList = React.createClass({
     );
   },
 
-  // todo loginしてなかったら、サインアップページ
   setEventStatus: function(targetEvent, eventStatus){
+    // if not login user, redirect for sign up page
+    if (!this.data.user) {
+      location.href = '/signup';
+    }
+
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
     eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
     eventStatus.set("date", targetEvent.date);

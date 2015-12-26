@@ -34,6 +34,11 @@ var Follow = React.createClass({
   },
 
   follow() {
+    // if not login user, redirect for sign up page
+    if (!this.data.user) {
+      location.href = '/signup';
+    }
+
     if(this.state.isFollowing || this.state.isWaiting){
       return;
     }
@@ -44,6 +49,11 @@ var Follow = React.createClass({
   },
 
   unfollow() {
+    // if not login user, redirect for sign up page
+    if (!this.data.user) {
+      location.href = '/signup';
+    }
+
     this.setState({isWaiting: true});
     var Following = Parse.Object.extend('Following');
     var followings = [];
