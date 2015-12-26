@@ -436,7 +436,9 @@ h1 {
   color: white;
   font-size: 14px;
   text-align: center;
-  z-index: 30; }
+  z-index: 30;
+  cursor:pointer;
+}
 
 .dashboardPhotos {
   margin-top: 20px; }
@@ -476,7 +478,8 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 5px 0 0 5px;
       color: white;
-      font-size: 14px; }
+      font-size: 14px; 
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
       box-sizing: border-box;
       float: left;
@@ -488,14 +491,17 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 0 5px 5px 0;
       color: white;
-      font-size: 14px; }
+      font-size: 14px;
+      cursor:pointer;}
     .dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px; }
+      text-indent: -9999px; 
+      cursor:pointer;}
     .dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px; }
+      text-indent: -9999px; 
+      cursor:pointer;}
 
 /*# sourceMappingURL=sp_style.css.map */

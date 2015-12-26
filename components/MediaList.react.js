@@ -52,7 +52,7 @@ var MediaList = React.createClass({
     if(this.state.editMode){ 
       return (
         <div>
-          <div className="dashboardPhotosEditStartButton" type="button" onClick={this.switchEditMode}>保存</div>
+          <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
           <div className="dashboardPhotos editnow">
           {this.data.mediaMap.map(function (mediaMap) {
             return (
@@ -81,7 +81,7 @@ var MediaList = React.createClass({
       return(
         <div>
           {this.data.user &&
-            <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>編集</div>
+            <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
           }
           <ul>
           {this.data.mediaMap.map(function (mediaMap) {
