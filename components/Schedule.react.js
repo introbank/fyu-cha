@@ -121,26 +121,6 @@ var Schedule = React.createClass({
         }));
   },
 
-  setEventStatus: function(targetEvent, eventStatus){
-    eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
-    eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
-    if (this.props.type === 'Artist') {
-      var Artist = Parse.Object.extend('Artist');
-      var artist = new Artist();
-      artist.id = this.data.account[0].id.objectId;
-      eventStatus.set("artist", artist);
-    } else {
-      var Group = Parse.Object.extend('Group');
-      var group = new Group();
-      group.id = this.data.account[0].id.objectId;
-      eventStatus.set("group", group);
-    }
-    eventStatus.save(null, {
-      success: function(res){console.log(res.text);},
-      error: function(error){console.log(error.text);}
-    });
-  },
-
   render() {
     if (this.props.type == "Dashboard"){
       return (
