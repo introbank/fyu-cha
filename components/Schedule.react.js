@@ -15,7 +15,7 @@ var Schedule = React.createClass({
       eventPrice: '',
       eventPlace: '',
       eventDetail: '',
-      update: false
+      register: 0 
     };
   },
 
@@ -29,7 +29,6 @@ var Schedule = React.createClass({
       };
     }
     else{
-      console.log("non dash");
       var accountQuery = new Parse.Query(type);
       accountQuery.equalTo('twitterUsername', id);
 
@@ -104,7 +103,8 @@ var Schedule = React.createClass({
       var relation = event.relation('groups');
       relation.add(group);
     }
-    event.save().then(
+    event.save().then(this.props.handler).
+      then(
       this.setState(
         {
           eventYear: '',
@@ -113,8 +113,10 @@ var Schedule = React.createClass({
           eventTitle: '',
           eventPrice: '',
           eventPlace: '',
-          eventDetail: ''
+          eventDetail: '',
+          register: this.state.register + 1 
         }));
+        
   },
 
   render() {
@@ -138,7 +140,7 @@ var Schedule = React.createClass({
             <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
             <input type="submit" value="登録" />
           </form>
-          <EventList type={this.props.type} id={this.props.id} update={this.state.update} />
+          <EventList type={this.props.type} id={this.props.id} register={this.state.register} />
         </div>
       );
     }

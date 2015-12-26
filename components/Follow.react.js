@@ -16,6 +16,14 @@ var Follow = React.createClass({
     };
   },
 
+
+  getInitialState() {
+    return {
+      isFollowing: null,
+      isWaiting: false,
+    };
+  },
+
   createFollowingObj() {
     var Following = Parse.Object.extend('Following');
     var following = new Following();
@@ -26,12 +34,17 @@ var Follow = React.createClass({
   },
 
   follow() {
+    if(this.state.isFollowing || this.state.isWaiting){
+      return;
+    }
+    this.setState({isWaiting: true});
     var following = this.createFollowingObj();
     following.save().then(
-      this.refreshQueries(["following"]));
+      this.refreshQueries(["following"])).then(this.setState({isFollowing: true, isWaiting: false}));
   },
 
   unfollow() {
+    this.setState({isWaiting: true});
     var Following = Parse.Object.extend('Following');
     var followings = [];
     this.data.following.map(function(follow){
@@ -40,21 +53,31 @@ var Follow = React.createClass({
       followings.push(following);
     });
     Parse.Object.destroyAll(followings).then(
-      this.refreshQueries(["following"])).then(console.log("deleted"));
+      this.refreshQueries(["following"])).then(this.setState({isWaiting: false, isFollowing:false}));
   },
 
   render() {
-    console.log((this.data.following.length > 0));
-    return (
-      <div>
-        {this.data.following.length > 0
-          ?
-          <div className="followButton following" onClick={this.unfollow}>フォロー中</div>
-          :
-          <div className="followButton unfollowing" onClick={this.follow}>＋フォローする</div>
-        }
-      </div>
-    );
+    var isFollowing = this.state.isFollowing;
+    if (isFollowing == null){
+      isFollowing = (this.data.following.length > 0);
+    }
+
+    if (this.state.isWaiting){
+      return null; 
+    }
+    else{
+      return (
+        <div>
+          {isFollowing
+            ?
+            <div className="followButton following" onClick={this.unfollow}>フォロー中</div>
+            :
+            <div className="followButton unfollowing" onClick={this.follow}>＋フォローする</div>
+          }
+        </div>
+      );
+      
+    }
   },
 
 });

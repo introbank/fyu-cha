@@ -7,9 +7,7 @@ var EventList = React.createClass({
 
   getInitialState() {
     return {
-      update: null,
-      attend: null,
-      plan: null
+      update: false,
     };
   },
 
@@ -58,7 +56,7 @@ var EventList = React.createClass({
     ev.id = targetEvent.objectId;
     ev.destroy().then(
       this.refreshQueries(["plan", "events"])
-    );
+    ).then(this.setState({update:true}));
   },
 
   attendEvent: function(targetEvent) {
@@ -78,7 +76,7 @@ var EventList = React.createClass({
     var eventPlan = new EventPlan();  
     eventPlan.id = plan.objectId;
     eventPlan.destroy().then(
-      this.refreshQueries(["plan", "events"])
+      this.refreshQueries(["plan", "events"])).then(this.setState({update:true})
     );
   },
 
@@ -149,7 +147,7 @@ var EventList = React.createClass({
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                ?{plan == null
+                {plan == null
                   ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
                   : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
                 }
@@ -171,7 +169,14 @@ var EventList = React.createClass({
     }
   },
 
+  componentWillUpdate(nextProps, nextState) {
+    if(nextProps.register !== this.props.register){
+      this.refreshQueries(["plan", "events"]);
+    }
+  },
+
   render() {
+    console.log(this.props.register);
     var previousEventMonth = -1;
     var previousEventDay = -1;
     var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];

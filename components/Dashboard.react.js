@@ -101,7 +101,7 @@ var Dashboard = React.createClass({
               <FollowingList />
             }
             {this.state.showSchedule &&
-              <Schedule type="Dashboard" id={this.data.user.username} />
+              <Schedule type="Dashboard" id={this.data.user.username} handler={this.changeTab3}/>
             }
             {this.state.showData &&
               <ContributionList type="Dashboard" id={this.data.user.username} />
