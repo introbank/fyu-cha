@@ -103,7 +103,7 @@ var Schedule = React.createClass({
       var relation = event.relation('groups');
       relation.add(group);
     }
-    event.save().then(this.props.handler).
+    event.save().
       then(
       this.setState(
         {
