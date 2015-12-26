@@ -47,9 +47,10 @@ var Dashboard = React.createClass({
         <div className="tabArea">
           <div className="contents">
             <ul className="tabs">
-              <li id="label__tab2"><a href="#" className="tab1 boR" onClick={this.changeTab2}>フォロー</a></li>
-              <li id="label__tab3"><a href="#" className="tab1 boR" onClick={this.changeTab3}>スケジュール</a></li>
-              <li id="label__tab4"><a href="#" className="tab1 boR" onClick={this.changeTab4}>ふゅーちゃ</a></li>
+              <li id="label__tab1"><a href="#" className="tab1 boR" onClick={this.changeTab1}>画像/動画</a></li>
+              <li id="label__tab2"><a href="#" className="tab2 boR" onClick={this.changeTab2}>フォロー</a></li>
+              <li id="label__tab3"><a href="#" className="tab3 boR" onClick={this.changeTab3}>スケジュール</a></li>
+              <li id="label__tab4"><a href="#" className="tab4" onClick={this.changeTab4}>ふゅーちゃ</a></li>
             </ul>
 
             {this.state.showFollow &&
@@ -59,9 +60,7 @@ var Dashboard = React.createClass({
               <Schedule type="Dashboard" id={this.data.user.username} />
             }
             {this.state.showData &&
-            <div id="tab4" className="tab">
               <ContributionList type="Dashboard" id={this.data.user.username} />
-            </div>
             }
           </div>
         </div>
