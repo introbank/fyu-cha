@@ -59,7 +59,7 @@ var Follow = React.createClass({
       <div>
         {isFollowing
           ?
-          <div className="followButton following" onClick={this.unfollow}>✔ フォロー中</div>
+          <div className="followButton following" onClick={this.unfollow}>フォロー中</div>
           :
           <div className="followButton unfollowing" onClick={this.follow}>＋フォローする</div>
         }
