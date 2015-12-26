@@ -22,7 +22,7 @@ var ArtistList = React.createClass({
     return (
       <div id="wrapper">
         <Header />
-        <Navigation />
+        <Navigation active="idol" />
         <div id="content">
           <div className="tabArea">
             <div className="contents">

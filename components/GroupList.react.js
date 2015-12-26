@@ -21,7 +21,7 @@ var GroupList = React.createClass({
     return (
       <div id="wrapper">
         <Header />
-        <Navigation />
+        <Navigation active="group" />
         <div id="content">
           <div className="tabArea">
             <div className="contents">

@@ -37,7 +37,7 @@ var Top = React.createClass({
     return (
       <div>
         <Header />
-        <Navigation />
+        <Navigation active="top" />
         <Dashboard />
       </div>
     );
