@@ -41,13 +41,9 @@ var Dashboard = React.createClass({
   },
 
   render() {
-    var account = null;
-    if (this.data.user) {
-      account = {'imageUrl': this.data.user.imageUrl, 'name': this.data.user.name,'twitterUsername': this.data.user.username,'info': this.data.user.info};
-    }
     return (
       <div id="content">
-        <AccountInfo account={account}/>
+        <AccountInfo account={this.data.user}/>
         <div className="tabArea">
           <div className="contents">
             <ul className="tabs">
@@ -55,7 +51,7 @@ var Dashboard = React.createClass({
               <li id="label__tab3"><a href="#" className="tab1 boR" onClick={this.changeTab3}>スケジュール</a></li>
               <li id="label__tab4"><a href="#" className="tab1 boR" onClick={this.changeTab4}>ふゅーちゃ</a></li>
             </ul>
-           
+
             {this.state.showFollow &&
               <FollowingList />
             }

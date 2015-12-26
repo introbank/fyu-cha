@@ -28,14 +28,14 @@ var Follow = React.createClass({
     following.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId": this.data.user.objectId});
     var col = this.props.account.className.toLowerCase();
     following.set(col, {"__type":"Pointer", "className": this.props.account.className, "objectId": this.props.account.objectId});
-    return following; 
+    return following;
   },
 
   follow() {
     var following = this.createFollowingObj();
     following.save().then(
       this.setState({isFollowing: true}));
-    
+
   },
 
   unfollow() {
@@ -56,18 +56,13 @@ var Follow = React.createClass({
       isFollowing = (this.data.following.length > 0);
     }
     return (
-      <div className="followInfo">
+      <div>
         {isFollowing
           ?
-          <div className="follow_btn">
-            {this.props.account.name}さんを <button className="btn" type="button" onClick={this.unfollow}>unfollw</button>
-          </div>
+          <div className="followButton following" onClick={this.unfollow}>✔ フォロー中</div>
           :
-          <div className="follow_btn">
-            {this.props.account.name}さんを <button className="btn" type="button" onClick={this.follow}>follow</button>
-          </div>
+          <div className="followButton unfollowing" onClick={this.follow}>＋フォローする</div>
         }
-
       </div>
     );
   },

@@ -118,9 +118,6 @@ var Group = React.createClass({
                 }
               </div>
             </div>
-
-            <h3> follow </h3>
-            <Follow account={group} />
           </div>
         </div>
       );
