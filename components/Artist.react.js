@@ -84,8 +84,8 @@ var Artist = React.createClass({
                 <ul className="tabs">
                   <li id="label__tab1">
                     {this.state.activeTab === 'media' ?
-                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>アルバム</a> :
-                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>アルバム</a>
+                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>画像/動画</a> :
+                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>画像/動画</a>
                     }
                   </li>
                   <li id="label__tab2">
