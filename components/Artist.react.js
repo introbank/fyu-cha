@@ -118,9 +118,6 @@ var Artist = React.createClass({
                 }
               </div>
             </div>
-
-            <h3> follow </h3>
-            <Follow account={artist} />
           </div>
         </div>
       );

@@ -170,6 +170,32 @@ h1 {
 .mainInfo span {
   font-size: 0.9em; }
 
+.mainInfo .followButton {
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 15px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer; }
+
+.mainInfo .followButton.following {
+  color: #999999;
+  border: 1px solid #999999; }
+
+.mainInfo .followButton.following:hover {
+  color: #ffffff;
+  background-color: #999999; }
+
+.mainInfo .followButton.unfollowing {
+  color: #e4007f;
+  border: 1px solid #e4007f; }
+
+.mainInfo .followButton.unfollowing:hover {
+  color: #ffffff;
+  background-color: #e4007f; }
+
 /*-----tab-----*/
 .tabArea .tabs {
   display: table;
