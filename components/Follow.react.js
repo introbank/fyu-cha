@@ -5,12 +5,6 @@ var ParseReact   = require('parse-react');
 var Follow = React.createClass({
   mixins: [ParseReact.Mixin],
 
-  getInitialState() {
-    return {
-      isFollowing: null,
-    };
-  },
-
   observe(props, state) {
   var followingQuery = new Parse.Query("Following");
   var col = this.props.account.className.toLowerCase();
@@ -34,8 +28,7 @@ var Follow = React.createClass({
   follow() {
     var following = this.createFollowingObj();
     following.save().then(
-      this.setState({isFollowing: true}));
-
+      this.refreshQueries(["following"]));
   },
 
   unfollow() {
@@ -47,17 +40,14 @@ var Follow = React.createClass({
       followings.push(following);
     });
     Parse.Object.destroyAll(followings).then(
-      this.setState({isFollowing: false}));
+      this.refreshQueries(["following"])).then(console.log("deleted"));
   },
 
   render() {
-    var isFollowing = this.state.isFollowing;
-    if (isFollowing == null){
-      isFollowing = (this.data.following.length > 0);
-    }
+    console.log((this.data.following.length > 0));
     return (
       <div>
-        {isFollowing
+        {this.data.following.length > 0
           ?
           <div className="followButton following" onClick={this.unfollow}>フォロー中</div>
           :

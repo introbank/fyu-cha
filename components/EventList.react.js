@@ -82,6 +82,7 @@ var EventList = React.createClass({
     );
   },
 
+  // todo loginしてなかったら、サインアップページ
   setEventStatus: function(targetEvent, eventStatus){
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
     eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
@@ -186,7 +187,9 @@ var EventList = React.createClass({
     else{
       var planHash = {};
         this.data.plan.map(function(plan){
-        planHash[plan.event.objectId] = plan;
+        if(plan.event != null){
+          planHash[plan.event.objectId] = plan;
+        }
       });
       eventList = this.data.events.map(function(event) {
         var plan = null;
