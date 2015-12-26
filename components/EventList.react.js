@@ -27,8 +27,6 @@ var EventList = React.createClass({
       };
     }
     else{
-
-
       var accountQuery = new Parse.Query(type);
       accountQuery.equalTo('twitterUsername', id);
 
@@ -36,10 +34,15 @@ var EventList = React.createClass({
       eventQuery.ascending('date');
       eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
 
+      var plans = new Parse.Query("EventPlan");
+      plans.include('event');
+      plans.equalTo("user", Parse.User.current());
+
       return {
         user: ParseReact.currentUser,
         account: accountQuery,
         events: eventQuery,
+        plans: plans,
       };
     }
   },
@@ -100,7 +103,7 @@ var EventList = React.createClass({
     );
   },
 
-  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan = null){
+  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan){
     try{
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
@@ -184,7 +187,7 @@ var EventList = React.createClass({
     }
     else{
       eventList = this.data.events.map(function(event) {
-        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider)}, this);
+        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, null)}, this);
     }
     return (
       <div>
