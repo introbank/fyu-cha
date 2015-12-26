@@ -17,13 +17,15 @@ var EventList = React.createClass({
     var type = props.type;
     var id = props.id;
 
+    var planQuery = new Parse.Query("EventPlan");
+    planQuery.include('event');
+    planQuery.equalTo("user", Parse.User.current());
+    planQuery.ascending('date');
+
     if (type == "Dashboard"){
-      var plans = new Parse.Query("EventPlan");
-      plans.include('event');
-      plans.equalTo("user", Parse.User.current());
       return{
         user: ParseReact.currentUser,
-        plans: plans
+        plan: planQuery
       };
     }
     else{
@@ -34,15 +36,11 @@ var EventList = React.createClass({
       eventQuery.ascending('date');
       eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
 
-      var plans = new Parse.Query("EventPlan");
-      plans.include('event');
-      plans.equalTo("user", Parse.User.current());
-
       return {
         user: ParseReact.currentUser,
         account: accountQuery,
         events: eventQuery,
-        plans: plans,
+        plan: planQuery,
       };
     }
   },
@@ -59,7 +57,7 @@ var EventList = React.createClass({
     var ev = new Event();
     ev.id = targetEvent.objectId;
     ev.destroy().then(
-      this.refreshQueries(["plans", "events"])
+      this.refreshQueries(["plan", "events"])
     );
   },
 
@@ -80,13 +78,14 @@ var EventList = React.createClass({
     var eventPlan = new EventPlan();  
     eventPlan.id = plan.objectId;
     eventPlan.destroy().then(
-      this.refreshQueries(["plans", "events"])
+      this.refreshQueries(["plan", "events"])
     );
   },
 
   setEventStatus: function(targetEvent, eventStatus){
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
     eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
+    eventStatus.set("date", targetEvent.date);
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
@@ -99,7 +98,7 @@ var EventList = React.createClass({
       eventStatus.set("group", group);
     }
     eventStatus.save().then(
-      this.refreshQueries(["plans", "events"])
+      this.refreshQueries(["plan", "events"])
     );
   },
 
@@ -178,7 +177,7 @@ var EventList = React.createClass({
     var isDisplayedNowDivider = false;
     var eventList = null;
     if (this.props.type == "Dashboard"){
-      eventList = this.data.plans.map(function(plan) {
+      eventList = this.data.plan.map(function(plan) {
         if (plan.event != null){
         console.log(plan.event);
         return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}

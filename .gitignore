@@ -4,3 +4,4 @@ bundle.min.js
 dist/
 public/javascripts/
 npm-debug.log
+*.swp
