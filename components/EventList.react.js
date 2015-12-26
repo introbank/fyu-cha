@@ -132,10 +132,10 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
-                {this.props.type != "Dashboard" &&
+                {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                {plan == null 
+                {plan == null
                 ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
                 : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
                 }
@@ -145,12 +145,12 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
-                {this.props.type != "Dashboard" &&
+                {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                {plan == null 
-                ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
-                : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
+                ?{plan == null
+                  ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+                  : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
                 }
               </div>
             )}
