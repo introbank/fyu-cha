@@ -2,6 +2,7 @@ var React  = require('react');
 var Parse       = require('../lib/parse');
 var ParseReact  = require('parse-react');
 var AccountInfo   = require('./AccountInfo.react.js');
+var UserMediaList       = require('./UserMediaList.react.js');
 var FollowingList       = require('./FollowingList.react.js');
 var Schedule   = require('./Schedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
@@ -19,9 +20,21 @@ var Dashboard = React.createClass({
     };
   },
 
+  createQuery(col){
+    var following = new Parse.Query('Following');
+    following.equalTo("user", Parse.User.current());
+    following.include(col);
+    following.notEqualTo(col, null);
+    return following;
+  },
+
   observe() {
+    var followingArtistQuery = this.createQuery("artist");
+    var followingGroupQuery = this.createQuery("group");
     return {
       user: ParseReact.currentUser,
+      followingArtists: followingArtistQuery,
+      followingGroups: followingGroupQuery,
     };
   },
 
@@ -97,8 +110,13 @@ var Dashboard = React.createClass({
                 }
               </li>
             </ul>
+            {this.state.showMedia &&
+              <div id="images" className="tab">
+                <UserMediaList artists={this.data.followingArtists} groups={this.data.followingGroups} />
+              </div>
+            }
             {this.state.showFollow &&
-              <FollowingList />
+              <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
             }
             {this.state.showSchedule &&
               <Schedule type="Dashboard" id={this.data.user.username} handler={this.changeTab3}/>
