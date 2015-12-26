@@ -9,7 +9,6 @@ var Navigation = React.createClass({
   },
 
   render() {
-    console.log(this.props.active);
     return (
       <div id="nav" className="cf">
         <ul>
