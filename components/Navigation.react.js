@@ -14,12 +14,12 @@ var Navigation = React.createClass({
       <div id="nav" className="cf">
         <ul>
           {this.props.active === 'top' ?
-            <li className="active" onClick={this.top}>マイページ</li> :
-            <li onClick={this.top}>マイページ</li>
+            <li className="boR active" onClick={this.top}>マイページ</li> :
+            <li className="boR" onClick={this.top}>マイページ</li>
           }
           {this.props.active === 'idol' ?
-            <li className="active" onClick={this.artists}>アイドル</li> :
-            <li onClick={this.artists}>アイドル</li>
+            <li className="boR active" onClick={this.artists}>アイドル</li> :
+            <li className="boR" onClick={this.artists}>アイドル</li>
           }
           {this.props.active === 'group' ?
             <li className="active" onClick={this.groups}>グループ</li> :
