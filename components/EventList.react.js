@@ -186,8 +186,8 @@ var EventList = React.createClass({
     else{
       var planHash = {};
         this.data.plan.map(function(plan){
-        planHash[plan.event.objectId] = plan;}
-      );
+        planHash[plan.event.objectId] = plan;
+      });
       eventList = this.data.events.map(function(event) {
         var plan = null;
         if (event.objectId in planHash){
