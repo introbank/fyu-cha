@@ -68,6 +68,18 @@ gulp.task('build:group', function() {
     }));
 });
 
+gulp.task('build:signup', function() {
+  gulp.src('app/signup.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(print(function(filepath) {
+      return "built: " + filepath;
+    }));
+});
+
 gulp.task('watch:top', function() {
   gulp.watch('./components/*.js', ['build:top']);
 });
@@ -78,4 +90,8 @@ gulp.task('watch:artist', function() {
 
 gulp.task('watch:group', function() {
   gulp.watch('./components/*.js', ['build:group']);
+});
+
+gulp.task('watch:signup', function() {
+  gulp.watch('./components/*.js', ['build:signup']);
 });
