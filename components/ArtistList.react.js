@@ -32,7 +32,7 @@ var ArtistList = React.createClass({
                   {this.data.groups &&
                     this.data.groups.map(function (group) {
                       return (
-                        <MemberList group={group} />
+                        <MemberList group={group} key={group.objectId} />
                       );
                     })
                   }

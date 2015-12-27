@@ -23,7 +23,7 @@ var MemberList = React.createClass({
     }
 
     return (
-      <div>
+      <div key={this.props.key}>
         <h2>
           <img src={this.props.group.imageUrl} width="20"/>
           {this.props.group.name}
@@ -31,7 +31,7 @@ var MemberList = React.createClass({
         <ul>
           {this.data.members.map(function(member) {
             return (
-              <li>
+              <li key={member.objectId} >
                 <a href={'/artists/' + member.twitterUsername}><img src={member.imageUrl} /></a>
                 <h2>{member.name}</h2>
               </li>

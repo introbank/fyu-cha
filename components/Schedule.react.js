@@ -15,7 +15,7 @@ var Schedule = React.createClass({
       eventPrice: '',
       eventPlace: '',
       eventDetail: '',
-      register: false
+      register: 0,
     };
   },
 
@@ -114,12 +114,8 @@ var Schedule = React.createClass({
           eventPrice: '',
           eventPlace: '',
           eventDetail: '',
-          register: true,
+          register: this.state.register + 1,
         })).then(console.log("ok"));
-  },
-
-  resetRegister(){
-    this.setState({register: false});
   },
 
   render() {
@@ -143,7 +139,7 @@ var Schedule = React.createClass({
             <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
             <input type="submit" value="登録" />
           </form>
-          <EventList type={this.props.type} id={this.props.id} register={this.state.register} handler={this.resetRegister} />
+          <EventList type={this.props.type} id={this.props.id} register={this.state.register} />
         </div>
       );
     }
