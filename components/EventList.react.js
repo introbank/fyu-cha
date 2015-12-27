@@ -113,7 +113,7 @@ var EventList = React.createClass({
       var minute = eventDate.getMinutes();
       if(minute < 10) { minute = "0" + minute; }
       var eventListHtml = (
-        <div>
+        <div key={event.objectId}>
           {previousEventMonth != eventDate.getMonth() && (
             <h2 className="schedulePeriod">
               <span className="scheduleYear">{eventDate.getFullYear()}</span>
