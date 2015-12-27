@@ -56,7 +56,7 @@ var MediaList = React.createClass({
           <div className="dashboardPhotos editnow">
           {this.data.mediaMap.map(function (mediaMap) {
             return (
-              <div className="dashboardPhoto">
+              <div className="dashboardPhoto" key={mediaMap.objectId} >
               {mediaMap.isViewable 
               ? 
                 <div className="dashboardPhotoEditButtonArea appear">
@@ -86,7 +86,7 @@ var MediaList = React.createClass({
           <ul>
           {this.data.mediaMap.map(function (mediaMap) {
           return (
-            <li>
+            <li key={mediaMap.objectId}>
               <img src={mediaMap.media.mediaUri} />
             </li>
           )}, this) 
