@@ -55,7 +55,7 @@ var Login = React.createClass({
     return (
       <div>
         <Header />
-        <h2>ログイン</h2>
+        <h2>繝ｭ繧ｰ繧､繝ｳ</h2>
         {
           this.state.error
           ? <Alert bsStyle="danger">{this.state.error}</Alert>
@@ -64,7 +64,7 @@ var Login = React.createClass({
         <form>
           <Input ref="username" type="text" label="Twitter ID" placeholder="Twitter ID" />
           <Input ref="password" type="password" label="Password" />
-          <ButtonInput value="ログイン" onClick={this.login} />
+          <ButtonInput value="繝ｭ繧ｰ繧､繝ｳ" onClick={this.login} />
         </form>
       </div>
     );
