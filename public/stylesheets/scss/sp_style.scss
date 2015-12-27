@@ -414,7 +414,114 @@ h1 {
 	}
 }
 
-/*-- fyucha --*/
+.scheduleAddBox {
+	box-sizing: border-box;
+	position: absolute;
+	top: 330px;
+	left: 50%;
+	margin-left: -50%;
+	width: 100%;
+	height: auto;
+	background: white;
+	border: 10px solid rgba(black, 0.3);
+	color: #898989;
+	font-size: 12px;
+	z-index: 50;
+	input {
+		margin-left: 10px;
+		margin-right: 5px;
+		min-height: 15px;
+		border: 1px solid #898989;
+		border-radius: 3px;
+	}
+	textarea {
+		margin-left: 10px;
+		margin-right: 5px;
+		border: 1px solid #898989;
+		border-radius: 3px;
+	}
+	.scheduleAddTitle {
+		margin-top: 10px;
+		margin-left: 10px;
+		color: #5375b1;
+		font-size: 14px;
+	}
+	.scheduleAddSubTitle {
+		margin-top: 10px;
+		margin-bottom: 3px;
+		margin-left: 10px;
+		color: #898989;
+		font-size: 14px;
+	}
+	.scheduleAddMultiArea {
+		overflow: hidden;
+	}
+	.scheduleAddInputDay {
+		width: 20%;
+	}
+	.scheduleAddInputTime {
+		width: 30%;
+	}
+	.scheduleAddInputEventTitle {
+		width: 90%;
+	}
+	.scheduleAddSpotArea {
+		float: left;
+		width: 40%;
+		.scheduleAddInputSpot {
+			width: 100%;
+		}
+	}
+	.scheduleAddCostArea {
+		float: left;
+		margin-left: 10px;
+		width: 40%;
+		.scheduleAddInputCost {
+			width: 70%;
+		}
+	}
+	.scheduleAddInputEventDescription {
+		width: 90%;
+		min-height: 60px;
+	}
+	.scheduleAddButtonArea {
+		overflow: hidden;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 90%;
+	}
+	.scheduleAddButtonOtherTime {
+		display: block;
+		float: left;
+		margin-right: 5px;
+		padding: 5px;
+		width: 43%;
+		border: 1px solid #5375b1;
+		border-radius: 3px;
+		color: #5375b1;
+		font-size: 14px;
+		text-align: center;
+	}
+	.scheduleAddButtonComplete {
+		display: block;
+		float: left;
+		margin-left: 5px;
+		padding: 5px;
+		width: 43%;
+		border: 1px solid #db1277;
+		border-radius: 3px;
+		color: #db1277;
+		font-size: 14px;
+		text-align: center;
+	}
+}
+
+
+
+
+/*-----fyucha-----*/
 
 .fyuchaTotal {
 	margin-top: 10px;
@@ -596,6 +703,4 @@ h1 {
 		}
 	}
 }
-
-
 

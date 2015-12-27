@@ -136,7 +136,6 @@ h1 {
   width: 100%;
   height: 40px;
   border-bottom: 1px solid #CFD0D0;
-  color: #999999;
   overflow: hidden; }
 
 #nav ul li {
@@ -144,13 +143,7 @@ h1 {
   float: left;
   width: 33%;
   padding: 8px 0px;
-  text-align: center;
-  color: #999999;
-  cursor: pointer; }
-
-#nav ul li.active {
-  color: #ffffff;
-  background-color: #999999; }
+  text-align: center; }
 
 /*-----maininfo-----*/
 .mainInfo {
@@ -169,32 +162,6 @@ h1 {
 
 .mainInfo span {
   font-size: 0.9em; }
-
-.mainInfo .followButton {
-  color: #e4007f;
-  border: 1px solid #e4007f;
-  border-radius: 5px;
-  padding: 7px 10px;
-  margin-top: 15px;
-  font-weight: bold;
-  float: right;
-  cursor: pointer; }
-
-.mainInfo .followButton.following {
-  color: #999999;
-  border: 1px solid #999999; }
-
-.mainInfo .followButton.following:hover {
-  color: #ffffff;
-  background-color: #999999; }
-
-.mainInfo .followButton.unfollowing {
-  color: #e4007f;
-  border: 1px solid #e4007f; }
-
-.mainInfo .followButton.unfollowing:hover {
-  color: #ffffff;
-  background-color: #e4007f; }
 
 /*-----tab-----*/
 .tabArea .tabs {
@@ -215,9 +182,6 @@ h1 {
       margin-right: -1px; }
     .tabArea .tabs a.boR {
       border-right: 1px solid #999999; }
-    .tabArea .tabs a.active {
-      color: #ffffff;
-      background-color: #999999; }
     .tabArea .tabs a:hover {
       color: #ffffff;
       background-color: #999999;
@@ -238,26 +202,11 @@ h1 {
 
 /*-----tab__images-----*/
 #images li img {
-  width: 100%;
   max-width: 458px;
   min-width: 288px;
   height: auto;
   margin: 10px auto 0px;
   border: 1px solid #EAEAEA; }
-
-#images .startButton {
-  width: 250px;
-  color: #5375b1;
-  border: 1px solid #5375b1;
-  border-radius: 5px;
-  padding: 7px 10px;
-  margin-top: 50px;
-  font-weight: bold;
-  cursor: pointer; }
-
-#images .startButton:hover {
-  color: #ffffff;
-  background-color: #5375b1; }
 
 /*--------------------dashboard----------------------*/
 /*-----tab__followList-----*/
@@ -275,10 +224,6 @@ h1 {
     padding-top: 10px;
     color: #e4007f;
     font-weight: bold; }
-  .tabArea #followList h2 {
-    font-weight: bold; }
-  .tabArea #followList h2 img {
-    margin-right: 5px; }
   .tabArea #followList ul li {
     float: left;
     width: 50%;
@@ -394,7 +339,94 @@ h1 {
       background: #d31277;
       border-radius: 50%; }
 
-/*-- fyucha --*/
+.scheduleAddBox {
+  box-sizing: border-box;
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  margin-left: -50%;
+  width: 100%;
+  height: auto;
+  background: white;
+  border: 10px solid rgba(0, 0, 0, 0.3);
+  color: #898989;
+  font-size: 12px;
+  z-index: 50; }
+  .scheduleAddBox input {
+    margin-left: 10px;
+    margin-right: 5px;
+    min-height: 15px;
+    border: 1px solid #898989;
+    border-radius: 3px; }
+  .scheduleAddBox textarea {
+    margin-left: 10px;
+    margin-right: 5px;
+    border: 1px solid #898989;
+    border-radius: 3px; }
+  .scheduleAddBox .scheduleAddTitle {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: #5375b1;
+    font-size: 14px; }
+  .scheduleAddBox .scheduleAddSubTitle {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    color: #898989;
+    font-size: 14px; }
+  .scheduleAddBox .scheduleAddMultiArea {
+    overflow: hidden; }
+  .scheduleAddBox .scheduleAddInputDay {
+    width: 20%; }
+  .scheduleAddBox .scheduleAddInputTime {
+    width: 30%; }
+  .scheduleAddBox .scheduleAddInputEventTitle {
+    width: 90%; }
+  .scheduleAddBox .scheduleAddSpotArea {
+    float: left;
+    width: 40%; }
+    .scheduleAddBox .scheduleAddSpotArea .scheduleAddInputSpot {
+      width: 100%; }
+  .scheduleAddBox .scheduleAddCostArea {
+    float: left;
+    margin-left: 10px;
+    width: 40%; }
+    .scheduleAddBox .scheduleAddCostArea .scheduleAddInputCost {
+      width: 70%; }
+  .scheduleAddBox .scheduleAddInputEventDescription {
+    width: 90%;
+    min-height: 60px; }
+  .scheduleAddBox .scheduleAddButtonArea {
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%; }
+  .scheduleAddBox .scheduleAddButtonOtherTime {
+    display: block;
+    float: left;
+    margin-right: 5px;
+    padding: 5px;
+    width: 43%;
+    border: 1px solid #5375b1;
+    border-radius: 3px;
+    color: #5375b1;
+    font-size: 14px;
+    text-align: center; }
+  .scheduleAddBox .scheduleAddButtonComplete {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    padding: 5px;
+    width: 43%;
+    border: 1px solid #db1277;
+    border-radius: 3px;
+    color: #db1277;
+    font-size: 14px;
+    text-align: center; }
+
+/*-----fyucha-----*/
 .fyuchaTotal {
   margin-top: 10px;
   margin-right: 0px;
@@ -441,14 +473,10 @@ h1 {
         height: auto; }
     .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
       position: absolute;
-      width: 160px;
       top: 5px;
       left: 35px;
       color: black;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis; }
+      font-size: 12px; }
     .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserAccount {
       position: absolute;
       top: 23px;
@@ -490,9 +518,7 @@ h1 {
   color: white;
   font-size: 14px;
   text-align: center;
-  z-index: 30;
-  cursor:pointer;
-}
+  z-index: 30; }
 
 .dashboardPhotos {
   margin-top: 20px; }
@@ -532,8 +558,7 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 5px 0 0 5px;
       color: white;
-      font-size: 14px;
-      cursor:pointer; }
+      font-size: 14px; }
     .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
       box-sizing: border-box;
       float: left;
@@ -545,17 +570,14 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 0 5px 5px 0;
       color: white;
-      font-size: 14px;
-      cursor:pointer;}
+      font-size: 14px; }
     .dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px;
-      cursor:pointer;}
+      text-indent: -9999px; }
     .dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px;
-      cursor:pointer;}
+      text-indent: -9999px; }
 
 /*# sourceMappingURL=sp_style.css.map */
