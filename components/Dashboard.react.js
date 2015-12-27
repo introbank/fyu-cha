@@ -119,7 +119,7 @@ var Dashboard = React.createClass({
               <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
             }
             {this.state.showSchedule &&
-              <Schedule type="Dashboard" id={this.data.user.username} handler={this.changeTab3}/>
+              <Schedule type="Dashboard" id={this.data.user.username} />
             }
             {this.state.showData &&
               <ContributionList type="Dashboard" id={this.data.user.username} />

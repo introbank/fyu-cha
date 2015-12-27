@@ -131,12 +131,12 @@ var Schedule = React.createClass({
       return (
         <div>
           <form className="commentForm" onSubmit={this.handleEventSubmit}>
-            <input type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-            <input type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-            <input type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
+            <input type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
+            <input type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
+            <input type="number" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
             <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
             <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-            <input type="text" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
+            <input type="number" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
             <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
             <input type="submit" value="登録" />
           </form>
