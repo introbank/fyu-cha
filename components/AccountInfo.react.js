@@ -10,6 +10,10 @@ var AccountInfo = React.createClass({
       <div className="mainInfo">
         {this.props.account &&
           <div className="contents">
+            {this.props.account.className === '_User'
+              ? <div />
+              : <Follow account={this.props.account} />
+            }
             <img src={this.props.account.imageUrl} className="iconImage" />
             <h1>{this.props.account.name}</h1>
             {this.props.account.className === '_User'
@@ -17,7 +21,6 @@ var AccountInfo = React.createClass({
                 <p className="account">@{this.props.account.username}</p>
               </div>
             : <div>
-                <Follow account={this.props.account} />
                 <p className="account">@{this.props.account.twitterUsername}</p>
               </div>
             }

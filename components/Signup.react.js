@@ -69,12 +69,16 @@ var Signup = React.createClass({
     return (
       <div>
         <Header />
-        <h2>ユーザ登録</h2>
-        {this.props.params.username}
-        <form>
-          <input type="password" label="Passwordを入力して下さい" />
-          <input value="登録" type='submit' onClick={this.signup} />
-        </form>
+        <div id="content">
+          <div className="signup">
+            <h2>ユーザ登録</h2>
+            {this.props.params.username}
+            <form>
+              <input ref="password" type="password" />
+              <input value="登録" type='submit' onClick={this.signup} />
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

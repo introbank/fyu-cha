@@ -645,4 +645,22 @@ h1 {
       text-indent: -9999px;
       cursor:pointer; }
 
+/*-----maininfo-----*/
+.signup {
+  width: 100%; }
+
+.signup .iconImage {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
+  border: 1px solid #CFD0D0;
+  border-radius: 4px; }
+
+.signup .account {
+  color: #999999;
+  font-size: 0.8em; }
+
+.signup span {
+  font-size: 0.9em; }
+
 /*# sourceMappingURL=tab_style.css.map */
