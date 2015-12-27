@@ -427,10 +427,14 @@ h1 {
         height: auto; }
     .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
       position: absolute;
+      width: 160px;
       top: 5px;
       left: 35px;
       color: black;
-      font-size: 12px; }
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserAccount {
       position: absolute;
       top: 23px;
