@@ -20,7 +20,7 @@ var Follow = React.createClass({
   getInitialState() {
     return {
       isFollowing: null,
-      isWaiting: false,
+      isWaiting: true,
     };
   },
 
@@ -33,6 +33,11 @@ var Follow = React.createClass({
     return following;
   },
 
+ 
+  componentDidMount(){
+    this.setState({isWaiting: false});
+  },
+  
   follow() {
     // if not login user, redirect for sign up page
     if (!this.data.user) {
