@@ -111,7 +111,7 @@ var Signup = React.createClass({
         }
         <form>
           <Input ref="password" type="password" label="Passwordを入力して下さい" />
-          <ButtonInput value="登録" onClick={this.signup} />
+          <ButtonInput value="登録" type='submit' onClick={this.signup} />
         </form>
       </div>
     );
