@@ -645,13 +645,35 @@ h1 {
       text-indent: -9999px;
       cursor:pointer; }
 
-/*-----maininfo-----*/
+/*-----signup-----*/
 .signup {
   width: 100%; }
 
+.signup h1 {
+  color: #e4007f;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.signup h2 {
+  font-weight: bold;
+}
+
+.signup .box {
+  float: left;
+}
+
+.signup .box.name {
+  padding-left: 15px;
+}
+
+.signup .after {
+  clear: both;
+}
+
 .signup .iconImage {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   margin-bottom: 5px;
   border: 1px solid #CFD0D0;
   border-radius: 4px; }
@@ -662,5 +684,39 @@ h1 {
 
 .signup span {
   font-size: 0.9em; }
+
+.signup .label {
+  color: #999999;
+}
+
+.signup .description {
+  padding-bottom: 10px;
+  color: #999999;
+  font-size: 0.8em; }
+
+.signup input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 1.3em;
+  border:solid 2px #999999;
+  width:300px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.signup .submitButton {
+  width:280px;
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 15px;
+  font-weight: bold;
+  cursor: pointer; }
+
+.signup .submitButton:hover {
+  color: #ffffff;
+  background-color: #e4007f; }
 
 /*# sourceMappingURL=tab_style.css.map */

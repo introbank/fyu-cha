@@ -7,6 +7,14 @@ var setting     = require('../setting');
 var Signup = React.createClass({
   mixins: [ParseReact.Mixin],
 
+  getInitialState: function() {
+    return {
+      password: '',
+      confirm: '',
+      error: false
+    };
+  },
+
   getInitialState() {
     return {
       error: null,
@@ -31,9 +39,22 @@ var Signup = React.createClass({
     };
   },
 
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value});
+  },
+
+  handleConfirmChange(e) {
+    this.setState({confirm: e.target.value});
+  },
+
   signup() {
+    if (this.state.password !== this.state.confirm) {
+      this.setState({error: true});
+      return;
+    }
+
     var username = this.props.params.username;
-    var password = this.refs.password.getValue();
+    var password = this.state.password;
     var userId = this.props.params.userId;
     var name = unescape(this.props.params.screenname);
     var info = unescape(this.props.params.info);
@@ -67,16 +88,36 @@ var Signup = React.createClass({
     }
 
     return (
-      <div>
+      <div id="wrapper">
         <Header />
         <div id="content">
-          <div className="signup">
-            <h2>ユーザ登録</h2>
-            {this.props.params.username}
-            <form>
-              <input ref="password" type="password" />
-              <input value="登録" type='submit' onClick={this.signup} />
-            </form>
+          <div className="contents">
+            <div className="signup">
+              <h1>ユーザ登録</h1>
+              <div className="box">
+                <img src={this.props.params.imageUrl} className="iconImage" />
+              </div>
+              <div className="box name">
+                <h2>{this.props.params.screenname}</h2>
+                <p className="account">@{this.props.params.username}</p>
+              </div>
+              <div className="after" />
+              <div className="label">新規パスワードを設定してください</div>
+              <form>
+                <input ref="password" type="password" onChange={this.handlePasswordChange} />
+              </form>
+              <div className="description">必ずTwitterアカウントとは別のパスワードを入力してください</div>
+              <div className="label">確認のためもう一度入力してください</div>
+              <form>
+                <input ref="password" type="password" onChange={this.handleConfirmChange} />
+              </form>
+              <div className="submitButton" onClick={this.signup}>
+                登録してマイページへ行く
+              </div>
+              {this.state.error &&
+                <div>入力に誤りがあります</div>
+              }
+            </div>
           </div>
         </div>
       </div>
