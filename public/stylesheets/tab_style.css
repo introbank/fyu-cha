@@ -141,7 +141,19 @@ h1 {
   float: left;
   width: 33%;
   padding: 8px 0px;
-  text-align: center; }
+  text-align: center;
+  color: #999999;
+  cursor: pointer; }
+
+#nav ul li.active {
+  color: #ffffff;
+  background-color: #999999; }
+
+#nav ul li:hover {
+  color: #ffffff;
+  background-color: #999999;
+  -webkit-transition: all .3s;
+  transition: all .3s; }
 
 /*-----maininfo-----*/
 .mainInfo {
@@ -160,6 +172,32 @@ h1 {
 
 .mainInfo span {
   font-size: 0.9em; }
+
+.mainInfo .followButton {
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 15px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer; }
+
+.mainInfo .followButton.following {
+  color: #999999;
+  border: 1px solid #999999; }
+
+.mainInfo .followButton.following:hover {
+  color: #ffffff;
+  background-color: #999999; }
+
+.mainInfo .followButton.unfollowing {
+  color: #e4007f;
+  border: 1px solid #e4007f; }
+
+.mainInfo .followButton.unfollowing:hover {
+  color: #ffffff;
+  background-color: #e4007f; }
 
 /*-----tab-----*/
 .tabArea ul.tabs {
@@ -183,6 +221,10 @@ h1 {
 
 .tabArea .tabs a.boR {
   border-right: 1px solid #999999; }
+
+.tabArea .tabs a.active {
+  color: #ffffff;
+  background-color: #999999; }
 
 .tabArea .tabs a:hover {
   color: #ffffff;
@@ -210,6 +252,20 @@ h1 {
   margin: 10px 10px 10px 0px;
   border: 1px solid #EAEAEA; }
 
+#images .startButton {
+  width: 250px;
+  color: #5375b1;
+  border: 1px solid #5375b1;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 50px;
+  font-weight: bold;
+  cursor: pointer; }
+
+#images .startButton:hover {
+  color: #ffffff;
+  background-color: #5375b1; }
+
 /*--------------------dashboard----------------------*/
 /*-----tab__followList-----*/
 .tabArea .box {
@@ -218,6 +274,12 @@ h1 {
 .tabArea #followList h1 {
   color: #e4007f;
   font-weight: bold; }
+
+.tabArea #followList h2 {
+  font-weight: bold; }
+
+.tabArea #followList h2 img {
+  margin-right: 5px; }
 
 .tabArea #followList ul {
   margin: 0 auto;
@@ -516,7 +578,8 @@ h1 {
   color: white;
   font-size: 14px;
   text-align: center;
-  z-index: 30; }
+  z-index: 30;
+  cursor:pointer; }
 
 .dashboardPhotos {
   margin-top: 20px; }
@@ -556,7 +619,8 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 5px 0 0 5px;
       color: white;
-      font-size: 14px; }
+      font-size: 14px;
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
       box-sizing: border-box;
       float: left;
@@ -568,14 +632,17 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 0 5px 5px 0;
       color: white;
-      font-size: 14px; }
+      font-size: 14px;
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px; }
+      text-indent: -9999px;
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px; }
+      text-indent: -9999px;
+      cursor:pointer; }
 
 /*# sourceMappingURL=tab_style.css.map */
