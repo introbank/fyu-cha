@@ -174,7 +174,9 @@ var EventList = React.createClass({
   },
 
   componentWillUpdate(nextProps, nextState) {
-    if(nextProps.register !== this.props.register){
+    if(nextProps.register){
+      console.log("refreshQueries by register");
+      this.props.handler();
       this.refreshQueries(["plan", "events"]);
     }
   },

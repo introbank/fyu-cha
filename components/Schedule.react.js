@@ -15,7 +15,7 @@ var Schedule = React.createClass({
       eventPrice: '',
       eventPlace: '',
       eventDetail: '',
-      register: 0 
+      register: false
     };
   },
 
@@ -114,15 +114,15 @@ var Schedule = React.createClass({
           eventPrice: '',
           eventPlace: '',
           eventDetail: '',
-          register: this.state.register + 1 
+          register: true,
         })).then(console.log("ok"));
-        
+  },
+
+  resetRegister(){
+    this.setState({register: false});
   },
 
   render() {
-    console.log("render");
-    console.log(this.state.register);
-
     if (this.props.type == "Dashboard" || !this.data.user){
       return (
         <div>
@@ -143,7 +143,7 @@ var Schedule = React.createClass({
             <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
             <input type="submit" value="登録" />
           </form>
-          <EventList type={this.props.type} id={this.props.id} register={this.state.register} />
+          <EventList type={this.props.type} id={this.props.id} register={this.state.register} handler={this.resetRegister} />
         </div>
       );
     }
