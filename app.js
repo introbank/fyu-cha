@@ -27,67 +27,57 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
-    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
-    //var css = '<link rel="stylesheet" href="/stylesheets/sp_style.css">';
     var body = React.renderToString(Top({}));
     var script = '/javascripts/top.js';
-    res.render('main', {css: css, body: body, script: script});
+    res.render('main', {body: body, script: script});
 });
 
 app.get('/login', function(req, res) {
-    var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
     var body = React.renderToString(Login({}));
     var script = '/javascripts/login.js';
-    res.render('main', {css: css, body: body, script: script});
+    res.render('main', {body: body, script: script});
 });
 
 app.get('/users/:id', function(req, res) {
     var params = {id: req.params.id};
-    var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
     var body   = React.renderToString(User({params: params}));
     var script = '/javascripts/user.js';
     var json   = JSON.stringify(params);
-    res.render('main', {css: css, body: body, script: script, params: json});
+    res.render('main', {body: body, script: script, params: json});
 });
 
 app.get('/artists', function(req, res) {
-    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     var body   = React.renderToString(ArtistList({}));
     var script = '/javascripts/artist-list.js';
-    res.render('main', {css: css, body: body, script: script});
+    res.render('main', {body: body, script: script});
 });
 
 app.get('/artists/:id', function(req, res) {
     var params = {id: req.params.id};
-    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
-    //var css = '<link rel="stylesheet" href="/stylesheets/sp_style.css">';
     var body   = React.renderToString(Artist({params: params}));
     var script = '/javascripts/artist.js';
     var json   = JSON.stringify(params);
-    res.render('main', {css: css, body: body, script: script, params: json});
+    res.render('main', {body: body, script: script, params: json});
 });
 
 app.get('/groups', function(req, res) {
-    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     var body   = React.renderToString(GroupList({}));
     var script = '/javascripts/group-list.js';
-    res.render('main', {css: css, body: body, script: script});
+    res.render('main', {body: body, script: script});
 });
 
 app.get('/groups/:id', function(req, res) {
     var params = {id: req.params.id};
-    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     var body   = React.renderToString(Group({params: params}));
     var script = '/javascripts/group.js';
     var json   = JSON.stringify(params);
-    res.render('main', {css: css, body: body, script: script, params: json});
+    res.render('main', {body: body, script: script, params: json});
 });
 
 app.get('/registration', function(req, res) {
-    var css = '<link media="only screen and (max-device-width:480px)" rel="stylesheet" href="/stylesheets/sp_style.css"><link media="screen and (min-device-width:481px)" rel="stylesheet" href="/stylesheets/tab_style.css">';
     var body   = React.renderToString(Registration({}));
     var script = '/javascripts/registration.js';
-    res.render('main', {css: css, body: body, script: script});
+    res.render('main', {body: body, script: script});
 });
 
 var passport = require('passport');
@@ -136,19 +126,17 @@ app.get('/auth/twitter/callback',
                                      failureRedirect: '/login' }));
 
 app.get('/signup', function(req, res) {
-  var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
   var body = React.renderToString(Signup({}));
   var script = '/javascripts/signup.js';
   var params = {token: twitterToken, tokenSecret: twitterTokenSecret, username: twitterProfile.username, userId: twitterProfile.id, screenname: escape(twitterProfile.displayName), info: escape(twitterProfile['_json']['description']), imageUrl: twitterProfile['_json']['profile_image_url']};
   var json   = JSON.stringify(params);
-  res.render('main', {css: css, body: body, script: script, params: json});
+  res.render('main', {body: body, script: script, params: json});
 });
 
 app.get('*', function(req, res) {
-  var css = '<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">';
   var body = React.renderToString(NotFound({}));
   var script = '/javascripts/notfound.js';
-  res.render('main', {css: css, body: body, script: script});
+  res.render('main', {body: body, script: script});
 });
 
 var port = process.env.PORT || 5000;
