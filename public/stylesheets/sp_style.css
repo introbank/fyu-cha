@@ -136,6 +136,7 @@ h1 {
   width: 100%;
   height: 40px;
   border-bottom: 1px solid #CFD0D0;
+  color: #999999;
   overflow: hidden; }
 
 #nav ul li {
@@ -143,7 +144,13 @@ h1 {
   float: left;
   width: 33%;
   padding: 8px 0px;
-  text-align: center; }
+  text-align: center;
+  color: #999999;
+  cursor: pointer; }
+
+#nav ul li.active {
+  color: #ffffff;
+  background-color: #999999; }
 
 /*-----maininfo-----*/
 .mainInfo {
@@ -162,6 +169,32 @@ h1 {
 
 .mainInfo span {
   font-size: 0.9em; }
+
+.mainInfo .followButton {
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 15px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer; }
+
+.mainInfo .followButton.following {
+  color: #999999;
+  border: 1px solid #999999; }
+
+.mainInfo .followButton.following:hover {
+  color: #ffffff;
+  background-color: #999999; }
+
+.mainInfo .followButton.unfollowing {
+  color: #e4007f;
+  border: 1px solid #e4007f; }
+
+.mainInfo .followButton.unfollowing:hover {
+  color: #ffffff;
+  background-color: #e4007f; }
 
 /*-----tab-----*/
 .tabArea .tabs {
@@ -182,6 +215,9 @@ h1 {
       margin-right: -1px; }
     .tabArea .tabs a.boR {
       border-right: 1px solid #999999; }
+    .tabArea .tabs a.active {
+      color: #ffffff;
+      background-color: #999999; }
     .tabArea .tabs a:hover {
       color: #ffffff;
       background-color: #999999;
@@ -202,11 +238,26 @@ h1 {
 
 /*-----tab__images-----*/
 #images li img {
+  width: 100%;
   max-width: 458px;
   min-width: 288px;
   height: auto;
   margin: 10px auto 0px;
   border: 1px solid #EAEAEA; }
+
+#images .startButton {
+  width: 250px;
+  color: #5375b1;
+  border: 1px solid #5375b1;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 50px;
+  font-weight: bold;
+  cursor: pointer; }
+
+#images .startButton:hover {
+  color: #ffffff;
+  background-color: #5375b1; }
 
 /*--------------------dashboard----------------------*/
 /*-----tab__followList-----*/
@@ -224,6 +275,10 @@ h1 {
     padding-top: 10px;
     color: #e4007f;
     font-weight: bold; }
+  .tabArea #followList h2 {
+    font-weight: bold; }
+  .tabArea #followList h2 img {
+    margin-right: 5px; }
   .tabArea #followList ul li {
     float: left;
     width: 50%;
@@ -473,10 +528,14 @@ h1 {
         height: auto; }
     .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
       position: absolute;
+      width: 160px;
       top: 5px;
       left: 35px;
       color: black;
-      font-size: 12px; }
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserAccount {
       position: absolute;
       top: 23px;
@@ -518,7 +577,8 @@ h1 {
   color: white;
   font-size: 14px;
   text-align: center;
-  z-index: 30; }
+  z-index: 30;
+  cursor:pointer; }
 
 .dashboardPhotos {
   margin-top: 20px; }
@@ -558,7 +618,8 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 5px 0 0 5px;
       color: white;
-      font-size: 14px; }
+      font-size: 14px;
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
       box-sizing: border-box;
       float: left;
@@ -570,14 +631,17 @@ h1 {
       border: 2px solid #dfdfdf;
       border-radius: 0 5px 5px 0;
       color: white;
-      font-size: 14px; }
+      font-size: 14px;
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px; }
+      text-indent: -9999px;
+      cursor:pointer; }
     .dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
       background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
       background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px; }
+      text-indent: -9999px;
+      cursor:pointer; }
 
 /*# sourceMappingURL=sp_style.css.map */
