@@ -1,38 +1,49 @@
 @charset "UTF-8";
+
 /*-----reset-----*/
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 table {
   border-collapse: collapse;
-  border-spacing: 0; }
+  border-spacing: 0;
+}
 
 fieldset, img {
-  border: 0; }
+  border: 0;
+}
 
 address, caption, cite, code, dfn, em, strong, th, var {
   font-style: normal;
-  font-weight: normal; }
+  font-weight: normal;
+}
 
 ol, ul {
-  list-style: none; }
+  list-style: none;
+}
 
 caption, th {
-  text-align: left; }
+  text-align: left;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
-  font-weight: normal; }
+  font-weight: normal;
+}
 
 q:before, q:after {
-  content: ''; }
+  content: '';
+}
 
 abbr, acronym {
-  border: 0; }
+  border: 0;
+}
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 /*-----common-----*/
 body {
@@ -40,39 +51,48 @@ body {
   font-size: 1.0em;
   margin: 0;
   padding: 0;
-  color: #000000; }
+  color: #000000;
+}
 
 .cf:after {
   content: '';
   display: block;
-  clear: both; }
+  clear: both;
+}
 
 .cf {
   zoom: 1;
-  /* for IE6/7 */ }
+  /* for IE6/7 */
+}
 
 .mR10 {
-  margin-right: 10px; }
+  margin-right: 10px;
+}
 
 .boR {
-  border-right: 1px solid #CFD0D0; }
+  border-right: 1px solid #CFD0D0;
+}
 
 /*-----main-----*/
 #wrapper {
   width: 100%;
   min-width: 320px;
-  height: auto; }
+  height: auto;
+}
 
 #content {
-  font-size: 0.8em; }
+  font-size: 0.8em;
+}
 
 .contents {
-  padding: 10px; }
+  padding: 10px;
+}
 
 h1 {
   font-size: 1.17em;
   font-weight: bold;
-  color: #000000; }
+  color: #000000;
+}
 
 /*-----header-----*/
 #header {
@@ -85,7 +105,8 @@ h1 {
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #B993D6, #8CA6DB);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: #ffffff; }
+  color: #ffffff;
+}
 
 #header .mainLogo {
   position: absolute;
@@ -98,15 +119,18 @@ h1 {
   -webkit-background-size: 34px 34px;
   -moz-background-size: 34px 34px;
   text-indent: -9999px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 #header .loginArea {
   position: absolute;
   top: 10px;
-  right: 10px; }
+  right: 10px;
+}
 
 #header .loginArea ul {
-  height: 30px; }
+  height: 30px;
+}
 
 #header .loginArea ul li {
   float: left;
@@ -116,7 +140,8 @@ h1 {
   line-height: 1.9;
   border: 1px solid #ffffff;
   border-radius: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 #header .loginArea ul li a {
   display: block;
@@ -126,10 +151,12 @@ h1 {
   left: 0;
   border-radius: 5px;
   color: #ffffff;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 #header .loginArea ul li:hover {
-  background-color: rgba(255, 255, 255, 0.3); }
+  background-color: rgba(255, 255, 255, 0.3);
+}
 
 /*-----navi-----*/
 #nav {
@@ -137,7 +164,8 @@ h1 {
   height: 40px;
   border-bottom: 1px solid #CFD0D0;
   color: #999999;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 #nav ul li {
   display: table-cell;
@@ -146,29 +174,35 @@ h1 {
   padding: 8px 0px;
   text-align: center;
   color: #999999;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 #nav ul li.active {
   color: #ffffff;
-  background-color: #999999; }
+  background-color: #999999;
+}
 
 /*-----maininfo-----*/
 .mainInfo {
-  width: 100%; }
+  width: 100%;
+}
 
 .mainInfo .iconImage {
   width: 70px;
   height: 70px;
   margin-bottom: 5px;
   border: 1px solid #CFD0D0;
-  border-radius: 4px; }
+  border-radius: 4px;
+}
 
 .mainInfo .account {
   color: #999999;
-  font-size: 0.8em; }
+  font-size: 0.8em;
+}
 
 .mainInfo span {
-  font-size: 0.9em; }
+  font-size: 0.9em;
+}
 
 .mainInfo .followButton {
   color: #e4007f;
@@ -178,23 +212,28 @@ h1 {
   margin-top: 15px;
   font-weight: bold;
   float: right;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .mainInfo .followButton.following {
   color: #999999;
-  border: 1px solid #999999; }
+  border: 1px solid #999999;
+}
 
 .mainInfo .followButton.following:hover {
   color: #ffffff;
-  background-color: #999999; }
+  background-color: #999999;
+}
 
 .mainInfo .followButton.unfollowing {
   color: #e4007f;
-  border: 1px solid #e4007f; }
+  border: 1px solid #e4007f;
+}
 
 .mainInfo .followButton.unfollowing:hover {
   color: #ffffff;
-  background-color: #e4007f; }
+  background-color: #e4007f;
+}
 
 /*-----tab-----*/
 .tabArea .tabs {
@@ -203,38 +242,55 @@ h1 {
   border: 1px solid #999999;
   border-radius: 5px;
   table-layout: fixed;
-  font-size: 0.9em; }
-  .tabArea .tabs li {
-    display: table-cell; }
-  .tabArea .tabs a {
-    display: block;
-    padding: 5px 0px;
-    text-align: center;
-    color: #999999; }
-    .tabArea .tabs a.tab1 {
-      margin-right: -1px; }
-    .tabArea .tabs a.boR {
-      border-right: 1px solid #999999; }
-    .tabArea .tabs a.active {
-      color: #ffffff;
-      background-color: #999999; }
-    .tabArea .tabs a:hover {
-      color: #ffffff;
-      background-color: #999999;
-      -webkit-transition: all .3s;
-      transition: all .3s; }
-    .tabArea .tabs a.current {
-      color: #ffffff;
-      background-color: #999999;
-      -webkit-transition: all .3s;
-      transition: all .3s; }
+  font-size: 0.9em;
+}
+
+.tabArea .tabs li {
+  display: table-cell;
+}
+
+.tabArea .tabs a {
+  display: block;
+  padding: 5px 0px;
+  text-align: center;
+  color: #999999;
+}
+
+.tabArea .tabs a.tab1 {
+  margin-right: -1px;
+}
+
+.tabArea .tabs a.boR {
+  border-right: 1px solid #999999;
+}
+
+.tabArea .tabs a.active {
+  color: #ffffff;
+  background-color: #999999;
+}
+
+.tabArea .tabs a:hover {
+  color: #ffffff;
+  background-color: #999999;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.tabArea .tabs a.current {
+  color: #ffffff;
+  background-color: #999999;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
 .tabArea .viewMore {
   display: block;
   width: 100%;
   padding-top: 10px;
   padding-bottom: 5px;
   color: #999999;
-  text-align: center; }
+  text-align: center;
+}
 
 /*-----tab__images-----*/
 #images li img {
@@ -243,7 +299,8 @@ h1 {
   min-width: 288px;
   height: auto;
   margin: 10px auto 0px;
-  border: 1px solid #EAEAEA; }
+  border: 1px solid #EAEAEA;
+}
 
 #images .startButton {
   width: 250px;
@@ -253,16 +310,19 @@ h1 {
   padding: 7px 10px;
   margin-top: 50px;
   font-weight: bold;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 #images .startButton:hover {
   color: #ffffff;
-  background-color: #5375b1; }
+  background-color: #5375b1;
+}
 
 /*--------------------dashboard----------------------*/
 /*-----tab__followList-----*/
 .tabArea .box {
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .tabArea #followList ul {
   overflow: hidden;
@@ -270,129 +330,178 @@ h1 {
   -webkit-margin-before: 5px;
   -webkit-margin-after: 5px;
   -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px; }
-  .tabArea #followList ul h1 {
-    padding-top: 10px;
-    color: #e4007f;
-    font-weight: bold; }
-  .tabArea #followList h2 {
-    font-weight: bold; }
-  .tabArea #followList h2 img {
-    margin-right: 5px; }
-  .tabArea #followList ul li {
-    float: left;
-    width: 50%;
-    box-sizing: border-box; }
-    .tabArea #followList ul li img {
-      display: block;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto;
-      vertical-align: middle;
-      text-align: center;
-      border: 1px solid #EAEAEA; }
-    .tabArea #followList ul li h2 {
-      font-weight: bold;
-      width: 140px;
-      height: 30px;
-      margin: 0px auto 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis; }
+  -webkit-margin-end: 0px;
+}
+
+.tabArea #followList ul h1 {
+  padding-top: 10px;
+  color: #e4007f;
+  font-weight: bold;
+}
+
+.tabArea #followList h2 {
+  font-weight: bold;
+}
+
+.tabArea #followList h2 img {
+  margin-right: 5px;
+}
+
+.tabArea #followList ul li {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.tabArea #followList ul li img {
+  display: block;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #EAEAEA;
+}
+
+.tabArea #followList ul li h2 {
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  margin: 0px auto 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /*-----schedule-----*/
 .schedulePeriod {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
-  color: black; }
-  .schedulePeriod .scheduleYear {
-    margin-left: 5px; }
-  .schedulePeriod .scheduleMonth {
-    margin-left: 10px; }
+  color: black;
+}
+
+.schedulePeriod .scheduleYear {
+  margin-left: 5px;
+}
+
+.schedulePeriod .scheduleMonth {
+  margin-left: 10px;
+}
 
 .scheduleDayWrapper {
   overflow: hidden;
   width: 100%;
-  height: auto; }
-  .scheduleDayWrapper .scheduleDayBox {
-    float: left;
-    width: 10%;
-    color: black;
-    text-align: center; }
-    .scheduleDayWrapper .scheduleDayBox.finished {
-      color: #999; }
-    .scheduleDayWrapper .scheduleDayBox.today {
-      color: #d31277; }
-    .scheduleDayWrapper .scheduleDayBox .scheduleDay {
-      margin-top: 9px;
-      font-size: 14px; }
-    .scheduleDayWrapper .scheduleDayBox .scheduleDayOfTheWeek {
-      font-size: 10px; }
-  .scheduleDayWrapper .scheduleContentBox {
-    position: relative;
-    float: right;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    width: 87%;
-    background: #5375b1; }
-    .scheduleDayWrapper .scheduleContentBox.finished {
-      background: #898989; }
-    .scheduleDayWrapper .scheduleContentBox .scheduleContentTime {
-      margin-top: 5px;
-      margin-left: 5px;
-      font-size: 11px;
-      color: white; }
-    .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
-      margin-left: 5px;
-      width: 85%;
-      font-size: 13px;
-      color: white; }
-    .scheduleDayWrapper .scheduleContentBox .scheduleContentDescription {
-      margin-left: 5px;
-      width: 85%;
-      font-size: 12px;
-      color: white; }
-    .scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
-      margin-top: 7px;
-      margin-bottom: 7px;
-      margin-left: auto;
-      margin-right: auto;
-      width: 92px;
-      height: 30px;
-      background: #cacfe3;
-      border: 1px solid #d31277;
-      border-radius: 5px;
-      color: #d31277;
-      font-size: 14px;
-      text-align: center;
-      line-height: 2em; }
-    .scheduleDayWrapper .scheduleContentBox .scheduleStar {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      width: 20px;
-      height: 20px;
-      background: #b5b6b6; }
-      .scheduleDayWrapper .scheduleContentBox .scheduleStar.active {
-        background: #d31277; }
-  .scheduleDayWrapper .scheduleNowDivider {
-    position: relative;
-    float: right;
-    margin-top: -2px;
-    margin-bottom: 8px;
-    width: 87%;
-    height: 1px;
-    background: #d31277; }
-    .scheduleDayWrapper .scheduleNowDivider:before {
-      position: absolute;
-      top: -5px;
-      right: 100%;
-      content: "";
-      width: 10px;
-      height: 10px;
-      background: #d31277;
-      border-radius: 50%; }
+  height: auto;
+}
+
+.scheduleDayWrapper .scheduleDayBox {
+  float: left;
+  width: 10%;
+  color: black;
+  text-align: center;
+}
+
+.scheduleDayWrapper .scheduleDayBox.finished {
+  color: #999;
+}
+
+.scheduleDayWrapper .scheduleDayBox.today {
+  color: #d31277;
+}
+
+.scheduleDayWrapper .scheduleDayBox .scheduleDay {
+  margin-top: 9px;
+  font-size: 14px;
+}
+
+.scheduleDayWrapper .scheduleDayBox .scheduleDayOfTheWeek {
+  font-size: 10px;
+}
+
+.scheduleDayWrapper .scheduleContentBox {
+  position: relative;
+  float: right;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  width: 87%;
+  background: #5375b1;
+}
+
+.scheduleDayWrapper .scheduleContentBox.finished {
+  background: #898989;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentTime {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 11px;
+  color: white;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentName {
+  margin-left: 5px;
+  width: 85%;
+  font-size: 13px;
+  color: white;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentDescription {
+  margin-left: 5px;
+  width: 85%;
+  font-size: 12px;
+  color: white;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 92px;
+  height: 30px;
+  background: #cacfe3;
+  border: 1px solid #d31277;
+  border-radius: 5px;
+  color: #d31277;
+  font-size: 14px;
+  text-align: center;
+  line-height: 2em;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleStar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background: #b5b6b6;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleStar.active {
+  background: #d31277;
+}
+
+.scheduleDayWrapper .scheduleNowDivider {
+  position: relative;
+  float: right;
+  margin-top: -2px;
+  margin-bottom: 8px;
+  width: 87%;
+  height: 1px;
+  background: #d31277;
+}
+
+.scheduleDayWrapper .scheduleNowDivider:before {
+  position: absolute;
+  top: -5px;
+  right: 100%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #d31277;
+  border-radius: 50%;
+}
 
 .scheduleAddBox {
   box-sizing: border-box;
@@ -406,80 +515,113 @@ h1 {
   border: 10px solid rgba(0, 0, 0, 0.3);
   color: #898989;
   font-size: 12px;
-  z-index: 50; }
-  .scheduleAddBox input {
-    margin-left: 10px;
-    margin-right: 5px;
-    min-height: 15px;
-    border: 1px solid #898989;
-    border-radius: 3px; }
-  .scheduleAddBox textarea {
-    margin-left: 10px;
-    margin-right: 5px;
-    border: 1px solid #898989;
-    border-radius: 3px; }
-  .scheduleAddBox .scheduleAddTitle {
-    margin-top: 10px;
-    margin-left: 10px;
-    color: #5375b1;
-    font-size: 14px; }
-  .scheduleAddBox .scheduleAddSubTitle {
-    margin-top: 10px;
-    margin-bottom: 3px;
-    margin-left: 10px;
-    color: #898989;
-    font-size: 14px; }
-  .scheduleAddBox .scheduleAddMultiArea {
-    overflow: hidden; }
-  .scheduleAddBox .scheduleAddInputDay {
-    width: 20%; }
-  .scheduleAddBox .scheduleAddInputTime {
-    width: 30%; }
-  .scheduleAddBox .scheduleAddInputEventTitle {
-    width: 90%; }
-  .scheduleAddBox .scheduleAddSpotArea {
-    float: left;
-    width: 40%; }
-    .scheduleAddBox .scheduleAddSpotArea .scheduleAddInputSpot {
-      width: 100%; }
-  .scheduleAddBox .scheduleAddCostArea {
-    float: left;
-    margin-left: 10px;
-    width: 40%; }
-    .scheduleAddBox .scheduleAddCostArea .scheduleAddInputCost {
-      width: 70%; }
-  .scheduleAddBox .scheduleAddInputEventDescription {
-    width: 90%;
-    min-height: 60px; }
-  .scheduleAddBox .scheduleAddButtonArea {
-    overflow: hidden;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%; }
-  .scheduleAddBox .scheduleAddButtonOtherTime {
-    display: block;
-    float: left;
-    margin-right: 5px;
-    padding: 5px;
-    width: 43%;
-    border: 1px solid #5375b1;
-    border-radius: 3px;
-    color: #5375b1;
-    font-size: 14px;
-    text-align: center; }
-  .scheduleAddBox .scheduleAddButtonComplete {
-    display: block;
-    float: left;
-    margin-left: 5px;
-    padding: 5px;
-    width: 43%;
-    border: 1px solid #db1277;
-    border-radius: 3px;
-    color: #db1277;
-    font-size: 14px;
-    text-align: center; }
+  z-index: 50;
+}
+
+.scheduleAddBox input {
+  margin-left: 10px;
+  margin-right: 5px;
+  min-height: 15px;
+  border: 1px solid #898989;
+  border-radius: 3px;
+}
+
+.scheduleAddBox textarea {
+  margin-left: 10px;
+  margin-right: 5px;
+  border: 1px solid #898989;
+  border-radius: 3px;
+}
+
+.scheduleAddBox .scheduleAddTitle {
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #5375b1;
+  font-size: 14px;
+}
+
+.scheduleAddBox .scheduleAddSubTitle {
+  margin-top: 10px;
+  margin-bottom: 3px;
+  margin-left: 10px;
+  color: #898989;
+  font-size: 14px;
+}
+
+.scheduleAddBox .scheduleAddMultiArea {
+  overflow: hidden;
+}
+
+.scheduleAddBox .scheduleAddInputDay {
+  width: 20%;
+}
+
+.scheduleAddBox .scheduleAddInputTime {
+  width: 30%;
+}
+
+.scheduleAddBox .scheduleAddInputEventTitle {
+  width: 90%;
+}
+
+.scheduleAddBox .scheduleAddSpotArea {
+  float: left;
+  width: 40%;
+}
+
+.scheduleAddBox .scheduleAddSpotArea .scheduleAddInputSpot {
+  width: 100%;
+}
+
+.scheduleAddBox .scheduleAddCostArea {
+  float: left;
+  margin-left: 10px;
+  width: 40%;
+}
+
+.scheduleAddBox .scheduleAddCostArea .scheduleAddInputCost {
+  width: 70%;
+}
+
+.scheduleAddBox .scheduleAddInputEventDescription {
+  width: 90%;
+  min-height: 60px;
+}
+
+.scheduleAddBox .scheduleAddButtonArea {
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.scheduleAddBox .scheduleAddButtonOtherTime {
+  display: block;
+  float: left;
+  margin-right: 5px;
+  padding: 5px;
+  width: 43%;
+  border: 1px solid #5375b1;
+  border-radius: 3px;
+  color: #5375b1;
+  font-size: 14px;
+  text-align: center;
+}
+
+.scheduleAddBox .scheduleAddButtonComplete {
+  display: block;
+  float: left;
+  margin-left: 5px;
+  padding: 5px;
+  width: 43%;
+  border: 1px solid #db1277;
+  border-radius: 3px;
+  color: #db1277;
+  font-size: 14px;
+  text-align: center;
+}
 
 /*-----fyucha-----*/
 .fyuchaTotal {
@@ -487,10 +629,13 @@ h1 {
   margin-right: 0px;
   font-size: 12px;
   color: #db1277;
-  text-align: right; }
-  .fyuchaTotal .fyuchaToalNumerals {
-    margin-left: 5px;
-    font-size: 18px; }
+  text-align: right;
+}
+
+.fyuchaTotal .fyuchaToalNumerals {
+  margin-left: 5px;
+  font-size: 18px;
+}
 
 .fyuchaGraph {
   margin-top: 5px;
@@ -498,71 +643,90 @@ h1 {
   margin-right: auto;
   width: 95%;
   height: 200px;
-  background: #db1277; }
+  background: #db1277;
+}
 
 .fyuchaCommitsTitle {
   margin-top: 10px;
   margin-left: 10px;
   font-size: 16px;
-  color: #db1277; }
+  color: #db1277;
+}
 
 .fyuchaCommits .fyuchaCommit {
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
   width: 95%;
-  border-bottom: 1px solid #c9caca; }
-  .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea {
-    position: relative;
-    float: left;
-    width: 50%;
-    height: 42px; }
-    .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail {
-      position: absolute;
-      top: 8px;
-      left: 0px;
-      width: 28px;
-      height: 28px; }
-      .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail img {
-        width: 28px;
-        height: auto; }
-    .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
-      position: absolute;
-      width: 160px;
-      top: 5px;
-      left: 35px;
-      color: black;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis; }
-    .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserAccount {
-      position: absolute;
-      top: 23px;
-      left: 35px;
-      color: #c9caca;
-      font-size: 10px; }
-  .fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea {
-    position: relative;
-    float: right;
-    width: 50%; }
-    .fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea .fyuchaCommitActionText {
-      position: absolute;
-      top: 12px;
-      right: 40px;
-      color: #333333;
-      font-size: 12px; }
-    .fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea .fyuchaCommitActionNumerals {
-      position: absolute;
-      top: 0px;
-      right: 5px;
-      width: 23px;
-      height: 35px;
-      color: #db1277;
-      font-size: 10px;
-      text-align: center;
-      background: url("../images/diamond.png") no-repeat;
-      background-position: 0px 15px; }
+  border-bottom: 1px solid #c9caca;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 42px;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail {
+  position: absolute;
+  top: 8px;
+  left: 0px;
+  width: 28px;
+  height: 28px;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail img {
+  width: 28px;
+  height: auto;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
+  position: absolute;
+  width: 160px;
+  top: 5px;
+  left: 35px;
+  color: black;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserAccount {
+  position: absolute;
+  top: 23px;
+  left: 35px;
+  color: #c9caca;
+  font-size: 10px;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea {
+  position: relative;
+  float: right;
+  width: 50%;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea .fyuchaCommitActionText {
+  position: absolute;
+  top: 12px;
+  right: 40px;
+  color: #333333;
+  font-size: 12px;
+}
+
+.fyuchaCommits .fyuchaCommit .fyuchaCommitActionArea .fyuchaCommitActionNumerals {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  width: 23px;
+  height: 35px;
+  color: #db1277;
+  font-size: 10px;
+  text-align: center;
+  background: url("../images/diamond.png") no-repeat;
+  background-position: 0px 15px;
+}
 
 /* -- ダッシュボード画像/動画 -- */
 .dashboardPhotosEditStartButton {
@@ -578,12 +742,16 @@ h1 {
   font-size: 14px;
   text-align: center;
   z-index: 30;
-  cursor:pointer; }
+  cursor: pointer;
+}
 
 .dashboardPhotos {
-  margin-top: 20px; }
-  .dashboardPhotos.edit .dashboardPhotoEditButtonArea {
-    display: none; }
+  margin-top: 20px;
+}
+
+.dashboardPhotos.edit .dashboardPhotoEditButtonArea {
+  display: none;
+}
 
 .dashboardPhoto {
   margin-top: 10px;
@@ -591,57 +759,68 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   width: 98%;
-  height: auto; }
-  .dashboardPhoto img {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    z-index: 10; }
-  .dashboardPhoto .dashboardPhotoEditButtonArea {
-    box-sizing: border-box;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    overflow: hidden;
-    float: right;
-    width: 112px;
-    letter-spacing: 1px;
-    text-align: center;
-    z-index: 20; }
-    .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoAppearButton {
-      box-sizing: border-box;
-      float: left;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      width: 54px;
-      background: #db1277;
-      border: 2px solid #dfdfdf;
-      border-radius: 5px 0 0 5px;
-      color: white;
-      font-size: 14px;
-      cursor:pointer; }
-    .dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
-      box-sizing: border-box;
-      float: left;
-      margin-left: -1px;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      width: 54px;
-      background: #999999;
-      border: 2px solid #dfdfdf;
-      border-radius: 0 5px 5px 0;
-      color: white;
-      font-size: 14px;
-      cursor:pointer; }
-    .dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
-      background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
-      background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px;
-      cursor:pointer; }
-    .dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
-      background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
-      background: linear-gradient(to bottom, #fefefe, #c5c5c5);
-      text-indent: -9999px;
-      cursor:pointer; }
+  height: auto;
+}
 
-/*# sourceMappingURL=sp_style.css.map */
+.dashboardPhoto img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  z-index: 10;
+}
+
+.dashboardPhoto .dashboardPhotoEditButtonArea {
+  box-sizing: border-box;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  overflow: hidden;
+  float: right;
+  width: 112px;
+  letter-spacing: 1px;
+  text-align: center;
+  z-index: 20;
+}
+
+.dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoAppearButton {
+  box-sizing: border-box;
+  float: left;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 54px;
+  background: #db1277;
+  border: 2px solid #dfdfdf;
+  border-radius: 5px 0 0 5px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dashboardPhoto .dashboardPhotoEditButtonArea .dashboardPhotoHideButton {
+  box-sizing: border-box;
+  float: left;
+  margin-left: -1px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 54px;
+  background: #999999;
+  border: 2px solid #dfdfdf;
+  border-radius: 0 5px 5px 0;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dashboardPhoto .dashboardPhotoEditButtonArea.hide .dashboardPhotoAppearButton {
+  background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
+  background: linear-gradient(to bottom, #fefefe, #c5c5c5);
+  text-indent: -9999px;
+  cursor: pointer;
+}
+
+.dashboardPhoto .dashboardPhotoEditButtonArea.appear .dashboardPhotoHideButton {
+  background: -webkit-linear-gradient(to bottom, #fefefe, #c5c5c5);
+  background: linear-gradient(to bottom, #fefefe, #c5c5c5);
+  text-indent: -9999px;
+  cursor: pointer;
+}
