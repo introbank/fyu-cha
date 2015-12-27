@@ -32,7 +32,16 @@ var UserMediaList = React.createClass({
     };
   },
 
+  jump() {
+    location.href = '/artists';
+  },
+
   render() {
+    if (this.props.artists.length < 1 && this.props.groups.length < 1) {
+      return (
+        <div className="startButton" onClick={this.jump}>気になるアイドルをフォローする</div>
+      );
+    }
     return (
       <ul>
         {this.data.mediaMap.map(function (mediaMap) {

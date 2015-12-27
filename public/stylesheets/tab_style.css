@@ -253,6 +253,20 @@ h1 {
   margin: 10px 10px 10px 0px;
   border: 1px solid #EAEAEA; }
 
+#images .startButton {
+  width: 250px;
+  color: #5375b1;
+  border: 1px solid #5375b1;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 50px;
+  font-weight: bold;
+  cursor: pointer; }
+
+#images .startButton:hover {
+  color: #ffffff;
+  background-color: #5375b1; }
+
 /*--------------------dashboard----------------------*/
 /*-----tab__followList-----*/
 .tabArea .box {
