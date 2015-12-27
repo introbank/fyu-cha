@@ -10,7 +10,7 @@ var Following = React.createClass({
           <ul>
             {this.props.artists.map(function (following) {
               return (
-                <li>
+                <li key={following.objectId} >
                   <a href={'artists/' + following.artist.twitterUsername}><img src={following.artist.imageUrl} /></a>
                   <h2>{following.artist.name}</h2>
                 </li>
@@ -24,7 +24,7 @@ var Following = React.createClass({
           <ul>
             {this.props.groups.map(function (following) {
               return (
-                <li>
+                <li key={following.objectId} >
                   <a href={'groups/' + following.group.twitterUsername}><img src={following.group.imageUrl} /></a>
                   <h2>{following.group.name}</h2>
                 </li>
