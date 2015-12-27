@@ -62,7 +62,7 @@ var Login = React.createClass({
           : null
         }
         <form>
-          <Input ref="username" type="email" label="Twitter ID" placeholder="Twitter ID" />
+          <Input ref="username" label="Twitter ID" placeholder="Twitter ID" />
           <Input ref="password" type="password" label="Password" />
           <ButtonInput value="ログイン" type='submit' onClick={this.login} />
         </form>
