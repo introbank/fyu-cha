@@ -115,11 +115,14 @@ var Schedule = React.createClass({
           eventPlace: '',
           eventDetail: '',
           register: this.state.register + 1 
-        }));
+        })).then(console.log("ok"));
         
   },
 
   render() {
+    console.log("render");
+    console.log(this.state.register);
+
     if (this.props.type == "Dashboard" || !this.data.user){
       return (
         <div>
