@@ -30,15 +30,21 @@ var Top = React.createClass({
       return <div />;
     }
 
-    if (!this.data.user) {
-      location.href = '/lp.html';
-    }
-
     return (
       <div id="wrapper">
         <Header />
-        <Navigation active="top" />
-        <Dashboard />
+        {this.data.user
+          ?
+          <div>
+            <Navigation active="top" />
+            <Dashboard />
+          </div>
+          :
+          <div className="lp">
+            <Navigation />
+            <img src="/images/lp.jpg" alt="ファンのファンによるアイドルのためのサイト。ふゅーちゃ！は「アイドルを応援するファン」を応援しています。夢にむかって頑張るアイドルと、応援するファンのみんなで作るファンページです。" />
+          </div>
+        }
       </div>
     );
   },
