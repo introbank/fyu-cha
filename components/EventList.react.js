@@ -38,11 +38,19 @@ var EventList = React.createClass({
         user: ParseReact.currentUser,
         account: accountQuery,
         events: eventQuery,
-        plan: planQuery,
+        plan: planQuery
       };
     }
   },
 
+  refreshEventData(){
+    if (this.props.type == "Dashboard"){
+      return this.refreshQueries(["plan"]);
+    }
+    else{
+      return this.refreshQueries(["events", "plan"]); 
+    }
+  },
 
   // to do
   editEvent: function(eventObj){
@@ -55,7 +63,7 @@ var EventList = React.createClass({
     var ev = new Event();
     ev.id = targetEvent.objectId;
     ev.destroy().then(
-      this.refreshQueries(["plan", "events"])
+      this.refreshEventData()
     ).then(this.setState({update:this.state.update + 1}));
   },
 
@@ -76,7 +84,8 @@ var EventList = React.createClass({
     var eventPlan = new EventPlan();  
     eventPlan.id = plan.objectId;
     eventPlan.destroy().then(
-      this.refreshQueries(["plan", "events"])).then(this.setState({update:this.state.update + 1})
+      this.refreshEventData()
+    ).then(this.setState({update:this.state.update + 1})
     );
   },
 
@@ -101,7 +110,7 @@ var EventList = React.createClass({
       eventStatus.set("group", group);
     }
     eventStatus.save().then(
-      this.refreshQueries(["plan", "events"])
+      this.refreshEventData()
     ).then(this.setState({update:this.state.update + 1}));
   },
 
@@ -112,11 +121,12 @@ var EventList = React.createClass({
       if(hour < 10) { hour = "0" + hour; }
       var minute = eventDate.getMinutes();
       if(minute < 10) { minute = "0" + minute; }
-      var keyString = ((plan == null)
-        ? event.objectId
-        : event.objectId + plan.objectId
+
+      var planButton = ( plan != null
+        ? <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
+        : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
       );
-      
+
       var eventListHtml = (
         <div key={event.objectId}>
           {previousEventMonth != eventDate.getMonth() && (
@@ -143,17 +153,8 @@ var EventList = React.createClass({
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                {plan && 
-                <div key={event.objectId}>
-                  <button className="btn" type="submit" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button> 
-                </div>
-                }
-                {plan == null && 
-                <div key={event.objectId}>
-                  <button className="btn" type="submit" onClick={this.planEvent.bind(this, event)}>plan</button>
-                </div>
-                }
-              </div>
+                {planButton}
+             </div>
             ) : (
               <div className="scheduleContentBox">
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
@@ -162,16 +163,7 @@ var EventList = React.createClass({
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                {plan && 
-                <div key={event.objectId}>
-                  <button className="btn" type="submit" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button> 
-                </div>
-                }
-                {plan == null && 
-                <div key={event.objectId}>
-                  <button className="btn" type="submit" onClick={this.planEvent.bind(this, event)}>plan</button>
-                </div>
-                }
+                {planButton}
               </div>
             )}
 
@@ -194,21 +186,23 @@ var EventList = React.createClass({
     // for add event
     if(nextProps.register > this.props.register){
       console.log("refreshQueries by register");
-      this.refreshQueries(["plan", "events"]);
+      this.refreshEventData();
     }
     // for update
     if(nextState.update > this.state.update){
       console.log("refreshQueries by update");
-      this.refreshQueries(["plan", "events"]);
+      this.refreshEventData();
     }
   },
 
   render() {
-    console.log(this.state.update);
+    console.log("register::" + this.props.register);
+    console.log("update::" + this.state.update);
     var previousEventMonth = -1;
     var previousEventDay = -1;
     var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
     var isDisplayedNowDivider = false;
+
     var eventList = null;
     if (this.props.type == "Dashboard"){
       eventList = this.data.plan.map(function(plan) {
@@ -231,6 +225,7 @@ var EventList = React.createClass({
         }
         return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}, this);
     }
+
     return (
       <div>
         {eventList}
