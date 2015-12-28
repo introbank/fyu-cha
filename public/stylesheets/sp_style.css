@@ -374,6 +374,20 @@ h1 {
 }
 
 /*-----schedule-----*/
+.scheduleInputPopup .getFormButton {
+  width:280px;
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 15px;
+  font-weight: bold;
+  cursor: pointer; }
+
+.scheduleInputPopup .getFormButton:hover {
+  color: #ffffff;
+  background-color: #e4007f; }
+
 .schedulePeriod {
   margin-top: 10px;
   margin-bottom: 10px;

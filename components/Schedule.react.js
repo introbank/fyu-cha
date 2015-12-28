@@ -8,6 +8,7 @@ var Schedule = React.createClass({
 
   getInitialState() {
     return {
+      inputForm: false,
       eventYear: '',
       eventMonth: '',
       eventDay: '',
@@ -162,7 +163,9 @@ var Schedule = React.createClass({
     else {
       return (
         <div>
-          {inputForm}
+          <div className="scheduleInputPopup">
+            <input className="getFormButton" type="submit" value="イベントを追加" />
+          </div>
           <EventList type={this.props.type} id={this.props.id} register={this.state.register} />
         </div>
     );
