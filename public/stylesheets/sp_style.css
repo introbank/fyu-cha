@@ -381,6 +381,7 @@ h1 {
   border-radius: 5px;
   padding: 7px 10px;
   margin-top: 15px;
+  float: right;
   font-weight: bold;
   cursor: pointer; }
 
