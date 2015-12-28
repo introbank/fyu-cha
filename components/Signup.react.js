@@ -99,7 +99,7 @@ var Signup = React.createClass({
                 <img src={this.props.params.imageUrl} className="iconImage" />
               </div>
               <div className="box name">
-                <h2>{this.props.params.screenname}</h2>
+                <h2>{unescape(this.props.params.screenname)}</h2>
                 <p className="account">@{this.props.params.username}</p>
               </div>
               <div className="after" />
