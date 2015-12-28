@@ -3,19 +3,19 @@ var Parse       = require('../lib/parse');
 var ParseReact  = require('parse-react');
 var Header      = require('./Header.react.js');
 var bootstrap   = require('react-bootstrap');
-var Input       = bootstrap.Input;
-var ButtonInput = bootstrap.ButtonInput;
-var Button      = bootstrap.Button;
-var Alert       = bootstrap.Alert;
+var setting     = require('../setting');
 
 var Login = React.createClass({
   mixins: [ParseReact.Mixin],
 
-  getInitialState() {
+  getInitialState: function() {
     return {
-      error: null,
+      username: '',
+      password: '',
+      error: null
     };
   },
+
 
   observe() {
     return {
@@ -29,46 +29,62 @@ var Login = React.createClass({
     }
   },
 
+  handleUsernameChange(e) {
+    this.setState({username: e.target.value});
+  },
+  
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value});
+  },
+
   login() {
     var self = this;
-    var username = this.refs.username.getValue();
-    var password = this.refs.password.getValue();
+    var username = this.state.username;
+    var password = this.state.password;
 
     Parse.User.logIn(username, password, {
       success: function(user) {
         location.href = '/';
       },
       error: function(user, error) {
-        console.error(error);
+        alert("Error: " + error.code + " " + error.message);
         self.setState({
-          error: error
+          error: true
         });
       }
     });
   },
 
-  logout() {
-    Parse.User.logOut();
-  },
-
   render() {
+    if (this.state.serverSideRendering) {
+      return <div />
+    }
+
     return (
-      <div>
+      <div id="wrapper">
         <Header />
-        <h2>ログイン</h2>
-        {
-          this.state.error
-          ? <Alert bsStyle="danger">{this.state.error}</Alert>
-          : null
-        }
-        <form>
-          <Input ref="username" type="text" label="Twitter ID" placeholder="Twitter ID" />
-          <Input ref="password" type="password" label="Password" />
-          <ButtonInput value="ログイン" onClick={this.login} />
-        </form>
+        <div id="content">
+          <div className="contents">
+            <div className="signup">
+              <h1>ログイン</h1>
+              <form>
+                <div className="label">Twitter アカウントを入力してください</div>
+                  <input ref="password" type="text" onChange={this.handleUsernameChange} />
+                <div className="label">ふゅーちゃ！パスワードを入力してください</div>
+                  <input ref="password" type="password" onChange={this.handlePasswordChange} />
+                <div className="submitButton" onClick={this.login}>
+                  ログインしてマイページに行く
+                </div>
+              </form>
+              {this.state.error &&
+              <div>入力に誤りがあります</div>
+              }
+            </div>
+          </div>
+        </div>
       </div>
     );
-  }
+  },
 
 });
 
