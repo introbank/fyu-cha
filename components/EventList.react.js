@@ -7,7 +7,7 @@ var EventList = React.createClass({
 
   getInitialState() {
     return {
-      update: false,
+      update: 0,
     };
   },
 
@@ -56,7 +56,7 @@ var EventList = React.createClass({
     ev.id = targetEvent.objectId;
     ev.destroy().then(
       this.refreshQueries(["plan", "events"])
-    ).then(this.setState({update:true}));
+    ).then(this.setState({update:this.state.update + 1}));
   },
 
   attendEvent: function(targetEvent) {
@@ -76,7 +76,7 @@ var EventList = React.createClass({
     var eventPlan = new EventPlan();  
     eventPlan.id = plan.objectId;
     eventPlan.destroy().then(
-      this.refreshQueries(["plan", "events"])).then(this.setState({update:true})
+      this.refreshQueries(["plan", "events"])).then(this.setState({update:this.state.update + 1})
     );
   },
 
@@ -102,7 +102,7 @@ var EventList = React.createClass({
     }
     eventStatus.save().then(
       this.refreshQueries(["plan", "events"])
-    );
+    ).then(this.setState({update:this.state.update + 1}));
   },
 
   createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan){
@@ -112,6 +112,11 @@ var EventList = React.createClass({
       if(hour < 10) { hour = "0" + hour; }
       var minute = eventDate.getMinutes();
       if(minute < 10) { minute = "0" + minute; }
+      var keyString = ((plan == null)
+        ? event.objectId
+        : event.objectId + plan.objectId
+      );
+      
       var eventListHtml = (
         <div key={event.objectId}>
           {previousEventMonth != eventDate.getMonth() && (
@@ -136,11 +141,17 @@ var EventList = React.createClass({
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
-                <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
+                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                {plan == null
-                ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
-                : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
+                {plan && 
+                <div key={event.objectId}>
+                  <button className="btn" type="submit" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button> 
+                </div>
+                }
+                {plan == null && 
+                <div key={event.objectId}>
+                  <button className="btn" type="submit" onClick={this.planEvent.bind(this, event)}>plan</button>
+                </div>
                 }
               </div>
             ) : (
@@ -149,11 +160,17 @@ var EventList = React.createClass({
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
-                <button className="btn" type="button" onClick={this.deleteEvent.bind(this, event)}>delete</button>
+                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>delete</button>
                 }
-                {plan == null
-                  ? <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
-                  : <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
+                {plan && 
+                <div key={event.objectId}>
+                  <button className="btn" type="submit" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button> 
+                </div>
+                }
+                {plan == null && 
+                <div key={event.objectId}>
+                  <button className="btn" type="submit" onClick={this.planEvent.bind(this, event)}>plan</button>
+                </div>
                 }
               </div>
             )}
@@ -174,14 +191,20 @@ var EventList = React.createClass({
   },
 
   componentWillUpdate(nextProps, nextState) {
+    // for add event
     if(nextProps.register > this.props.register){
       console.log("refreshQueries by register");
+      this.refreshQueries(["plan", "events"]);
+    }
+    // for update
+    if(nextState.update > this.state.update){
+      console.log("refreshQueries by update");
       this.refreshQueries(["plan", "events"]);
     }
   },
 
   render() {
-    console.log(this.props.register);
+    console.log(this.state.update);
     var previousEventMonth = -1;
     var previousEventDay = -1;
     var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
