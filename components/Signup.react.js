@@ -82,6 +82,7 @@ var Signup = React.createClass({
     });
   },
 
+
   render() {
     if (this.state.serverSideRendering) {
       return <div />
@@ -119,6 +120,8 @@ var Signup = React.createClass({
               }
             </div>
           </div>
+          Introbankは「<a href="/privacy.html" target="fyu-cha.privacy">プライバシーポリシー</a>
+          」にしたがってお客様の情報を取り扱います。
         </div>
       </div>
     );
