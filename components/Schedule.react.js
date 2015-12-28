@@ -118,7 +118,40 @@ var Schedule = React.createClass({
         })).then(console.log("ok"));
   },
 
+  popInputForm(){
+    return (
+      <div className="scheduleAddBox">
+       <form className="commentForm" onSubmit={this.handleEventSubmit}>
+         <h3 className="scheduleAddSubTitle">開催日</h3>
+         <input className="scheduleAddInputDay" placeholder="2015" type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
+         <input className="scheduleAddInputDay" placeholder="12" type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
+         <input className="scheduleAddInputDay" placeholder="29" type="number" value={this.state.eventDay} onChange={this.handleEventDayChange} />日
+         <h3 className="scheduleAddSubTitle">時間</h3>
+         <input type="text" className="scheduleAddInputTime" />〜<input type="text" className="scheduleAddInputTime" />
+         <h3 className="scheduleAddSubTitle">イベントタイトル</h3>
+         <input type="text" className="scheduleAddInputEventTitle" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
+         <div className="scheduleAddMultiArea">
+           <div className="scheduleAddSpotArea">
+             <h3 className="scheduleAddSubTitle">場所</h3>
+             <input type="text" className="scheduleAddInputSpot" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
+           </div> 
+           <div className="scheduleAddCostArea">
+             <h3 className="scheduleAddSubTitle">費用</h3>
+             <input type="number" placeholder="1500" className="scheduleAddInputCost" value={this.state.eventPrice} onChange={this.handleEventPriceChange} />円
+           </div>
+         </div>
+         <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
+         <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
+         <div className="scheduleAddButtonArea">
+           <input className="scheduleAddButtonComplete" type="submit" value="完了" />
+         </div>
+       </form> 
+     </div>
+    );
+  },
+
   render() {
+    var inputForm = this.popInputForm();
     if (this.props.type == "Dashboard" || !this.data.user){
       return (
         <div>
@@ -129,19 +162,10 @@ var Schedule = React.createClass({
     else {
       return (
         <div>
-          <form className="commentForm" onSubmit={this.handleEventSubmit}>
-            <input type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-            <input type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-            <input type="number" value={this.state.eventDay} onChange={this.handleEventDayChange} /> 日　　　
-            <input type="text" placeholder="イベントタイトル" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
-            <input type="text" placeholder="場所" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-            <input type="number" placeholder="費用" value={this.state.eventPrice} onChange={this.handleEventPriceChange} /> 円
-            <input type="text" placeholder="イベント詳細" value={this.state.eventDetail} onChange={this.handleEventDetailChange} />
-            <input type="submit" value="登録" />
-          </form>
+          {inputForm}
           <EventList type={this.props.type} id={this.props.id} register={this.state.register} />
         </div>
-      );
+    );
     }
   },
 
