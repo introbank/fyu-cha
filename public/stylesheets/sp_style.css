@@ -902,3 +902,9 @@ h1 {
 .signup .submitButton:hover {
   color: #ffffff;
   background-color: #e4007f; }
+
+/*-----lp-----*/
+.lp img {
+  width: 100%;
+  height: auto;
+}
