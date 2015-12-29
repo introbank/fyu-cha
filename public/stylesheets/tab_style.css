@@ -619,6 +619,7 @@ h1 {
   color: #5375b1;
   font-size: 14px;
   text-align: center;
+  cursor: pointer;
 }
 
 .scheduleAddBox .scheduleAddButtonComplete {
@@ -632,6 +633,7 @@ h1 {
   color: #db1277;
   font-size: 14px;
   text-align: center;
+  cursor: pointer;
 }
 
 /*-- fyucha --*/
