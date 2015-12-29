@@ -41,7 +41,7 @@ var Follow = React.createClass({
   follow() {
     // if not login user, redirect for sign up page
     if (!this.data.user) {
-      location.href = '/signup';
+      location.href = '/auth/twitter';
     }
 
     if(this.state.isFollowing || this.state.isWaiting){
@@ -56,7 +56,7 @@ var Follow = React.createClass({
   unfollow() {
     // if not login user, redirect for sign up page
     if (!this.data.user) {
-      location.href = '/signup';
+      location.href = '/auth/twitter';
     }
 
     this.setState({isWaiting: true});

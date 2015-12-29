@@ -94,7 +94,7 @@ var EventList = React.createClass({
   setEventStatus: function(targetEvent, eventStatus){
     // if not login user, redirect for sign up page
     if (!this.data.user) {
-      location.href = '/signup';
+      location.href = '/auth/twitter';
     }
 
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
