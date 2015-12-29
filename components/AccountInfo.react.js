@@ -4,7 +4,6 @@ var Follow       = require('./Follow.react.js');
 
 var AccountInfo = React.createClass({
 
-
   render() {
     return (
       <div className="mainInfo">
