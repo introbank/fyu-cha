@@ -103,7 +103,6 @@ var ContributionList = React.createClass({
       return (
         <div>
           <p className="fyuchaTotal">TOTAL<span className="fyuchaToalNumerals">{totalFyucha}</span></p>
-          <div className="fyuchaGraph"></div>
           <h2 className="fyuchaCommitsTitle">最近のコミット</h2>
           {commits}
         </div>
