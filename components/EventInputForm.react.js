@@ -123,7 +123,6 @@ var EventInputForm = React.createClass({
          <input className="scheduleAddInputDay" type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
          <input className="scheduleAddInputDay" type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} />日
          <h3 className="scheduleAddSubTitle">時間</h3>
-         <input type="text" className="scheduleAddInputTime" />〜<input type="text" className="scheduleAddInputTime" />
          <h3 className="scheduleAddSubTitle">イベントタイトル</h3>
          <input type="text" className="scheduleAddInputEventTitle" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
          <div className="scheduleAddMultiArea">
