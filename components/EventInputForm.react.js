@@ -11,7 +11,7 @@ var EventInputForm = React.createClass({
       eventMonth: '',
       eventDay: '',
       eventTitle: '',
-      eventPrice: '',
+      eventCharge: '',
       eventPlace: '',
       eventDetail: '',
     };
@@ -51,8 +51,8 @@ var EventInputForm = React.createClass({
     this.setState({eventTitle: e.target.value});
   },
 
-  handleEventPriceChange: function(e) {
-    this.setState({eventPrice: e.target.value});
+  handleEventChargeChange: function(e) {
+    this.setState({eventCharge: e.target.value});
   },
 
   handleEventPlaceChange: function(e) {
@@ -68,7 +68,7 @@ var EventInputForm = React.createClass({
     var month = this.state.eventMonth;
     var day = this.state.eventDay;
     var title = this.state.eventTitle.trim();
-    var price = this.state.eventPrice;
+    var charge = this.state.eventCharge;
     var place = this.state.eventPlace;
     var detail = this.state.eventDetail.trim();
     if (!year || !month || !day || !title) {
@@ -79,7 +79,7 @@ var EventInputForm = React.createClass({
     var date = new Date(year, month-1, day);
     event.set('date', date);
     event.set('title', title);
-    event.set('price', Number(price));
+    event.set('charge', charge);
     event.set('place', place);
     event.set('detail', detail);
     if (this.props.type === 'Artist') {
@@ -103,7 +103,7 @@ var EventInputForm = React.createClass({
           eventMonth: '',
           eventDay: '',
           eventTitle: '',
-          eventPrice: '',
+          eventCharge: '',
           eventPlace: '',
           eventDetail: '',
         })).then(this.props.handler())
@@ -129,7 +129,7 @@ var EventInputForm = React.createClass({
            </div> 
            <div className="scheduleAddCostArea">
              <h3 className="scheduleAddSubTitle">費用</h3>
-             <input type="text" className="scheduleAddInputCost" value={this.state.eventPrice} onChange={this.handleEventPriceChange} />円
+             <input type="text" className="scheduleAddInputCost" value={this.state.eventCharge} onChange={this.handleEventChargeChange} />
            </div>
          </div>
          <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
