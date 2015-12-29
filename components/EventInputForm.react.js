@@ -112,6 +112,7 @@ var EventInputForm = React.createClass({
 
   formClose(){
     this.props.handlers().closeInputForm();  
+    this.props.handlers().incrementUpdate();  
   },
 
   getInputFormHtml(){
