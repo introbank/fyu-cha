@@ -106,7 +106,7 @@ var EventInputForm = React.createClass({
           eventCharge: '',
           eventPlace: '',
           eventDetail: '',
-        })).then(this.props.handlers().incrementRegister())
+        })).then(this.props.handlers().incrementUpdate())
         .then(console.log("ok"));
   },
 

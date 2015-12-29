@@ -10,7 +10,6 @@ var Schedule = React.createClass({
   getInitialState() {
     return {
       inputForm: false,
-      register: 0,
       update: 0,
     };
   },
@@ -48,18 +47,13 @@ var Schedule = React.createClass({
     this.setState({inputForm:false});
   },
 
-  incrementRegister(){
-    this.setState({register: this.state.register + 1});
-  },
-
   incrementUpdate(){
     this.setState({update: this.state.update + 1});
   },
 
-
   handlers() {
     return {
-      incrementRegister : this.incrementRegister,
+      incrementUpdate : this.incrementUpdate,
       closeInputForm : this.closeInputForm
     } 
   },
@@ -81,7 +75,7 @@ var Schedule = React.createClass({
           {this.state.inputForm &&
             <EventInputForm type={this.props.type} id={this.props.id} handlers={this.handlers}/>
           }
-          <EventList type={this.props.type} id={this.props.id} register={this.state.register} update={this.state.update}  incrementUpdate={this.incrementUpdate} />
+          <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
         </div>
     );
     }

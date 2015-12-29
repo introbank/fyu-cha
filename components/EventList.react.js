@@ -46,9 +46,17 @@ var EventList = React.createClass({
     }
   },
 
+  refreshPlanData(){
+    if (this.props.type == "Dashboard"){
+      this.refreshQueries(["plan"]);
+    }
+    else{
+      this.refreshQueries(["plan"]); 
+    }
+  },
 
   incrementUpdate(){
-    this.props.incrementUpdate();
+    this.props.handlers().incrementUpdate();
   },
 
   // to do
@@ -115,8 +123,8 @@ var EventList = React.createClass({
       if(minute < 10) { minute = "0" + minute; }
 
       var planButton = ( plan != null
-        ? <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>quit plan</button>
-        : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>plan</button>
+        ? <button className="btn" type="button" key={plan.objectId} onClick={this.quitPlanEvent.bind(this, plan)}>お気に入り</button>
+        : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>取り消し</button>
       );
 
       var eventListHtml = (
@@ -143,7 +151,7 @@ var EventList = React.createClass({
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
-                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>delete</button>
+                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
                 }
                 {planButton}
              </div>
@@ -175,11 +183,6 @@ var EventList = React.createClass({
   },
 
   componentWillUpdate(nextProps, nextState) {
-    // for add event
-    if(nextProps.register > this.props.register){
-      console.log("refreshQueries by register");
-      this.refreshEventData();
-    }
     // for update
     if(nextProps.update > this.props.update){
       console.log("refreshQueries by update");
@@ -188,7 +191,6 @@ var EventList = React.createClass({
   },
 
   render() {
-    console.log("register::" + this.props.register);
     console.log("update::" + this.props.update);
     var previousEventMonth = -1;
     var previousEventDay = -1;
