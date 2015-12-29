@@ -5,12 +5,6 @@ var ParseReact   = require('parse-react');
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
 
-  getInitialState() {
-    return {
-      update: 0,
-    };
-  },
-
   observe(props, state) {
     var type = props.type;
     var id = props.id;
@@ -45,11 +39,16 @@ var EventList = React.createClass({
 
   refreshEventData(){
     if (this.props.type == "Dashboard"){
-      return this.refreshQueries(["plan"]);
+      this.refreshQueries(["plan"]);
     }
     else{
-      return this.refreshQueries(["events", "plan"]); 
+      this.refreshQueries(["events", "plan"]); 
     }
+  },
+
+
+  incrementUpdate(){
+    this.props.incrementUpdate();
   },
 
   // to do
@@ -62,9 +61,7 @@ var EventList = React.createClass({
     var Event = Parse.Object.extend('Event');
     var ev = new Event();
     ev.id = targetEvent.objectId;
-    ev.destroy().then(
-      this.refreshEventData()
-    ).then(this.setState({update:this.state.update + 1}));
+    ev.destroy().then(this.incrementUpdate());
   },
 
   attendEvent: function(targetEvent) {
@@ -83,10 +80,7 @@ var EventList = React.createClass({
     var EventPlan = Parse.Object.extend("EventPlan");
     var eventPlan = new EventPlan();  
     eventPlan.id = plan.objectId;
-    eventPlan.destroy().then(
-      this.refreshEventData()
-    ).then(this.setState({update:this.state.update + 1})
-    );
+    eventPlan.destroy().then(this.incrementUpdate());
   },
 
   setEventStatus: function(targetEvent, eventStatus){
@@ -109,9 +103,7 @@ var EventList = React.createClass({
       group.id = this.data.account[0].id.objectId;
       eventStatus.set("group", group);
     }
-    eventStatus.save().then(
-      this.refreshEventData()
-    ).then(this.setState({update:this.state.update + 1}));
+    eventStatus.save().then(this.incrementUpdate());
   },
 
   createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan){
@@ -189,7 +181,7 @@ var EventList = React.createClass({
       this.refreshEventData();
     }
     // for update
-    if(nextState.update > this.state.update){
+    if(nextProps.update > this.props.update){
       console.log("refreshQueries by update");
       this.refreshEventData();
     }
@@ -197,7 +189,7 @@ var EventList = React.createClass({
 
   render() {
     console.log("register::" + this.props.register);
-    console.log("update::" + this.state.update);
+    console.log("update::" + this.props.update);
     var previousEventMonth = -1;
     var previousEventDay = -1;
     var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
