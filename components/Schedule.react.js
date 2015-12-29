@@ -48,12 +48,12 @@ var Schedule = React.createClass({
   },
 
   incrementRegister(){
-    this.setState({register:this.state.register});
+    this.setState({register:this.state.register + 1});
   },
 
   handlers() {
     return {
-      incrementRegiste : this.incrementRegiste,
+      incrementRegister : this.incrementRegister,
       closeInputForm : this.closeInputForm
     } 
   },
