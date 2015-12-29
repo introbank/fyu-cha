@@ -152,7 +152,6 @@ var EventList = React.createClass({
             )}
             {new Date() > eventDate ? (
               <div className="scheduleContentBox finished">
-                <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
