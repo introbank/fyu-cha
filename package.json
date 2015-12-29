@@ -26,7 +26,9 @@
   "devDependencies": {
     "browserify": "^12.0.1",
     "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1"
+    "gulp-browserify": "^0.5.1",
+    "mocha": "*",
+    "supertest": "*"
   },
   "scripts": {
     "watch": "gulp watch",
@@ -38,7 +40,8 @@
     "watch:top": "gulp watch:top",
     "watch:artist": "gulp watch:artist",
     "watch:group": "gulp watch:group",
-    "watch:signup": "gulp watch:signup"
+    "watch:signup": "gulp watch:signup",
+    "test": "./node_modules/.bin/mocha"
   },
   "engines": {
     "node": "5.3.0"
