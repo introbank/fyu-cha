@@ -34,7 +34,7 @@ var Header = React.createClass({
           }
           {
             this.data.user
-            ? <li onClick={this.profile}>プロフィール</li>
+            ? null
           : <li onClick={this.signup}>ユーザ登録</li>
           }
           </ul>
