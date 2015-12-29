@@ -43,6 +43,7 @@ var Schedule = React.createClass({
   },
 
   closeInputForm(){
+    console.log("closeInputForm");
     this.setState({inputForm:false});
   },
 
@@ -50,6 +51,12 @@ var Schedule = React.createClass({
     this.setState({register:this.state.register});
   },
 
+  handlers() {
+    return {
+      incrementRegiste : this.incrementRegiste,
+      closeInputForm : this.closeInputForm
+    } 
+  },
 
   render() {
     if (this.props.type == "Dashboard" || !this.data.user){
@@ -66,7 +73,7 @@ var Schedule = React.createClass({
             <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
           </div>
           {this.state.inputForm &&
-            <EventInputForm type={this.props.type} id={this.props.id} handler={this.incrementRegister}/>
+            <EventInputForm type={this.props.type} id={this.props.id} handlers={this.handlers}/>
           }
           <EventList type={this.props.type} id={this.props.id} register={this.state.register} />
         </div>

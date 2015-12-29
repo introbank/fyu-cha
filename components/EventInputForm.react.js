@@ -106,8 +106,12 @@ var EventInputForm = React.createClass({
           eventCharge: '',
           eventPlace: '',
           eventDetail: '',
-        })).then(this.props.handler())
+        })).then(this.props.handler.incrementRegiste())
         .then(console.log("ok"));
+  },
+
+  formClose(){
+    this.props.handlers().closeInputForm();  
   },
 
   getInputFormHtml(){
@@ -135,6 +139,7 @@ var EventInputForm = React.createClass({
          <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
          <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
          <div className="scheduleAddButtonArea">
+           <div className="scheduleAddButtonOtherTime" onClick={this.formClose} >フォームを閉じる</div>
            <input className="scheduleAddButtonComplete" type="submit" value="完了" />
          </div>
        </form> 
