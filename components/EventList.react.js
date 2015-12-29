@@ -123,8 +123,13 @@ var EventList = React.createClass({
       if(minute < 10) { minute = "0" + minute; }
 
       var planButton = ( plan != null
-        ? <button className="btn" type="button" key={plan.objectId} onClick={this.quitPlanEvent.bind(this, plan)}>お気に入り</button>
-        : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>取り消し</button>
+        ? <button className="btn" type="button" key={plan.objectId} onClick={this.quitPlanEvent.bind(this, plan)}>取り消し</button>
+        : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>お気に入り</button>
+      );
+
+      var divKey = (plan != null
+      ? this.props.type + this.props.id + event.objectId + plan.objectId
+      : this.props.type + this.props.id + event.objectId
       );
 
       var eventListHtml = (
