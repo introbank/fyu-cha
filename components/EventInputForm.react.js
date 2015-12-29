@@ -63,7 +63,7 @@ var EventInputForm = React.createClass({
     this.setState({eventDetail: e.target.value});
   },
 
-  handleEventSubmit(e, hasNext) {
+  handleEventSubmit(e) {
     var year = this.state.eventYear;
     var month = this.state.eventMonth;
     var day = this.state.eventDay;
@@ -110,11 +110,10 @@ var EventInputForm = React.createClass({
         .then(console.log("ok"));
   },
 
-  render() {
-   console.log()
-   return (
+  getInputFormHtml(){
+    return (
       <div className="scheduleAddBox">
-       <form className="commentForm" onSubmit={this.handleEventSubmit(false)}>
+       <form className="commentForm" onSubmit={this.handleEventSubmit}>
          <h3 className="scheduleAddSubTitle">開催日</h3>
          <input className="scheduleAddInputDay" type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
          <input className="scheduleAddInputDay" type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
@@ -140,6 +139,17 @@ var EventInputForm = React.createClass({
          </div>
        </form> 
      </div>
+   );
+  },
+
+
+  render() {
+   console.log()
+   var inputFormHtml = this.getInputFormHtml();
+   return(
+    <div>
+      {inputFormHtml}
+    </div>
    );
   },
 });
