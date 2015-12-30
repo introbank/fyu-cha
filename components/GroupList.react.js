@@ -31,10 +31,11 @@ var GroupList = React.createClass({
                   {this.data.group &&
                     <ul>
                       {this.data.group.map(function (group) {
+                        var groupName = (group.displayName) ? group.displayName : group.name;
                         return (
-                          <li>
+                          <li key={group.objectId}>
                             <a href={'/groups/' + group.twitterUsername}><img src={group.imageUrl} /></a>
-                            <h2>{group.name}</h2>
+                            <h2>{groupName}</h2>
                           </li>
                         )
                       })}

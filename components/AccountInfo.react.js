@@ -4,6 +4,15 @@ var Follow       = require('./Follow.react.js');
 
 var AccountInfo = React.createClass({
 
+  getAccountName(){
+    if (this.props.account.className === '_User'){
+      return this.props.account.name;
+    }
+    else{
+      return (this.props.account.displayName) ? this.props.account.displayName : this.props.account.name;
+    }
+  },
+
   render() {
     return (
       <div className="mainInfo">
