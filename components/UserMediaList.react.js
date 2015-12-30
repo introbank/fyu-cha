@@ -8,14 +8,18 @@ var UserMediaList = React.createClass({
   observe(props, state) {
     var artists = [];
     for (var following of props.artists) {
-      artists.push(following.artist);
+      if (following.artist) {
+        artists.push(following.artist);
+      }
     }
     var artistAlbumQuery = new Parse.Query('Album');
     artistAlbumQuery.containedIn('artist', artists);
 
     var groups = [];
     for (var following of props.groups) {
-      groups.push(following.group)
+      if (following.group) {
+        groups.push(following.group)
+      }
     }
     var groupAlbumQuery = new Parse.Query('Album');
     groupAlbumQuery.containedIn('group', groups);
@@ -39,16 +43,21 @@ var UserMediaList = React.createClass({
   createAlbumAccountHash(){
     var albumAccountHash = {};
     for (var following of this.props.artists) {
+      if (!following.artist) {
+        continue;
+      }
       var album = following.artist.album.objectId;
       var id = following.artist.twitterUsername;
       albumAccountHash[album] = "/artists/" + id;
     }
     for (var following of this.props.groups) {
+      if (!following.group) {
+        continue;
+      }
       var album = following.group.album.objectId;
       var id = following.group.twitterUsername;
       albumAccountHash[album] = "/groups/" + id;
-    }    
-    console.log(albumAccountHash);
+    }
     return albumAccountHash;
   },
 
@@ -64,8 +73,10 @@ var UserMediaList = React.createClass({
       <ul>
         {this.data.mediaMap.map(function (mediaMap) {
           return (
-            <li key={mediaMap.objectId} >
-              <a href={albumAccountHash[mediaMap.album.objectId]}><img src={mediaMap.media.mediaUri} /> </a>
+            <li>
+              <a href={albumAccountHash[mediaMap.album.objectId]}>
+                <img src={mediaMap.media.mediaUri} />
+              </a>
             </li>
           );
         })}
