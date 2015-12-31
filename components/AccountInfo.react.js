@@ -29,7 +29,7 @@ var AccountInfo = React.createClass({
                 <p className="account">@{this.props.account.username}</p>
               </div>
             : <div>
-                <p className="account">@{this.props.account.twitterUsername}</p>
+                <p className="account">@{this.getAccountName()}</p>
               </div>
             }
             <span>{this.props.account.info}</span>
