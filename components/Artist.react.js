@@ -27,14 +27,9 @@ var Artist = React.createClass({
     var artistQuery = new Parse.Query('Artist');
     artistQuery.equalTo('twitterUsername', id);
 
-    var twitterContributionQuery = new Parse.Query('TwitterContribution');
-    twitterContributionQuery.matchesQuery("artist", artistQuery);
-    twitterContributionQuery.include("user");
-
     return {
       user: ParseReact.currentUser,
       artist: artistQuery,
-      twitterCbs: twitterContributionQuery,
     };
   },
 
@@ -112,7 +107,7 @@ var Artist = React.createClass({
                 </div>
                 }
                 {this.state.showData &&
-                <div id="tab3" class="tab">
+                <div id="tab3" className="tab">
                   <ContributionList type="Artist" id={this.props.params.id} />
                 </div>
                 }

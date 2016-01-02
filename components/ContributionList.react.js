@@ -16,7 +16,7 @@ var ContributionList = React.createClass({
       twitterContributionQuery.include("group");
       twitterContributionQuery.descending("createdAt");
     }
-    if (type == "User"){
+    else if (type == "User"){
       var accountQuery = new Parse.Query('User');
       accountQuery.equalTo('username', id);
       twitterContributionQuery.matchesQuery("user", accountQuery);
@@ -25,6 +25,7 @@ var ContributionList = React.createClass({
       twitterContributionQuery.descending("createdAt");
     }
     else{
+      console.log("type=" + type);
       var accountQuery = new Parse.Query(type);
       accountQuery.equalTo('twitterUsername', id);
       twitterContributionQuery.matchesQuery(type.toLowerCase(), accountQuery);
@@ -41,7 +42,7 @@ var ContributionList = React.createClass({
     this.data.latestTwitterCbs.map(function(twitterCb){
     });
 
-    if (this.props.type == "Dashboard" || "User" ){
+    if (this.props.type in ["Dashboard", "User"]){
       var commits = (
         <div className="fyuchaCommits">
           {this.data.latestTwitterCbs.map(function(twitterCb) {
@@ -56,15 +57,18 @@ var ContributionList = React.createClass({
               return;
             }
             totalFyucha += twitterCb.point;
+            var url = "/" + account.className.toLowerCase() + "s/" + account.twitterUsername;
             return (
               <div className="fyuchaCommit" key={twitterCb.objectId}>
-                <div className="fyuchaCommitUserArea">
-                  <div className="fyuchaCommitUserThumbnail">
-                    <img src={account.imageUrl} alt={account.name} />
+                <a href={url}>
+                  <div className="fyuchaCommitUserArea">
+                    <div className="fyuchaCommitUserThumbnail">
+                      <img src={account.imageUrl} alt={account.name} />
+                    </div>
+                    <p className="fyuchaCommitUserName">{account.name}</p>
+                    <p className="fyuchaCommitUserAccount">@{account.twitterUsername}</p>
                   </div>
-                  <p className="fyuchaCommitUserName">{account.name}</p>
-                  <p className="fyuchaCommitUserAccount">@{account.twitterUsername}</p>
-                </div>
+                </a>
                 <div className="fyuchaCommitActionArea">
                   <p className="fyuchaCommitActionText">{twitterCb.type}</p>
                   <div className="fyuchaCommitActionNumerals">{twitterCb.point}</div>
@@ -90,15 +94,18 @@ var ContributionList = React.createClass({
             if (!twitterCb.user) {
               return;
             }
+            var url = "/users/" + twitterCb.user.username;
             return (
               <div className="fyuchaCommit" key={twitterCb.objectId}>
-                <div className="fyuchaCommitUserArea">
-                  <div className="fyuchaCommitUserThumbnail">
-                    <img src={twitterCb.user.imageUrl} alt={twitterCb.user.name} />
+                <a href={url}>
+                  <div className="fyuchaCommitUserArea">
+                    <div className="fyuchaCommitUserThumbnail">
+                      <img src={twitterCb.user.imageUrl} alt={twitterCb.user.name} />
+                    </div>
+                    <p className="fyuchaCommitUserName">{twitterCb.user.name}</p>
+                    <p className="fyuchaCommitUserAccount">@{twitterCb.user.username}</p>
                   </div>
-                  <p className="fyuchaCommitUserName">{twitterCb.user.name}</p>
-                  <p className="fyuchaCommitUserAccount">@{twitterCb.user.username}</p>
-                </div>
+                </a>
                 <div className="fyuchaCommitActionArea">
                   <p className="fyuchaCommitActionText">{twitterCb.type}</p>
                   <div className="fyuchaCommitActionNumerals">{twitterCb.point}</div>

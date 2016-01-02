@@ -27,14 +27,9 @@ var Group = React.createClass({
     var groupQuery = new Parse.Query('Group');
     groupQuery.equalTo('twitterUsername', id);
 
-    var twitterContributionQuery = new Parse.Query('TwitterContribution');
-    twitterContributionQuery.matchesQuery("group", groupQuery);
-    twitterContributionQuery.include("user");
-
     return {
       user: ParseReact.currentUser,
       group: groupQuery,
-      twitterCbs: twitterContributionQuery,
     };
   },
 
@@ -112,7 +107,7 @@ var Group = React.createClass({
                 </div>
                 }
                 {this.state.showData &&
-                <div id="tab3" class="tab">
+                <div id="tab3" className="tab">
                   <ContributionList type="Group" id={this.props.params.id} />
                 </div>
                 }
