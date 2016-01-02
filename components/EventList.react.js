@@ -147,7 +147,7 @@ var EventList = React.createClass({
                 <p className="scheduleDayOfTheWeek">{EventList.getWeekDaysString(eventDate.getDay())}</p>
               </div>
             )}
-            {new Date() < eventDate && !isDisplayedNowDivider && (
+            {new Date() < eventDate && !this.isDisplayedNowDivider && (
               <div className="scheduleNowDivider"></div>
             )}
             {new Date() > eventDate ? (
@@ -194,6 +194,12 @@ var EventList = React.createClass({
     }
   },
 
+  initEventListFlugs(){
+    this.previousEventMonth = -1;
+    this.previousEventDay = -1;
+    this.isDisplayedNowDivider = false;
+  },
+
   statics: {
     getWeekDaysString(weekdayInt){
       var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
@@ -203,10 +209,7 @@ var EventList = React.createClass({
 
   render() {
     console.log("update::" + this.props.update);
-    this.previousEventMonth = -1;
-    this.previousEventDay = -1;
-    this.isDisplayedNowDivider = false;
-
+    this.initEventListFlugs();
     var eventList = null;
     if (this.props.type == "Dashboard"){
       eventList = this.data.plan.map(function(plan) {
