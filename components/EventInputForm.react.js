@@ -6,10 +6,12 @@ var EventInputForm = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState() {
+    var now = new Date();
     return {
-      eventYear: '',
-      eventMonth: '',
-      eventDay: '',
+      eventYear: now.getFullYear(),
+      eventMonth: now.getMonth() + 1,
+      eventDay: now.getDate(),
+      eventTime: '18:30',
       eventTitle: '',
       eventCharge: '',
       eventPlace: '',
@@ -35,7 +37,6 @@ var EventInputForm = React.createClass({
   },
 
   handleEventYearChange: function(e) {
-    console.log("handleEventYearChange");
     this.setState({eventYear: e.target.value});
   },
 
@@ -45,6 +46,10 @@ var EventInputForm = React.createClass({
 
   handleEventDayChange: function(e) {
     this.setState({eventDay: e.target.value});
+  },
+
+  handleEventTimeChange: function(e) {
+    this.setState({eventTime: e.target.value});
   },
 
   handleEventTitleChange: function(e) {
@@ -67,6 +72,8 @@ var EventInputForm = React.createClass({
     var year = this.state.eventYear;
     var month = this.state.eventMonth;
     var day = this.state.eventDay;
+    var time = this.state.eventTime.split(":", 2);
+    console.log(time);
     var title = this.state.eventTitle.trim();
     var charge = this.state.eventCharge;
     var place = this.state.eventPlace;
@@ -76,7 +83,13 @@ var EventInputForm = React.createClass({
     }
     var Event = Parse.Object.extend('Event');
     var event = new Event();
-    var date = new Date(year, month-1, day);
+    var date = null;
+    try{
+      date = new Date(year, month-1, day-1, time[0], time[1]);
+    }
+    catch (e){
+      date = new Date(year, month-1, day);
+    }
     event.set('date', date);
     event.set('title', title);
     event.set('charge', charge);
@@ -102,6 +115,7 @@ var EventInputForm = React.createClass({
           eventYear: '',
           eventMonth: '',
           eventDay: '',
+          eventTime: '',
           eventTitle: '',
           eventCharge: '',
           eventPlace: '',
@@ -110,9 +124,8 @@ var EventInputForm = React.createClass({
         .then(console.log("ok"));
   },
 
-  formClose(){
+  closeForm(){
     this.props.handlers().closeInputForm();  
-    this.props.handlers().incrementUpdate();  
   },
 
   getInputFormHtml(){
@@ -120,10 +133,11 @@ var EventInputForm = React.createClass({
       <div className="scheduleAddBox">
        <form className="commentForm" onSubmit={this.handleEventSubmit}>
          <h3 className="scheduleAddSubTitle">開催日</h3>
-         <input className="scheduleAddInputDay" type="text" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-         <input className="scheduleAddInputDay" type="text" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-         <input className="scheduleAddInputDay" type="text" value={this.state.eventDay} onChange={this.handleEventDayChange} />日
-         <h3 className="scheduleAddSubTitle">時間</h3>
+         <input className="scheduleAddInputDay" type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
+         <input className="scheduleAddInputDay" type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
+         <input className="scheduleAddInputDay" type="number" value={this.state.eventDay} onChange={this.handleEventDayChange} />日
+         <h3 className="scheduleAddSubTitle">開始時間</h3>
+         <input type="time" className="scheduleAddInputTime" value={this.state.eventTime} onChange={this.handleEventTimeChange} />〜
          <h3 className="scheduleAddSubTitle">イベントタイトル</h3>
          <input type="text" className="scheduleAddInputEventTitle" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
          <div className="scheduleAddMultiArea">
@@ -139,7 +153,7 @@ var EventInputForm = React.createClass({
          <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
          <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
          <div className="scheduleAddButtonArea">
-           <div className="scheduleAddButtonOtherTime" onClick={this.formClose} >フォームを閉じる</div>
+           <div className="scheduleAddButtonOtherTime" onClick={this.closeForm} >フォームを閉じる</div>
            <input className="scheduleAddButtonComplete" type="submit" value="完了" />
          </div>
        </form> 

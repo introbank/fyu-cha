@@ -5,6 +5,9 @@ var ParseReact   = require('parse-react');
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
 
+  getInitialState() {
+    return{update: 0};
+  },
   observe(props, state) {
     var type = props.type;
     var id = props.id;
@@ -127,11 +130,7 @@ var EventList = React.createClass({
         : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>お気に入り</button>
       );
 
-      var divKey = (plan != null
-      ? this.props.type + this.props.id + event.objectId + this.props.update
-      : this.props.type + this.props.id + event.objectId
-      );
-
+      var divKey = this.props.type + this.props.id + event.objectId + this.state.update;
       var eventListHtml = (
         <div key={this.props.type + event.objectId + new Date().getTime()}>
           {this.previousEventMonth != eventDate.getMonth() && (
@@ -153,6 +152,7 @@ var EventList = React.createClass({
             {new Date() > eventDate ? (
               <div className="scheduleContentBox finished">
                 <p className="scheduleContentName">{event.title}</p>
+                <p className="scheduleContentDescription">{event.detail}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
@@ -163,6 +163,7 @@ var EventList = React.createClass({
               <div className="scheduleContentBox">
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
+                <p className="scheduleContentDescription">{event.detail}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
@@ -191,7 +192,7 @@ var EventList = React.createClass({
     if(nextProps.update > this.props.update){
       console.log("refreshQueries by update");
       this.refreshEventData();
-      //this.setState({update: nextProps.update});
+      this.setState({update: nextProps.update});
     }
   },
 
@@ -210,6 +211,7 @@ var EventList = React.createClass({
 
   render() {
     console.log("props.update::" + this.props.update);
+    console.log("state.update::" + this.state.update);
     this.initEventListFlugs();
     var eventList = null;
     if (this.props.type == "Dashboard"){
