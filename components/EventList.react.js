@@ -128,7 +128,7 @@ var EventList = React.createClass({
       );
 
       var divKey = (plan != null
-      ? this.props.type + this.props.id + event.objectId + plan.objectId
+      ? this.props.type + this.props.id + event.objectId + this.props.update
       : this.props.type + this.props.id + event.objectId
       );
 
@@ -165,7 +165,7 @@ var EventList = React.createClass({
                 <p className="scheduleContentName">{event.title}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
-                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>delete</button>
+                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
                 }
                 {planButton}
               </div>
@@ -191,6 +191,7 @@ var EventList = React.createClass({
     if(nextProps.update > this.props.update){
       console.log("refreshQueries by update");
       this.refreshEventData();
+      //this.setState({update: nextProps.update});
     }
   },
 
@@ -208,7 +209,7 @@ var EventList = React.createClass({
   },
 
   render() {
-    console.log("update::" + this.props.update);
+    console.log("props.update::" + this.props.update);
     this.initEventListFlugs();
     var eventList = null;
     if (this.props.type == "Dashboard"){
