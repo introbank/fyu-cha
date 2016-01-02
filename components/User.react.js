@@ -1,53 +1,133 @@
-var React        = require('react');
-var Parse        = require('../lib/parse');
-var ParseReact   = require('parse-react');
+var React  = require('react');
+var Parse       = require('../lib/parse');
+var ParseReact  = require('parse-react');
+var AccountInfo   = require('./AccountInfo.react.js');
+var UserMediaList       = require('./UserMediaList.react.js');
+var FollowingList       = require('./FollowingList.react.js');
+var ContributionList    = require('./ContributionList.react.js');
 var Header       = require('./Header.react.js');
-var bootstrap    = require('react-bootstrap');
-var FormControls = bootstrap.FormControls;
+var Navigation   = require('./Navigation.react.js');
 
 var User = React.createClass({
   mixins: [ParseReact.Mixin],
 
-  observe() {
-    var id = this.props.params.id;
-
-    var userQuery = new Parse.Query('User');
-    userQuery.equalTo('username', id);
-    var contributionQuery = new Parse.Query('IntrobankContribution');
-    contributionQuery.matchesQuery('user', userQuery);
+  getInitialState() {
     return {
-      user: userQuery,
-      contribution: contributionQuery,
+      activeTab: 'media',
+      showMedia: true,
+      showFollow: false,
+      showData: false,
     };
   },
 
+  createQuery(userQuery, col){
+    var following = new Parse.Query('Following');
+    following.matchesQuery("user", userQuery);
+    following.include(col);
+    following.notEqualTo(col, null);
+    return following;
+  },
+
+  observe() {
+    var id = this.props.params.id;
+    var userQuery = new Parse.Query('User');
+    userQuery.equalTo('username', id);
+    var followingArtistQuery = this.createQuery(userQuery, "artist");
+    var followingGroupQuery = this.createQuery(userQuery, "group");
+    return {
+      user: userQuery,
+      followingArtists: followingArtistQuery,
+      followingGroups: followingGroupQuery,
+    };
+  },
+
+  changeTab1() {
+    this.setState({
+      activeTab: 'media',
+      showMedia: true,
+      showFollow: false,
+      showData: false
+    });
+  },
+
+  changeTab2() {
+    this.setState({
+      activeTab: 'follow',
+      showMedia: false,
+      showFollow: true,
+      showData: false
+    });
+  },
+
+  changeTab3() {
+    this.setState({
+      activeTab: 'data',
+      showMedia: false,
+      showFollow: false,
+      showData: true
+    });
+  },
+
   render() {
-    var username;
-    if (this.data.user && this.data.user[0]) {
-      username = this.data.user[0].username;
-    } else {
-      username = '';
-    }
-    var contributions = [];
-    if (this.data.contribution && this.data.contribution[0]) {
-      for (var i = 0; i < this.data.contribution.length; i++) {
-        contributions.push(this.data.contribution[i]);
-      }
+    var user = null;
+    if (this.data.user && this.data.user.length !== 0) {
+      user = this.data.user[0];
     }
 
-    return (
-      <div>
-        <Header />
-        <h2>プロフィール</h2>
-        <form className="form-horizontal">
-          <FormControls.Static label="username" labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={username} />
-        </form>
-        {contributions.map(function (contribution) {
-          console.log(contribution);
-          return <p>{contribution.point}</p>
-        })}
-      </div>
-    );
+    if(user){
+      return (
+         <div id="wrapper">
+          <Header />
+          <Navigation />
+            <div id="content">
+            <AccountInfo account={user}/>
+            <div className="tabArea">
+              <div className="contents">
+                <ul className="tabs">
+                  <li id="label__tab1">
+                    {this.state.activeTab === 'media' ?
+                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>画像/動画</a> :
+                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>画像/動画</a>
+                    }
+                  </li>
+                  <li id="label__tab2">
+                    {this.state.activeTab === 'follow' ?
+                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>フォロー</a> :
+                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>フォロー</a>
+                    }
+                  </li>
+                  <li id="label__tab3">
+                    {this.state.activeTab === 'data' ?
+                      <a href="#" className="tab3 active" onClick={this.changeTab3}>ふゅーちゃ</a> :
+                      <a href="#" className="tab3" onClick={this.changeTab3}>ふゅーちゃ</a>
+                    }
+                  </li>
+                </ul>
+                {this.state.showMedia &&
+                  <div id="images" className="tab">
+                    <UserMediaList artists={this.data.followingArtists} groups={this.data.followingGroups} />
+                  </div>
+                }
+                {this.state.showFollow &&
+                  <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
+                }
+                {this.state.showData &&
+                  <ContributionList type="Dashboard" id={this.data.user.username} />
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    else{
+      return(
+        <div id="wrapper">
+          <Header />
+          <Navigation />
+        </div>
+      );
+    }
   },
 
 });

@@ -47,9 +47,8 @@ var ContributionList = React.createClass({
               return;
             }
             totalFyucha += twitterCb.point;
-            console.log(account.objectId);
             return (
-              <div className="fyuchaCommit">
+              <div className="fyuchaCommit" key={twitterCb.objectId}>
                 <div className="fyuchaCommitUserArea">
                   <div className="fyuchaCommitUserThumbnail">
                     <img src={account.imageUrl} alt={account.name} />
@@ -83,7 +82,7 @@ var ContributionList = React.createClass({
               return;
             }
             return (
-              <div className="fyuchaCommit">
+              <div className="fyuchaCommit" key={twitterCb.objectId}>
                 <div className="fyuchaCommitUserArea">
                   <div className="fyuchaCommitUserThumbnail">
                     <img src={twitterCb.user.imageUrl} alt={twitterCb.user.name} />
