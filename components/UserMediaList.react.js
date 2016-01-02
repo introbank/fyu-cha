@@ -73,7 +73,7 @@ var UserMediaList = React.createClass({
       <ul>
         {this.data.mediaMap.map(function (mediaMap) {
           return (
-            <li>
+            <li key={mediaMap.objectId}>
               <a href={albumAccountHash[mediaMap.album.objectId]}>
                 <img src={mediaMap.media.mediaUri} />
               </a>
