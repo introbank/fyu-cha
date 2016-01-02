@@ -114,7 +114,7 @@ var EventList = React.createClass({
     eventStatus.save().then(this.incrementUpdate());
   },
 
-  createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan){
+  createEventList(event, plan){
     try{
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
@@ -134,17 +134,17 @@ var EventList = React.createClass({
 
       var eventListHtml = (
         <div key={this.props.type + event.objectId + new Date().getTime()}>
-          {previousEventMonth != eventDate.getMonth() && (
+          {this.previousEventMonth != eventDate.getMonth() && (
             <h2 className="schedulePeriod">
               <span className="scheduleYear">{eventDate.getFullYear()}</span>
               <span className="scheduleMonth">{eventDate.getMonth() + 1}月</span>
             </h2>
           )}
           <div className="scheduleDayWrapper">
-            {previousEventDay != eventDate.getDate() && (
+            {this.previousEventDay != eventDate.getDate() && (
               <div className="scheduleDayBox finished">
                 <h3 className="scheduleDay">{eventDate.getDate()}</h3>
-                <p className="scheduleDayOfTheWeek">{weekdays[eventDate.getDay()]}</p>
+                <p className="scheduleDayOfTheWeek">{EventList.getWeekDaysString(eventDate.getDay())}</p>
               </div>
             )}
             {new Date() < eventDate && !isDisplayedNowDivider && (
@@ -174,10 +174,10 @@ var EventList = React.createClass({
           </div>
         </div>
       );
-      previousEventMonth = eventDate.getMonth();
-      previousEventDay = eventDate.getDate();
+      this.previousEventMonth = eventDate.getMonth();
+      this.previousEventDay = eventDate.getDate();
       if (new Date() < eventDate) {
-        isDisplayedNowDivider = true;
+        this.isDisplayedNowDivider = true;
       }
       return eventListHtml;
     }
@@ -194,18 +194,24 @@ var EventList = React.createClass({
     }
   },
 
+  statics: {
+    getWeekDaysString(weekdayInt){
+      var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
+      return weekdays[weekdayInt];
+    }, 
+  },
+
   render() {
     console.log("update::" + this.props.update);
-    var previousEventMonth = -1;
-    var previousEventDay = -1;
-    var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
-    var isDisplayedNowDivider = false;
+    this.previousEventMonth = -1;
+    this.previousEventDay = -1;
+    this.isDisplayedNowDivider = false;
 
     var eventList = null;
     if (this.props.type == "Dashboard"){
       eventList = this.data.plan.map(function(plan) {
         if (plan.event != null){
-        return this.createEventList(plan.event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}
+        return this.createEventList(plan.event, plan)}
       }, this);
       
     }
@@ -221,7 +227,7 @@ var EventList = React.createClass({
         if (event.objectId in planHash){
           plan = planHash[event.objectId];
         }
-        return this.createEventList(event, previousEventMonth, previousEventDay, weekdays, isDisplayedNowDivider, plan)}, this);
+        return this.createEventList(event, plan)}, this);
     }
 
     return (
