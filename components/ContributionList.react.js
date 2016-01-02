@@ -42,7 +42,7 @@ var ContributionList = React.createClass({
     this.data.latestTwitterCbs.map(function(twitterCb){
     });
 
-    if (this.props.type in ["Dashboard", "User"]){
+    if (this.props.type == "Dashboard" || this.props.type == "User"){
       var commits = (
         <div className="fyuchaCommits">
           {this.data.latestTwitterCbs.map(function(twitterCb) {
