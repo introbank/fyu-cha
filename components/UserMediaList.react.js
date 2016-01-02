@@ -69,7 +69,7 @@ var UserMediaList = React.createClass({
       return (
         <div>
         {this.props.type == "Dashboard" 
-        ? <div className="startButton" onClick={this.jump}>豌励↓縺ェ繧九い繧、繝峨Ν繧偵ヵ繧ゥ繝ュ繝シ縺吶ｋ</div>
+        ? <div className="startButton" onClick={this.jump}>気になるアイドルをフォローする</div>
         : <div>誰もフォローしていません</div>
         }
         </div>
