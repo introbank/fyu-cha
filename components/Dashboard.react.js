@@ -112,7 +112,7 @@ var Dashboard = React.createClass({
             </ul>
             {this.state.showMedia &&
               <div id="images" className="tab">
-                <UserMediaList artists={this.data.followingArtists} groups={this.data.followingGroups} />
+                <UserMediaList type="Dashboard" artists={this.data.followingArtists} groups={this.data.followingGroups} />
               </div>
             }
             {this.state.showFollow &&

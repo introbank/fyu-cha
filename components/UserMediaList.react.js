@@ -64,9 +64,15 @@ var UserMediaList = React.createClass({
 
   render() {
     var albumAccountHash = this.createAlbumAccountHash();
+    console.log(this.props.type);
     if (this.props.artists.length < 1 && this.props.groups.length < 1) {
       return (
-        <div className="startButton" onClick={this.jump}>気になるアイドルをフォローする</div>
+        <div>
+        {this.props.type == "Dashboard" 
+        ? <div className="startButton" onClick={this.jump}>豌励↓縺ェ繧九い繧、繝峨Ν繧偵ヵ繧ゥ繝ュ繝シ縺吶ｋ</div>
+        : <div>誰もフォローしていません</div>
+        }
+        </div>
       );
     }
     return (
