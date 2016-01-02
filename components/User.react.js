@@ -112,7 +112,7 @@ var User = React.createClass({
                   <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
                 }
                 {this.state.showData &&
-                  <ContributionList type="Dashboard" id={this.data.user.username} />
+                  <ContributionList type="User" id={user.username} />
                 }
               </div>
             </div>

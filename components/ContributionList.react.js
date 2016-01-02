@@ -8,11 +8,20 @@ var ContributionList = React.createClass({
   observe(props, state) {
     var type = props.type;
     var id = props.id;
+    console.log(id);
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     if (type == "Dashboard"){
       twitterContributionQuery.equalTo("user", Parse.User.current());
       twitterContributionQuery.include("artist");
       twitterContributionQuery.include("group");
+      twitterContributionQuery.descending("createdAt");
+    }
+    if (type == "User"){
+      var accountQuery = new Parse.Query('User');
+      accountQuery.equalTo('username', id);
+      twitterContributionQuery.matchesQuery("user", accountQuery);
+      twitterContributionQuery.include("group");
+      twitterContributionQuery.include("artist");
       twitterContributionQuery.descending("createdAt");
     }
     else{
@@ -32,7 +41,7 @@ var ContributionList = React.createClass({
     this.data.latestTwitterCbs.map(function(twitterCb){
     });
 
-    if (this.props.type == "Dashboard"){
+    if (this.props.type == "Dashboard" || "User" ){
       var commits = (
         <div className="fyuchaCommits">
           {this.data.latestTwitterCbs.map(function(twitterCb) {
