@@ -23,13 +23,13 @@ var AccountInfo = React.createClass({
               : <Follow account={this.props.account} />
             }
             <img src={this.props.account.imageUrl} className="iconImage" />
-            <h1>{this.props.account.name}</h1>
+            <h1>{this.getAccountName()}</h1>
             {this.props.account.className === '_User'
             ? <div>
                 <p className="account">@{this.props.account.username}</p>
               </div>
             : <div>
-                <p className="account">@{this.getAccountName()}</p>
+                <p className="account">@{this.props.account.twitterUsername}</p>
               </div>
             }
             <span>{this.props.account.info}</span>
