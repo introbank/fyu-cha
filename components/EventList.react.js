@@ -131,6 +131,19 @@ var EventList = React.createClass({
       );
 
       var divKey = this.props.type + this.props.id + event.objectId + this.state.update;
+
+      var eventDescription = "";
+      if(event.place){
+        eventDescription += "■会場 " + event.place + " ";
+      }
+      if(event.charge){
+        console.log(event.charge);
+        eventDescription += "■料金: " +event.charge + " ";
+      }
+      if(event.detail){
+        eventDescription += "■詳細 :" +event.detail;
+      }
+
       var eventListHtml = (
         <div key={this.props.type + event.objectId + new Date().getTime()}>
           {this.previousEventMonth != eventDate.getMonth() && (
@@ -152,7 +165,7 @@ var EventList = React.createClass({
             {new Date() > eventDate ? (
               <div className="scheduleContentBox finished">
                 <p className="scheduleContentName">{event.title}</p>
-                <p className="scheduleContentDescription">{event.detail}</p>
+                <p className="scheduleContentDescription">{eventDescription}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
@@ -163,7 +176,7 @@ var EventList = React.createClass({
               <div className="scheduleContentBox">
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
-                <p className="scheduleContentDescription">{event.detail}</p>
+                <p className="scheduleContentDescription">{eventDescription}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
