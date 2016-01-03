@@ -145,7 +145,7 @@ var EventList = React.createClass({
       }
 
       var eventListHtml = (
-        <div key={this.props.type + event.objectId + new Date().getTime()}>
+        <div key={divKey}>
           {this.previousEventMonth != eventDate.getMonth() && (
             <h2 className="schedulePeriod">
               <span className="scheduleYear">{eventDate.getFullYear()}</span>
@@ -164,6 +164,7 @@ var EventList = React.createClass({
             )}
             {new Date() > eventDate ? (
               <div className="scheduleContentBox finished">
+                <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{event.title}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
                 <div className="scheduleStar active"></div>
