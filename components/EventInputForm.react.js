@@ -85,7 +85,7 @@ var EventInputForm = React.createClass({
     var event = new Event();
     var date = null;
     try{
-      date = new Date(year, month-1, day-1, time[0], time[1]);
+      date = new Date(year, month-1, day, time[0], time[1]);
     }
     catch (e){
       date = new Date(year, month-1, day);
