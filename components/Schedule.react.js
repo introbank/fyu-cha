@@ -10,7 +10,7 @@ var Schedule = React.createClass({
   getInitialState() {
     return {
       inputForm: false,
-      update: 0,
+      update: null,
     };
   },
 
@@ -58,6 +58,10 @@ var Schedule = React.createClass({
     } 
   },
 
+  componentWillMount(){
+    this.setState({update: 0});
+  },
+
   render() {
     if (this.props.type == "Dashboard" || !this.data.user){
       return (
@@ -67,17 +71,22 @@ var Schedule = React.createClass({
         );
     }
     else {
-      return (
-        <div>
-          <div className="scheduleInputPopup">
-            <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
+      if(this.state.update != null){
+        return (
+          <div>
+            <div className="scheduleInputPopup">
+              <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
+            </div>
+            {this.state.inputForm &&
+              <EventInputForm type={this.props.type} id={this.props.id} handlers={this.handlers}/>
+            }
+            <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
           </div>
-          {this.state.inputForm &&
-            <EventInputForm type={this.props.type} id={this.props.id} handlers={this.handlers}/>
-          }
-          <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
-        </div>
-    );
+        );
+      }
+      else{
+        return null; 
+      }
     }
   },
 

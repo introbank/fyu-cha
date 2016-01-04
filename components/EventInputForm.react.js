@@ -162,7 +162,6 @@ var EventInputForm = React.createClass({
    );
   },
 
-
   render() {
    console.log()
    var inputFormHtml = this.getInputFormHtml();
