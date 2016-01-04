@@ -134,14 +134,14 @@ var EventList = React.createClass({
 
       var eventDescription = "";
       if(event.place){
-        eventDescription += "■会場 " + event.place + " ";
+        eventDescription += "会場：" + event.place + " ";
       }
       if(event.charge){
         console.log(event.charge);
-        eventDescription += "■料金: " +event.charge + " ";
+        eventDescription += "料金：" +event.charge + " ";
       }
       if(event.detail){
-        eventDescription += "■詳細 :" +event.detail;
+        eventDescription += "詳細：" +event.detail;
       }
 
       var eventListHtml = (
