@@ -64,11 +64,16 @@ var Schedule = React.createClass({
 
   render() {
     if (this.props.type == "Dashboard" || !this.data.user){
-      return (
-        <div>
-          <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
-        </div>
+      if(this.state.update != null){
+        return (
+          <div>
+            <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
+          </div>
         );
+      }
+      else{
+        return null;
+      }
     }
     else {
       if(this.state.update != null){
