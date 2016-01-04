@@ -5,9 +5,6 @@ var ParseReact   = require('parse-react');
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
 
-  getInitialState() {
-    return{update: 0};
-  },
   observe(props, state) {
     var type = props.type;
     var id = props.id;
@@ -126,11 +123,11 @@ var EventList = React.createClass({
       if(minute < 10) { minute = "0" + minute; }
 
       var planButton = ( plan != null
-        ? <button className="btn" type="button" key={plan.objectId} onClick={this.quitPlanEvent.bind(this, plan)}>取り消し</button>
+        ? <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>取り消し</button>
         : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>お気に入り</button>
       );
 
-      var divKey = this.props.type + this.props.id + event.objectId + this.state.update;
+      var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
 
       var eventDescription = "";
       if(event.place){
@@ -204,10 +201,13 @@ var EventList = React.createClass({
   componentWillUpdate(nextProps, nextState) {
     // for update
     if(nextProps.update > this.props.update){
-      console.log("refreshQueries by update");
+      console.log("refreshQueries by update=" + nextProps.update);
       this.refreshEventData();
-      this.setState({update: nextProps.update});
     }
+  },
+
+  componentWillMount(){
+    this.refreshEventData();
   },
 
   initEventListFlugs(){
@@ -225,7 +225,6 @@ var EventList = React.createClass({
 
   render() {
     console.log("props.update::" + this.props.update);
-    console.log("state.update::" + this.state.update);
     this.initEventListFlugs();
     var eventList = null;
     if (this.props.type == "Dashboard"){

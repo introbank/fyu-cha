@@ -11,7 +11,7 @@ var EventInputForm = React.createClass({
       eventYear: now.getFullYear(),
       eventMonth: now.getMonth() + 1,
       eventDay: now.getDate(),
-      eventTime: '18:30',
+      eventTime: null,
       eventTitle: '',
       eventCharge: '',
       eventPlace: '',
@@ -69,22 +69,23 @@ var EventInputForm = React.createClass({
   },
 
   handleEventSubmit(e) {
+    var now = new Date();
     var year = this.state.eventYear;
     var month = this.state.eventMonth;
     var day = this.state.eventDay;
-    var time = this.state.eventTime.split(":", 2);
-    console.log(time);
     var title = this.state.eventTitle.trim();
     var charge = this.state.eventCharge;
     var place = this.state.eventPlace;
     var detail = this.state.eventDetail.trim();
     if (!year || !month || !day || !title) {
+      window.alert("年、月、日、タイトルは必ず入力してください");
       return;
     }
     var Event = Parse.Object.extend('Event');
     var event = new Event();
     var date = null;
     try{
+      var time = this.state.eventTime.split(":", 2);
       date = new Date(year, month-1, day, time[0], time[1]);
     }
     catch (e){
@@ -112,14 +113,14 @@ var EventInputForm = React.createClass({
       then(
       this.setState(
         {
-          eventYear: '',
-          eventMonth: '',
-          eventDay: '',
-          eventTime: '',
+          eventYear: now.getFullYear(),
+          eventMonth: now.getMonth() + 1,
+          eventDay: now.getDate(),
+          eventTime: null,
           eventTitle: '',
           eventCharge: '',
           eventPlace: '',
-          eventDetail: '',
+          eventDetail: ''
         })).then(this.props.handlers().incrementUpdate())
         .then(console.log("ok"));
   },
