@@ -1,6 +1,7 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
 var ContributionList = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -57,16 +58,15 @@ var ContributionList = React.createClass({
               return;
             }
             totalFyucha += twitterCb.point;
-            var url = "/" + account.className.toLowerCase() + "s/" + account.twitterUsername;
             return (
               <div className="fyuchaCommit" key={twitterCb.objectId}>
-                <a href={url}>
+                <a href={AccountInfoLib.getUrl(account)}>
                   <div className="fyuchaCommitUserArea">
                     <div className="fyuchaCommitUserThumbnail">
-                      <img src={account.imageUrl} alt={account.name} />
+                      <img src={AccountInfoLib.getImageUrl(account)} alt={AccountInfoLib.getAccountName(account)} />
                     </div>
-                    <p className="fyuchaCommitUserName">{account.name}</p>
-                    <p className="fyuchaCommitUserAccount">@{account.twitterUsername}</p>
+                    <p className="fyuchaCommitUserName">{AccountInfoLib.getAccountName(account)}</p>
+                    <p className="fyuchaCommitUserAccount">@{AccountInfoLib.getUsername(account)}</p>
                   </div>
                 </a>
                 <div className="fyuchaCommitActionArea">
@@ -94,16 +94,15 @@ var ContributionList = React.createClass({
             if (!twitterCb.user) {
               return;
             }
-            var url = "/users/" + twitterCb.user.username;
             return (
               <div className="fyuchaCommit" key={twitterCb.objectId}>
-                <a href={url}>
+                <a href={AccountInfoLib.getUrl(twitterCb.user)}>
                   <div className="fyuchaCommitUserArea">
                     <div className="fyuchaCommitUserThumbnail">
-                      <img src={twitterCb.user.imageUrl} alt={twitterCb.user.name} />
+                      <img src={twitterCb.user.imageUrl} alt={AccountInfoLib.getAccountName(twitterCb.user)} />
                     </div>
-                    <p className="fyuchaCommitUserName">{twitterCb.user.name}</p>
-                    <p className="fyuchaCommitUserAccount">@{twitterCb.user.username}</p>
+                    <p className="fyuchaCommitUserName">{AccountInfoLib.getAccountName(twitterCb.user)}</p>
+                    <p className="fyuchaCommitUserAccount">@{AccountInfoLib.getUsername(twitterCb.user)}</p>
                   </div>
                 </a>
                 <div className="fyuchaCommitActionArea">

@@ -3,6 +3,7 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
 var GroupList = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -31,11 +32,10 @@ var GroupList = React.createClass({
                   {this.data.group &&
                     <ul>
                       {this.data.group.map(function (group) {
-                        var groupName = (group.displayName) ? group.displayName : group.name;
                         return (
                           <li key={group.objectId}>
-                            <a href={'/groups/' + group.twitterUsername}><img src={group.imageUrl} /></a>
-                            <h2>{groupName}</h2>
+                            <a href={'/groups/' + AccountInfoLib.getUsername(group)}><img src={AccountInfoLib.getImageUrl(group)} /></a>
+                            <h2>{AccountInfoLib.getAccountName(group)}</h2>
                           </li>
                         )
                       })}
