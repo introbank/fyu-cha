@@ -33,7 +33,7 @@ var MemberList = React.createClass({
             return (
               <li key={member.objectId} >
                 <a href={'/artists/' + member.twitterUsername}><img src={AccountInfoLib.getImageUrl(member)} /></a>
-                <h2>{AccountInfoLib.getUsername(member)}</h2>
+                <h2>{AccountInfoLib.getAccountName(member)}</h2>
               </li>
             );
           })}
