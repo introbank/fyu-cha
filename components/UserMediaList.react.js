@@ -1,6 +1,7 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
 var UserMediaList = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -47,16 +48,14 @@ var UserMediaList = React.createClass({
         continue;
       }
       var album = following.artist.album.objectId;
-      var id = following.artist.twitterUsername;
-      albumAccountHash[album] = "/artists/" + id;
+      albumAccountHash[album] = AccountInfoLib.getUrl(following.artist);
     }
     for (var following of this.props.groups) {
       if (!following.group) {
         continue;
       }
       var album = following.group.album.objectId;
-      var id = following.group.twitterUsername;
-      albumAccountHash[album] = "/groups/" + id;
+      albumAccountHash[album] = AccountInfoLib.getUrl(following.group);
     }
     return albumAccountHash;
   },
