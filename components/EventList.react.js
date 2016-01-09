@@ -129,6 +129,8 @@ var EventList = React.createClass({
 
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
 
+      var eventTitle = event.title == null ? event.title : "";
+
       var eventDescription = "";
       if(event.place){
         eventDescription += "会場：" + event.place + " ";
@@ -162,7 +164,7 @@ var EventList = React.createClass({
             {new Date() > eventDate ? (
               <div className="scheduleContentBox finished">
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
-                <p className="scheduleContentName">{event.title}</p>
+                <p className="scheduleContentName">{eventTitle}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
@@ -173,7 +175,7 @@ var EventList = React.createClass({
             ) : (
               <div className="scheduleContentBox">
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
-                <p className="scheduleContentName">{event.title}</p>
+                <p className="scheduleContentName">{eventTitle}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
                 <div className="scheduleStar active"></div>
                 {this.props.type != "Dashboard" && this.data.user &&
