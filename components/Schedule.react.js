@@ -15,27 +15,9 @@ var Schedule = React.createClass({
   },
 
   observe(props, state) {
-    var type = props.type;
-    var id = props.id;
-
-    if (type == "Dashboard"){
-      return{
-        user: ParseReact.currentUser,
-      };
-    }
-    else{
-      var accountQuery = new Parse.Query(type);
-      accountQuery.equalTo('twitterUsername', id);
-
-      var eventQuery = new Parse.Query('Event');
-      eventQuery.ascending('date');
-      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
-
-      return {
-        user: ParseReact.currentUser,
-        account: accountQuery,
-      };
-    }
+    return{
+      user: ParseReact.currentUser,
+    };
   },
 
   popInputForm(){
@@ -67,7 +49,7 @@ var Schedule = React.createClass({
       if(this.state.update != null){
         return (
           <div>
-            <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
+            <EventList type={this.props.type} account={this.props.account} update={this.state.update} handlers={this.handlers} />
           </div>
         );
       }
@@ -83,9 +65,9 @@ var Schedule = React.createClass({
               <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
             </div>
             {this.state.inputForm &&
-              <EventInputForm type={this.props.type} id={this.props.id} handlers={this.handlers}/>
+              <EventInputForm account={this.props.account} handlers={this.handlers}/>
             }
-            <EventList type={this.props.type} id={this.props.id} update={this.state.update} handlers={this.handlers} />
+            <EventList type={this.props.type} account={this.props.account} update={this.state.update} handlers={this.handlers} />
           </div>
         );
       }

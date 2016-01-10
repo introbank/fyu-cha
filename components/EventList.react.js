@@ -7,7 +7,7 @@ var EventList = React.createClass({
 
   observe(props, state) {
     var type = props.type;
-    var id = props.id;
+    var account = props.account;
 
     var planQuery = new Parse.Query("EventPlan");
     planQuery.include('event');
@@ -22,7 +22,7 @@ var EventList = React.createClass({
     }
     else{
       var accountQuery = new Parse.Query(type);
-      accountQuery.equalTo('twitterUsername', id);
+      accountQuery.equalTo('objectId', account.objectId);
 
       var eventQuery = new Parse.Query('Event');
       eventQuery.ascending('date');
@@ -103,12 +103,12 @@ var EventList = React.createClass({
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
-      artist.id = this.data.account[0].id.objectId;
+      artist.id = this.props.account[0].id.objectId;
       eventStatus.set("artist", artist);
     } else {
       var Group = Parse.Object.extend('Group');
       var group = new Group();
-      group.id = this.data.account[0].id.objectId;
+      group.id = this.props.account[0].id.objectId;
       eventStatus.set("group", group);
     }
     eventStatus.save().then(this.incrementUpdate());
@@ -134,7 +134,6 @@ var EventList = React.createClass({
         eventDescription += "会場：" + event.place + " ";
       }
       if(event.charge){
-        console.log(event.charge);
         eventDescription += "料金：" +event.charge + " ";
       }
       if(event.detail){

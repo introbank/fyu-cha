@@ -103,7 +103,7 @@ var Group = React.createClass({
                 }
                 {this.state.showSchedule &&
                 <div id="tab2" className="tab">
-                  <Schedule type="Group" id={this.props.params.id} />
+                  <Schedule type="Group" account={group} />
                 </div>
                 }
                 {this.state.showData &&

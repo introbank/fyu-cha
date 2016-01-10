@@ -20,19 +20,8 @@ var EventInputForm = React.createClass({
   },
 
   observe(props, state) {
-    var type = props.type;
-    var id = props.id;
-
-      var accountQuery = new Parse.Query(type);
-      accountQuery.equalTo('twitterUsername', id);
-
-      var eventQuery = new Parse.Query('Event');
-      eventQuery.ascending('date');
-      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
-
     return {
       user: ParseReact.currentUser,
-      account: accountQuery,
     };
   },
 
@@ -96,18 +85,20 @@ var EventInputForm = React.createClass({
     event.set('charge', charge);
     event.set('place', place);
     event.set('detail', detail);
-    if (this.props.type === 'Artist') {
+    if (this.props.account.className == 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
-      artist.id = this.data.account[0].id.objectId;
+      artist.id = this.props.account.objectId;
       var relation = event.relation('artists');
       relation.add(artist);
+      console.log(relation);
     } else {
       var Group = Parse.Object.extend('Group');
       var group = new Group();
-      group.id = this.data.account[0].id.objectId;
+      group.id = this.props.account.objectId;
       var relation = event.relation('groups');
       relation.add(group);
+      console.log(relation);
     }
     event.save().
       then(
@@ -163,13 +154,13 @@ var EventInputForm = React.createClass({
   },
 
   render() {
-   console.log()
-   var inputFormHtml = this.getInputFormHtml();
-   return(
-    <div>
-      {inputFormHtml}
-    </div>
-   );
+     console.log(this.props.account);
+     var inputFormHtml = this.getInputFormHtml();
+     return(
+      <div>
+        {inputFormHtml}
+      </div>
+     );
   },
 });
 

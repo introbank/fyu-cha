@@ -103,7 +103,7 @@ var Artist = React.createClass({
                 }
                 {this.state.showSchedule &&
                 <div id="tab2" className="tab">
-                  <Schedule type="Artist" id={this.props.params.id} />
+                  <Schedule type="Artist" account={artist} />
                 </div>
                 }
                 {this.state.showData &&
