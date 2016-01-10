@@ -21,16 +21,33 @@ var EventList = React.createClass({
       };
     }
     else{
-      var accountQuery = new Parse.Query(type);
-      accountQuery.equalTo('objectId', account.objectId);
-
       var eventQuery = new Parse.Query('Event');
       eventQuery.ascending('date');
-      eventQuery.matchesQuery(type.toLowerCase() + 's', accountQuery);
+      if(type == "Group"){
+        var groupQuery = new Parse.Query(type);
+        groupQuery.equalTo('objectId', account.objectId);
+        eventQuery.matchesQuery("groups", groupQuery);
+      }
+      else{ // Artist
+        var Artist = Parse.Object.extend("Artist");
+        var artist = new Artist();
+        artist.id = account.objectId;
+
+        var artistQuery = new Parse.Query("Artist");
+        artistQuery.equalTo("objectId", account.objectId);
+        var groupsQuery = artist.relation("groups").query();
+
+        var eventArtistQuery = new Parse.Query('Event');
+        eventArtistQuery.matchesQuery("artists", artistQuery);
+
+        var eventGroupQuery = new Parse.Query('Event');
+        eventGroupQuery.matchesQuery("groups", groupsQuery);
+        
+        eventQuery._orQuery([eventArtistQuery, eventGroupQuery]);
+      }
 
       return {
         user: ParseReact.currentUser,
-        account: accountQuery,
         events: eventQuery,
         plan: planQuery
       };
@@ -103,12 +120,12 @@ var EventList = React.createClass({
     if (this.props.type === 'Artist') {
       var Artist = Parse.Object.extend('Artist');
       var artist = new Artist();
-      artist.id = this.props.account[0].id.objectId;
+      artist.id = this.props.account.objectId;
       eventStatus.set("artist", artist);
     } else {
       var Group = Parse.Object.extend('Group');
       var group = new Group();
-      group.id = this.props.account[0].id.objectId;
+      group.id = this.props.account.objectId;
       eventStatus.set("group", group);
     }
     eventStatus.save().then(this.incrementUpdate());
