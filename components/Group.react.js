@@ -8,6 +8,7 @@ var MediaList   = require('./MediaList.react.js');
 var Schedule   = require('./Schedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var Follow       = require('./Follow.react.js');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
 var Group = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -16,6 +17,7 @@ var Group = React.createClass({
     return {
       activeTab: 'media',
       showMedia: true,
+      showMember: false,
       showSchedule: false,
       showData: false,
     };
@@ -27,9 +29,13 @@ var Group = React.createClass({
     var groupQuery = new Parse.Query('Group');
     groupQuery.equalTo('twitterUsername', id);
 
+    var artistQuery = new Parse.Query("Artist");
+    artistQuery.matchesKeyInQuery('groups', 'objectId', groupQuery);
+
     return {
       user: ParseReact.currentUser,
       group: groupQuery,
+      member: artistQuery,
     };
   },
 
@@ -37,27 +43,65 @@ var Group = React.createClass({
     this.setState({
       activeTab: 'media',
       showMedia: true,
+      showMember: false,
       showSchedule: false,
       showData: false
     });
   },
-
+  
   changeTab2() {
     this.setState({
-      activeTab: 'schedule',
+      activeTab: 'member',
       showMedia: false,
-      showSchedule: true,
+      showMember: true,
+      showSchedule: false,
       showData: false
     });
   },
 
   changeTab3() {
     this.setState({
+      activeTab: 'schedule',
+      showMedia: false,
+      showMember: false,
+      showSchedule: true,
+      showData: false
+    });
+  },
+
+  changeTab4() {
+    this.setState({
       activeTab: 'data',
       showMedia: false,
+      showMember: false,
       showSchedule: false,
       showData: true
     });
+  },
+
+  createMemberList(){
+    return(
+      <div id="followList" className="tab">
+        <div className="box">
+          <ul>
+            {this.data.member.map(function (member) {
+              if (!member) {
+                return <div />;
+              }
+              var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(member) + ')'};
+              return (
+                <li key={member.objectId} >
+                  <a href={AccountInfoLib.getUrl(member)}>
+                    <span style={imageStyle}></span>
+                  </a>
+                  <h2>{AccountInfoLib.getAccountName(member)}</h2>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </div>
+     );
   },
 
   render() {
@@ -84,15 +128,21 @@ var Group = React.createClass({
                     }
                   </li>
                   <li id="label__tab2">
-                    {this.state.activeTab === 'schedule' ?
-                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>スケジュール</a> :
-                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>スケジュール</a>
+                    {this.state.activeTab === 'member' ?
+                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>メンバー</a> :
+                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>メンバー</a>
                     }
                   </li>
                   <li id="label__tab3">
+                    {this.state.activeTab === 'schedule' ?
+                      <a href="#" className="tab3 boR active" onClick={this.changeTab3}>スケジュール</a> :
+                      <a href="#" className="tab3 boR" onClick={this.changeTab3}>スケジュール</a>
+                    }
+                  </li>
+                  <li id="label__tab4">
                     {this.state.activeTab === 'data' ?
-                      <a href="#" className="tab3 active" onClick={this.changeTab3}>ふゅーちゃ</a> :
-                      <a href="#" className="tab3" onClick={this.changeTab3}>ふゅーちゃ</a>
+                      <a href="#" className="tab4 active" onClick={this.changeTab4}>ふゅーちゃ</a> :
+                      <a href="#" className="tab4 " onClick={this.changeTab4}>ふゅーちゃ</a>
                     }
                   </li>
                 </ul>
@@ -101,13 +151,18 @@ var Group = React.createClass({
                   <MediaList type="Group" id={this.props.params.id} />
                 </div>
                 }
-                {this.state.showSchedule &&
+                {this.state.showMember &&
                 <div id="tab2" className="tab">
+                  {this.createMemberList(group)}
+                </div>
+                }
+                {this.state.showSchedule &&
+                <div id="tab3" className="tab">
                   <Schedule type="Group" account={group} />
                 </div>
                 }
                 {this.state.showData &&
-                <div id="tab3" className="tab">
+                <div id="tab4" className="tab">
                   <ContributionList type="Group" id={this.props.params.id} />
                 </div>
                 }
