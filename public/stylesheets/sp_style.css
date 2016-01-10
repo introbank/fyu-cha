@@ -521,7 +521,7 @@ h1 {
 .scheduleDayWrapper .scheduleNowDivider {
   position: relative;
   float: right;
-  margin-top: -2px;
+  margin-top: 5px;
   margin-bottom: 8px;
   width: 87%;
   height: 1px;

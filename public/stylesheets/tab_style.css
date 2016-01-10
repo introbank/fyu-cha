@@ -500,17 +500,24 @@ h1 {
   right: 5px;
   width: 20px;
   height: 20px;
-  background: #b5b6b6;
+  background: url(../images/scheduleStar.png) no-repeat 0 0;
+  background-size:20px 20px;
+  -webkit-background-size:20px 20px;
+  -moz-background-size:20px 20px;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleStar.active {
   background: #d31277;
+  background: url(../images/scheduleStar_active.png) no-repeat 0 0;
+  background-size:20px 20px;
+  -webkit-background-size:20px 20px;
+  -moz-background-size:20px 20px;
 }
 
 .scheduleDayWrapper .scheduleNowDivider {
   position: relative;
   float: right;
-  margin-top: -2px;
+  margin-top: 5px;
   margin-bottom: 8px;
   width: 87%;
   height: 1px;
