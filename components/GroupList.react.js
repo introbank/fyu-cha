@@ -32,9 +32,12 @@ var GroupList = React.createClass({
                   {this.data.group &&
                     <ul>
                       {this.data.group.map(function (group) {
+                        var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(group) + ')'};
                         return (
                           <li key={group.objectId}>
-                            <a href={'/groups/' + AccountInfoLib.getUsername(group)}><img src={AccountInfoLib.getImageUrl(group)} /></a>
+                            <a href={'/groups/' + AccountInfoLib.getUsername(group)}>
+                              <span style={imageStyle}></span>
+                            </a>
                             <h2>{AccountInfoLib.getAccountName(group)}</h2>
                           </li>
                         )

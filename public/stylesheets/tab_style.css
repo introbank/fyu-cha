@@ -192,11 +192,15 @@ h1 {
 }
 
 .mainInfo .iconImage {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
   width: 70px;
   height: 70px;
   margin-bottom: 5px;
   border: 1px solid #CFD0D0;
   border-radius: 4px;
+  background-size: cover;
 }
 
 .mainInfo .account {
@@ -348,6 +352,16 @@ h1 {
   width: 200px;
   height: auto;
   margin: 10px 10px 5px;
+}
+
+.tabArea #followList ul li span {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #EAEAEA;
+  background-size: cover;
 }
 
 .tabArea #followList ul li img {

@@ -12,9 +12,12 @@ var Following = React.createClass({
               if (!following.artist) {
                 return <div />;
               }
+              var imageStyle = {backgroundImage:'url(' + following.artist.imageUrl + ')'};
               return (
                 <li key={following.objectId} >
-                  <a href={'/artists/' + following.artist.twitterUsername}><img src={following.artist.imageUrl} /></a>
+                  <a href={'/artists/' + following.artist.twitterUsername}>
+                    <span style={imageStyle}></span>
+                  </a>
                   <h2>{following.artist.name}</h2>
                 </li>
               )
