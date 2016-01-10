@@ -66,8 +66,8 @@ var EventInputForm = React.createClass({
     var charge = this.state.eventCharge;
     var place = this.state.eventPlace;
     var detail = this.state.eventDetail.trim();
-    if (!year || !month || !day || !title) {
-      window.alert("年、月、日、タイトルは必ず入力してください");
+    if (!year || !month || !day) {
+      window.alert("年、月、日、は必ず入力してください");
       return;
     }
     var Event = Parse.Object.extend('Event');

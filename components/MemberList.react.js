@@ -25,15 +25,17 @@ var MemberList = React.createClass({
     return (
       <div key={this.props.key}>
         <h2>
-          <img src={AccountInfoLib.getImageUrl(this.props.group)} width="20"/>
-          {AccountInfoLib.getAccountName(this.props.group)}
+          <a href={AccountInfoLib.getUrl(this.props.group)}>
+            <img src={AccountInfoLib.getImageUrl(this.props.group)} width="20"/>
+            {AccountInfoLib.getAccountName(this.props.group)}
+          </a>
         </h2>
         <ul>
           {this.data.members.map(function(member) {
             var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(member) + ')'};
             return (
               <li key={member.objectId} >
-                <a href={'/artists/' + member.twitterUsername}>
+                <a href={AccountInfoLib.getUrl(member)}><img src={AccountInfoLib.getImageUrl(member)} />
                   <span style={imageStyle}></span>
                 </a>
                 <h2>{AccountInfoLib.getAccountName(member)}</h2>
