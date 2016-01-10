@@ -11,26 +11,23 @@ var Signup = React.createClass({
     return {
       password: '',
       confirm: '',
-      error: false
-    };
-  },
-
-  getInitialState() {
-    return {
-      error: null,
-      complete: false,
+      error: false,
       serverSideRendering: true
     };
   },
 
-  componentWillMount() {
-    if (this.data.user) {
-      location.href = '/';
-    }
-  },
-
   componentDidMount() {
     this.setState({serverSideRendering: false});
+    var User = Parse.Object.extend('User');
+    var query = new Parse.Query(User);
+    query.equalTo('username', this.props.params.username);
+    query.find({
+      success: function(results) {
+        if (results.length > 0) {
+          location.href = '/login';
+        }
+      }
+    });
   },
 
   observe() {
