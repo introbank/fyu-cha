@@ -32,9 +32,12 @@ var MemberList = React.createClass({
         </h2>
         <ul>
           {this.data.members.map(function(member) {
+            var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(member) + ')'};
             return (
               <li key={member.objectId} >
-                <a href={AccountInfoLib.getUrl(member)}><img src={AccountInfoLib.getImageUrl(member)} /></a>
+                <a href={AccountInfoLib.getUrl(member)}><img src={AccountInfoLib.getImageUrl(member)} />
+                  <span style={imageStyle}></span>
+                </a>
                 <h2>{AccountInfoLib.getAccountName(member)}</h2>
               </li>
             );

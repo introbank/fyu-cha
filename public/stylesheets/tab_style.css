@@ -192,11 +192,15 @@ h1 {
 }
 
 .mainInfo .iconImage {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
   width: 70px;
   height: 70px;
   margin-bottom: 5px;
   border: 1px solid #CFD0D0;
   border-radius: 4px;
+  background-size: cover;
 }
 
 .mainInfo .account {
@@ -350,6 +354,16 @@ h1 {
   margin: 10px 10px 5px;
 }
 
+.tabArea #followList ul li span {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #EAEAEA;
+  background-size: cover;
+}
+
 .tabArea #followList ul li img {
   width: 200px;
   height: 200px;
@@ -486,17 +500,24 @@ h1 {
   right: 5px;
   width: 20px;
   height: 20px;
-  background: #b5b6b6;
+  background: url(../images/scheduleStar.png) no-repeat 0 0;
+  background-size:20px 20px;
+  -webkit-background-size:20px 20px;
+  -moz-background-size:20px 20px;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleStar.active {
   background: #d31277;
+  background: url(../images/scheduleStar_active.png) no-repeat 0 0;
+  background-size:20px 20px;
+  -webkit-background-size:20px 20px;
+  -moz-background-size:20px 20px;
 }
 
 .scheduleDayWrapper .scheduleNowDivider {
   position: relative;
   float: right;
-  margin-top: -2px;
+  margin-top: 5px;
   margin-bottom: 8px;
   width: 87%;
   height: 1px;

@@ -42,7 +42,7 @@ var EventList = React.createClass({
       this.refreshQueries(["plan"]);
     }
     else{
-      this.refreshQueries(["events", "plan"]); 
+      this.refreshQueries(["events", "plan"]);
     }
   },
 
@@ -51,7 +51,7 @@ var EventList = React.createClass({
       this.refreshQueries(["plan"]);
     }
     else{
-      this.refreshQueries(["plan"]); 
+      this.refreshQueries(["plan"]);
     }
   },
 
@@ -86,7 +86,7 @@ var EventList = React.createClass({
 
   quitPlanEvent(plan) {
     var EventPlan = Parse.Object.extend("EventPlan");
-    var eventPlan = new EventPlan();  
+    var eventPlan = new EventPlan();
     eventPlan.id = plan.objectId;
     eventPlan.destroy().then(this.incrementUpdate());
   },
@@ -196,7 +196,7 @@ var EventList = React.createClass({
       return eventListHtml;
     }
     catch(e) {
-      console.log(e); 
+      console.log(e);
     }
   },
 
@@ -222,7 +222,7 @@ var EventList = React.createClass({
     getWeekDaysString(weekdayInt){
       var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
       return weekdays[weekdayInt];
-    }, 
+    },
   },
 
   render() {
@@ -234,7 +234,7 @@ var EventList = React.createClass({
         if (plan.event != null){
         return this.createEventList(plan.event, plan)}
       }, this);
-      
+
     }
     else{
       var planHash = {};

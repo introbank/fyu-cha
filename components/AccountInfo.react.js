@@ -6,6 +6,8 @@ var AccountInfoLib = require('../lib/AccountInfoLib.js');
 var AccountInfo = React.createClass({
 
   render() {
+    var twitterUrl = 'https://twitter.com/' + AccountInfoLib.getUsername(this.props.account);
+    var iconImageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(this.props.account) + ')'};
     return (
       <div className="mainInfo">
         {this.props.account &&
@@ -14,10 +16,14 @@ var AccountInfo = React.createClass({
               ? <div />
               : <Follow account={this.props.account} />
             }
-            <img src={AccountInfoLib.getImageUrl(this.props.account)} className="iconImage" />
+            <span className="iconImage" style={iconImageStyle}></span>
             <h1>{AccountInfoLib.getAccountName(this.props.account)}</h1>
             <div>
-              <p className="account">@{AccountInfoLib.getUsername(this.props.account)}</p>
+              <a href={twitterUrl} target="_blank">
+                <p className="account">
+                  @{AccountInfoLib.getUsername(this.props.account)}
+                </p>
+              </a>
             </div>
             <span>{this.props.account.info}</span>
           </div>
