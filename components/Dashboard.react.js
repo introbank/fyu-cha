@@ -21,14 +21,6 @@ var Dashboard = React.createClass({
     };
   },
 
-  createQuery(col){
-    var following = new Parse.Query('Following');
-    following.equalTo("user", Parse.User.current());
-    following.include(col);
-    following.notEqualTo(col, null);
-    return following;
-  },
-
   observe() {
     var userQuery = new Parse.Query('User');
     userQuery.equalTo('objectId', Parse.User.current().id);

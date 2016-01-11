@@ -1,6 +1,7 @@
 var React  = require('react');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
-var Following = React.createClass({
+var FollowingList = React.createClass({
 
   render() {
     return(
@@ -12,13 +13,13 @@ var Following = React.createClass({
               if (!following.artist) {
                 return <div />;
               }
-              var imageStyle = {backgroundImage:'url(' + following.artist.imageUrl + ')'};
+              var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(following.artist) + ')'};
               return (
                 <li key={following.objectId} >
-                  <a href={'/artists/' + following.artist.twitterUsername}>
+                  <a href={AccountInfoLib.getUrl(following.artist)}>
                     <span style={imageStyle}></span>
                   </a>
-                  <h2>{following.artist.name}</h2>
+                  <h2>{AccountInfoLib.getAccountName(following.artist)}</h2>
                 </li>
               )
             })}
@@ -32,10 +33,13 @@ var Following = React.createClass({
               if (!following.group) {
                 return <div />;
               }
+              var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(following.group) + ')'};
               return (
                 <li key={following.objectId} >
-                  <a href={'/groups/' + following.group.twitterUsername}><img src={following.group.imageUrl} /></a>
-                  <h2>{following.group.name}</h2>
+                  <a href={AccountInfoLib.getUrl(following.group)}>
+                    <span style={imageStyle}></span>
+                  </a>
+                  <h2>{AccountInfoLib.getAccountName(following.group)}</h2>
                 </li>
               )
             })}
@@ -48,4 +52,4 @@ var Following = React.createClass({
 
 });
 
-module.exports = Following;
+module.exports = FollowingList;
