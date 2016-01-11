@@ -42,7 +42,7 @@ var EventList = React.createClass({
 
         var eventGroupQuery = new Parse.Query('Event');
         eventGroupQuery.matchesQuery("groups", groupsQuery);
-        
+
         eventQuery._orQuery([eventArtistQuery, eventGroupQuery]);
       }
 
@@ -146,7 +146,7 @@ var EventList = React.createClass({
 
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
 
-      var eventTitle = event.title == null ? event.title : "";
+      var eventTitle = event.title !== null ? event.title : "";
 
       var eventDescription = "";
       if(event.place){
