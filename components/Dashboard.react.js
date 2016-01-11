@@ -30,8 +30,10 @@ var Dashboard = React.createClass({
   },
 
   observe() {
-    var followingArtistQuery = FollowingLib.createArtistQuery(Parse.User.current());
-    var followingGroupQuery = FollowingLib.createGroupQuery(Parse.User.current());
+    var userQuery = new Parse.Query('User');
+    userQuery.equalTo('objectId', Parse.User.current().id);
+    var followingArtistQuery = FollowingLib.createArtistQuery(userQuery);
+    var followingGroupQuery = FollowingLib.createGroupQuery(userQuery);
     return {
       user: ParseReact.currentUser,
       followingArtists: followingArtistQuery,
