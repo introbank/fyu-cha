@@ -6,6 +6,7 @@ var UserMediaList       = require('./UserMediaList.react.js');
 var FollowingList       = require('./FollowingList.react.js');
 var Schedule   = require('./Schedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
+var FollowingLib = require('../lib/FollowingLib.js');
 
 var Dashboard = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -29,8 +30,8 @@ var Dashboard = React.createClass({
   },
 
   observe() {
-    var followingArtistQuery = this.createQuery("artist");
-    var followingGroupQuery = this.createQuery("group");
+    var followingArtistQuery = FollowingLib.createArtistQuery(Parse.User.current());
+    var followingGroupQuery = FollowingLib.createGroupQuery(Parse.User.current());
     return {
       user: ParseReact.currentUser,
       followingArtists: followingArtistQuery,

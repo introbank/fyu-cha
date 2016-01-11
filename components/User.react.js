@@ -7,6 +7,7 @@ var FollowingList       = require('./FollowingList.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var Header       = require('./Header.react.js');
 var Navigation   = require('./Navigation.react.js');
+var FollowingLib = require('../lib/FollowingLib.js');
 
 var User = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -32,7 +33,8 @@ var User = React.createClass({
     var id = this.props.params.id;
     var userQuery = new Parse.Query('User');
     userQuery.equalTo('username', id);
-    var followingArtistQuery = this.createQuery(userQuery, "artist");
+    console.log(userQuery);
+    var followingArtistQuery = FollowingLib.createArtistQuery(userQuery);
     var followingGroupQuery = this.createQuery(userQuery, "group");
     return {
       user: userQuery,
