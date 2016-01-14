@@ -2,26 +2,17 @@ var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var AccountInfoLib = require('../lib/AccountInfoLib.js');
+var FollowingLib = require('../lib/FollowingLib');
 
 var UserMediaList = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe(props, state) {
-    var artists = [];
-    for (var following of props.artists) {
-      if (following.artist) {
-        artists.push(following.artist);
-      }
-    }
+    var artists = FollowingLib.getArtistList(props.artists);
     var artistAlbumQuery = new Parse.Query('Album');
     artistAlbumQuery.containedIn('artist', artists);
 
-    var groups = [];
-    for (var following of props.groups) {
-      if (following.group) {
-        groups.push(following.group)
-      }
-    }
+    var groups = FollowingLib.getGroupList(props.groups);
     var groupAlbumQuery = new Parse.Query('Album');
     groupAlbumQuery.containedIn('group', groups);
 

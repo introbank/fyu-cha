@@ -1,75 +1,15 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
+var PageType     = require('../lib/PageType.js');
 
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
 
   observe(props, state) {
-    var type = props.type;
-    var account = props.account;
-
-    var planQuery = new Parse.Query("EventPlan");
-    planQuery.include('event');
-    planQuery.equalTo("user", Parse.User.current());
-    planQuery.ascending('date');
-
-    if (type == "Dashboard"){
-      return{
-        user: ParseReact.currentUser,
-        plan: planQuery
-      };
-    }
-    else{
-      var eventQuery = new Parse.Query('Event');
-      eventQuery.ascending('date');
-      if(type == "Group"){
-        var groupQuery = new Parse.Query(type);
-        groupQuery.equalTo('objectId', account.objectId);
-        eventQuery.matchesQuery("groups", groupQuery);
-      }
-      else{ // Artist
-        var Artist = Parse.Object.extend("Artist");
-        var artist = new Artist();
-        artist.id = account.objectId;
-
-        var artistQuery = new Parse.Query("Artist");
-        artistQuery.equalTo("objectId", account.objectId);
-        var groupsQuery = artist.relation("groups").query();
-
-        var eventArtistQuery = new Parse.Query('Event');
-        eventArtistQuery.matchesQuery("artists", artistQuery);
-
-        var eventGroupQuery = new Parse.Query('Event');
-        eventGroupQuery.matchesQuery("groups", groupsQuery);
-
-        eventQuery._orQuery([eventArtistQuery, eventGroupQuery]);
-      }
-
-      return {
-        user: ParseReact.currentUser,
-        events: eventQuery,
-        plan: planQuery
-      };
-    }
-  },
-
-  refreshEventData(){
-    if (this.props.type == "Dashboard"){
-      this.refreshQueries(["plan"]);
-    }
-    else{
-      this.refreshQueries(["events", "plan"]);
-    }
-  },
-
-  refreshPlanData(){
-    if (this.props.type == "Dashboard"){
-      this.refreshQueries(["plan"]);
-    }
-    else{
-      this.refreshQueries(["plan"]);
-    }
+   return {
+      user: ParseReact.currentUser,
+    };
   },
 
   incrementUpdate(){
@@ -109,11 +49,6 @@ var EventList = React.createClass({
   },
 
   setEventStatus: function(targetEvent, eventStatus){
-    // if not login user, redirect for sign up page
-    if (!this.data.user) {
-      location.href = '/auth/twitter';
-    }
-
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
     eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
     eventStatus.set("date", targetEvent.date);
@@ -216,18 +151,6 @@ var EventList = React.createClass({
     }
   },
 
-  componentWillUpdate(nextProps, nextState) {
-    // for update
-    if(nextProps.update > this.props.update){
-      console.log("refreshQueries by update=" + nextProps.update);
-      this.refreshEventData();
-    }
-  },
-
-  componentWillMount(){
-    this.refreshEventData();
-  },
-
   initEventListFlugs(){
     this.previousEventMonth = -1;
     this.previousEventDay = -1;
@@ -242,11 +165,10 @@ var EventList = React.createClass({
   },
 
   render() {
-    console.log("props.update::" + this.props.update);
     this.initEventListFlugs();
     var eventList = null;
     if (this.props.type == "Dashboard"){
-      eventList = this.data.plan.map(function(plan) {
+      eventList = this.props.plan.map(function(plan) {
         if (plan.event != null){
         return this.createEventList(plan.event, plan)}
       }, this);
@@ -254,12 +176,12 @@ var EventList = React.createClass({
     }
     else{
       var planHash = {};
-        this.data.plan.map(function(plan){
+        this.props.plan.map(function(plan){
         if(plan.event != null){
           planHash[plan.event.objectId] = plan;
         }
       });
-      eventList = this.data.events.map(function(event) {
+      eventList = this.props.events.map(function(event) {
         var plan = null;
         if (event.objectId in planHash){
           plan = planHash[event.objectId];

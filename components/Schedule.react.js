@@ -15,12 +15,54 @@ var Schedule = React.createClass({
   },
 
   observe(props, state) {
-    return{
+    var type = props.type;
+    var account = props.account;
+
+    var planQuery = new Parse.Query("EventPlan");
+    planQuery.include('event');
+    planQuery.equalTo("user", Parse.User.current());
+    planQuery.ascending('date');
+
+    var eventQuery = new Parse.Query('Event');
+    eventQuery.ascending('date');
+    if(type == "Group"){
+      var groupQuery = new Parse.Query(type);
+      groupQuery.equalTo('objectId', account.objectId);
+      eventQuery.matchesQuery("groups", groupQuery);
+    }
+    else{ // Artist
+      var Artist = Parse.Object.extend("Artist");
+      var artist = new Artist();
+      artist.id = account.objectId;
+
+      var artistQuery = new Parse.Query("Artist");
+      artistQuery.equalTo("objectId", account.objectId);
+      var groupsQuery = artist.relation("groups").query();
+
+      var eventArtistQuery = new Parse.Query('Event');
+      eventArtistQuery.matchesQuery("artists", artistQuery);
+
+      var eventGroupQuery = new Parse.Query('Event');
+      eventGroupQuery.matchesQuery("groups", groupsQuery);
+
+      eventQuery._orQuery([eventArtistQuery, eventGroupQuery]);
+    }
+
+    return {
       user: ParseReact.currentUser,
+      events: eventQuery,
+      plan: planQuery
     };
+
   },
 
   popInputForm(){
+    // if not login user, redirect for sign up page
+    if (!this.data.user) {
+      location.href = '/auth/twitter';
+      return;
+    }
+
     this.setState({inputForm:true});
   },
 
@@ -31,6 +73,22 @@ var Schedule = React.createClass({
 
   incrementUpdate(){
     this.setState({update: this.state.update + 1});
+  },
+
+  refreshEventData(){
+    this.refreshQueries(["events", "plan"]);
+  },
+
+  componentWillUpdate(nextProps, nextState) {
+    // for update
+    if(nextState.update > this.state.update){
+      console.log("refreshQueries by update=" + nextState.update);
+      this.refreshEventData();
+    }
+  },
+
+  componentWillMount(){
+    this.refreshEventData();
   },
 
   handlers() {
@@ -45,35 +103,26 @@ var Schedule = React.createClass({
   },
 
   render() {
-    if (this.props.type == "Dashboard" || !this.data.user){
-      if(this.state.update != null){
-        return (
-          <div>
-            <EventList type={this.props.type} account={this.props.account} update={this.state.update} handlers={this.handlers} />
+    if(this.state.update != null){
+      return (
+        <div>
+          <div className="scheduleInputPopup">
+            <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
           </div>
-        );
-      }
-      else{
-        return null;
-      }
+          {this.state.inputForm &&
+            <EventInputForm account={this.props.account} handlers={this.handlers}/>
+          }
+          <div>
+          {this.data.events.length > 0
+          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} plan={this.data.plan} handlers={this.handlers} />
+          : <p>登録されているイベントがありません</p>
+          }
+        </div>
+      </div>
+      );
     }
-    else {
-      if(this.state.update != null){
-        return (
-          <div>
-            <div className="scheduleInputPopup">
-              <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
-            </div>
-            {this.state.inputForm &&
-              <EventInputForm account={this.props.account} handlers={this.handlers}/>
-            }
-            <EventList type={this.props.type} account={this.props.account} update={this.state.update} handlers={this.handlers} />
-          </div>
-        );
-      }
-      else{
-        return null; 
-      }
+    else{
+      return null;
     }
   },
 

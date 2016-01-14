@@ -58,6 +58,11 @@ var EventInputForm = React.createClass({
   },
 
   handleEventSubmit(e) {
+    // if not login user, redirect for sign up page
+    if (!this.data.user) {
+      location.href = '/auth/twitter';
+    }
+
     var now = new Date();
     var year = this.state.eventYear;
     var month = this.state.eventMonth;
