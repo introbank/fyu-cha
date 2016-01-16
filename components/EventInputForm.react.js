@@ -151,7 +151,7 @@ var EventInputForm = React.createClass({
           eventTitle: editEvent.title,
           eventCharge: editEvent.charge,
           eventPlace: editEvent.place,
-          eventDetail: editEvent.place
+          eventDetail: editEvent.detail
         }); 
     }
   },
