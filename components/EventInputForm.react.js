@@ -127,34 +127,34 @@ var EventInputForm = React.createClass({
 
   getInputFormHtml(){
     return (
-      <div className="scheduleAddBox">
-       <form className="commentForm" onSubmit={this.handleEventSubmit}>
-         <h3 className="scheduleAddSubTitle">開催日</h3>
-         <input className="scheduleAddInputDay" type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
-         <input className="scheduleAddInputDay" type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
-         <input className="scheduleAddInputDay" type="number" value={this.state.eventDay} onChange={this.handleEventDayChange} />日
-         <h3 className="scheduleAddSubTitle">開始時間</h3>
-         <input type="time" className="scheduleAddInputTime" value={this.state.eventTime} onChange={this.handleEventTimeChange} />〜
-         <h3 className="scheduleAddSubTitle">イベントタイトル</h3>
-         <input type="text" className="scheduleAddInputEventTitle" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
-         <div className="scheduleAddMultiArea">
-           <div className="scheduleAddSpotArea">
-             <h3 className="scheduleAddSubTitle">場所</h3>
-             <input type="text" className="scheduleAddInputSpot" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-           </div> 
-           <div className="scheduleAddCostArea">
-             <h3 className="scheduleAddSubTitle">費用</h3>
-             <input type="text" className="scheduleAddInputCost" value={this.state.eventCharge} onChange={this.handleEventChargeChange} />
-           </div>
-         </div>
-         <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
-         <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
-         <div className="scheduleAddButtonArea">
-           <div className="scheduleAddButtonOtherTime" onClick={this.closeForm} >フォームを閉じる</div>
-           <input className="scheduleAddButtonComplete" type="submit" value="完了" />
-         </div>
-       </form> 
-     </div>
+    <div className="scheduleAddBox">
+      <form className="commentForm" onSubmit={this.handleEventSubmit}>
+        <h3 className="scheduleAddSubTitle">開催日</h3>
+        <input className="scheduleAddInputDay" type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
+        <input className="scheduleAddInputDay" type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
+        <input className="scheduleAddInputDay" type="number" value={this.state.eventDay} onChange={this.handleEventDayChange} />日
+        <h3 className="scheduleAddSubTitle">開始時間</h3>
+        <input type="time" className="scheduleAddInputTime" value={this.state.eventTime} onChange={this.handleEventTimeChange} />〜
+        <h3 className="scheduleAddSubTitle">イベントタイトル</h3>
+        <input type="text" className="scheduleAddInputEventTitle" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
+        <div className="scheduleAddMultiArea">
+          <div className="scheduleAddSpotArea">
+            <h3 className="scheduleAddSubTitle">場所</h3>
+            <input type="text" className="scheduleAddInputSpot" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
+          </div> 
+          <div className="scheduleAddCostArea">
+            <h3 className="scheduleAddSubTitle">費用</h3>
+            <input type="text" className="scheduleAddInputCost" value={this.state.eventCharge} onChange={this.handleEventChargeChange} />
+          </div>
+        </div>
+        <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
+        <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
+        <div className="scheduleAddButtonArea">
+          <div className="scheduleAddButtonOtherTime" onClick={this.closeForm} >フォームを閉じる</div>
+          <input className="scheduleAddButtonComplete" type="submit" value="完了" />
+        </div>
+      </form> 
+    </div>
    );
   },
 
