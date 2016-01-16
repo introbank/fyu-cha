@@ -10,7 +10,7 @@ var MemberList = React.createClass({
     var Group = Parse.Object.extend("Group");
     var group = new Group();
     group.id = props.group.objectId;
-    var memberQuery = group.relation("members").query()
+    var memberQuery = group.relation("members").query();
     memberQuery.ascending('name');
 
     return {

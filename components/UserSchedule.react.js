@@ -16,25 +16,37 @@ var UserSchedule = React.createClass({
 
   observe(props, state) {
     var artists = FollowingLib.getArtistList(props.artists);
-    var artistEventQuery = new Parse.Query('Event');
-    artistEventQuery.containedIn('artists', artists);
+    var artistQueryList = [];
+    for(var i = 0; i < artists.length; i++){
+      var eventQuery = new Parse.Query('Event');
+      var artistQuery = new Parse.Query('Artist');
+      eventQuery.equalTo('artists', artists[i]);
+      artistQueryList.push(eventQuery);
+    }
 
     var groups = FollowingLib.getGroupList(props.groups);
-    var groupEventQuery = new Parse.Query('Event');
-    groupEventQuery.containedIn('groups', groups);
+    var groupQueryList = [];
+    for(var i = 0; i < groups.length; i++){
+      var eventQuery = new Parse.Query('Event');
+      eventQuery.equalTo('groups', groups[i]);
+      groupQueryList.push(eventQuery);
+    }
 
-    var eventQuery = new Parse.Query(artistEventQuery, groupEventQuery);
+    var queryList = artistQueryList.concat(groupQueryList);
+    var eventQuery = null;
+    for(var i = 0; i < queryList.length; i++){
+      if(i == 0){
+        eventQuery = queryList[i];
+      }
+      else{
+        eventQuery = Parse.Query.or(eventQuery, queryList[i]);
+      }
+    }
     eventQuery.ascending('date');
-
-    var planQuery = new Parse.Query("EventPlan");
-    planQuery.include('event');
-    planQuery.equalTo("user", Parse.User.current());
-    planQuery.ascending('date');
 
     return {
       user: ParseReact.currentUser,
       events: eventQuery,
-      plan: planQuery
     };
 
   },
@@ -44,7 +56,7 @@ var UserSchedule = React.createClass({
   },
 
   refreshEventData(){
-    this.refreshQueries(["events", "plan"]);
+    this.refreshQueries(["events"]);
   },
 
   componentWillUpdate(nextProps, nextState) {
@@ -70,11 +82,12 @@ var UserSchedule = React.createClass({
   },
 
   render() {
+    console.log(this.data.events);
     if(this.state.update != null){
       return (
         <div>
           {this.data.events.length > 0
-          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} plan={this.data.plan} />
+          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} />
           : <p>登録されているイベントがありません</p>
           }
         </div>

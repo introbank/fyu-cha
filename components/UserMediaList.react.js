@@ -54,7 +54,6 @@ var UserMediaList = React.createClass({
 
   render() {
     var albumAccountHash = this.createAlbumAccountHash();
-    console.log(this.props.type);
     if (this.props.artists.length < 1 && this.props.groups.length < 1) {
       return (
         <div>

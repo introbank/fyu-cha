@@ -4,7 +4,7 @@ var ParseReact  = require('parse-react');
 var AccountInfo   = require('./AccountInfo.react.js');
 var UserMediaList       = require('./UserMediaList.react.js');
 var FollowingList       = require('./FollowingList.react.js');
-var Schedule   = require('./Schedule.react.js');
+var UserSchedule   = require('./UserSchedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var FollowingLib = require('../lib/FollowingLib.js');
 
@@ -114,7 +114,7 @@ var Dashboard = React.createClass({
               <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
             }
             {this.state.showSchedule &&
-              <Schedule type="Dashboard" account={this.data.user} />
+              <UserSchedule artists={this.data.followingArtists} groups={this.data.followingGroups} />
             }
             {this.state.showData &&
               <ContributionList type="Dashboard" id={this.data.user.username} />

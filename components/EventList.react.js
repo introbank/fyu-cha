@@ -66,18 +66,13 @@ var EventList = React.createClass({
     eventStatus.save().then(this.incrementUpdate());
   },
 
-  createEventList(event, plan){
+  createEventList(event){
     try{
       var eventDate = new Date(event.date);
       var hour = eventDate.getHours();
       if(hour < 10) { hour = "0" + hour; }
       var minute = eventDate.getMinutes();
       if(minute < 10) { minute = "0" + minute; }
-
-      var planButton = ( plan != null
-        ? <button className="btn" type="button" onClick={this.quitPlanEvent.bind(this, plan)}>取り消し</button>
-        : <button className="btn" type="button" onClick={this.planEvent.bind(this, event)}>お気に入り</button>
-      );
 
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
 
@@ -121,7 +116,6 @@ var EventList = React.createClass({
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
                 }
-                {planButton}
              </div>
             ) : (
               <div className="scheduleContentBox">
@@ -132,7 +126,6 @@ var EventList = React.createClass({
                 {this.props.type != "Dashboard" && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
                 }
-                {planButton}
               </div>
             )}
 
@@ -167,27 +160,8 @@ var EventList = React.createClass({
   render() {
     this.initEventListFlugs();
     var eventList = null;
-    if (this.props.type == "Dashboard"){
-      eventList = this.props.plan.map(function(plan) {
-        if (plan.event != null){
-        return this.createEventList(plan.event, plan)}
-      }, this);
-
-    }
-    else{
-      var planHash = {};
-        this.props.plan.map(function(plan){
-        if(plan.event != null){
-          planHash[plan.event.objectId] = plan;
-        }
-      });
-      eventList = this.props.events.map(function(event) {
-        var plan = null;
-        if (event.objectId in planHash){
-          plan = planHash[event.objectId];
-        }
-        return this.createEventList(event, plan)}, this);
-    }
+    eventList = this.props.events.map(function(event) {
+      return this.createEventList(event)}, this);
 
     return (
       <div>
