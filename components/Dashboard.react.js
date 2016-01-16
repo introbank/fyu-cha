@@ -13,11 +13,11 @@ var Dashboard = React.createClass({
 
   getInitialState() {
     return {
-      activeTab: 'media',
-      showMedia: true,
-      showFollow: false,
-      showSchedule: false,
+      activeTab: 'schedule',
+      showSchedule: true,
       showData: false,
+      showMedia: false,
+      showFollow: false,
     };
   },
 
@@ -35,41 +35,41 @@ var Dashboard = React.createClass({
 
   changeTab1() {
     this.setState({
-      activeTab: 'media',
-      showMedia: true,
+      activeTab: 'schedule',
+      showSchedule: true,
+      showData: false,
+      showMedia: false,
       showFollow: false,
-      showSchedule: false,
-      showData: false
     });
   },
 
   changeTab2() {
     this.setState({
-      activeTab: 'follow',
-      showMedia: false,
-      showFollow: true,
+      activeTab: 'data',
       showSchedule: false,
-      showData: false
+      showData: true,
+      showMedia: false,
+      showFollow: false,
     });
   },
 
   changeTab3() {
     this.setState({
-      activeTab: 'schedule',
-      showMedia: false,
+      activeTab: 'media',
+      showSchedule: false,
+      showData: false,
+      showMedia: true,
       showFollow: false,
-      showSchedule: true,
-      showData: false
     });
   },
 
   changeTab4() {
     this.setState({
-      activeTab: 'data',
-      showMedia: false,
-      showFollow: false,
+      activeTab: 'follow',
       showSchedule: false,
-      showData: true
+      showData: false,
+      showMedia: false,
+      showFollow: true,
     });
   },
 
@@ -81,27 +81,27 @@ var Dashboard = React.createClass({
           <div className="contents">
             <ul className="tabs">
               <li id="label__tab1">
-                {this.state.activeTab === 'media' ?
-                  <a href="#" className="tab1 boR active" onClick={this.changeTab1}>画像/動画</a> :
-                  <a href="#" className="tab1 boR" onClick={this.changeTab1}>画像/動画</a>
+                {this.state.activeTab === 'schedule' ?
+                  <a href="#" className="tab1 boR active" onClick={this.changeTab1}>スケジュール</a> :
+                  <a href="#" className="tab1 boR" onClick={this.changeTab1}>スケジュール</a>
                 }
               </li>
               <li id="label__tab2">
-                {this.state.activeTab === 'follow' ?
-                  <a href="#" className="tab2 boR active" onClick={this.changeTab2}>フォロー</a> :
-                  <a href="#" className="tab2 boR" onClick={this.changeTab2}>フォロー</a>
+                {this.state.activeTab === 'data' ?
+                  <a href="#" className="tab2 active" onClick={this.changeTab2}>ふゅーちゃ</a> :
+                  <a href="#" className="tab2" onClick={this.changeTab2}>ふゅーちゃ</a>
                 }
               </li>
               <li id="label__tab3">
-                {this.state.activeTab === 'schedule' ?
-                  <a href="#" className="tab3 boR active" onClick={this.changeTab3}>スケジュール</a> :
-                  <a href="#" className="tab3 boR" onClick={this.changeTab3}>スケジュール</a>
+                {this.state.activeTab === 'media' ?
+                  <a href="#" className="tab3 boR active" onClick={this.changeTab3}>画像/動画</a> :
+                  <a href="#" className="tab3 boR" onClick={this.changeTab3}>画像/動画</a>
                 }
               </li>
               <li id="label__tab4">
-                {this.state.activeTab === 'data' ?
-                  <a href="#" className="tab4 active" onClick={this.changeTab4}>ふゅーちゃ</a> :
-                  <a href="#" className="tab4" onClick={this.changeTab4}>ふゅーちゃ</a>
+                {this.state.activeTab === 'follow' ?
+                  <a href="#" className="tab4 boR active" onClick={this.changeTab4}>フォロー</a> :
+                  <a href="#" className="tab4 boR" onClick={this.changeTab4}>フォロー</a>
                 }
               </li>
             </ul>

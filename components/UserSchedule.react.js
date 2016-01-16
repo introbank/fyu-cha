@@ -33,7 +33,7 @@ var UserSchedule = React.createClass({
     }
 
     var queryList = artistQueryList.concat(groupQueryList);
-    var eventQuery = null;
+    var eventQuery = new Parse.Query('Event');
     for(var i = 0; i < queryList.length; i++){
       if(i == 0){
         eventQuery = queryList[i];
