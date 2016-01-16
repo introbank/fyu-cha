@@ -147,24 +147,24 @@ var Group = React.createClass({
                     }
                   </li>
                 </ul>
+                {this.state.showSchedule &&
+                <div id="tab1" className="tab">
+                  <Schedule type="Group" account={group} />
+                </div>
+                }
+                {this.state.showData &&
+                <div id="tab2" className="tab">
+                  <ContributionList type="Group" id={this.props.params.id} />
+                </div>
+                }
                 {this.state.showMedia &&
                 <div id="images" className="tab">
                   <MediaList type="Group" id={this.props.params.id} />
                 </div>
                 }
                 {this.state.showMember &&
-                <div id="tab2" className="tab">
-                  {this.createMemberList(group)}
-                </div>
-                }
-                {this.state.showSchedule &&
-                <div id="tab3" className="tab">
-                  <Schedule type="Group" account={group} />
-                </div>
-                }
-                {this.state.showData &&
                 <div id="tab4" className="tab">
-                  <ContributionList type="Group" id={this.props.params.id} />
+                  {this.createMemberList(group)}
                 </div>
                 }
               </div>

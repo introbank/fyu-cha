@@ -105,20 +105,27 @@ var Dashboard = React.createClass({
                 }
               </li>
             </ul>
+            {this.state.showSchedule &&
+              <div id="tab1" className="tab">
+                <UserSchedule artists={this.data.followingArtists} groups={this.data.followingGroups} />
+              </div>
+            }
+            {this.state.showData &&
+              <div id="tab2" className="tab">
+                <ContributionList type="Dashboard" id={this.data.user.username} />
+              </div>
+            }
             {this.state.showMedia &&
               <div id="images" className="tab">
                 <UserMediaList type="Dashboard" artists={this.data.followingArtists} groups={this.data.followingGroups} />
               </div>
             }
             {this.state.showFollow &&
-              <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
+              <div id="tab4" className="tab">
+                <FollowingList artists={this.data.followingArtists} groups={this.data.followingGroups} />
+              </div>
             }
-            {this.state.showSchedule &&
-              <UserSchedule artists={this.data.followingArtists} groups={this.data.followingGroups} />
-            }
-            {this.state.showData &&
-              <ContributionList type="Dashboard" id={this.data.user.username} />
-            }
+
           </div>
         </div>
       </div>

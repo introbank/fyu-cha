@@ -8,6 +8,7 @@ var MediaList    = require('./MediaList.react.js');
 var Schedule   = require('./Schedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var Follow       = require('./Follow.react.js');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
 var Artist = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -28,9 +29,14 @@ var Artist = React.createClass({
     var artistQuery = new Parse.Query('Artist');
     artistQuery.equalTo('twitterUsername', id);
 
+    var groupQuery = new Parse.Query("Group");
+    groupQuery.matchesKeyInQuery('members', 'objectId', artistQuery);
+
+
     return {
       user: ParseReact.currentUser,
       artist: artistQuery,
+      group: groupQuery,
     };
   },
 
@@ -66,7 +72,7 @@ var Artist = React.createClass({
 
   changeTab4() {
     this.setState({
-      activeTab: 'follow',
+      activeTab: 'group',
       showSchedule: false,
       showData: false,
       showMedia: false,
@@ -74,7 +80,30 @@ var Artist = React.createClass({
     });
   },
 
-
+  createGroupList(){
+    return(
+      <div id="followList" className="tab">
+        <div className="box">
+          <ul>
+            {this.data.group.map(function (group) {
+              if (!group) {
+                return <div />;
+              }
+              var imageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(group) + ')'};
+              return (
+                <li key={group.objectId} >
+                  <a href={AccountInfoLib.getUrl(group)}>
+                    <span style={imageStyle}></span>
+                  </a>
+                  <h2>{AccountInfoLib.getAccountName(group)}</h2>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </div>
+     );
+  },
 
   render() {
     var artist = null;
@@ -107,24 +136,35 @@ var Artist = React.createClass({
                   </li>
                   <li id="label__tab3">
                     {this.state.activeTab === 'media' ?
-                      <a href="#" className="tab3 active" onClick={this.changeTab3}>画像/動画</a> :
-                      <a href="#" className="tab3" onClick={this.changeTab3}>画像/動画</a>
+                      <a href="#" className="tab3 boR active" onClick={this.changeTab3}>画像/動画</a> :
+                      <a href="#" className="tab3 boR" onClick={this.changeTab3}>画像/動画</a>
+                    }
+                  </li>
+                  <li id="label__tab4">
+                    {this.state.activeTab === 'group' ?
+                      <a href="#" className="tab4 active" onClick={this.changeTab4}>グループ</a> :
+                      <a href="#" className="tab4" onClick={this.changeTab4}>グループ</a>
                     }
                   </li>
                 </ul>
+                {this.state.showSchedule &&
+                <div id="tab1" className="tab">
+                  <Schedule type="Artist" account={artist} />
+                </div>
+                }
+                {this.state.showData &&
+                <div id="tab2" className="tab">
+                  <ContributionList type="Artist" id={this.props.params.id} />
+                </div>
+                }
                 {this.state.showMedia &&
                 <div id="images" className="tab">
                   <MediaList type="Artist" id={this.props.params.id} />
                 </div>
                 }
-                {this.state.showSchedule &&
-                <div id="tab2" className="tab">
-                  <Schedule type="Artist" account={artist} />
-                </div>
-                }
-                {this.state.showData &&
-                <div id="tab3" className="tab">
-                  <ContributionList type="Artist" id={this.props.params.id} />
+                {this.state.showGroup &&
+                <div id="tab4" className="tab">
+                  {this.createGroupList(artist)}
                 </div>
                 }
               </div>
