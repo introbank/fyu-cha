@@ -14,10 +14,10 @@ var User = React.createClass({
 
   getInitialState() {
     return {
-      activeTab: 'media',
-      showMedia: true,
+      activeTab: 'data',
+      showData: true,
+      showMedia: false,
       showFollow: false,
-      showData: false,
     };
   },
 
@@ -45,28 +45,28 @@ var User = React.createClass({
 
   changeTab1() {
     this.setState({
-      activeTab: 'media',
-      showMedia: true,
+      activeTab: 'data',
+      showData: true,
+      showMedia: false,
       showFollow: false,
-      showData: false
     });
   },
 
   changeTab2() {
     this.setState({
-      activeTab: 'follow',
-      showMedia: false,
-      showFollow: true,
-      showData: false
+      activeTab: 'media',
+      showData: true,
+      showMedia: true,
+      showFollow: false,
     });
   },
 
   changeTab3() {
     this.setState({
-      activeTab: 'data',
+      activeTab: 'follow',
+      showData: false,
       showMedia: false,
-      showFollow: false,
-      showData: true
+      showFollow: true,
     });
   },
 
@@ -87,21 +87,21 @@ var User = React.createClass({
               <div className="contents">
                 <ul className="tabs">
                   <li id="label__tab1">
-                    {this.state.activeTab === 'media' ?
-                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>画像/動画</a> :
-                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>画像/動画</a>
+                    {this.state.activeTab === 'data' ?
+                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>ふゅーちゃ</a> :
+                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>ふゅーちゃ</a>
                     }
                   </li>
                   <li id="label__tab2">
-                    {this.state.activeTab === 'follow' ?
-                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>フォロー</a> :
-                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>フォロー</a>
+                    {this.state.activeTab === 'media' ?
+                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>画像/動画</a> :
+                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>画像/動画</a>
                     }
                   </li>
                   <li id="label__tab3">
-                    {this.state.activeTab === 'data' ?
-                      <a href="#" className="tab3 active" onClick={this.changeTab3}>ふゅーちゃ</a> :
-                      <a href="#" className="tab3" onClick={this.changeTab3}>ふゅーちゃ</a>
+                    {this.state.activeTab === 'follow' ?
+                      <a href="#" className="tab3 active" onClick={this.changeTab3}>フォロー</a> :
+                      <a href="#" className="tab3" onClick={this.changeTab3}>フォロー</a>
                     }
                   </li>
                 </ul>
