@@ -498,6 +498,19 @@ h1 {
   line-height: 2em;
 }
 
+
+.scheduleDayWrapper .scheduleContentBox .scheduleEdit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-size:20px 20px;
+  -webkit-background-size:20px 20px;
+  -moz-background-size:20px 20px;
+  cursor: pointer;
+}
+
 .scheduleDayWrapper .scheduleContentBox .scheduleStar {
   position: absolute;
   top: 5px;
