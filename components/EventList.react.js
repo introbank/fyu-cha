@@ -2,9 +2,19 @@ var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var PageType     = require('../lib/PageType.js');
+var EventDateLib = require('../lib/EventDateLib.js');
+var EventInputForm    = require('./EventInputForm.react.js');
 
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
+
+  getInitialState() {
+    return {
+      inputForm: false,
+      edit: null,
+      update: null,
+    };
+  },
 
   observe(props, state) {
    return {
@@ -20,6 +30,18 @@ var EventList = React.createClass({
   editEvent: function(eventObj){
 
   },
+
+  incrementUpdate(){
+    this.setState({update: this.state.update + 1});
+  },
+
+  handlers() {
+    return {
+      incrementUpdate : this.incrementUpdate,
+      closeInputForm : this.closeInputForm
+    } 
+  },
+
 
   // to do handling plan/attend data
   deleteEvent(targetEvent){
@@ -48,6 +70,21 @@ var EventList = React.createClass({
     eventPlan.destroy().then(this.incrementUpdate());
   },
 
+  popInputForm(event){
+    // if not login user, redirect for sign up page
+    if (!this.data.user) {
+      location.href = '/auth/twitter';
+      return;
+    }
+
+    this.setState({edit: event, inputForm:true});
+  },
+
+  closeInputForm(){
+    console.log("closeInputForm");
+    this.setState({inputForm:false});
+  },
+
   setEventStatus: function(targetEvent, eventStatus){
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
     eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
@@ -69,10 +106,8 @@ var EventList = React.createClass({
   createEventList(event){
     try{
       var eventDate = new Date(event.date);
-      var hour = eventDate.getHours();
-      if(hour < 10) { hour = "0" + hour; }
-      var minute = eventDate.getMinutes();
-      if(minute < 10) { minute = "0" + minute; }
+      var hour = EventDateLib.getHours(eventDate);
+      var minute = EventDateLib.getMinutes(eventDate);
 
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
 
@@ -112,9 +147,13 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{eventTitle}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
-                <div className="scheduleStar active"></div>
-                {this.props.type != "Dashboard" && this.data.user &&
-                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
+                {this.props.type !== PageType.Dashboard() && this.data.user &&
+                <div className="scheduleEdit">
+                  <button className="btn" type="submit" onClick={this.popInputForm.bind(this, event)}>編集</button>
+                </div>
+                }
+                {this.props.type !== PageType.Dashboard() && this.data.user &&
+                  <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
                 }
              </div>
             ) : (
@@ -122,8 +161,10 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{eventTitle}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
-                <div className="scheduleStar active"></div>
-                {this.props.type != "Dashboard" && this.data.user &&
+                <div className="scheduleEdit">
+                  <button className="btn" type="submit" onClick={this.popInputForm.bind(this, event)}>編集</button>
+                </div>
+                {this.props.type !== PageType.Dashboard() && this.data.user &&
                 <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
                 }
               </div>
@@ -166,6 +207,9 @@ var EventList = React.createClass({
     return (
       <div>
         {eventList}
+        {this.state.inputForm &&
+          <EventInputForm account={this.props.account} handlers={this.handlers} mode="edit" event={this.state.edit} />
+        } 
       </div>
     );
   },

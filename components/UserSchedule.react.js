@@ -3,6 +3,7 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var EventList    = require('./EventList.react.js');
 var FollowingLib = require('../lib/FollowingLib');
+var PageType = require('../lib/PageType.js');
 
 var UserSchedule = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -82,12 +83,11 @@ var UserSchedule = React.createClass({
   },
 
   render() {
-    console.log(this.data.events);
     if(this.state.update != null){
       return (
         <div>
           {this.data.events.length > 0
-          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} />
+          ? <EventList type={PageType.Dashboard()} account={this.props.account} events={this.data.events} />
           : <p>登録されているイベントがありません</p>
           }
         </div>

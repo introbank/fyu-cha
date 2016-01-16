@@ -1,13 +1,15 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
-
+var EventDateLib = require('../lib/EventDateLib.js')
 var EventInputForm = React.createClass({
   mixins: [ParseReact.Mixin],
 
   getInitialState() {
     var now = new Date();
+    var Event = Parse.Object.extend('Event');
     return {
+      eventObject: new Event(),
       eventYear: now.getFullYear(),
       eventMonth: now.getMonth() + 1,
       eventDay: now.getDate(),
@@ -62,6 +64,7 @@ var EventInputForm = React.createClass({
     if (!this.data.user) {
       location.href = '/auth/twitter';
     }
+    var event = this.state.eventObject;
 
     var now = new Date();
     var year = this.state.eventYear;
@@ -75,8 +78,6 @@ var EventInputForm = React.createClass({
       window.alert("年、月、日、は必ず入力してください");
       return;
     }
-    var Event = Parse.Object.extend('Event');
-    var event = new Event();
     var date = null;
     try{
       var time = this.state.eventTime.split(":", 2);
@@ -125,6 +126,36 @@ var EventInputForm = React.createClass({
     this.props.handlers().closeInputForm();  
   },
 
+  componentWillMount(){
+    this.initState();
+  },
+
+  initState() {
+    if((this.props.mode === "edit") && (this.props.event)){
+      var editEvent = this.props.event;
+      var Event = Parse.Object.extend('Event');
+      var event = new Event();
+      event.id = editEvent.objectId;
+      var date = new Date(editEvent.date);
+      var hour = EventDateLib.getHours(date);
+      var minute = EventDateLib.getMinutes(date);
+      console.log(hour); 
+      console.log(minute); 
+      this.setState(
+        {
+          eventObject: event,
+          eventYear: date.getFullYear(),
+          eventMonth: date.getMonth() + 1,
+          eventDay: date.getDate(),
+          eventTime: hour + ":" + minute,
+          eventTitle: editEvent.title,
+          eventCharge: editEvent.charge,
+          eventPlace: editEvent.place,
+          eventDetail: editEvent.place
+        }); 
+    }
+  },
+
   getInputFormHtml(){
     return (
     <div className="scheduleAddBox">
@@ -159,13 +190,12 @@ var EventInputForm = React.createClass({
   },
 
   render() {
-     console.log(this.props.account);
-     var inputFormHtml = this.getInputFormHtml();
-     return(
+    var inputFormHtml = this.getInputFormHtml();
+    return(
       <div>
         {inputFormHtml}
       </div>
-     );
+    );
   },
 });
 

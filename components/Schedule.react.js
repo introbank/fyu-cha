@@ -110,7 +110,7 @@ var Schedule = React.createClass({
             <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
           </div>
           {this.state.inputForm &&
-            <EventInputForm account={this.props.account} handlers={this.handlers}/>
+            <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
           }
           <div>
           {this.data.events.length > 0

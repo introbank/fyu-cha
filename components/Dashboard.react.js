@@ -1,12 +1,13 @@
-var React  = require('react');
-var Parse       = require('../lib/parse');
-var ParseReact  = require('parse-react');
-var AccountInfo   = require('./AccountInfo.react.js');
-var UserMediaList       = require('./UserMediaList.react.js');
-var FollowingList       = require('./FollowingList.react.js');
-var UserSchedule   = require('./UserSchedule.react.js');
-var ContributionList    = require('./ContributionList.react.js');
+var React = require('react');
+var Parse = require('../lib/parse');
+var ParseReact = require('parse-react');
+var AccountInfo = require('./AccountInfo.react.js');
+var UserMediaList = require('./UserMediaList.react.js');
+var FollowingList = require('./FollowingList.react.js');
+var UserSchedule = require('./UserSchedule.react.js');
+var ContributionList = require('./ContributionList.react.js');
 var FollowingLib = require('../lib/FollowingLib.js');
+var PageType = require('../lib/PageType.js');
 
 var Dashboard = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -112,12 +113,12 @@ var Dashboard = React.createClass({
             }
             {this.state.showData &&
               <div id="tab2" className="tab">
-                <ContributionList type="Dashboard" id={this.data.user.username} />
+                <ContributionList type={PageType.Dashboard()} id={this.data.user.username} />
               </div>
             }
             {this.state.showMedia &&
               <div id="images" className="tab">
-                <UserMediaList type="Dashboard" artists={this.data.followingArtists} groups={this.data.followingGroups} />
+                <UserMediaList type={PageType.Dashboard()} artists={this.data.followingArtists} groups={this.data.followingGroups} />
               </div>
             }
             {this.state.showFollow &&
