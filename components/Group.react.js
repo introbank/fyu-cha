@@ -130,8 +130,8 @@ var Group = React.createClass({
                   </li>
                   <li id="label__tab2">
                     {this.state.activeTab === 'data' ?
-                      <a href="#" className="tab2 active" onClick={this.changeTab2}>ふゅーちゃ</a> :
-                      <a href="#" className="tab2 " onClick={this.changeTab2}>ふゅーちゃ</a>
+                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>ふゅーちゃ</a> :
+                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>ふゅーちゃ</a>
                     }
                   </li>
                   <li id="label__tab3">
@@ -142,8 +142,8 @@ var Group = React.createClass({
                   </li>
                   <li id="label__tab4">
                     {this.state.activeTab === 'member' ?
-                      <a href="#" className="tab4 boR active" onClick={this.changeTab4}>メンバー</a> :
-                      <a href="#" className="tab4 boR" onClick={this.changeTab4}>メンバー</a>
+                      <a href="#" className="tab4 active" onClick={this.changeTab4}>メンバー</a> :
+                      <a href="#" className="tab4" onClick={this.changeTab4}>メンバー</a>
                     }
                   </li>
                 </ul>
