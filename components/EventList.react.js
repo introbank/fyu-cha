@@ -194,8 +194,19 @@ var EventList = React.createClass({
   render() {
     this.initEventListFlugs();
     var eventList = null;
+    var hideList = [];
+    if(this.props.hides){
+      this.props.hides.map(function(hide){
+        hideList.push(hide.event.objectId);    
+      });
+    }
+    console.log(hideList);
+
     eventList = this.props.events.map(function(event) {
-      return this.createEventList(event)}, this);
+      if(hideList.indexOf(event.objectId)){
+        return this.createEventList(event)
+      }
+    }, this);
 
     return (
       <div>

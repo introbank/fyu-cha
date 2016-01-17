@@ -10,11 +10,11 @@ var UserSchedule = React.createClass({
 
   getInitialState() {
     return {
-      inputForm: false,
+      editMode: false,
+      hideEventObjectList: null, 
       update: null,
     };
   },
-
   observe(props, state) {
     var artists = FollowingLib.getArtistList(props.artists);
     var artistQueryList = [];
@@ -44,32 +44,40 @@ var UserSchedule = React.createClass({
       }
     }
     eventQuery.ascending('date');
+    eventQuery.limit(1000);
+
+    var userHideEventQuery = new Parse.Query("UserHideEvent");
+    userHideEventQuery.equalTo('user', Parse.User.current());
+    userHideEventQuery.limit(1000);
 
     return {
       user: ParseReact.currentUser,
       events: eventQuery,
+      hides: userHideEventQuery,
     };
 
+  },
+
+  switchEditMode(event) {
+    console.log("switchEditMode");
+    this.setState({editMode: !this.state.editMode});
   },
 
   incrementUpdate(){
     this.setState({update: this.state.update + 1});
   },
 
-  refreshEventData(){
-    this.refreshQueries(["events"]);
-  },
-
   componentWillUpdate(nextProps, nextState) {
     // for update
     if(nextState.update > this.state.update){
       console.log("refreshQueries by update=" + nextState.update);
-      this.refreshEventData();
+      this.refreshQueries(["hides"]);
     }
-  },
 
-  componentWillMount(){
-    this.refreshEventData();
+    if((nextState.editMode === false) && (this.state.editMode !== false)){
+      this.refreshQueries(["hides"]);
+      this.setState({update: this.state.update + 1});
+    }
   },
 
   handlers() {
@@ -78,23 +86,28 @@ var UserSchedule = React.createClass({
     } 
   },
 
-  componentWillMount(){
-    this.setState({update: 0});
-  },
-
   render() {
-    if(this.state.update != null){
+    if(this.state.editMode){ 
       return (
         <div>
+          <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
           {this.data.events.length > 0
-          ? <EventList type={PageType.Dashboard()} account={this.props.account} events={this.data.events} />
+          ? <EventList type={PageType.Dashboard()} events={this.data.events} />
           : <p>登録されているイベントがありません</p>
           }
         </div>
       );
     }
     else{
-      return null;
+      return (
+        <div>
+          <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
+          {this.data.events.length > 0
+          ? <EventList type={PageType.Dashboard()} events={this.data.events}  hides={this.data.hides}/>
+          : <p>表示するイベントがありません</p>
+          }
+        </div>
+      );
     }
   },
 

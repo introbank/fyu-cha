@@ -677,6 +677,23 @@ h1 {
   cursor: pointer;
 }
 
+/*-- user schedule --*/
+.dashboardScheduleEditStartButton {
+  box-sizing: border-box;
+  position: fixed;
+  top: 300px;
+  right: 0px;
+  padding-top: 10px;
+  width: 34px;
+  height: 60px;
+  background: #8eabc8;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  z-index: 30;
+  cursor: pointer;
+}
+
 /*-----fyucha-----*/
 .fyuchaTotal {
   margin-top: 10px;
