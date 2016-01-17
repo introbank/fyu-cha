@@ -114,7 +114,7 @@ var Schedule = React.createClass({
           }
           <div>
           {this.data.events.length > 0
-          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} />
+          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
           : <p>登録されているイベントがありません</p>
           }
         </div>

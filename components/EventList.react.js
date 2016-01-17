@@ -11,7 +11,7 @@ var EventList = React.createClass({
   getInitialState() {
     return {
       inputForm: false,
-      edit: null,
+      editEvent: null,
       update: null,
     };
   },
@@ -37,6 +37,9 @@ var EventList = React.createClass({
     } 
   },
 
+  hide(event){
+    return this.props.handlers().hide(event);
+  },
 
   // to do handling plan/attend data
   deleteEvent(targetEvent){
@@ -72,7 +75,7 @@ var EventList = React.createClass({
       return;
     }
 
-    this.setState({edit: event, inputForm:true});
+    this.setState({editEvent: event, inputForm:true});
   },
 
   closeInputForm(){
@@ -194,16 +197,21 @@ var EventList = React.createClass({
   render() {
     this.initEventListFlugs();
     var eventList = null;
-    var hideList = [];
-    if(this.props.hides){
-      this.props.hides.map(function(hide){
-        hideList.push(hide.event.objectId);    
+    var hiddenList = [];
+    if(this.props.hidden){
+      this.props.hidden.map(function(hidden){
+        hiddenList.push(hidden.event.objectId);    
       });
     }
-    console.log(hideList);
 
     eventList = this.props.events.map(function(event) {
-      if(hideList.indexOf(event.objectId)){
+      if(this.props.mode === "selected"){
+        console.log(this.props.mode);
+        if(hiddenList.indexOf(event.objectId) === -1){
+          return this.createEventList(event)
+        }
+      }else{
+        console.log(this.props.mode);
         return this.createEventList(event)
       }
     }, this);
@@ -212,7 +220,7 @@ var EventList = React.createClass({
       <div>
         {eventList}
         {this.state.inputForm &&
-          <EventInputForm account={this.props.account} handlers={this.handlers} mode="edit" event={this.state.edit} />
+          <EventInputForm account={this.props.account} handlers={this.handlers} mode="edit" event={this.state.editEvent} />
         } 
       </div>
     );
