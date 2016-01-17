@@ -26,11 +26,6 @@ var EventList = React.createClass({
     this.props.handlers().incrementUpdate();
   },
 
-  // to do
-  editEvent: function(eventObj){
-
-  },
-
   incrementUpdate(){
     this.setState({update: this.state.update + 1});
   },
@@ -148,10 +143,10 @@ var EventList = React.createClass({
                 <p className="scheduleContentName">{eventTitle}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
                 {this.props.type !== PageType.Dashboard() && this.data.user &&
-                <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編<br />集</div>
-                }
-                {this.props.type !== PageType.Dashboard() && this.data.user &&
+                <div>
+                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
                   <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
+                </div>
                 }
              </div>
             ) : (
@@ -159,9 +154,11 @@ var EventList = React.createClass({
                 <p className="scheduleContentTime">{hour}:{minute} -</p>
                 <p className="scheduleContentName">{eventTitle}</p>
                 <p className="scheduleContentDescription">{eventDescription}</p>
-                <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編<br />集</div>
                 {this.props.type !== PageType.Dashboard() && this.data.user &&
-                <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
+                <div>
+                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
+                  <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
+                </div>
                 }
               </div>
             )}
