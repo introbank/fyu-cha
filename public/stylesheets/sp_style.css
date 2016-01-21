@@ -557,10 +557,9 @@ h1 {
 
 .scheduleAddBox {
   box-sizing: border-box;
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 0%;
   left: 50%;
-/*  transform: translate(-50%, -50%); */
   margin-top: -50%;
   margin-left: -50%;
   width: 100%;
