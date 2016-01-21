@@ -498,11 +498,15 @@ h1 {
   position: absolute;
   top: 5px;
   right: 5px;
-  width: 40px;
+  width: 45px;
   height: 20px;
-  background: #f5f5dc;
+  border-radius: 5px;
+  padding: 5px 0px;
+  border: 1px solid #777777;
+  color: #777777;
+  background: #ffffff;
   text-align: center;
-  font-size: 0.80em;
+  font-size: 0.9em;
   background-size:40px 20px;
   -webkit-background-size:40px 20px;
   -moz-background-size:40px 20px;
