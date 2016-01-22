@@ -200,8 +200,8 @@ h1 {
 }
 
 .mainInfo .account {
-  color: #999999;
-  font-size: 0.8em;
+  color: #036eb8;
+  font-size: 0.9em;
 }
 
 .mainInfo span {
@@ -503,11 +503,15 @@ h1 {
   position: absolute;
   top: 5px;
   right: 5px;
-  width: 40px;
+  width: 45px;
   height: 20px;
-  background: #f5f5dc;
+  border-radius: 5px;
+  background: #ffffff;
   text-align: center;
-  font-size: 0.80em;
+  padding: 5px 0px;
+  font-size: 0.9em;
+  border: 1px solid #777777;
+  color: #777777;
   background-size:40px 20px;
   -webkit-background-size:40px 20px;
   -moz-background-size:40px 20px;
@@ -557,8 +561,8 @@ h1 {
 
 .scheduleAddBox {
   box-sizing: border-box;
-  position: absolute;
-  top: 330px;
+  position: fixed;
+  top: 0%;
   left: 50%;
   margin-left: -50%;
   width: 100%;
