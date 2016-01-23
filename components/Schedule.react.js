@@ -72,13 +72,14 @@ var Schedule = React.createClass({
   },
 
   incrementUpdate(){
-    this.setState({update: this.state.update + 1});
+  //  this.setState({update: this.state.update + 1});
   },
 
   refreshEventData(){
-    this.refreshQueries(["events", "plan"]);
+   // this.refreshQueries(["events", "plan"]);
   },
 
+  /*
   componentWillUpdate(nextProps, nextState) {
     // for update
     if(nextState.update > this.state.update){
@@ -90,6 +91,7 @@ var Schedule = React.createClass({
   componentWillMount(){
     this.refreshEventData();
   },
+ */
 
   handlers() {
     return {
@@ -98,32 +100,29 @@ var Schedule = React.createClass({
     } 
   },
 
+  /*
   componentWillMount(){
     this.setState({update: 0});
   },
+ */
 
   render() {
-    if(this.state.update != null){
-      return (
-        <div>
-          <div className="scheduleInputPopup">
-            <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
-          </div>
-          {this.state.inputForm &&
-            <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
-          }
-          <div>
-          {this.data.events.length > 0
-          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
-          : <p>登録されているイベントがありません</p>
-          }
+    return (
+      <div>
+        <div className="scheduleInputPopup">
+          <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
         </div>
+        {this.state.inputForm &&
+          <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
+        }
+        <div>
+        {this.data.events.length > 0
+        ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
+        : <p>登録されているイベントがありません</p>
+        }
       </div>
-      );
-    }
-    else{
-      return null;
-    }
+    </div>
+    );
   },
 
 });

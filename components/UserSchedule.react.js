@@ -65,6 +65,7 @@ var UserSchedule = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
 
+  /*
   incrementUpdate(){
     this.setState({update: this.state.update + 1});
   },
@@ -81,6 +82,7 @@ var UserSchedule = React.createClass({
       this.refreshQueries(["hidden"]);
     }
   },
+ */
 
   handlers() {
     return {

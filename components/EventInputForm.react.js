@@ -7,9 +7,9 @@ var EventInputForm = React.createClass({
 
   getInitialState() {
     var now = new Date();
-    var Event = Parse.Object.extend('Event');
+    
     return {
-      eventObject: new Event(),
+      eventObject: null,
       eventYear: now.getFullYear(),
       eventMonth: now.getMonth() + 1,
       eventDay: now.getDate(),
@@ -59,13 +59,11 @@ var EventInputForm = React.createClass({
     this.setState({eventDetail: e.target.value});
   },
 
-  handleEventSubmit(e) {
+  handleEventSubmit() {
     // if not login user, redirect for sign up page
     if (!this.data.user) {
       location.href = '/auth/twitter';
     }
-    var event = this.state.eventObject;
-
     var now = new Date();
     var year = this.state.eventYear;
     var month = this.state.eventMonth;
@@ -86,28 +84,39 @@ var EventInputForm = React.createClass({
     catch (e){
       date = new Date(year, month-1, day);
     }
-    event.set('date', date);
-    event.set('title', title);
-    event.set('charge', charge);
-    event.set('place', place);
-    event.set('detail', detail);
-    if (this.props.account.className == 'Artist') {
-      var Artist = Parse.Object.extend('Artist');
-      var artist = new Artist();
-      artist.id = this.props.account.objectId;
-      var relation = event.relation('artists');
-      relation.add(artist);
-      console.log(relation);
-    } else {
-      var Group = Parse.Object.extend('Group');
-      var group = new Group();
-      group.id = this.props.account.objectId;
-      var relation = event.relation('groups');
-      relation.add(group);
-      console.log(relation);
+    var data = {
+      date: date,
+      title: title,
+      charge: charge,
+      place: place,
+      detail: detail
+    };
+    console.log(data);
+    // create event data
+    var event = null;
+    var relation = null;
+    var account = this.props.account;
+
+    if(this.state.eventObject === null){
+      event = ParseReact.Mutation.Create('Event', data); 
+      event.dispatch().then(function(createdEvent){
+        var col = account.className.toLowerCase() + "s";
+        relation = ParseReact.Mutation.AddRelation(createdEvent, col, account);
+        relation.dispatch().then(
+          function(result){
+            console.log(result);
+          },
+          function(error){
+            console.log(error);
+          });
+      });
     }
-    event.save().
-      then(
+    
+
+    /*
+    try{
+    event.dispatch().
+      then(function(result){
       this.setState(
         {
           eventYear: now.getFullYear(),
@@ -118,8 +127,15 @@ var EventInputForm = React.createClass({
           eventCharge: '',
           eventPlace: '',
           eventDetail: ''
-        })).then(this.props.handlers().incrementUpdate())
-        .then(console.log("ok"));
+        }).then(this.props.handlers().incrementUpdate())
+        .then(console.log("ok"))}, 
+        function(error){
+          console.log(error);
+        });
+    }catch (e){
+      console.log(e);
+    }
+    */
   },
 
   closeForm(){
@@ -133,17 +149,12 @@ var EventInputForm = React.createClass({
   initState() {
     if((this.props.mode === "edit") && (this.props.event)){
       var editEvent = this.props.event;
-      var Event = Parse.Object.extend('Event');
-      var event = new Event();
-      event.id = editEvent.objectId;
       var date = new Date(editEvent.date);
       var hour = EventDateLib.getHours(date);
       var minute = EventDateLib.getMinutes(date);
-      console.log(hour); 
-      console.log(minute); 
       this.setState(
         {
-          eventObject: event,
+          eventObject: editEvent,
           eventYear: date.getFullYear(),
           eventMonth: date.getMonth() + 1,
           eventDay: date.getDate(),
@@ -159,7 +170,7 @@ var EventInputForm = React.createClass({
   getInputFormHtml(){
     return (
     <div className="scheduleAddBox">
-      <form className="commentForm" onSubmit={this.handleEventSubmit}>
+      <form className="commentForm">
         <h3 className="scheduleAddSubTitle">開催日</h3>
         <input className="scheduleAddInputDay" type="number" value={this.state.eventYear} onChange={this.handleEventYearChange} />年
         <input className="scheduleAddInputDay" type="number" value={this.state.eventMonth} onChange={this.handleEventMonthChange} />月
@@ -182,7 +193,7 @@ var EventInputForm = React.createClass({
         <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
         <div className="scheduleAddButtonArea">
           <div className="scheduleAddButtonOtherTime" onClick={this.closeForm} >フォームを閉じる</div>
-          <input className="scheduleAddButtonComplete" type="submit" value="完了" />
+          <div className="scheduleAddButtonComplete" onClick={this.handleEventSubmit}>完了</div>
         </div>
       </form> 
     </div>
