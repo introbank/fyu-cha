@@ -102,6 +102,7 @@ var EventList = React.createClass({
   },
 
   createEventList(event){
+    this.getRelatedAccounts(event);
     try{
       var eventDate = new Date(event.date);
       var hour = EventDateLib.getHours(eventDate);
@@ -148,7 +149,11 @@ var EventList = React.createClass({
                 {this.props.type !== PageType.Dashboard() && this.data.user &&
                 <div>
                   <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
-                  <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
+                </div>
+                }
+                {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
+                <div>
+                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>表示</div>
                 </div>
                 }
              </div>
@@ -160,7 +165,11 @@ var EventList = React.createClass({
                 {this.props.type !== PageType.Dashboard() && this.data.user &&
                 <div>
                   <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
-                  <button className="btn" type="submit" onClick={this.deleteEvent.bind(this, event)}>イベントを削除</button>
+                </div>
+                }
+                {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
+                <div>
+                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>表示</div>
                 </div>
                 }
               </div>
@@ -194,6 +203,42 @@ var EventList = React.createClass({
     },
   },
 
+  getRelatedAccounts(event){
+    if(event.artists){
+      var artistsRelation = event.artists;
+      artistsRelation.query().find().then(function(artists){
+        var idList = [];
+        for(var i = 0; i < artists.length; i++) {
+          idList.push(artists[i].id);
+        }
+        var artistQuery = new Parse.Query('Artist');
+        artistQuery.containedIn("objectId", idList);
+        artistQuery.find().then(function(results){
+          for(var i = 0; i < results.length; i++){
+            console.log(results[0].toJSON());
+          }
+          });
+      });
+    }
+
+    if(event.groups){
+      var groupsRelation = event.groups;
+      groupsRelation.query().find().then(function(groups){
+        var idList = [];
+        for(var i = 0; i < groups.length; i++) {
+           idList.push(groups[i].id);
+        }
+        var groupQuery = new Parse.Query('Group');
+        groupQuery.containedIn("objectId", idList);
+        groupQuery.find().then(function(results){
+          for(var i = 0; i < results.length; i++){
+            console.log(results[0].toJSON());
+          }
+          });
+      });
+    }
+  },
+
   render() {
     this.initEventListFlugs();
     var eventList = null;
@@ -206,12 +251,10 @@ var EventList = React.createClass({
 
     eventList = this.props.events.map(function(event) {
       if(this.props.mode === "selected"){
-        console.log(this.props.mode);
         if(hiddenList.indexOf(event.objectId) === -1){
           return this.createEventList(event)
         }
       }else{
-        console.log(this.props.mode);
         return this.createEventList(event)
       }
     }, this);

@@ -22,6 +22,7 @@ var UserSchedule = React.createClass({
       var eventQuery = new Parse.Query('Event');
       var artistQuery = new Parse.Query('Artist');
       eventQuery.equalTo('artists', artists[i]);
+      eventQuery.include('artists');
       artistQueryList.push(eventQuery);
     }
 
@@ -30,6 +31,7 @@ var UserSchedule = React.createClass({
     for(var i = 0; i < groups.length; i++){
       var eventQuery = new Parse.Query('Event');
       eventQuery.equalTo('groups', groups[i]);
+      eventQuery.include('groups');
       groupQueryList.push(eventQuery);
     }
 
