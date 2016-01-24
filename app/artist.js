@@ -1,3 +1,4 @@
+require("babel-polyfill");
 var React     = require('react');
 var Artist = require('../components/Artist.react.js');
 

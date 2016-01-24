@@ -1,3 +1,4 @@
+require("babel-polyfill");
 var React     = require('react');
 var Group = require('../components/Group.react.js');
 
