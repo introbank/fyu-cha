@@ -58,7 +58,7 @@ var EventList = React.createClass({
       location.href = '/auth/twitter';
       return;
     }
-
+    console.log(event);
     this.setState({editEvent: event, inputForm:true});
   },
 
@@ -66,6 +66,15 @@ var EventList = React.createClass({
     console.log("closeInputForm");
     this.setState({inputForm:false});
   },
+
+  handlers() {
+    return {
+      incrementUpdate : this.props.handlers().incrementUpdate,
+      closeInputForm : this.closeInputForm
+    } 
+  },
+
+
 
   setEventStatus: function(targetEvent, eventStatus){
     eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
@@ -250,7 +259,7 @@ var EventList = React.createClass({
       <div>
         {eventList}
         {this.state.inputForm &&
-          <EventInputForm account={this.props.account} handlers={this.props.handlers} mode="edit" event={this.state.editEvent} />
+          <EventInputForm account={this.props.account} handlers={this.handlers} mode="edit" event={this.state.editEvent} />
         } 
       </div>
     );

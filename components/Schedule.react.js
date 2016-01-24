@@ -88,7 +88,6 @@ var Schedule = React.createClass({
   },
 
   handlers() {
-    console.log("render");
     return {
       incrementUpdate : this.incrementUpdate,
       closeInputForm : this.closeInputForm

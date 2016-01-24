@@ -107,6 +107,7 @@ var EventInputForm = React.createClass({
     var closeForm = this.closeForm;
     var incrementUpdate = this.incrementUpdate;    
 
+    // add new event
     if(this.state.eventObject === null){
       event = ParseReact.Mutation.Create('Event', data); 
       event.dispatch().then(function(createdEvent){
@@ -124,7 +125,25 @@ var EventInputForm = React.createClass({
           });
       });
     }
+    // update event
+    else{
+      event = ParseReact.Mutation.Set(this.state.eventObject, data);
+      event.dispatch().then(
+        function(result){
+          console.log(result);
+          incrementUpdate();
+          closeForm();
+        },
+        function(error){
+          console.log(error);
+          window.alert("イベントの更新に失敗しました");
+        });
+    }
   },
+
+  componentWillMount(){
+    this.initState();
+  }, 
 
   initState() {
     if((this.props.mode === "edit") && (this.props.event)){
