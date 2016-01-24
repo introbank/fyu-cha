@@ -329,12 +329,18 @@ h1 {
 }
 
 .tabArea #followList ul {
+/*
   overflow: hidden;
   display: block;
   -webkit-margin-before: 5px;
   -webkit-margin-after: 5px;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
+*/
+  margin: 0 auto;
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
 }
 
 .tabArea #followList ul h1 {
@@ -352,17 +358,29 @@ h1 {
 }
 
 .tabArea #followList ul li {
+/*
   float: left;
   width: 50%;
   box-sizing: border-box;
+*/
+  float: left;
+  display: table-cell;
+  width: 140px;
+  height: auto;
+  margin: 10px 5px 10px 5px;
 }
 
 .tabArea #followList ul li span {
+
   display: inline-block;
   background-position: center center;
   background-repeat: no-repeat;
+/*
   width: 140px;
   height: 140px;
+*/
+  width: 138px;
+  height: 138px;
   border: 1px solid #EAEAEA;
   background-size: cover;
 }
