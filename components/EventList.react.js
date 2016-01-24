@@ -12,7 +12,6 @@ var EventList = React.createClass({
     return {
       inputForm: false,
       editEvent: null,
-      update: null,
     };
   },
 
@@ -20,21 +19,6 @@ var EventList = React.createClass({
    return {
       user: ParseReact.currentUser,
     };
-  },
-
-  incrementUpdate(){
-    this.props.handlers().incrementUpdate();
-  },
-
-  incrementUpdate(){
-    this.setState({update: this.state.update + 1});
-  },
-
-  handlers() {
-    return {
-      incrementUpdate : this.incrementUpdate,
-      closeInputForm : this.closeInputForm
-    } 
   },
 
   hide(event){
@@ -102,7 +86,7 @@ var EventList = React.createClass({
   },
 
   createEventList(event){
-    this.getRelatedAccounts(event);
+    //this.getRelatedAccounts(event);
     try{
       var eventDate = new Date(event.date);
       var hour = EventDateLib.getHours(eventDate);
@@ -214,9 +198,12 @@ var EventList = React.createClass({
         var artistQuery = new Parse.Query('Artist');
         artistQuery.containedIn("objectId", idList);
         artistQuery.find().then(function(results){
+          console.log(results);
+          /*
           for(var i = 0; i < results.length; i++){
             console.log(results[0].toJSON());
           }
+          */
           });
       });
     }
@@ -263,7 +250,7 @@ var EventList = React.createClass({
       <div>
         {eventList}
         {this.state.inputForm &&
-          <EventInputForm account={this.props.account} handlers={this.handlers} mode="edit" event={this.state.editEvent} />
+          <EventInputForm account={this.props.account} handlers={this.props.handlers} mode="edit" event={this.state.editEvent} />
         } 
       </div>
     );

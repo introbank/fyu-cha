@@ -72,39 +72,32 @@ var Schedule = React.createClass({
   },
 
   incrementUpdate(){
-  //  this.setState({update: this.state.update + 1});
+    return this.setState({update: this.state.update + 1});
   },
 
   refreshEventData(){
-   // this.refreshQueries(["events", "plan"]);
+    return this.refreshQueries(["events", "plan"]);
   },
 
-  /*
   componentWillUpdate(nextProps, nextState) {
     // for update
     if(nextState.update > this.state.update){
-      console.log("refreshQueries by update=" + nextState.update);
       this.refreshEventData();
+      console.log("refreshQueries by update=" + nextState.update);
     }
   },
 
-  componentWillMount(){
-    this.refreshEventData();
-  },
- */
-
   handlers() {
+    console.log("render");
     return {
       incrementUpdate : this.incrementUpdate,
       closeInputForm : this.closeInputForm
     } 
   },
 
-  /*
   componentWillMount(){
     this.setState({update: 0});
   },
- */
 
   render() {
     return (

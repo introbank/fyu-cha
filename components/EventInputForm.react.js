@@ -7,7 +7,6 @@ var EventInputForm = React.createClass({
 
   getInitialState() {
     var now = new Date();
-    
     return {
       eventObject: null,
       eventYear: now.getFullYear(),
@@ -58,6 +57,15 @@ var EventInputForm = React.createClass({
   handleEventDetailChange: function(e) {
     this.setState({eventDetail: e.target.value});
   },
+  
+  closeForm(){
+    this.initState();
+    this.props.handlers().closeInputForm(); 
+  },
+
+  incrementUpdate(){
+    return this.props.handlers().incrementUpdate();
+  },
 
   handleEventSubmit() {
     // if not login user, redirect for sign up page
@@ -84,6 +92,8 @@ var EventInputForm = React.createClass({
     catch (e){
       date = new Date(year, month-1, day);
     }
+    
+    // create event data
     var data = {
       date: date,
       title: title,
@@ -91,11 +101,11 @@ var EventInputForm = React.createClass({
       place: place,
       detail: detail
     };
-    console.log(data);
-    // create event data
     var event = null;
     var relation = null;
     var account = this.props.account;
+    var closeForm = this.closeForm;
+    var incrementUpdate = this.incrementUpdate;    
 
     if(this.state.eventObject === null){
       event = ParseReact.Mutation.Create('Event', data); 
@@ -105,45 +115,15 @@ var EventInputForm = React.createClass({
         relation.dispatch().then(
           function(result){
             console.log(result);
+            incrementUpdate();
+            closeForm();
           },
           function(error){
             console.log(error);
+            window.alert("イベント登録に失敗しました");
           });
       });
     }
-    
-
-    /*
-    try{
-    event.dispatch().
-      then(function(result){
-      this.setState(
-        {
-          eventYear: now.getFullYear(),
-          eventMonth: now.getMonth() + 1,
-          eventDay: now.getDate(),
-          eventTime: null,
-          eventTitle: '',
-          eventCharge: '',
-          eventPlace: '',
-          eventDetail: ''
-        }).then(this.props.handlers().incrementUpdate())
-        .then(console.log("ok"))}, 
-        function(error){
-          console.log(error);
-        });
-    }catch (e){
-      console.log(e);
-    }
-    */
-  },
-
-  closeForm(){
-    this.props.handlers().closeInputForm();  
-  },
-
-  componentWillMount(){
-    this.initState();
   },
 
   initState() {
@@ -152,7 +132,7 @@ var EventInputForm = React.createClass({
       var date = new Date(editEvent.date);
       var hour = EventDateLib.getHours(date);
       var minute = EventDateLib.getMinutes(date);
-      this.setState(
+      return this.setState(
         {
           eventObject: editEvent,
           eventYear: date.getFullYear(),
@@ -164,6 +144,21 @@ var EventInputForm = React.createClass({
           eventPlace: editEvent.place,
           eventDetail: editEvent.detail
         }); 
+    }
+    else{
+      var now = new Date();
+      return this.setState(
+        {
+          eventObject: null,
+          eventYear: now.getFullYear(),
+          eventMonth: now.getMonth() + 1,
+          eventDay: now.getDate(),
+          eventTime: null,
+          eventTitle: '',
+          eventCharge: '',
+          eventPlace: '',
+          eventDetail: ''
+        });
     }
   },
 
