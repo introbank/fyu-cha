@@ -64,8 +64,8 @@ var EventList = React.createClass({
       var eventDescription = "";
 
       var hideSwichButton = (hiddenObject === null) 
-        ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>隠す</div>)
-        : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
+        ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>表示</div>)
+        : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>隠す</div>)
       ;
 
       if(event.place){
