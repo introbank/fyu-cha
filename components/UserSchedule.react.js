@@ -62,10 +62,9 @@ var UserSchedule = React.createClass({
 
   switchEditMode(event) {
     console.log("switchEditMode");
-    this.setState({editMode: !this.state.editMode});
+    this.setState({editMode: !this.state.editMode, update: this.state.update + 1});
   },
 
-  /*
   incrementUpdate(){
     this.setState({update: this.state.update + 1});
   },
@@ -76,27 +75,12 @@ var UserSchedule = React.createClass({
       console.log("refreshQueries by update=" + nextState.update);
       this.refreshQueries(["hidden"]);
     }
-
-    // done edit mode
-    if((nextState.editMode === false) && (this.state.editMode !== false)){
-      this.refreshQueries(["hidden"]);
-    }
   },
- */
 
   handlers() {
     return {
       incrementUpdate : this.incrementUpdate,
-      hide: this.hide,
     } 
-  },
-
-  hide(event){
-    var UserHideEvent = Parse.Object.extend("UserHideEvent");
-    var userHideEvent = new UserHideEvent();
-    userHideEvent.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
-    userHideEvent.set("event", {"__type":"Pointer", "className": event.className, "objectId": event.objectId});
-    return userHideEvent.save().then(this.incrementUpdate());
   },
 
   render() {
@@ -105,7 +89,7 @@ var UserSchedule = React.createClass({
         <div>
           <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
           {this.data.events.length > 0
-          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={this.data.hidden} mode="all" />
+          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={this.data.hidden} mode="all" handlers={this.handlers}/>
           : <p>登録されているイベントがありません</p>
           }
         </div>
@@ -116,7 +100,7 @@ var UserSchedule = React.createClass({
         <div>
           <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
           {this.data.events.length > 0
-          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={this.data.hidden} mode="selected" />
+          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={this.data.hidden} mode="selected" handlers={this.handlers}/>
           : <p>表示するイベントがありません</p>
           }
         </div>

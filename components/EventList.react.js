@@ -21,37 +21,6 @@ var EventList = React.createClass({
     };
   },
 
-  hide(event){
-    return this.props.handlers().hide(event);
-  },
-
-  // to do handling plan/attend data
-  deleteEvent(targetEvent){
-    var Event = Parse.Object.extend('Event');
-    var ev = new Event();
-    ev.id = targetEvent.objectId;
-    ev.destroy().then(this.incrementUpdate());
-  },
-
-  attendEvent: function(targetEvent) {
-    var EventAttendance = Parse.Object.extend("EventAttendance");
-    var eventAttendance = new EventAttendance();
-    this.setEventStatus(targetEvent, eventAttendance);
-  },
-
-  planEvent: function(targetEvent) {
-    var EventPlan = Parse.Object.extend("EventPlan");
-    var eventPlan = new EventPlan();
-    this.setEventStatus(targetEvent, eventPlan);
-  },
-
-  quitPlanEvent(plan) {
-    var EventPlan = Parse.Object.extend("EventPlan");
-    var eventPlan = new EventPlan();
-    eventPlan.id = plan.objectId;
-    eventPlan.destroy().then(this.incrementUpdate());
-  },
-
   popInputForm(event){
     // if not login user, redirect for sign up page
     if (!this.data.user) {
@@ -74,38 +43,31 @@ var EventList = React.createClass({
     } 
   },
 
-
-
-  setEventStatus: function(targetEvent, eventStatus){
-    eventStatus.set("event", {"__type":"Pointer", "className": targetEvent.className, "objectId": targetEvent.objectId});
-    eventStatus.set("user", {"__type":"Pointer", "className": this.data.user.className, "objectId":this.data.user.objectId});
-    eventStatus.set("date", targetEvent.date);
-    if (this.props.type === 'Artist') {
-      var Artist = Parse.Object.extend('Artist');
-      var artist = new Artist();
-      artist.id = this.props.account.objectId;
-      eventStatus.set("artist", artist);
-    } else {
-      var Group = Parse.Object.extend('Group');
-      var group = new Group();
-      group.id = this.props.account.objectId;
-      eventStatus.set("group", group);
-    }
-    eventStatus.save().then(this.incrementUpdate());
+  hide(event){
+    var data = {user: this.data.user, event:event};
+    var userHideEvent = ParseReact.Mutation.Create("UserHideEvent", data);
+    return userHideEvent.dispatch();
   },
 
-  createEventList(event){
+  show(hiddenObject){
+    return ParseReact.Mutation.Destroy(hiddenObject).dispatch();
+  },
+
+  createEventList(event, hiddenObject){
     //this.getRelatedAccounts(event);
     try{
       var eventDate = new Date(event.date);
       var hour = EventDateLib.getHours(eventDate);
       var minute = EventDateLib.getMinutes(eventDate);
-
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
-
       var eventTitle = event.title !== null ? event.title : "";
-
       var eventDescription = "";
+
+      var hideSwichButton = (hiddenObject === null) 
+        ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>隠す</div>)
+        : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
+      ;
+
       if(event.place){
         eventDescription += "会場：" + event.place + " ";
       }
@@ -146,7 +108,7 @@ var EventList = React.createClass({
                 }
                 {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
                 <div>
-                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>表示</div>
+                  {hideSwichButton}
                 </div>
                 }
              </div>
@@ -162,7 +124,7 @@ var EventList = React.createClass({
                 }
                 {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
                 <div>
-                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>表示</div>
+                  {hideSwichButton}
                 </div>
                 }
               </div>
@@ -238,20 +200,23 @@ var EventList = React.createClass({
   render() {
     this.initEventListFlugs();
     var eventList = null;
-    var hiddenList = [];
+    var hiddenDict = {}
     if(this.props.hidden){
       this.props.hidden.map(function(hidden){
-        hiddenList.push(hidden.event.objectId);    
+        hiddenDict[hidden.event.objectId] = hidden;
       });
     }
 
+    console.log(hiddenDict);
+
     eventList = this.props.events.map(function(event) {
       if(this.props.mode === "selected"){
-        if(hiddenList.indexOf(event.objectId) === -1){
-          return this.createEventList(event)
+        if(!hiddenDict.hasOwnProperty(event.objectId)){
+          return this.createEventList(event, null)
         }
       }else{
-        return this.createEventList(event)
+        var hiddenObject = (hiddenDict.hasOwnProperty(event.objectId)) ? hiddenDict[event.objectId] : null;
+        return this.createEventList(event, hiddenObject)
       }
     }, this);
 
