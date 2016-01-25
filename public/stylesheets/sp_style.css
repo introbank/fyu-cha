@@ -345,28 +345,51 @@ h1 {
 
 .tabArea #followList h2 {
   font-weight: bold;
+  margin-top: 10px;
 }
 
 .tabArea #followList h2 img {
   margin-right: 5px;
+  vertical-align: bottom;
+}
+
+.tabArea #followList h2 span {
+  color: #036eb8;
 }
 
 .tabArea #followList ul li {
   float: left;
   width: 50%;
+  width: -webkit-calc(50% - 0.5px);
+  width: calc(50% - 5px);
   box-sizing: border-box;
+}
+
+.tabArea #followList ul li:nth-child(even) {
+  float: right;
 }
 
 .tabArea #followList ul li span {
   display: inline-block;
   background-position: center center;
   background-repeat: no-repeat;
-  width: 140px;
-  height: 140px;
-  border: 1px solid #EAEAEA;
+  width: 100%;
+  padding-bottom: 100%;
+  /* border: 1px solid #EAEAEA; */
   background-size: cover;
 }
 
+.tabArea #followList ul li img {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding-bottom: 100%;
+  /* border: 1px solid #EAEAEA; */
+  background-size: cover;
+}
+
+/*
 .tabArea #followList ul li img {
   display: block;
   width: 140px;
@@ -376,11 +399,13 @@ h1 {
   text-align: center;
   border: 1px solid #EAEAEA;
 }
+*/
 
 .tabArea #followList ul li h2 {
   font-weight: bold;
-  width: 140px;
-  height: 30px;
+  width: 100%;
+  height: auto;
+  color: #333333;
   margin: 0px auto 10px;
   white-space: nowrap;
   overflow: hidden;
