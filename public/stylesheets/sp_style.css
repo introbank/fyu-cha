@@ -403,13 +403,14 @@ h1 {
 
 .tabArea #followList ul li h2 {
   font-weight: bold;
-  width: 100%;
+  width: 90%;
   height: auto;
   color: #333333;
   margin: 0px auto 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 /*-----schedule-----*/
