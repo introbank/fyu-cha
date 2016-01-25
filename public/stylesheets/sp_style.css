@@ -362,7 +362,7 @@ h1 {
   float: left;
   width: 50%;
   width: -webkit-calc(50% - 0.5px);
-  width: calc(50% - 5px);
+  width: calc(50% - 0.5px);
   box-sizing: border-box;
 }
 
