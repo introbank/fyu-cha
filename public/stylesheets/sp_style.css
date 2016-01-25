@@ -350,18 +350,19 @@ h1 {
 
 .tabArea #followList h2 img {
   margin-right: 5px;
-  vertical-align: bottom;
+  vertical-align: top;
 }
 
 .tabArea #followList h2 span {
   color: #036eb8;
+  font-size: 1.1em;
 }
 
 .tabArea #followList ul li {
   float: left;
   width: 50%;
   width: -webkit-calc(50% - 0.5px);
-  width: calc(50% - 5px);
+  width: calc(50% - 0.5px);
   box-sizing: border-box;
 }
 
