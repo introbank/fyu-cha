@@ -355,17 +355,21 @@ h1 {
 
 .tabArea #followList h2 span {
   color: #036eb8;
-  font-size: 1.1em;
+  font-size: 1.5em;
+  vertical-align: middle;
 }
 
 .tabArea #followList ul li {
   float: left;
   width: 50%;
+/*
   width: -webkit-calc(50% - 0.5px);
   width: calc(50% - 0.5px);
+*/
   box-sizing: border-box;
+  padding: 0.5px;
 }
-
+/*
 .tabArea #followList ul li:nth-child(odd) {
   float: left;
 }
@@ -373,6 +377,7 @@ h1 {
 .tabArea #followList ul li:nth-child(even) {
   float: right;
 }
+*/
 
 .tabArea #followList ul li span {
   display: inline-block;
@@ -382,6 +387,7 @@ h1 {
   padding-bottom: 100%;
   /* border: 1px solid #EAEAEA; */
   background-size: cover;
+  vertical-align: middle;
 }
 
 .tabArea #followList ul li img {
@@ -392,6 +398,7 @@ h1 {
   padding-bottom: 100%;
   /* border: 1px solid #EAEAEA; */
   background-size: cover;
+  vertical-align: middle;
 }
 
 /*
@@ -416,6 +423,7 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  height: 25px;
 }
 
 /*-----schedule-----*/
