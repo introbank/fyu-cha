@@ -361,7 +361,7 @@ h1 {
 }
 
 .tabArea #followList ul li {
-/*  float: left;  */
+  float: left;
   width: 50%;
   width: -webkit-calc(50% - 0.5px);
   width: calc(50% - 0.5px);
