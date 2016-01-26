@@ -346,11 +346,12 @@ h1 {
 .tabArea #followList h2 {
   font-weight: bold;
   margin-top: 10px;
+  vertical-align: middle;
 }
 
 .tabArea #followList h2 img {
   margin-right: 5px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .tabArea #followList h2 span {
@@ -362,10 +363,8 @@ h1 {
 .tabArea #followList ul li {
   float: left;
   width: 50%;
-/*
   width: -webkit-calc(50% - 0.5px);
   width: calc(50% - 0.5px);
-*/
   box-sizing: border-box;
   padding: 0.5px;
 }
