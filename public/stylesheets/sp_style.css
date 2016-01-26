@@ -368,15 +368,6 @@ h1 {
   box-sizing: border-box;
   padding: 0.5px;
 }
-/*
-.tabArea #followList ul li:nth-child(odd) {
-  float: left;
-}
-
-.tabArea #followList ul li:nth-child(even) {
-  float: right;
-}
-*/
 
 .tabArea #followList ul li span {
   display: inline-block;
