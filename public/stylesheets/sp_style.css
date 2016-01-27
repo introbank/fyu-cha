@@ -89,9 +89,9 @@ body {
 }
 
 h1 {
-  font-size: 1.17em;
+  font-size: 1.3em;
   font-weight: bold;
-  color: #000000;
+  color: #555555;
 }
 
 /*-----header-----*/
@@ -173,13 +173,14 @@ h1 {
   width: 33%;
   padding: 8px 0px;
   text-align: center;
-  color: #999999;
+  color: #aaaaaa;
   cursor: pointer;
 }
 
 #nav ul li.active {
   color: #ffffff;
-  background-color: #999999;
+  background-color: #CFD0D0;
+  width: calc(34% - 2px);
 }
 
 /*-----maininfo-----*/
@@ -407,7 +408,7 @@ h1 {
   font-weight: bold;
   width: 90%;
   height: auto;
-  color: #333333;
+  color: #555555;
   margin: 0px auto 10px;
   white-space: nowrap;
   overflow: hidden;
