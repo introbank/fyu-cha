@@ -4,6 +4,7 @@ var ParseReact   = require('parse-react');
 var PageType     = require('../lib/PageType.js');
 var EventDateLib = require('../lib/EventDateLib.js');
 var EventInputForm    = require('./EventInputForm.react.js');
+var EventContent = require('./EventContent.react.js');
 
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -57,26 +58,14 @@ var EventList = React.createClass({
     //this.getRelatedAccounts(event);
     try{
       var eventDate = new Date(event.date);
-      var hour = EventDateLib.getHours(eventDate);
-      var minute = EventDateLib.getMinutes(eventDate);
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
-      var eventTitle = event.title !== null ? event.title : "";
-      var eventDescription = "";
+      var scheduleContentBoxClass = new Date() > eventDate
+        ? ("scheduleContentBox finished") : ("scheduleContentBox");
 
       var hideSwichButton = (hiddenObject === null) 
         ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>隠す</div>)
         : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
       ;
-
-      if(event.place){
-        eventDescription += "会場：" + event.place + " ";
-      }
-      if(event.charge){
-        eventDescription += "料金：" +event.charge + " ";
-      }
-      if(event.detail){
-        eventDescription += "詳細：" +event.detail;
-      }
 
       var eventListHtml = (
         <div key={divKey}>
@@ -96,40 +85,19 @@ var EventList = React.createClass({
             {new Date() < eventDate && !this.isDisplayedNowDivider && (
               <div className="scheduleNowDivider"></div>
             )}
-            {new Date() > eventDate ? (
-              <div className="scheduleContentBox finished">
-                <p className="scheduleContentTime">{hour}:{minute} -</p>
-                <p className="scheduleContentName">{eventTitle}</p>
-                <p className="scheduleContentDescription">{eventDescription}</p>
-                {this.props.type !== PageType.Dashboard() && this.data.user &&
-                <div>
-                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
-                </div>
-                }
-                {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
-                <div>
-                  {hideSwichButton}
-                </div>
-                }
-             </div>
-            ) : (
-              <div className="scheduleContentBox">
-                <p className="scheduleContentTime">{hour}:{minute} -</p>
-                <p className="scheduleContentName">{eventTitle}</p>
-                <p className="scheduleContentDescription">{eventDescription}</p>
-                {this.props.type !== PageType.Dashboard() && this.data.user &&
-                <div>
-                  <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
-                </div>
-                }
-                {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
-                <div>
-                  {hideSwichButton}
-                </div>
-                }
+            <div className={scheduleContentBoxClass}>
+              <EventContent event={event} />
+              {this.props.type !== PageType.Dashboard() && this.data.user &&
+              <div>
+                <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
               </div>
-            )}
-
+              }
+              {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
+              <div>
+                {hideSwichButton}
+              </div>
+              }
+            </div>
           </div>
         </div>
       );
