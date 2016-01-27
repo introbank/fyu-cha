@@ -133,6 +133,12 @@ app.get('/signup', function(req, res) {
   res.render('main', {body: body, script: script, params: json});
 });
 
+app.get('/lp.html', function(req, res) {
+  console.log('lp');
+  res.status(404);
+  res.render('main', {title: 'ページが存在しません'});
+});
+
 app.get('*', function(req, res) {
   var body = React.renderToString(NotFound({}));
   var script = '/javascripts/notfound.js';
