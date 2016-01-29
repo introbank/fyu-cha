@@ -51,7 +51,7 @@ body {
   font-size: 1.0em;
   margin: 0;
   padding: 0;
-  color: #000000;
+  color: #555555;
 }
 
 .cf:after {
@@ -70,7 +70,7 @@ body {
 }
 
 .boR {
-  border-right: 1px solid #CFD0D0;
+  border-right: 1px solid #afafb0;
 }
 
 /*-----main-----*/
@@ -162,8 +162,8 @@ h1 {
 #nav {
   width: 100%;
   height: 40px;
-  border-bottom: 1px solid #CFD0D0;
-  color: #999999;
+  border-bottom: 1px solid #afafb0;
+  color: #afafb0;
   overflow: hidden;
 }
 
@@ -173,13 +173,13 @@ h1 {
   width: 33%;
   padding: 8px 0px;
   text-align: center;
-  color: #aaaaaa;
+  color: #afafb0;
   cursor: pointer;
 }
 
 #nav ul li.active {
   color: #ffffff;
-  background-color: #CFD0D0;
+  background-color: #afafb0;
   width: calc(34% - 2px);
 }
 
@@ -195,7 +195,7 @@ h1 {
   width: 70px;
   height: 70px;
   margin-bottom: 5px;
-  border: 1px solid #CFD0D0;
+/*  border: 1px solid #CFD0D0; */
   border-radius: 4px;
   background-size: cover;
 }
@@ -244,7 +244,7 @@ h1 {
 .tabArea .tabs {
   display: table;
   width: 100%;
-  border: 1px solid #999999;
+  border: 1px solid #afafb0;
   border-radius: 5px;
   table-layout: fixed;
   font-size: 0.9em;
@@ -266,17 +266,17 @@ h1 {
 }
 
 .tabArea .tabs a.boR {
-  border-right: 1px solid #999999;
+  border-right: 1px solid #afafb0;
 }
 
 .tabArea .tabs a.active {
   color: #ffffff;
-  background-color: #999999;
+  background-color: #afafb0;
 }
 
 .tabArea .tabs a:hover {
   color: #ffffff;
-  background-color: #999999;
+  background-color: #afafb0;
   -webkit-transition: all .3s;
   transition: all .3s;
 }
@@ -484,18 +484,18 @@ h1 {
   margin-bottom: 10px;
   padding-bottom: 5px;
   width: 87%;
-  background: #5375b1;
+  background: #3e62ad;
 }
 
 .scheduleDayWrapper .scheduleContentBox.finished {
-  background: #898989;
+  background: #c9caca;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentTime {
   margin-top: 5px;
   margin-left: 5px;
   font-size: 11px;
-  color: white;
+  color: #efefef;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
@@ -720,7 +720,7 @@ h1 {
   padding-top: 10px;
   width: 34px;
   height: 60px;
-  background: #8eabc8;
+  background: #88b5d3;
   color: white;
   font-size: 14px;
   text-align: center;
