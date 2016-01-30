@@ -27,15 +27,13 @@ var Header = React.createClass({
         <span className="mainLogo" onClick={this.top}>ふゅーちゃ</span>
         <span className="loginArea cf">
           <ul>
-          {
-            this.data.user
-            ? <li className="mR10" onClick={this.logout}>ログアウト</li>
-          : <li className="mR10" onClick={this.login}>ログイン</li>
+          {this.data.user
+          ? <li className="mR10" onClick={this.profile}>プロフィール</li>
+          : <li className="mR10" onClick={this.signup}>ユーザ登録</li>
           }
-          {
-            this.data.user
-            ? <li onClick={this.profile}>プロフィール</li>
-            : <li onClick={this.signup}>ユーザ登録</li>
+          {this.data.user
+          ? <li onClick={this.logout}>ログアウト</li>
+          : <li onClick={this.login}>ログイン</li>
           }
           </ul>
         </span>
