@@ -4,6 +4,7 @@ var ParseReact   = require('parse-react');
 var PageType     = require('../lib/PageType.js');
 var EventDateLib = require('../lib/EventDateLib.js');
 var EventInputForm    = require('./EventInputForm.react.js');
+var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
 var EventContent = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -16,9 +17,40 @@ var EventContent = React.createClass({
   },
 
   observe(props, state) {
-   return {
-      user: ParseReact.currentUser,
-    };
+    var event = props.event;
+    var artistQuery = null;
+    var groupQuery = null;
+    if(event.artists){
+      artistQuery = event.artists.query();
+    }
+    if(event.groups){
+      groupQuery = event.groups.query();
+    }
+
+    if(artistQuery === null && groupQuery === null){
+      return {
+        user: ParseReact.currentUser,
+      };  
+    }
+    else if (artistQuery !== null && groupQuery === null){
+      return {
+        user: ParseReact.currentUser,
+        artist: artistQuery,
+      };       
+    }
+    else if (artistQuery == null && groupQuery !== null){
+      return {
+        user: ParseReact.currentUser,
+        group: groupQuery,
+      };       
+    }
+    else{
+     return {
+        user: ParseReact.currentUser,
+        artist: artistQuery,
+        group: groupQuery,
+      };       
+    } 
   },
 
   popInputForm(event){
@@ -52,6 +84,14 @@ var EventContent = React.createClass({
         eventDescription += "詳細：" +event.detail;
       }
 
+      var accountList = this.getRelatedAccountList();
+      var iconImage = null;
+      if(accountList.length > 0){
+        var account = accountList[0];
+        var iconImageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(account) + ')'};
+        var url =AccountInfoLib.getUrl(account); 
+        var iconImage = (<a className="scheduleIcon" style={iconImageStyle} href={url}></a>)
+      }
       var scheduleContentBoxClass = new Date() > eventDate
         ? ("scheduleContentBox finished") : ("scheduleContentBox");
       var hideSwichButton = (hiddenObject === null) 
@@ -61,6 +101,7 @@ var EventContent = React.createClass({
 
       var eventContent = (
         <div className={scheduleContentBoxClass}>
+          {iconImage}
           <p className="scheduleContentTime">{hour}:{minute} -</p>
           <p className="scheduleContentName">{eventTitle}</p>
           <p className="scheduleContentDescription">{eventDescription}</p>
@@ -83,46 +124,23 @@ var EventContent = React.createClass({
     }
   },
 
-  getRelatedAccounts(event){
-    if(event.artists){
-      var artistsRelation = event.artists;
-      artistsRelation.query().find().then(function(artists){
-        var idList = [];
-        for(var i = 0; i < artists.length; i++) {
-          idList.push(artists[i].id);
-        }
-        var artistQuery = new Parse.Query('Artist');
-        artistQuery.containedIn("objectId", idList);
-        artistQuery.find().then(function(results){
-          console.log(results);
-          /*
-          for(var i = 0; i < results.length; i++){
-            console.log(results[0].toJSON());
-          }
-          */
-          });
-      });
-    }
-
-    if(event.groups){
-      var groupsRelation = event.groups;
-      groupsRelation.query().find().then(function(groups){
-        var idList = [];
-        for(var i = 0; i < groups.length; i++) {
-           idList.push(groups[i].id);
-        }
-        var groupQuery = new Parse.Query('Group');
-        groupQuery.containedIn("objectId", idList);
-        groupQuery.find().then(function(results){
-          for(var i = 0; i < results.length; i++){
-            console.log(results[0].toJSON());
-          }
-          });
-      });
-    }
+  getRelatedAccountList(){
+    var accountList = [];
+    this.data.artist.map(function(artist){
+      console.log(artist);
+      accountList.push(artist);
+    });
+    this.data.group.map(function(group){
+      console.log(group);
+      accountList.push(group);
+    });
+    return accountList;
   },
 
+
+
   render() {
+    console.log(this.getRelatedAccountList());
     return this.createEventContent(this.props.event, this.props.hidden);
   },
 

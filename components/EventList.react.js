@@ -103,8 +103,6 @@ var EventList = React.createClass({
       });
     }
 
-    console.log(hiddenDict);
-
     eventList = this.props.events.map(function(event) {
       if(this.props.mode === "selected"){
         if(!hiddenDict.hasOwnProperty(event.objectId)){
