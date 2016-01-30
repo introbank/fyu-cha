@@ -39,6 +39,7 @@ var EventList = React.createClass({
     return {
       incrementUpdate : this.props.handlers().incrementUpdate,
       popInputForm: this.popInputForm,
+      closeInputForm: this.closeInputForm,
     } 
   },
 
