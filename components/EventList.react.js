@@ -2,12 +2,17 @@ var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var PageType     = require('../lib/PageType.js');
-var EventDateLib = require('../lib/EventDateLib.js');
 var EventInputForm    = require('./EventInputForm.react.js');
 var EventContent = require('./EventContent.react.js');
 
 var EventList = React.createClass({
   mixins: [ParseReact.Mixin],
+
+  observe(props, state) {
+   return {
+      user: ParseReact.currentUser,
+    };
+  },
 
   getInitialState() {
     return {
@@ -16,10 +21,8 @@ var EventList = React.createClass({
     };
   },
 
-  observe(props, state) {
-   return {
-      user: ParseReact.currentUser,
-    };
+  closeInputForm(){
+    this.setState({inputForm:false});
   },
 
   popInputForm(event){
@@ -32,41 +35,17 @@ var EventList = React.createClass({
     this.setState({editEvent: event, inputForm:true});
   },
 
-  closeInputForm(){
-    console.log("closeInputForm");
-    this.setState({inputForm:false});
-  },
-
   handlers() {
     return {
       incrementUpdate : this.props.handlers().incrementUpdate,
-      closeInputForm : this.closeInputForm
+      popInputForm: this.popInputForm,
     } 
   },
 
-  hide(event){
-    var data = {user: this.data.user, event:event};
-    var userHideEvent = ParseReact.Mutation.Create("UserHideEvent", data);
-    return userHideEvent.dispatch();
-  },
-
-  show(hiddenObject){
-    return ParseReact.Mutation.Destroy(hiddenObject).dispatch();
-  },
-
   createEventList(event, hiddenObject){
-    //this.getRelatedAccounts(event);
     try{
       var eventDate = new Date(event.date);
       var divKey = this.props.type + this.props.id + event.objectId + this.props.update;
-      var scheduleContentBoxClass = new Date() > eventDate
-        ? ("scheduleContentBox finished") : ("scheduleContentBox");
-
-      var hideSwichButton = (hiddenObject === null) 
-        ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>隠す</div>)
-        : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
-      ;
-
       var eventListHtml = (
         <div key={divKey}>
           {this.previousEventMonth != eventDate.getMonth() && (
@@ -85,19 +64,7 @@ var EventList = React.createClass({
             {new Date() < eventDate && !this.isDisplayedNowDivider && (
               <div className="scheduleNowDivider"></div>
             )}
-            <div className={scheduleContentBoxClass}>
-              <EventContent event={event} />
-              {this.props.type !== PageType.Dashboard() && this.data.user &&
-              <div>
-                <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
-              </div>
-              }
-              {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
-              <div>
-                {hideSwichButton}
-              </div>
-              }
-            </div>
+              <EventContent event={event} hidden={hiddenObject} handlers={this.handlers} type={this.props.type} mode={this.props.mode} />
           </div>
         </div>
       );
@@ -124,45 +91,6 @@ var EventList = React.createClass({
       var weekdays = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"];
       return weekdays[weekdayInt];
     },
-  },
-
-  getRelatedAccounts(event){
-    if(event.artists){
-      var artistsRelation = event.artists;
-      artistsRelation.query().find().then(function(artists){
-        var idList = [];
-        for(var i = 0; i < artists.length; i++) {
-          idList.push(artists[i].id);
-        }
-        var artistQuery = new Parse.Query('Artist');
-        artistQuery.containedIn("objectId", idList);
-        artistQuery.find().then(function(results){
-          console.log(results);
-          /*
-          for(var i = 0; i < results.length; i++){
-            console.log(results[0].toJSON());
-          }
-          */
-          });
-      });
-    }
-
-    if(event.groups){
-      var groupsRelation = event.groups;
-      groupsRelation.query().find().then(function(groups){
-        var idList = [];
-        for(var i = 0; i < groups.length; i++) {
-           idList.push(groups[i].id);
-        }
-        var groupQuery = new Parse.Query('Group');
-        groupQuery.containedIn("objectId", idList);
-        groupQuery.find().then(function(results){
-          for(var i = 0; i < results.length; i++){
-            console.log(results[0].toJSON());
-          }
-          });
-      });
-    }
   },
 
   render() {
