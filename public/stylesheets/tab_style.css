@@ -395,10 +395,6 @@ h1 {
   color: #ffffff;
   background-color: #e4007f; }
 
-
-
-
-
 .schedulePeriod {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -459,20 +455,20 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentTime {
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 45px;
   font-size: 11px;
   color: white;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
-  margin-left: 5px;
+  margin-left: 45px;
   width: 85%;
   font-size: 13px;
   color: white;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentDescription {
-  margin-left: 5px;
+  margin-left: 45px;
   width: 85%;
   font-size: 12px;
   color: white;
@@ -510,6 +506,17 @@ h1 {
   background-size:40px 20px;
   -webkit-background-size:40px 20px;
   -moz-background-size:40px 20px;
+  cursor: pointer;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleIcon {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 35px;
+  height: 35px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   cursor: pointer;
 }
 

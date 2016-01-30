@@ -1,3 +1,4 @@
+require("babel-polyfill");
 var React = require('react');
 var Top = require('../components/Top.react.js');
 

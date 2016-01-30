@@ -1,3 +1,4 @@
+require("babel-polyfill");
 var React = require('react');
 var Signup = require('../components/Signup.react.js');
 

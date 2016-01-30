@@ -1,3 +1,4 @@
+require("babel-polyfill");
 var React = require('react');
 var User = require('../components/User.react.js');
 
