@@ -105,7 +105,7 @@ var UserSchedule = React.createClass({
       return (
         <div>
           <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
-          {this.data.events.length === hiddenDict.length 
+          {this.data.events.length !== hiddenDict.length 
           ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={hiddenDict} mode="selected" handlers={this.handlers}/>
           : <p className="dashboardScheduleInfo">表示するイベントがありません</p>
           }
