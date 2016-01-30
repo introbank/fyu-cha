@@ -418,6 +418,11 @@ h1 {
 }
 
 /*-----schedule-----*/
+.scheduleInputPopup p {
+  text-align: center;
+  padding-top: 65px;
+}
+
 .scheduleInputPopup .getFormButton {
   width:280px;
   color: #e4007f;
