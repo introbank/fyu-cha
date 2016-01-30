@@ -84,13 +84,19 @@ var UserSchedule = React.createClass({
   },
 
   render() {
+    var hiddenDict = {};
+    this.data.hidden.map(function(hidden){
+      hiddenDict[hidden.event.objectId] = hidden;
+    });
+    console.log(hiddenDict);
+
     if(this.state.editMode){ 
       return (
         <div>
           <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
           {this.data.events.length > 0
-          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={this.data.hidden} mode="all" handlers={this.handlers}/>
-          : <p>登録されているイベントがありません</p>
+          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={hiddenDict} mode="all" handlers={this.handlers}/>
+          : <p className="dashboardScheduleInfo">登録されているイベントがありません</p>
           }
         </div>
       );
@@ -99,9 +105,9 @@ var UserSchedule = React.createClass({
       return (
         <div>
           <div className="dashboardScheduleEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
-          {this.data.events.length > 0
-          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={this.data.hidden} mode="selected" handlers={this.handlers}/>
-          : <p>表示するイベントがありません</p>
+          {this.data.events.length === hiddenDict.length 
+          ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={hiddenDict} mode="selected" handlers={this.handlers}/>
+          : <p className="dashboardScheduleInfo">表示するイベントがありません</p>
           }
         </div>
       );

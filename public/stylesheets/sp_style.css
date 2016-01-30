@@ -418,7 +418,7 @@ h1 {
 }
 
 /*-----schedule-----*/
-.scheduleInputPopup p {
+.scheduleInfo p {
   text-align: center;
   padding-top: 65px;
 }
@@ -742,6 +742,13 @@ h1 {
   z-index: 30;
   cursor: pointer;
 }
+
+.dashboardScheduleInfo p {
+  text-align: center;
+  padding-top: 65px;
+}
+
+
 
 /*-----fyucha-----*/
 .fyuchaTotal {

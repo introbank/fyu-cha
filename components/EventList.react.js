@@ -97,13 +97,7 @@ var EventList = React.createClass({
   render() {
     this.initEventListFlugs();
     var eventList = null;
-    var hiddenDict = {}
-    if(this.props.hidden){
-      this.props.hidden.map(function(hidden){
-        hiddenDict[hidden.event.objectId] = hidden;
-      });
-    }
-
+    var hiddenDict = this.props.hidden ? this.props.hidden : {};
     eventList = this.props.events.map(function(event) {
       if(this.props.mode === "selected"){
         if(!hiddenDict.hasOwnProperty(event.objectId)){

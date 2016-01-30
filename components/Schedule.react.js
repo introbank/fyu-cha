@@ -103,15 +103,15 @@ var Schedule = React.createClass({
       <div>
         <div className="scheduleInputPopup">
           <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
+          {this.state.inputForm &&
+            <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
+          }
+          <div>
+          {this.data.events.length > 0
+          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
+          : <div className="scheduleInfo"><p>登録されているイベントがありません</p></div>
+          }
         </div>
-        {this.state.inputForm &&
-          <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
-        }
-        <div>
-        {this.data.events.length > 0
-        ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
-        : <p>登録されているイベントがありません</p>
-        }
       </div>
     </div>
     );
