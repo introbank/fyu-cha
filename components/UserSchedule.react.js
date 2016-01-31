@@ -23,6 +23,7 @@ var UserSchedule = React.createClass({
 
     var artists = FollowingLib.getArtistList(props.artists);
     var groups = FollowingLib.getGroupList(props.groups);
+
     if(artists.length + groups.length === 0){
       return{
         user: ParseReact.currentUser,
@@ -31,24 +32,30 @@ var UserSchedule = React.createClass({
     }
 
     var artistQueryList = [];
+    var groupQueryList = [];
+
     for(var i = 0; i < artists.length; i++){
+      // artist own event
       var eventQuery = new Parse.Query('Event');
-      var artistQuery = new Parse.Query('Artist');
       eventQuery.equalTo('artists', artists[i]);
       artistQueryList.push(eventQuery);
+
+      // related group event
+      var Artist = Parse.Object.extend("Artist");
+      var artist = new Artist();
+      artist.id = artists[i].objectId;
+      var eventGroupQuery = new Parse.Query('Event');
+      eventGroupQuery.matchesQuery("groups", artist.relation("groups").query());
+      groupQueryList.push(eventGroupQuery);
     }
 
-    var groupQueryList = [];
     for(var i = 0; i < groups.length; i++){
       var eventQuery = new Parse.Query('Event');
       eventQuery.equalTo('groups', groups[i]);
       groupQueryList.push(eventQuery);
     }
 
-    var queryList = artistQueryList;
-    if(groupQueryList.length > 0){
-      queryList = queryList.concat(groupQueryList);
-    }
+    var queryList = artistQueryList.concat(groupQueryList);
     var eventQuery = null;
     for(var i = 0; i < queryList.length; i++){
       if(i === 0){
@@ -107,7 +114,7 @@ var UserSchedule = React.createClass({
     if(this.state.editMode){ 
       return (
         <div>
-          <div className="scheduleEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
+          <div className="scheduleEditStartButton" onClick={this.switchEditMode}>完<br />了</div>
           {this.data.events.length > 0
           ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={hiddenDict} mode="all" handlers={this.handlers}/>
           : <p className="dashboardScheduleInfo">登録されているイベントがありません</p>

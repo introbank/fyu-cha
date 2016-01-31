@@ -215,7 +215,7 @@ var EventInputForm = React.createClass({
         <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
         <div className="scheduleAddButtonArea">
           <div className="scheduleAddButtonOtherTime" onClick={this.closeForm} >フォームを閉じる</div>
-          <div className="scheduleAddButtonComplete" onClick={this.handleEventSubmit}>完了</div>
+          <div className="scheduleAddButtonComplete" onClick={this.handleEventSubmit}>保存</div>
         </div>
       </form> 
     </div>

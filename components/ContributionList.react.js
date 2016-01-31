@@ -9,7 +9,6 @@ var ContributionList = React.createClass({
   observe(props, state) {
     var type = props.type;
     var id = props.id;
-    console.log(id);
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
     if (type == "Dashboard"){
       twitterContributionQuery.equalTo("user", Parse.User.current());
