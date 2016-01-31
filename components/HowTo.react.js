@@ -7,13 +7,13 @@ var HowTo = React.createClass({
     return {
       pageIndex: 0,
       images: ["/images/howto1.png", "/images/howto2.png", "/images/howto3.png"],
-      buttons: ["次へ", "次へ", "トップへ"]
+      buttons: ["次へ", "次へ", "フォローする"]
     };
   },
 
   handleNext() {
     if (this.state.pageIndex === 2) {
-      location.href = '/';
+      location.href = '/artists';
       return;
     }
     this.setState({pageIndex: this.state.pageIndex + 1});
