@@ -986,15 +986,16 @@ h1 {
 .howto img {
   width: 100%;
   height: auto;
+  cursor: pointer;
 }
 
 .howto .nextButton {
-  width: 60%;
-  margin-left: 20%;
+  width: 50%;
   color: #e4007f;
   border: 1px solid #e4007f;
   border-radius: 5px;
   padding: 7px 10px;
+  margin: 0 auto;
   margin-top: 5px;
   margin-bottom: 20px;
   font-weight: bold;

@@ -74,7 +74,7 @@ var Signup = React.createClass({
         user.setACL(new Parse.ACL(user))
         user.save(null, {
           success: (user) => {
-            location.href = '/'
+            location.href = '/howto'
           },
           error: (user, error) => {
             alert('Failed to update user, with error code: ' + error.message);
@@ -118,7 +118,7 @@ var Signup = React.createClass({
                 <input ref="password" type="password" onChange={this.handleConfirmChange} />
               </form>
               <div className="submitButton" onClick={this.signup}>
-                登録してマイページへ行く
+                登録して使い方を見る
               </div>
               {this.state.error &&
                 <div>入力に誤りがあります</div>
