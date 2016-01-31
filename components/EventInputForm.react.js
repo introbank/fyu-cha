@@ -1,7 +1,7 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
-var EventDateLib = require('../lib/EventDateLib.js')
+var EventDataLib = require('../lib/EventDataLib.js')
 var EventInputForm = React.createClass({
   mixins: [ParseReact.Mixin],
 
@@ -87,10 +87,10 @@ var EventInputForm = React.createClass({
     var date = null;
     try{
       var time = this.state.eventTime.split(":", 2);
-      date = new Date(year, month-1, day, time[0], time[1]);
+      date = EventDataLib.newTimeFixedDate(year, month, day, time[0], time[1]);
     }
     catch (e){
-      date = new Date(year, month-1, day);
+      date = EventDataLib.newTimeUnfixedDate(year, month, day);
     }
     
     // create event data
@@ -149,15 +149,17 @@ var EventInputForm = React.createClass({
     if((this.props.mode === "edit") && (this.props.event)){
       var editEvent = this.props.event;
       var date = new Date(editEvent.date);
-      var hour = EventDateLib.getHours(date);
-      var minute = EventDateLib.getMinutes(date);
+      var eventTime = null;
+      if(EventDataLib.isTimeFixed(date)){
+        eventTime = EventDataLib.getHours(date) + ":" + EventDataLib.getMinutes(date);
+      }
       return this.setState(
         {
           eventObject: editEvent,
           eventYear: date.getFullYear(),
           eventMonth: date.getMonth() + 1,
           eventDay: date.getDate(),
-          eventTime: hour + ":" + minute,
+          eventTime: eventTime,
           eventTitle: editEvent.title,
           eventCharge: editEvent.charge,
           eventPlace: editEvent.place,

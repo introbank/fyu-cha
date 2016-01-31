@@ -2,7 +2,7 @@ var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var PageType     = require('../lib/PageType.js');
-var EventDateLib = require('../lib/EventDateLib.js');
+var EventDataLib = require('../lib/EventDataLib.js');
 var EventInputForm    = require('./EventInputForm.react.js');
 var AccountInfoLib = require('../lib/AccountInfoLib.js');
 
@@ -70,19 +70,13 @@ var EventContent = React.createClass({
   createEventContent(event, hiddenObject){
     try{
       var eventDate = new Date(event.date);
-      var hour = EventDateLib.getHours(eventDate);
-      var minute = EventDateLib.getMinutes(eventDate);
-      var eventTitle = event.title !== null ? event.title : "";
-      var eventDescription = "";
-      if(event.place){
-        eventDescription += "会場：" + event.place + " ";
+      var isTimeFixed = EventDataLib.isTimeFixed(eventDate);
+      if(isTimeFixed){
+        var hour = EventDataLib.getHours(eventDate);
+        var minute = EventDataLib.getMinutes(eventDate);
       }
-      if(event.charge){
-        eventDescription += "料金：" +event.charge + " ";
-      }
-      if(event.detail){
-        eventDescription += "詳細：" +event.detail;
-      }
+      var eventTitle = EventDataLib.getTitle(event);
+      var eventDescription = EventDataLib.getDescription(event);
 
       var accountList = this.getRelatedAccountList();
       var iconImage = null;
@@ -102,7 +96,10 @@ var EventContent = React.createClass({
       var eventContent = (
         <div className={scheduleContentBoxClass}>
           {iconImage}
-          <p className="scheduleContentTime">{hour}:{minute} -</p>
+          {isTimeFixed 
+          ? <p className="scheduleContentTime">{hour}:{minute} -</p>
+          : <p className="scheduleContentTime">時間未定</p>
+          }
           <p className="scheduleContentName">{eventTitle}</p>
           <p className="scheduleContentDescription">{eventDescription}</p>
           {this.props.type !== PageType.Dashboard() && this.data.user &&
@@ -126,21 +123,16 @@ var EventContent = React.createClass({
 
   getRelatedAccountList(){
     var accountList = [];
-    this.data.artist.map(function(artist){
-      console.log(artist);
-      accountList.push(artist);
-    });
     this.data.group.map(function(group){
-      console.log(group);
       accountList.push(group);
+    });
+    this.data.artist.map(function(artist){
+      accountList.push(artist);
     });
     return accountList;
   },
 
-
-
   render() {
-    console.log(this.getRelatedAccountList());
     return this.createEventContent(this.props.event, this.props.hidden);
   },
 
