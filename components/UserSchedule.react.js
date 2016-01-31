@@ -23,7 +23,7 @@ var UserSchedule = React.createClass({
 
     var artists = FollowingLib.getArtistList(props.artists);
     var groups = FollowingLib.getGroupList(props.groups);
-    if(artists.length + groups.length=== 0){
+    if(artists.length + groups.length === 0){
       return{
         user: ParseReact.currentUser,
         hidden: userHideEventQuery,
@@ -35,7 +35,6 @@ var UserSchedule = React.createClass({
       var eventQuery = new Parse.Query('Event');
       var artistQuery = new Parse.Query('Artist');
       eventQuery.equalTo('artists', artists[i]);
-      eventQuery.include('artists');
       artistQueryList.push(eventQuery);
     }
 
@@ -43,12 +42,13 @@ var UserSchedule = React.createClass({
     for(var i = 0; i < groups.length; i++){
       var eventQuery = new Parse.Query('Event');
       eventQuery.equalTo('groups', groups[i]);
-      eventQuery.include('groups');
       groupQueryList.push(eventQuery);
     }
 
     var queryList = artistQueryList;
-    queryList = queryList.concat(groupQueryList);
+    if(groupQueryList.length > 0){
+      queryList = queryList.concat(groupQueryList);
+    }
     var eventQuery = null;
     for(var i = 0; i < queryList.length; i++){
       if(i === 0){
@@ -60,7 +60,6 @@ var UserSchedule = React.createClass({
     }
     eventQuery.ascending('date');
     eventQuery.limit(1000);
-    console.log(eventQuery);
 
     return {
       user: ParseReact.currentUser,
