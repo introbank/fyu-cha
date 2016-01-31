@@ -447,6 +447,7 @@ h1 {
   padding-bottom: 5px;
   width: 87%;
   background: #5375b1;
+  cursor: pointer;
 }
 
 .scheduleDayWrapper .scheduleContentBox.finished {
@@ -496,11 +497,6 @@ h1 {
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleEditButton {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 40px;
-  height: 20px;
   border-radius: 5px;
   padding: 5px 0px;
   border: 1px solid #777777;
@@ -508,6 +504,25 @@ h1 {
   background: #ffffff;
   text-align: center;
   font-size: 0.9em;
+  background-size:40px 20px;
+  -webkit-background-size:40px 20px;
+  -moz-background-size:40px 20px;
+  cursor: pointer;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleHideButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 33px;
+  height: 17px;
+  border-radius: 5px;
+  background: #ffffff;
+  text-align: center;
+  padding: 8px 0px;
+  font-size: 0.9em;
+  border: 1px solid #777777;
+  color: #777777;
   background-size:40px 20px;
   -webkit-background-size:40px 20px;
   -moz-background-size:40px 20px;

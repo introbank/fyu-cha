@@ -94,8 +94,8 @@ var EventContent = React.createClass({
       var scheduleContentBoxClass = new Date() > eventDate
         ? ("scheduleContentBox finished") : ("scheduleContentBox");
       var hideSwichButton = (hiddenObject === null)
-        ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>隠す</div>)
-        : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
+        ? (<div className="scheduleHideButton" onClick={this.hide.bind(this, event)}>隠す</div>)
+        : (<div className="scheduleHideButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
       ;
 
       var eventContent = (
@@ -107,14 +107,22 @@ var EventContent = React.createClass({
           }
           <p className="scheduleContentName">{eventTitle}</p>
           {this.state.isDisplayDetail
-          ? <p className="scheduleContentDescription">{eventDescription}</p>
-          : <div><p className="scheduleContentDescription">{eventDescription.substr(0, 50) + "..."}</p>
-          <p className="scheduleDescriptionMore">▼</p></div>
-          }
-          {this.props.mode === "edit" && this.data.user &&
-          <div>
-            <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
-          </div>
+          ?
+            <div>
+              <p className="scheduleContentDescription">
+                {eventDescription}
+              </p>
+              {this.props.mode === "edit" && this.data.user &&
+                <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
+              }
+            </div>
+          :
+            <div>
+              <p className="scheduleContentDescription">
+                {eventDescription.substr(0, 50) + "..."}
+              </p>
+              <p className="scheduleDescriptionMore">▼</p>
+            </div>
           }
           {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
           <div>

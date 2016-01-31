@@ -539,6 +539,20 @@ h1 {
 
 
 .scheduleDayWrapper .scheduleContentBox .scheduleEditButton {
+  border-radius: 5px;
+  background: #ffffff;
+  text-align: center;
+  padding: 8px 0px;
+  font-size: 0.9em;
+  border: 1px solid #777777;
+  color: #777777;
+  background-size:40px 20px;
+  -webkit-background-size:40px 20px;
+  -moz-background-size:40px 20px;
+  cursor: pointer;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleHideButton {
   position: absolute;
   top: 5px;
   right: 5px;
