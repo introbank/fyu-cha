@@ -21,6 +21,7 @@ var ArtistList = React.createFactory(require('./components/ArtistList.react.js')
 var Group = React.createFactory(require('./components/Group.react.js'));
 var GroupList = React.createFactory(require('./components/GroupList.react.js'));
 var Registration = React.createFactory(require('./components/Registration.react.js'));
+var HowTo = React.createFactory(require('./components/HowTo.react.js'));
 var NotFound = React.createFactory(require('./components/NotFound.react.js'));
 
 app.use(compression());
@@ -72,6 +73,12 @@ app.get('/groups/:id', function(req, res) {
     var script = '/javascripts/group.js';
     var json   = JSON.stringify(params);
     res.render('main', {body: body, script: script, params: json});
+});
+
+app.get('/howto', function(req, res) {
+    var body   = React.renderToString(HowTo({}));
+    var script = '/javascripts/howto.js';
+    res.render('main', {body: body, script: script});
 });
 
 app.get('/registration', function(req, res) {
