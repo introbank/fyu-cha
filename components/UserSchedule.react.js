@@ -17,6 +17,10 @@ var UserSchedule = React.createClass({
   },
 
   observe(props, state) {
+    var userHideEventQuery = new Parse.Query("UserHideEvent");
+    userHideEventQuery.equalTo('user', Parse.User.current());
+    userHideEventQuery.limit(1000);
+
     var artists = FollowingLib.getArtistList(props.artists);
     var artistQueryList = [];
     for(var i = 0; i < artists.length; i++){
@@ -35,8 +39,14 @@ var UserSchedule = React.createClass({
       eventQuery.include('groups');
       groupQueryList.push(eventQuery);
     }
-
     var queryList = artistQueryList.concat(groupQueryList);
+    if(queryList.length === 0){
+      return{
+        user: ParseReact.currentUser,
+        hidden: userHideEventQuery,
+      };
+    }
+
     var eventQuery = new Parse.Query('Event');
     for(var i = 0; i < queryList.length; i++){
       if(i == 0){
@@ -48,10 +58,6 @@ var UserSchedule = React.createClass({
     }
     eventQuery.ascending('date');
     eventQuery.limit(1000);
-
-    var userHideEventQuery = new Parse.Query("UserHideEvent");
-    userHideEventQuery.equalTo('user', Parse.User.current());
-    userHideEventQuery.limit(1000);
 
     return {
       user: ParseReact.currentUser,
@@ -86,9 +92,15 @@ var UserSchedule = React.createClass({
 
   render() {
     var hiddenDict = {};
-    this.data.hidden.map(function(hidden){
-      hiddenDict[hidden.event.objectId] = hidden;
-    });
+    if(this.data.hidden){
+      this.data.hidden.map(function(hidden){
+        hiddenDict[hidden.event.objectId] = hidden;
+      });
+    }
+    // if no folloing 
+    if(!this.data.events){
+      return(<p className="dashboardScheduleInfo">表示するイベントがありません</p>);
+    }
 
     if(this.state.editMode){ 
       return (
