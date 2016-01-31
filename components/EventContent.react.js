@@ -13,6 +13,7 @@ var EventContent = React.createClass({
     return {
       inputForm: false,
       editEvent: null,
+      isDisplayDetail: false
     };
   },
 
@@ -30,31 +31,31 @@ var EventContent = React.createClass({
     if(artistQuery === null && groupQuery === null){
       return {
         user: ParseReact.currentUser,
-      };  
+      };
     }
     else if (artistQuery !== null && groupQuery === null){
       return {
         user: ParseReact.currentUser,
         artist: artistQuery,
-      };       
+      };
     }
     else if (artistQuery == null && groupQuery !== null){
       return {
         user: ParseReact.currentUser,
         group: groupQuery,
-      };       
+      };
     }
     else{
      return {
         user: ParseReact.currentUser,
         artist: artistQuery,
         group: groupQuery,
-      };       
-    } 
+      };
+    }
   },
 
   popInputForm(event){
-    this.props.handlers().popInputForm(event); 
+    this.props.handlers().popInputForm(event);
   },
 
   hide(event){
@@ -65,6 +66,10 @@ var EventContent = React.createClass({
 
   show(hiddenObject){
     return ParseReact.Mutation.Destroy(hiddenObject).dispatch();
+  },
+
+  clickEvent() {
+    this.setState({isDisplayDetail: !this.state.isDisplayDetail});
   },
 
   createEventContent(event, hiddenObject){
@@ -83,25 +88,29 @@ var EventContent = React.createClass({
       if(accountList.length > 0){
         var account = accountList[0];
         var iconImageStyle = {backgroundImage:'url(' + AccountInfoLib.getImageUrl(account) + ')'};
-        var url =AccountInfoLib.getUrl(account); 
+        var url =AccountInfoLib.getUrl(account);
         var iconImage = (<a className="scheduleIcon" style={iconImageStyle} href={url}></a>)
       }
       var scheduleContentBoxClass = new Date() > eventDate
         ? ("scheduleContentBox finished") : ("scheduleContentBox");
-      var hideSwichButton = (hiddenObject === null) 
+      var hideSwichButton = (hiddenObject === null)
         ? (<div className="scheduleEditButton" onClick={this.hide.bind(this, event)}>隠す</div>)
         : (<div className="scheduleEditButton" onClick={this.show.bind(this, hiddenObject)}>表示</div>)
       ;
 
       var eventContent = (
-        <div className={scheduleContentBoxClass}>
+        <div className={scheduleContentBoxClass} onClick={this.clickEvent}>
           {iconImage}
-          {isTimeFixed 
+          {isTimeFixed
           ? <p className="scheduleContentTime">{hour}:{minute} -</p>
           : <p className="scheduleContentTime">時間未定</p>
           }
           <p className="scheduleContentName">{eventTitle}</p>
-          <p className="scheduleContentDescription">{eventDescription}</p>
+          {this.state.isDisplayDetail
+          ? <p className="scheduleContentDescription">{eventDescription}</p>
+          : <div><p className="scheduleContentDescription">{eventDescription.substr(0, 50) + "..."}</p>
+          <p className="scheduleDescriptionMore">▼</p></div>
+          }
           {this.props.mode === "edit" && this.data.user &&
           <div>
             <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
@@ -112,7 +121,7 @@ var EventContent = React.createClass({
             {hideSwichButton}
           </div>
           }
-        </div> 
+        </div>
       );
       return eventContent;
     }

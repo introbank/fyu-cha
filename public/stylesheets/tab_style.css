@@ -474,6 +474,11 @@ h1 {
   color: white;
 }
 
+.scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
+  text-align: center;
+  color: white;
+}
+
 .scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
   margin-top: 7px;
   margin-bottom: 7px;

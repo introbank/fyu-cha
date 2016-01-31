@@ -516,6 +516,11 @@ h1 {
   color: #efefef;
 }
 
+.scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
+  text-align: center;
+  color: white;
+}
+
 .scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
   margin-top: 7px;
   margin-bottom: 7px;
@@ -728,7 +733,7 @@ h1 {
 }
 
 /*-- user schedule --*/
-.scheduleEditStartButton {		
+.scheduleEditStartButton {
   box-sizing: border-box;
   position: fixed;
   top: 300px;
