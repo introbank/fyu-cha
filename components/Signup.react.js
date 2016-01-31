@@ -71,7 +71,15 @@ var Signup = React.createClass({
 
     user.signUp(null, {
       success: function(user) {
-        location.href = '/';
+        user.setACL(new Parse.ACL(user))
+        user.save(null, {
+          success: (user) => {
+            location.href = '/'
+          },
+          error: (user, error) => {
+            alert('Failed to update user, with error code: ' + error.message);
+          }
+        });
       },
       error: function(user, error) {
         alert("Error: " + error.code + " " + error.message);
