@@ -42,6 +42,7 @@
     "watch:artist": "gulp watch:artist",
     "watch:group": "gulp watch:group",
     "watch:signup": "gulp watch:signup",
+    "watch:howto": "gulp watch:howto",
     "test": "./node_modules/.bin/mocha"
   },
   "engines": {

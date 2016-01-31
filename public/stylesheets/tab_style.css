@@ -982,3 +982,28 @@ h1 {
   width: 100%;
   height: auto;
 }
+
+.howto img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.howto .nextButton {
+  width: 50%;
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.howto .nextButton:hover {
+  color: #ffffff;
+  background-color: #e4007f;
+}
