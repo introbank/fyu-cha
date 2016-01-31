@@ -538,12 +538,14 @@ h1 {
   line-height: 2em;
 }
 
-
 .scheduleDayWrapper .scheduleContentBox .scheduleEditButton {
   border-radius: 5px;
   background: #ffffff;
   text-align: center;
-  padding: 8px 0px;
+  padding: 5px 0px;
+  width: 46%;
+  margin: 0 auto;
+  margin-top: 10px;
   font-size: 0.9em;
   border: 1px solid #777777;
   color: #777777;
