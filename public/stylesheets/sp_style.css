@@ -727,7 +727,7 @@ h1 {
 }
 
 /*-- user schedule --*/
-.dashboardScheduleEditStartButton {		
+.scheduleEditStartButton {		
   box-sizing: border-box;
   position: fixed;
   top: 300px;
