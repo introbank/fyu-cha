@@ -645,7 +645,9 @@ h1 {
 .scheduleAddBox input {
   margin-left: 10px;
   margin-right: 5px;
-  min-height: 15px;
+  min-height: 19px;
+  padding: 3px;
+  font-size: 14px;
   border: 1px solid #898989;
   border-radius: 3px;
 }
@@ -677,11 +679,12 @@ h1 {
 }
 
 .scheduleAddBox .scheduleAddInputDay {
-  width: 20%;
+  width: 13%;
+  text-align: right;
 }
 
 .scheduleAddBox .scheduleAddInputTime {
-  width: 30%;
+  width: 25%;
 }
 
 .scheduleAddBox .scheduleAddInputEventTitle {
@@ -690,21 +693,20 @@ h1 {
 
 .scheduleAddBox .scheduleAddSpotArea {
   float: left;
-  width: 40%;
+  width: 50%;
 }
 
 .scheduleAddBox .scheduleAddSpotArea .scheduleAddInputSpot {
-  width: 100%;
+  width: 90%;
 }
 
 .scheduleAddBox .scheduleAddCostArea {
   float: left;
-  margin-left: 10px;
-  width: 40%;
+  width: 50%;
 }
 
 .scheduleAddBox .scheduleAddCostArea .scheduleAddInputCost {
-  width: 70%;
+  width: 80%;
 }
 
 .scheduleAddBox .scheduleAddInputEventDescription {
@@ -714,19 +716,16 @@ h1 {
 
 .scheduleAddBox .scheduleAddButtonArea {
   overflow: hidden;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto;
   width: 90%;
 }
 
 .scheduleAddBox .scheduleAddButtonOtherTime {
   display: block;
   float: left;
-  margin-right: 5px;
+  margin-right: 3%;
   padding: 5px;
-  width: 43%;
+  width: 44%;
   border: 1px solid #5375b1;
   border-radius: 3px;
   color: #5375b1;
@@ -737,10 +736,9 @@ h1 {
 
 .scheduleAddBox .scheduleAddButtonComplete {
   display: block;
-  float: left;
-  margin-left: 5px;
+  float: right;
   padding: 5px;
-  width: 43%;
+  width: 44%;
   border: 1px solid #db1277;
   border-radius: 3px;
   color: #db1277;
