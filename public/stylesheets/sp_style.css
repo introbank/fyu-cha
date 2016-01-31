@@ -489,6 +489,7 @@ h1 {
   padding-bottom: 5px;
   width: 87%;
   background: #3e62ad;
+  cursor: pointer;
 }
 
 .scheduleDayWrapper .scheduleContentBox.finished {
