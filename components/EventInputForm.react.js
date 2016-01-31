@@ -85,12 +85,18 @@ var EventInputForm = React.createClass({
       return;
     }
     var date = null;
-    try{
-      var time = this.state.eventTime.split(":", 2);
-      date = EventDataLib.newTimeFixedDate(year, month, day, time[0], time[1]);
-    }
-    catch (e){
+    if(!this.state.eventTime){
       date = EventDataLib.newTimeUnfixedDate(year, month, day);
+    }
+    else{
+      try{
+        var time = this.state.eventTime.split(":", 2);
+        date = EventDataLib.newTimeFixedDate(year, month, day, time[0], time[1]);
+      }
+      catch (e){
+        date = EventDataLib.newTimeUnfixedDate(year, month, day);
+        console.log(date);
+      } 
     }
     
     // create event data
