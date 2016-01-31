@@ -15,6 +15,7 @@ var UserSchedule = React.createClass({
       update: null,
     };
   },
+
   observe(props, state) {
     var artists = FollowingLib.getArtistList(props.artists);
     var artistQueryList = [];
@@ -88,7 +89,6 @@ var UserSchedule = React.createClass({
     this.data.hidden.map(function(hidden){
       hiddenDict[hidden.event.objectId] = hidden;
     });
-    console.log(hiddenDict);
 
     if(this.state.editMode){ 
       return (
