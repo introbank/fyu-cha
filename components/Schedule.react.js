@@ -9,6 +9,7 @@ var Schedule = React.createClass({
 
   getInitialState() {
     return {
+      editMode: false,
       inputForm: false,
       update: null,
     };
@@ -71,6 +72,11 @@ var Schedule = React.createClass({
     this.setState({inputForm:false});
   },
 
+  switchEditMode(event) {
+    console.log("switchEditMode");
+    this.setState({editMode: !this.state.editMode, update: this.state.update + 1});
+  },
+
   incrementUpdate(){
     return this.setState({update: this.state.update + 1});
   },
@@ -99,22 +105,45 @@ var Schedule = React.createClass({
   },
 
   render() {
-    return (
-      <div>
-        <div className="scheduleInputPopup">
-          <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
-          {this.state.inputForm &&
-            <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
-          }
-          <div>
-          {this.data.events.length > 0
-          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
-          : <div className="scheduleInfo"><p>登録されているイベントがありません</p></div>
-          }
+    if(this.state.editMode){ 
+      return (
+        <div>
+          <div className="scheduleEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
+          <div className="scheduleInputPopup">
+            <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
+            {this.state.inputForm &&
+              <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
+            }
+            <div>
+            {this.data.events.length > 0
+            ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="edit" />
+            : <div className="scheduleInfo"><p>登録されているイベントがありません</p></div>
+            }
+          </div>
         </div>
       </div>
-    </div>
-    );
+      );
+    }
+    else{
+      return (
+        <div>
+          <div className="scheduleEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
+          <div className="scheduleInputPopup">
+            <div className="getFormButton" onClick={this.popInputForm}>イベントを追加</div>
+            {this.state.inputForm &&
+              <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
+            }
+            <div>
+            {this.data.events.length > 0
+            ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} mode="all" />
+            : <div className="scheduleInfo"><p>登録されているイベントがありません</p></div>
+            }
+          </div>
+        </div>
+      </div>
+      );
+
+    }
   },
 
 });

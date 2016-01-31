@@ -102,7 +102,7 @@ var EventContent = React.createClass({
           }
           <p className="scheduleContentName">{eventTitle}</p>
           <p className="scheduleContentDescription">{eventDescription}</p>
-          {this.props.type !== PageType.Dashboard() && this.data.user &&
+          {this.props.mode === "edit" && this.data.user &&
           <div>
             <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
           </div>
