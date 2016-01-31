@@ -80,6 +80,18 @@ gulp.task('build:signup', function() {
     }));
 });
 
+gulp.task('build:howto', function() {
+  gulp.src('app/howto.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(print(function(filepath) {
+      return "built: " + filepath;
+    }));
+});
+
 gulp.task('watch:top', function() {
   gulp.watch('./components/*.js', ['build:top']);
 });
@@ -94,4 +106,8 @@ gulp.task('watch:group', function() {
 
 gulp.task('watch:signup', function() {
   gulp.watch('./components/*.js', ['build:signup']);
+});
+
+gulp.task('watch:howto', function() {
+  gulp.watch('./components/*.js', ['build:howto']);
 });
