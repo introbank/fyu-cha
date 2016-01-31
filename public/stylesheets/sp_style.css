@@ -516,6 +516,11 @@ h1 {
   color: #efefef;
 }
 
+.scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
+  text-align: center;
+  color: white;
+}
+
 .scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
   margin-top: 7px;
   margin-bottom: 7px;
@@ -534,6 +539,23 @@ h1 {
 
 
 .scheduleDayWrapper .scheduleContentBox .scheduleEditButton {
+  border-radius: 5px;
+  background: #ffffff;
+  text-align: center;
+  padding: 5px 0px;
+  width: 25%;
+  margin: 0 auto;
+  margin-top: 10px;
+  font-size: 0.9em;
+  border: 1px solid #777777;
+  color: #777777;
+  background-size:40px 20px;
+  -webkit-background-size:40px 20px;
+  -moz-background-size:40px 20px;
+  cursor: pointer;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleHideButton {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -728,7 +750,7 @@ h1 {
 }
 
 /*-- user schedule --*/
-.scheduleEditStartButton {		
+.scheduleEditStartButton {
   box-sizing: border-box;
   position: fixed;
   top: 300px;
