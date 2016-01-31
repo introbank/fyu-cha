@@ -4,6 +4,7 @@ var ParseReact   = require('parse-react');
 var EventList    = require('./EventList.react.js');
 var FollowingLib = require('../lib/FollowingLib');
 var PageType = require('../lib/PageType.js');
+var moment = require('moment');
 
 var UserSchedule = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -11,7 +12,7 @@ var UserSchedule = React.createClass({
   getInitialState() {
     return {
       editMode: false,
-      hideEventObjectList: null, 
+      hideEventObjectList: null,
       update: null,
     };
   },
@@ -65,6 +66,9 @@ var UserSchedule = React.createClass({
         eventQuery = Parse.Query.or(eventQuery, queryList[i]);
       }
     }
+    var today = moment();
+    today.set({hour:0, minute:0, second:0, millisecond:0});
+    eventQuery.greaterThan("date", today.toDate());
     eventQuery.ascending('date');
     eventQuery.limit(1000);
 
@@ -96,7 +100,7 @@ var UserSchedule = React.createClass({
   handlers() {
     return {
       incrementUpdate : this.incrementUpdate,
-    } 
+    }
   },
 
   render() {
@@ -106,12 +110,12 @@ var UserSchedule = React.createClass({
         hiddenDict[hidden.event.objectId] = hidden;
       });
     }
-    // if no folloing 
+    // if no folloing
     if(!this.data.events){
       return(<p className="dashboardScheduleInfo">表示するイベントがありません</p>);
     }
 
-    if(this.state.editMode){ 
+    if(this.state.editMode){
       return (
         <div>
           <div className="scheduleEditStartButton" onClick={this.switchEditMode}>完<br />了</div>
@@ -126,7 +130,7 @@ var UserSchedule = React.createClass({
       return (
         <div>
           <div className="scheduleEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
-          {this.data.events.length !== hiddenDict.length 
+          {this.data.events.length !== hiddenDict.length
           ? <EventList type={PageType.Dashboard()} events={this.data.events} hidden={hiddenDict} mode="selected" handlers={this.handlers}/>
           : <p className="dashboardScheduleInfo">表示するイベントがありません</p>
           }

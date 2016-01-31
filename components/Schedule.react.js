@@ -3,6 +3,7 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var EventList    = require('./EventList.react.js');
 var EventInputForm    = require('./EventInputForm.react.js');
+var moment = require('moment');
 
 var Schedule = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -25,6 +26,9 @@ var Schedule = React.createClass({
 
     var eventQuery = new Parse.Query('Event');
     eventQuery.ascending('date');
+    var today = moment();
+    today.set({hour:0, minute:0, second:0, millisecond:0});
+    eventQuery.greaterThan("date", today.toDate());
     if(type == "Group"){
       var groupQuery = new Parse.Query(type);
       groupQuery.equalTo('objectId', account.objectId);
@@ -91,7 +95,7 @@ var Schedule = React.createClass({
     return {
       incrementUpdate : this.incrementUpdate,
       closeInputForm : this.closeInputForm
-    } 
+    }
   },
 
   componentWillMount(){
