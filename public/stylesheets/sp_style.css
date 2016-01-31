@@ -418,7 +418,7 @@ h1 {
 }
 
 /*-----schedule-----*/
-.scheduleInputPopup p {
+.scheduleInfo p {
   text-align: center;
   padding-top: 65px;
 }
@@ -497,20 +497,20 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentTime {
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 45px;
   font-size: 11px;
   color: #efefef;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
-  margin-left: 5px;
+  margin-left: 45px;
   width: 85%;
   font-size: 13px;
   color: white;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentDescription {
-  margin-left: 5px;
+  margin-left: 45px;
   width: 85%;
   font-size: 12px;
   color: #efefef;
@@ -537,8 +537,8 @@ h1 {
   position: absolute;
   top: 5px;
   right: 5px;
-  width: 33px;
-  height: 17px;
+  width: 35px;
+  height: 20px;
   border-radius: 5px;
   background: #ffffff;
   text-align: center;
@@ -558,7 +558,6 @@ h1 {
   left: 5px;
   width: 35px;
   height: 35px;
-  border-radius: 5px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   cursor: pointer;
@@ -728,7 +727,7 @@ h1 {
 }
 
 /*-- user schedule --*/
-.dashboardScheduleEditStartButton {		
+.dashboardScheduleEditStartButton {
   box-sizing: border-box;
   position: fixed;
   top: 300px;
@@ -743,6 +742,13 @@ h1 {
   z-index: 30;
   cursor: pointer;
 }
+
+.dashboardScheduleInfo p {
+  text-align: center;
+  padding-top: 65px;
+}
+
+
 
 /*-----fyucha-----*/
 .fyuchaTotal {
@@ -1030,4 +1036,28 @@ h1 {
 .lp img {
   width: 100%;
   height: auto;
+}
+
+.howto img {
+  width: 100%;
+  height: auto;
+}
+
+.howto .nextButton {
+  width: 50%;
+  color: #e4007f;
+  border: 1px solid #e4007f;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.howto .nextButton:hover {
+  color: #ffffff;
+  background-color: #e4007f;
 }
