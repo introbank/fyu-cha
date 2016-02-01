@@ -516,7 +516,7 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
   margin-left: 5px;
-  width: 85%;
+  width: calc(100% - 50px);
   font-size: 14px;
   color: #efefef;
 }
@@ -591,7 +591,7 @@ h1 {
   right: 5px;
   width: 35px;
   height: 35px;
-  border-radius: 5px;
+  border-radius: 3px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   cursor: pointer;
@@ -811,7 +811,7 @@ h1 {
 .fyuchaCommitsTitle {
 /*  margin-top: 10px;
   margin-left: 10px; */
-  font-size: 16px;
+  font-size: 1.1em;
   color: #db1277;
 }
 
