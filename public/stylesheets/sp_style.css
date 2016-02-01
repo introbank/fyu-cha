@@ -327,6 +327,7 @@ h1 {
 /*-----tab__followList-----*/
 .tabArea .box {
   overflow: hidden;
+  margin-top: 10px;
 }
 
 .tabArea #followList ul {
@@ -429,7 +430,7 @@ h1 {
   border: 1px solid #e4007f;
   border-radius: 5px;
   padding: 7px 10px;
-  margin: 5px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
   float: right;
   font-weight: bold;
   cursor: pointer; }
