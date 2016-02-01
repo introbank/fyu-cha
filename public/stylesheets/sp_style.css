@@ -793,8 +793,10 @@ h1 {
 }
 
 .fyuchaTotal .fyuchaToalNumerals {
+  font-family: tahoma;
   margin-left: 5px;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .fyuchaGraph {
