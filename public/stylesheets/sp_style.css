@@ -85,7 +85,7 @@ body {
 }
 
 .contents {
-  padding: 10px 10px 0px 10px;
+  padding: 10px 3px 0px 3px;
 }
 
 h1 {
@@ -243,7 +243,7 @@ h1 {
 /*-----tab-----*/
 .tabArea .tabs {
   display: table;
-  width: 100%;
+  width: calc(100% - 2px);
   border: 1px solid #afafb0;
   border-radius: 5px;
   table-layout: fixed;
@@ -298,13 +298,17 @@ h1 {
 }
 
 /*-----tab__images-----*/
+#images {
+  margin-top: 10px;
+}
+
 #images li img {
   width: 100%;
   max-width: 458px;
   min-width: 288px;
   height: auto;
-  margin: 10px auto 0px;
-  border: 1px solid #EAEAEA;
+/*  margin: 10px auto 0px;
+  border: 1px solid #EAEAEA; */
 }
 
 #images .startButton {
@@ -327,7 +331,7 @@ h1 {
 /*-----tab__followList-----*/
 .tabArea .box {
   overflow: hidden;
-  margin-top: 10px;
+/*  margin-top: 10px; */
 }
 
 .tabArea #followList ul {
