@@ -656,6 +656,8 @@ h1 {
 .scheduleAddBox textarea {
   margin-left: 10px;
   margin-right: 5px;
+  padding: 3px;
+  font-size: 12px;
   border: 1px solid #898989;
   border-radius: 3px;
 }
@@ -712,7 +714,7 @@ h1 {
 
 .scheduleAddBox .scheduleAddInputEventDescription {
   width: 90%;
-  min-height: 60px;
+  min-height: 115px;
 }
 
 .scheduleAddBox .scheduleAddButtonArea {
