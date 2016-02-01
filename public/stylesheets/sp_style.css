@@ -818,7 +818,7 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 /*  width: 95%; */
-  border-bottom: 1px solid #c9caca;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea {
@@ -846,7 +846,7 @@ h1 {
   width: 160px;
   top: 5px;
   left: 35px;
-  color: black;
+  color: #555555;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
@@ -857,7 +857,7 @@ h1 {
   position: absolute;
   top: 23px;
   left: 35px;
-  color: #c9caca;
+  color: #cccccc;
   font-size: 10px;
 }
 
@@ -871,7 +871,7 @@ h1 {
   position: absolute;
   top: 12px;
   right: 40px;
-  color: #333333;
+  color: #555555;
   font-size: 12px;
 }
 
