@@ -807,8 +807,8 @@ h1 {
 }
 
 .fyuchaCommitsTitle {
-  margin-top: 10px;
-  margin-left: 10px;
+/*  margin-top: 10px;
+  margin-left: 10px; */
   font-size: 16px;
   color: #db1277;
 }
@@ -817,7 +817,7 @@ h1 {
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
-  width: 95%;
+/*  width: 95%; */
   border-bottom: 1px solid #c9caca;
 }
 
