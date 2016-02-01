@@ -467,7 +467,8 @@ h1 {
 }
 
 .scheduleDayWrapper .scheduleDayBox.finished {
-  color: #999;
+  color: #999999;
+  font-weight: bold;
 }
 
 .scheduleDayWrapper .scheduleDayBox.today {
@@ -477,6 +478,7 @@ h1 {
 .scheduleDayWrapper .scheduleDayBox .scheduleDay {
   margin-top: 3px;
   font-size: 14px;
+  font-weight: bold;
 }
 
 .scheduleDayWrapper .scheduleDayBox .scheduleDayOfTheWeek {
@@ -488,7 +490,7 @@ h1 {
   float: right;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  width: 87%;
+  width: 88%;
   background: #3e62ad;
   cursor: pointer;
 }
@@ -519,7 +521,8 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
   text-align: center;
-  color: #efefef;
+  color: #1e50a2;
+  font-size: 10px;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
