@@ -334,6 +334,10 @@ h1 {
 /*  margin-top: 10px; */
 }
 
+#followList .box {
+  margin-top: 10px;
+}
+
 .tabArea #followList ul {
   overflow: hidden;
   display: block;
