@@ -646,8 +646,8 @@ h1 {
 .scheduleAddBox input {
   margin-left: 10px;
   margin-right: 5px;
-  min-height: 19px;
-  padding: 3px;
+  min-height: 17px;
+  padding: 2px;
   font-size: 14px;
   border: 1px solid #898989;
   border-radius: 3px;
@@ -670,11 +670,10 @@ h1 {
 }
 
 .scheduleAddBox .scheduleAddSubTitle {
-  margin-top: 10px;
-  margin-bottom: 3px;
+  margin-top: 3px;
   margin-left: 10px;
   color: #898989;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .scheduleAddBox .scheduleAddMultiArea {
@@ -714,7 +713,7 @@ h1 {
 
 .scheduleAddBox .scheduleAddInputEventDescription {
   width: 90%;
-  min-height: 115px;
+  min-height: 120px;
 }
 
 .scheduleAddBox .scheduleAddButtonArea {
