@@ -838,6 +838,7 @@ h1 {
 .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail img {
   width: 28px;
   height: auto;
+  border-radius: 2px
 }
 
 .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
