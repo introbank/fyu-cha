@@ -790,7 +790,7 @@ h1 {
 }
 
 .fyuchaTotal .fyuchaToalNumerals {
-  font-family: 'Tahoma';
+  font-family: 'Tahoma', 'Helvetica', 'Arial', 'sans-serif';
   margin-left: 5px;
   font-size: 24px;
   font-weight: bold;
