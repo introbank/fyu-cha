@@ -82,6 +82,8 @@ var EventContent = React.createClass({
       }
       var eventTitle = EventDataLib.getTitle(event);
       var eventDescription = EventDataLib.getDescription(event);
+      var eventUrl = EventDataLib.getUrl(event);
+      var eventImageUrl = EventDataLib.getImageUrl(event);
 
       var accountList = this.getRelatedAccountList();
       var iconImage = null;
@@ -112,6 +114,16 @@ var EventContent = React.createClass({
               <p className="scheduleContentDescription">
                 {eventDescription}
               </p>
+              {eventUrl !== '' &&
+                <p className="scheduleContentUrl">
+                  詳細ページ： <a target="_blank" href={eventUrl}>{eventUrl}</a>
+                </p>
+              }
+              {eventImageUrl !== '' &&
+                <p className="scheduleContentImage">
+                  <img src={eventImageUrl}/>
+                </p>
+              }
               {this.props.type !== PageType.Dashboard() && this.data.user &&
                 <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
               }

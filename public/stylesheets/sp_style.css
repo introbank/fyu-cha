@@ -524,6 +524,21 @@ h1 {
   color: #efefef;
 }
 
+.scheduleDayWrapper .scheduleContentBox .scheduleContentUrl {
+  margin: 15px 5px 0px 5px;
+  font-size: 12px;
+  color: #efefef;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentUrl a {
+  color: #efefef;
+  text-decoration: underline;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentImage img {
+  width: 100%;
+}
+
 .scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
   text-align: center;
   color: #9ea1a3;
@@ -721,6 +736,14 @@ h1 {
 .scheduleAddBox .scheduleAddInputEventDescription {
   width: 90%;
   min-height: 120px;
+}
+
+.scheduleAddBox .scheduleAddInputEventUrl {
+  width: 90%;
+}
+
+.scheduleAddBox .scheduleAddInputEventImageUrl {
+  width: 90%;
 }
 
 .scheduleAddBox .scheduleAddButtonArea {
