@@ -513,7 +513,7 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
   margin-left: 5px;
-  width: calc(100% - 50px);
+  width: calc(100% - 45px);
   font-size: 14px;
   color: #efefef;
 }
@@ -525,7 +525,7 @@ h1 {
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentUrl {
-  margin: 15px 5px 0px 5px;
+  margin: 5px 5px 0px 5px;
   font-size: 12px;
   color: #efefef;
 }
@@ -537,6 +537,8 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentImage img {
   width: 100%;
+  vertical-align: middle;
+  margin-top: 10px;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
@@ -601,8 +603,8 @@ h1 {
   position: absolute;
   top: 5px;
   right: 5px;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 3px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
