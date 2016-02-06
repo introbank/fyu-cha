@@ -1,4 +1,4 @@
-var React        = require('react');
+tvar React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var EventDataLib = require('../lib/EventDataLib.js')
@@ -17,6 +17,8 @@ var EventInputForm = React.createClass({
       eventCharge: '',
       eventPlace: '',
       eventDetail: '',
+      eventUrl: '',
+      eventImageUrl: ''
     };
   },
 
@@ -57,10 +59,18 @@ var EventInputForm = React.createClass({
   handleEventDetailChange: function(e) {
     this.setState({eventDetail: e.target.value});
   },
-  
+
+  handleEventUrlChange: function(e) {
+    this.setState({eventUrl: e.target.value});
+  },
+
+  handleEventImageUrlChange: function(e) {
+    this.setState({eventImageUrl: e.target.value});
+  },
+
   closeForm(){
     this.initState();
-    this.props.handlers().closeInputForm(); 
+    this.props.handlers().closeInputForm();
   },
 
   incrementUpdate(){
@@ -80,6 +90,8 @@ var EventInputForm = React.createClass({
     var charge = this.state.eventCharge;
     var place = this.state.eventPlace;
     var detail = this.state.eventDetail.trim();
+    var url = this.state.eventUrl;
+    var imageUrl = this.state.eventImageUrl;
     if (!year || !month || !day) {
       window.alert("年、月、日、は必ず入力してください");
       return;
@@ -96,24 +108,23 @@ var EventInputForm = React.createClass({
       catch (e){
         date = EventDataLib.newTimeUnfixedDate(year, month, day);
         console.log(date);
-      } 
+      }
     }
-    
+
     // create event data
     var data = {
       date: date,
       title: title,
       charge: charge,
       place: place,
-      detail: detail
+      detail: detail,
+      url: url,
+      imageUrl: imageUrl
     };
     var event = null;
-    var relation = null;
-    var self = this;
-
     // add new event
     if(this.state.eventObject === null){
-      event = ParseReact.Mutation.Create('Event', data); 
+      event = ParseReact.Mutation.Create('Event', data);
       event.dispatch().then(function(createdEvent){
         var col = account.className.toLowerCase() + "s";
         relation = ParseReact.Mutation.AddRelation(createdEvent, col, self.props.account);
@@ -147,7 +158,7 @@ var EventInputForm = React.createClass({
 
   componentWillMount(){
     this.initState();
-  }, 
+  },
 
   initState() {
     if((this.props.mode === "edit") && (this.props.event)){
@@ -167,8 +178,10 @@ var EventInputForm = React.createClass({
           eventTitle: editEvent.title,
           eventCharge: editEvent.charge,
           eventPlace: editEvent.place,
-          eventDetail: editEvent.detail
-        }); 
+          eventDetail: editEvent.detail,
+          eventUrl: editEvent.url,
+          eventImageUrl: editEvent.imageUrl
+        });
     }
     else{
       var now = new Date();
@@ -182,7 +195,9 @@ var EventInputForm = React.createClass({
           eventTitle: '',
           eventCharge: '',
           eventPlace: '',
-          eventDetail: ''
+          eventDetail: '',
+          eventUrl: '',
+          eventImageUrl: ''
         });
     }
   },
@@ -201,21 +216,25 @@ var EventInputForm = React.createClass({
         <input type="text" className="scheduleAddInputEventTitle" value={this.state.eventTitle} onChange={this.handleEventTitleChange} />
         <div className="scheduleAddMultiArea">
           <div className="scheduleAddSpotArea">
-            <h3 className="scheduleAddSubTitle">場所</h3>
+            <h3 className="scheduleAddSubTitle">会場</h3>
             <input type="text" className="scheduleAddInputSpot" value={this.state.eventPlace} onChange={this.handleEventPlaceChange} />
-          </div> 
+          </div>
           <div className="scheduleAddCostArea">
-            <h3 className="scheduleAddSubTitle">費用</h3>
+            <h3 className="scheduleAddSubTitle">料金</h3>
             <input type="text" className="scheduleAddInputCost" value={this.state.eventCharge} onChange={this.handleEventChargeChange} />
           </div>
         </div>
         <h3 className="scheduleAddSubTitle">イベントの詳細</h3>
         <textarea className="scheduleAddInputEventDescription" value={this.state.eventDetail} onChange={this.handleEventDetailChange}></textarea>
+        <h3 className="scheduleAddSubTitle">イベント詳細ページのURL（枠内にリンクを表示）</h3>
+        <input type="text" className="scheduleAddInputEventUrl" value={this.state.eventUrl} onChange={this.handleEventUrlChange} />
+        <h3 className="scheduleAddSubTitle">イベント関連画像のURL（枠内に画像を表示）</h3>
+        <input type="text" className="scheduleAddInputEventImageUrl" value={this.state.eventImageUrl} onChange={this.handleEventImageUrlChange} />
         <div className="scheduleAddButtonArea">
           <div className="scheduleAddButtonOtherTime" onClick={this.closeForm} >フォームを閉じる</div>
           <div className="scheduleAddButtonComplete" onClick={this.handleEventSubmit}>保存</div>
         </div>
-      </form> 
+      </form>
     </div>
    );
   },

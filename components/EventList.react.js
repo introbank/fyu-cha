@@ -40,7 +40,7 @@ var EventList = React.createClass({
       incrementUpdate : this.props.handlers().incrementUpdate,
       popInputForm: this.popInputForm,
       closeInputForm: this.closeInputForm,
-    } 
+    }
   },
 
   createEventList(event, hiddenObject){
@@ -62,18 +62,12 @@ var EventList = React.createClass({
                 <p className="scheduleDayOfTheWeek">{EventList.getWeekDaysString(eventDate.getDay())}</p>
               </div>
             )}
-            {new Date() < eventDate && !this.isDisplayedNowDivider && (
-              <div className="scheduleNowDivider"></div>
-            )}
               <EventContent event={event} hidden={hiddenObject} handlers={this.handlers} type={this.props.type} mode={this.props.mode} />
           </div>
         </div>
       );
       this.previousEventMonth = eventDate.getMonth();
       this.previousEventDay = eventDate.getDate();
-      if (new Date() < eventDate) {
-        this.isDisplayedNowDivider = true;
-      }
       return eventListHtml;
     }
     catch(e) {
@@ -84,7 +78,6 @@ var EventList = React.createClass({
   initEventListFlugs(){
     this.previousEventMonth = -1;
     this.previousEventDay = -1;
-    this.isDisplayedNowDivider = false;
   },
 
   statics: {
@@ -114,7 +107,7 @@ var EventList = React.createClass({
         {eventList}
         {this.state.inputForm &&
           <EventInputForm account={this.props.account} handlers={this.handlers} mode="edit" event={this.state.editEvent} />
-        } 
+        }
       </div>
     );
   },

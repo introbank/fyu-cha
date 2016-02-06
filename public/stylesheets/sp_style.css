@@ -85,7 +85,7 @@ body {
 }
 
 .contents {
-  padding: 10px;
+  padding: 10px 3px 0px 3px;
 }
 
 h1 {
@@ -243,11 +243,12 @@ h1 {
 /*-----tab-----*/
 .tabArea .tabs {
   display: table;
-  width: 100%;
+  width: calc(100% - 2px);
   border: 1px solid #afafb0;
   border-radius: 5px;
   table-layout: fixed;
   font-size: 0.9em;
+  margin-bottom: 10px;
 }
 
 .tabArea .tabs li {
@@ -298,13 +299,17 @@ h1 {
 }
 
 /*-----tab__images-----*/
+#images {
+  margin-top: 10px;
+}
+
 #images li img {
   width: 100%;
   max-width: 458px;
   min-width: 288px;
   height: auto;
-  margin: 10px auto 0px;
-  border: 1px solid #EAEAEA;
+/*  margin: 10px auto 0px;
+  border: 1px solid #EAEAEA; */
 }
 
 #images .startButton {
@@ -327,6 +332,7 @@ h1 {
 /*-----tab__followList-----*/
 .tabArea .box {
   overflow: hidden;
+/*  margin-top: 10px; */
 }
 
 .tabArea #followList ul {
@@ -424,12 +430,12 @@ h1 {
 }
 
 .scheduleInputPopup .getFormButton {
-  width:280px;
+  width:80%;
   color: #e4007f;
   border: 1px solid #e4007f;
   border-radius: 5px;
   padding: 7px 10px;
-  margin-top: 15px;
+  margin: 10px 0px 10px 0px;
   float: right;
   font-weight: bold;
   cursor: pointer; }
@@ -460,13 +466,14 @@ h1 {
 
 .scheduleDayWrapper .scheduleDayBox {
   float: left;
-  width: 10%;
+  width: 12%;
   color: black;
   text-align: center;
 }
 
 .scheduleDayWrapper .scheduleDayBox.finished {
-  color: #999;
+  color: #999999;
+  font-weight: bold;
 }
 
 .scheduleDayWrapper .scheduleDayBox.today {
@@ -474,8 +481,9 @@ h1 {
 }
 
 .scheduleDayWrapper .scheduleDayBox .scheduleDay {
-  margin-top: 9px;
+  margin-top: 3px;
   font-size: 14px;
+  font-weight: bold;
 }
 
 .scheduleDayWrapper .scheduleDayBox .scheduleDayOfTheWeek {
@@ -487,8 +495,9 @@ h1 {
   float: right;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  width: 87%;
+  width: 88%;
   background: #3e62ad;
+  cursor: pointer;
 }
 
 .scheduleDayWrapper .scheduleContentBox.finished {
@@ -504,21 +513,38 @@ h1 {
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentName {
   margin-left: 5px;
-  width: 85%;
-  font-size: 13px;
-  color: white;
+  width: calc(100% - 45px);
+  font-size: 14px;
+  color: #efefef;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentDescription {
-  margin-left: 5px;
-  width: 85%;
+  margin: 15px 5px 0px 5px;
   font-size: 12px;
   color: #efefef;
 }
 
+.scheduleDayWrapper .scheduleContentBox .scheduleContentUrl {
+  margin: 5px 5px 0px 5px;
+  font-size: 12px;
+  color: #efefef;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentUrl a {
+  color: #efefef;
+  text-decoration: underline;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleContentImage img {
+  width: 100%;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
 .scheduleDayWrapper .scheduleContentBox .scheduleDescriptionMore {
   text-align: center;
-  color: white;
+  color: #9ea1a3;
+  font-size: 10px;
 }
 
 .scheduleDayWrapper .scheduleContentBox .scheduleContentReserveButton {
@@ -537,12 +563,14 @@ h1 {
   line-height: 2em;
 }
 
-
 .scheduleDayWrapper .scheduleContentBox .scheduleEditButton {
   border-radius: 5px;
   background: #ffffff;
   text-align: center;
-  padding: 8px 0px;
+  padding: 5px 0px;
+  width: 46%;
+  margin: 0 auto;
+  margin-top: 10px;
   font-size: 0.9em;
   border: 1px solid #777777;
   color: #777777;
@@ -575,9 +603,9 @@ h1 {
   position: absolute;
   top: 5px;
   right: 5px;
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   cursor: pointer;
@@ -642,7 +670,9 @@ h1 {
 .scheduleAddBox input {
   margin-left: 10px;
   margin-right: 5px;
-  min-height: 15px;
+  min-height: 17px;
+  padding: 2px;
+  font-size: 14px;
   border: 1px solid #898989;
   border-radius: 3px;
 }
@@ -650,6 +680,8 @@ h1 {
 .scheduleAddBox textarea {
   margin-left: 10px;
   margin-right: 5px;
+  padding: 2px;
+  font-size: 12px;
   border: 1px solid #898989;
   border-radius: 3px;
 }
@@ -662,11 +694,10 @@ h1 {
 }
 
 .scheduleAddBox .scheduleAddSubTitle {
-  margin-top: 10px;
-  margin-bottom: 3px;
+  margin-top: 3px;
   margin-left: 10px;
   color: #898989;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .scheduleAddBox .scheduleAddMultiArea {
@@ -674,11 +705,12 @@ h1 {
 }
 
 .scheduleAddBox .scheduleAddInputDay {
-  width: 20%;
+  width: 15%;
+  text-align: right;
 }
 
 .scheduleAddBox .scheduleAddInputTime {
-  width: 30%;
+  width: 25%;
 }
 
 .scheduleAddBox .scheduleAddInputEventTitle {
@@ -687,43 +719,47 @@ h1 {
 
 .scheduleAddBox .scheduleAddSpotArea {
   float: left;
-  width: 40%;
+  width: 50%;
 }
 
 .scheduleAddBox .scheduleAddSpotArea .scheduleAddInputSpot {
-  width: 100%;
+  width: 90%;
 }
 
 .scheduleAddBox .scheduleAddCostArea {
   float: left;
-  margin-left: 10px;
-  width: 40%;
+  width: 50%;
 }
 
 .scheduleAddBox .scheduleAddCostArea .scheduleAddInputCost {
-  width: 70%;
+  width: 80%;
 }
 
 .scheduleAddBox .scheduleAddInputEventDescription {
   width: 90%;
-  min-height: 60px;
+  min-height: 120px;
+}
+
+.scheduleAddBox .scheduleAddInputEventUrl {
+  width: 90%;
+}
+
+.scheduleAddBox .scheduleAddInputEventImageUrl {
+  width: 90%;
 }
 
 .scheduleAddBox .scheduleAddButtonArea {
   overflow: hidden;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto;
   width: 90%;
 }
 
 .scheduleAddBox .scheduleAddButtonOtherTime {
   display: block;
   float: left;
-  margin-right: 5px;
+  margin-right: 3%;
   padding: 5px;
-  width: 43%;
+  width: 44%;
   border: 1px solid #5375b1;
   border-radius: 3px;
   color: #5375b1;
@@ -734,10 +770,9 @@ h1 {
 
 .scheduleAddBox .scheduleAddButtonComplete {
   display: block;
-  float: left;
-  margin-left: 5px;
+  float: right;
   padding: 5px;
-  width: 43%;
+  width: 44%;
   border: 1px solid #db1277;
   border-radius: 3px;
   color: #db1277;
@@ -780,8 +815,10 @@ h1 {
 }
 
 .fyuchaTotal .fyuchaToalNumerals {
+  font-family: 'Tahoma', 'Helvetica', 'Arial', 'sans-serif';
   margin-left: 5px;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .fyuchaGraph {
@@ -794,9 +831,9 @@ h1 {
 }
 
 .fyuchaCommitsTitle {
-  margin-top: 10px;
-  margin-left: 10px;
-  font-size: 16px;
+/*  margin-top: 10px;
+  margin-left: 10px; */
+  font-size: 1.1em;
   color: #db1277;
 }
 
@@ -804,8 +841,8 @@ h1 {
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
-  width: 95%;
-  border-bottom: 1px solid #c9caca;
+/*  width: 95%; */
+  border-bottom: 1px solid #eeeeee;
 }
 
 .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea {
@@ -826,6 +863,7 @@ h1 {
 .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserThumbnail img {
   width: 28px;
   height: auto;
+  border-radius: 2px
 }
 
 .fyuchaCommits .fyuchaCommit .fyuchaCommitUserArea .fyuchaCommitUserName {
@@ -833,7 +871,7 @@ h1 {
   width: 160px;
   top: 5px;
   left: 35px;
-  color: black;
+  color: #555555;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
@@ -844,7 +882,7 @@ h1 {
   position: absolute;
   top: 23px;
   left: 35px;
-  color: #c9caca;
+  color: #cccccc;
   font-size: 10px;
 }
 
@@ -858,7 +896,7 @@ h1 {
   position: absolute;
   top: 12px;
   right: 40px;
-  color: #333333;
+  color: #555555;
   font-size: 12px;
 }
 
