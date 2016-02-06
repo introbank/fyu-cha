@@ -109,21 +109,19 @@ var EventInputForm = React.createClass({
     };
     var event = null;
     var relation = null;
-    var account = this.props.account;
-    var closeForm = this.closeForm;
-    var incrementUpdate = this.incrementUpdate;    
+    var self = this;
 
     // add new event
     if(this.state.eventObject === null){
       event = ParseReact.Mutation.Create('Event', data); 
       event.dispatch().then(function(createdEvent){
         var col = account.className.toLowerCase() + "s";
-        relation = ParseReact.Mutation.AddRelation(createdEvent, col, account);
+        relation = ParseReact.Mutation.AddRelation(createdEvent, col, self.props.account);
         relation.dispatch().then(
           function(result){
             console.log(result);
-            incrementUpdate();
-            closeForm();
+            self.incrementUpdate();
+            self.closeForm();
           },
           function(error){
             console.log(error);
@@ -137,8 +135,8 @@ var EventInputForm = React.createClass({
       event.dispatch().then(
         function(result){
           console.log(result);
-          incrementUpdate();
-          closeForm();
+          self.incrementUpdate();
+          self.closeForm();
         },
         function(error){
           console.log(error);
