@@ -1081,3 +1081,30 @@ h1 {
   color: #ffffff;
   background-color: #e4007f;
 }
+
+/*-----loader-----*/
+
+#loader {
+  margin: 0 auto;
+  width: 30px; /*ローディングアイコンの横サイズ*/
+  height: 30px; /*ローディングアイコンの縦サイズ*/
+	border-radius: 30px;  /*CSS3で円を書く*/
+	border: 5px solid #e4007f;  /*円に枠をつける*/
+  border-right-color: transparent; /*円の右にC状の空きをつける*/
+	-webkit-animation: spin 1s infinite linear; /*回転のアニメーションをつける*/
+	-moz-animation: spin 1s infinite linear;
+}
+
+@-webkit-keyframes spin
+{
+	0% { -webkit-transform: rotate(0deg); opacity: 0.4; }
+	50%  { -webkit-transform: rotate(180deg); opacity: 1; }
+	100%   { -webkit-transform: rotate(360deg); opacity: 0.4; }
+}
+
+@-moz-keyframes spin
+{
+	0% { -moz-transform: rotate(0deg); opacity: 0.4; }
+	50%  { -moz-transform: rotate(180deg); opacity: 1; }
+	100%   { -moz-transform: rotate(360deg); opacity: 0.4; }
+}

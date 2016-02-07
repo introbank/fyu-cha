@@ -41,12 +41,13 @@
     "build:group": "gulp build:group",
     "watch:top": "gulp watch:top",
     "watch:artist": "gulp watch:artist",
+    "watch:artist-list": "gulp watch:artist-list",
     "watch:group": "gulp watch:group",
     "watch:signup": "gulp watch:signup",
     "watch:howto": "gulp watch:howto",
     "test": "./node_modules/.bin/mocha"
   },
   "engines": {
-    "node": "5.3.0"
+    "node": "5.5.0"
   }
 }

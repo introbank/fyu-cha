@@ -7,7 +7,7 @@ var FollowingList = React.createClass({
     return(
       <div id="followList" className="tab">
         <div className="box">
-          <h1>アーティスト</h1>
+          <h1>アイドル</h1>
           <ul>
             {this.props.artists.map(function (following) {
               if (!following.artist) {

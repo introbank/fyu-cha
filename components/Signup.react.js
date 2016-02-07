@@ -104,7 +104,7 @@ var Signup = React.createClass({
               <form>
                 <input ref="password" type="password" onChange={this.handlePasswordChange} />
               </form>
-              <div className="description">必ずTwitterアカウントとは別のパスワードを入力してください</div>
+              <div className="description"></div>
               <div className="label">確認のためもう一度入力してください</div>
               <form>
                 <input ref="password" type="password" onChange={this.handleConfirmChange} />
