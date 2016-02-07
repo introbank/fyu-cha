@@ -3,6 +3,7 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var AccountInfoLib = require('../lib/AccountInfoLib.js');
 var FollowingLib = require('../lib/FollowingLib');
+var PageType = require('../lib/PageType.js');
 
 var UserMediaList = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -57,7 +58,7 @@ var UserMediaList = React.createClass({
     if (this.props.artists.length < 1 && this.props.groups.length < 1) {
       return (
         <div>
-        {this.props.type == "Dashboard" 
+        {PageType.isDashboard(this.props.type)
         ? <div className="startButton" onClick={this.jump}>気になるアイドルをフォローする</div>
         : <div>誰もフォローしていません</div>
         }

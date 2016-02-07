@@ -124,7 +124,7 @@ var EventContent = React.createClass({
                   <img src={eventImageUrl}/>
                 </p>
               }
-              {this.props.type !== PageType.Dashboard() && this.data.user &&
+              {!PageType.isDashboard(this.props.type) && this.data.user &&
                 <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>
               }
             </div>
@@ -136,7 +136,7 @@ var EventContent = React.createClass({
               <p className="scheduleDescriptionMore">▼</p>
             </div>
           }
-          {this.props.type === PageType.Dashboard() && this.props.mode === "all" &&
+          {PageType.isDashboard(this.props.type) && this.props.mode === "all" &&
           <div>
             {hideSwichButton}
           </div>
