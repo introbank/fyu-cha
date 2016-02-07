@@ -1,6 +1,7 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
+var ContributionLib = require('../lib/ContributionLib.js');
 
 var MediaList = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -13,13 +14,9 @@ var MediaList = React.createClass({
 
   observe(props, state) {
     var type = props.type;
-    var id = props.id;
-
-    var accountQuery = new Parse.Query(type);
-    accountQuery.equalTo('twitterUsername', id);
 
     var albumQuery = new Parse.Query('Album');
-    albumQuery.matchesQuery(type.toLowerCase(), accountQuery);
+    albumQuery.equalTo(type.toLowerCase(), this.props.account);
 
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
@@ -35,8 +32,20 @@ var MediaList = React.createClass({
     };
   },
 
-  switchEditMode(event) {
-    this.setState({editMode: !this.state.editMode});
+  openEditMode(event){
+    this.setState({editMode: true});
+  },
+
+  closeEditMode(event){
+    this.setState({editMode: false});
+    var contribution = ContributionLib.createEditAlbum(this.data.user, this.props.account);
+    contribution.dispatch().then(
+      function(result){
+        console.log(result);
+      },
+      function(error){
+        console.log(error);
+      });
   },
 
   setIsViewable(mediaMap, isViewable) {
@@ -52,7 +61,7 @@ var MediaList = React.createClass({
     if(this.state.editMode){ 
       return (
         <div>
-          <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>保<br />存</div>
+          <div className="dashboardPhotosEditStartButton" onClick={this.closeEditMode}>保<br />存</div>
           <div className="dashboardPhotos editnow">
           {this.data.mediaMap.map(function (mediaMap) {
             return (
@@ -81,7 +90,7 @@ var MediaList = React.createClass({
       return(
         <div>
           {this.data.user &&
-            <div className="dashboardPhotosEditStartButton" onClick={this.switchEditMode}>編<br />集</div>
+            <div className="dashboardPhotosEditStartButton" onClick={this.openEditMode}>編<br />集</div>
           }
           <ul>
           {this.data.mediaMap.map(function (mediaMap) {

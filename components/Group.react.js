@@ -160,7 +160,7 @@ var Group = React.createClass({
                 }
                 {this.state.showMedia &&
                 <div id="images" className="tab">
-                  <MediaList type={PageType.Group()} id={this.props.params.id} />
+                  <MediaList type={PageType.Group()} account={group} />
                 </div>
                 }
                 {this.state.showMember &&
