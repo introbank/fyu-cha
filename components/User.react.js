@@ -88,8 +88,8 @@ var User = React.createClass({
                 <ul className="tabs">
                   <li id="label__tab1">
                     {this.state.activeTab === 'data' ?
-                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>ふゅーちゃ</a> :
-                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>ふゅーちゃ</a>
+                      <a href="#" className="tab1 boR active" onClick={this.changeTab1}>ふゅーちゃ！</a> :
+                      <a href="#" className="tab1 boR" onClick={this.changeTab1}>ふゅーちゃ！</a>
                     }
                   </li>
                   <li id="label__tab2">

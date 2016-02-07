@@ -3,6 +3,7 @@ var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var AccountInfoLib = require('../lib/AccountInfoLib.js');
 var PageType = require('../lib/PageType.js');
+var ContributionLib = require('../lib/ContributionLib.js');
 
 var Contribution = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -34,7 +35,7 @@ var Contribution = React.createClass({
             </div>
           </a>
           <div className="fyuchaCommitActionArea">
-            <p className="fyuchaCommitActionText">{fyucha.type}</p>
+            <p className="fyuchaCommitActionText">{ContributionLib.getFyuchaDisplayType(fyucha.type)}</p>
             <div className="fyuchaCommitActionNumerals">{fyucha.point}</div>
           </div>
         </div>
@@ -57,7 +58,7 @@ var Contribution = React.createClass({
               </div>
             </a>
             <div className="fyuchaCommitActionArea">
-              <p className="fyuchaCommitActionText">{fyucha.type}</p>
+              <p className="fyuchaCommitActionText">{ContributionLib.getFyuchaDisplayType(fyucha.type)}</p>
               <div className="fyuchaCommitActionNumerals">{fyucha.point}</div>
             </div>
           </div>

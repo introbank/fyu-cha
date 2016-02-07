@@ -42,10 +42,12 @@ var ContributionList = React.createClass({
       // twitter
       twitterContributionQuery.equalTo(type.toLowerCase(), this.props.account);
       twitterContributionQuery.include("user");
+      twitterContributionQuery.notEqualTo("user", null);
       twitterContributionQuery.descending("createdAt");
 
       // introbank
-      introbankContributionQuery.matchesQuery(type.toLowerCase(), accountQuery);
+      introbankContributionQuery.equalTo(type.toLowerCase(), this.props.account);
+      introbankContributionQuery.notEqualTo("user", null);
       introbankContributionQuery.include("artist");
       introbankContributionQuery.include("group");
       introbankContributionQuery.descending("createdAt");
@@ -87,7 +89,7 @@ var ContributionList = React.createClass({
     return (
       <div>
         <p className="fyuchaTotal">TOTAL<span className="fyuchaToalNumerals">{data.totalFyucha}</span></p>
-        <h2 className="fyuchaCommitsTitle">最近のコミット</h2>
+        <h2 className="fyuchaCommitsTitle">最近のふゅーちゃ！</h2>
         <div className="fyuchaCommits">
         {data.fyuchaList.map(function(fyucha){
           return (

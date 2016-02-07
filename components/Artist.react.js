@@ -131,8 +131,8 @@ var Artist = React.createClass({
                   </li>
                   <li id="label__tab2">
                     {this.state.activeTab === 'data' ?
-                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>ふゅーちゃ</a> :
-                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>ふゅーちゃ</a>
+                      <a href="#" className="tab2 boR active" onClick={this.changeTab2}>ふゅーちゃ！</a> :
+                      <a href="#" className="tab2 boR" onClick={this.changeTab2}>ふゅーちゃ！</a>
                     }
                   </li>
                   <li id="label__tab3">
