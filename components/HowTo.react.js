@@ -34,7 +34,7 @@ var HowTo = React.createClass({
         <div className="howto">
           <img onClick={this.handleNext} src={this.state.images[this.state.pageIndex]}/>
           <div className="counter">
-            {this.state.pageIndex + 1}/3
+            {this.state.pageIndex + 1}ページ目/全3ページ
           </div>
           <div className="buttonToolBar">
             {this.state.pageIndex !== 0 &&
