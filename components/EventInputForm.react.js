@@ -1,10 +1,12 @@
-tvar React        = require('react');
+var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
-var EventDataLib = require('../lib/EventDataLib.js')
+var EventDataLib = require('../lib/EventDataLib.js');
+var ContributionLib = require('../lib/ContributionLib.js');
 var EventInputForm = React.createClass({
-  mixins: [ParseReact.Mixin],
 
+  mixins: [ParseReact.Mixin],
+  
   getInitialState() {
     var now = new Date();
     return {
@@ -122,17 +124,27 @@ var EventInputForm = React.createClass({
       imageUrl: imageUrl
     };
     var event = null;
+    var self = this;
+    var account = this.props.account;
     // add new event
     if(this.state.eventObject === null){
       event = ParseReact.Mutation.Create('Event', data);
       event.dispatch().then(function(createdEvent){
         var col = account.className.toLowerCase() + "s";
-        relation = ParseReact.Mutation.AddRelation(createdEvent, col, self.props.account);
+        var relation = ParseReact.Mutation.AddRelation(createdEvent, col, account);
         relation.dispatch().then(
-          function(result){
-            console.log(result);
-            self.incrementUpdate();
-            self.closeForm();
+          function(relationResult){
+            console.log(relationResult);
+            var contribution = ContributionLib.createAddScedule(self.data.user, account);
+            contribution.dispatch().then(
+              function(contribResult){
+                console.log(contribResult);
+                self.incrementUpdate();
+                self.closeForm();
+              },
+              function(error){
+                console.log(error);
+              });
           },
           function(error){
             console.log(error);
@@ -144,10 +156,18 @@ var EventInputForm = React.createClass({
     else{
       event = ParseReact.Mutation.Set(this.state.eventObject, data);
       event.dispatch().then(
-        function(result){
-          console.log(result);
-          self.incrementUpdate();
-          self.closeForm();
+        function(eventResult){
+          console.log(eventResult);
+          var contribution = ContributionLib.createEditScedule(self.data.user, account);
+          contribution.dispatch().then(function(contribResult){
+              console.log(contribResult);
+              self.incrementUpdate();
+              self.closeForm();
+          },
+          function(error){
+            console.log(error);
+          }
+          );
         },
         function(error){
           console.log(error);

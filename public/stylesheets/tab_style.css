@@ -1033,13 +1033,43 @@ h1 {
   cursor: pointer;
 }
 
+.howto .counter {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.howto .buttonToolBar {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.howto .backButton {
+  float: left;
+  width: 35%;
+  color: #999999;
+  border: 1px solid #999999;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.howto .backButton:hover {
+  color: #ffffff;
+  background-color: #999999;
+}
+
 .howto .nextButton {
-  width: 50%;
+  float: right;
+  width: 35%;
   color: #e4007f;
   border: 1px solid #e4007f;
   border-radius: 5px;
   padding: 7px 10px;
-  margin: 0 auto;
   margin-top: 5px;
   margin-bottom: 20px;
   font-weight: bold;

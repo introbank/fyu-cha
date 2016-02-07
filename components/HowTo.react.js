@@ -7,8 +7,16 @@ var HowTo = React.createClass({
     return {
       pageIndex: 0,
       images: ["/images/howto1.png", "/images/howto2.png", "/images/howto3.png"],
-      buttons: ["次へ", "次へ", "フォローする"]
+      backButtons: ["戻る", "戻る", "戻る"],
+      nextButtons: ["次へ", "次へ", "フォローする"]
     };
+  },
+
+  handleBack() {
+    if (this.state.pageIndex === 0) {
+      return;
+    }
+    this.setState({pageIndex: this.state.pageIndex - 1});
   },
 
   handleNext() {
@@ -25,8 +33,18 @@ var HowTo = React.createClass({
         <Header />
         <div className="howto">
           <img onClick={this.handleNext} src={this.state.images[this.state.pageIndex]}/>
-          <div className="nextButton" onClick={this.handleNext}>
-            {this.state.buttons[this.state.pageIndex]}
+          <div className="counter">
+            {this.state.pageIndex + 1}/3
+          </div>
+          <div className="buttonToolBar">
+            {this.state.pageIndex !== 0 &&
+              <div className="backButton" onClick={this.handleBack}>
+                {this.state.backButtons[this.state.pageIndex]}
+              </div>
+            }
+            <div className="nextButton" onClick={this.handleNext}>
+              {this.state.nextButtons[this.state.pageIndex]}
+            </div>
           </div>
         </div>
       </div>
