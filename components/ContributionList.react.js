@@ -44,7 +44,8 @@ var ContributionList = React.createClass({
       twitterContributionQuery.include("user");
       twitterContributionQuery.notEqualTo("user", null);
       twitterContributionQuery.descending("createdAt");
-
+      twitterContributionQuery.include("group");
+      twitterContributionQuery.include("artist");
       // introbank
       introbankContributionQuery.equalTo(type.toLowerCase(), this.props.account);
       introbankContributionQuery.notEqualTo("user", null);
