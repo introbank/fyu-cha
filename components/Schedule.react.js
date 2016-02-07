@@ -103,6 +103,14 @@ var Schedule = React.createClass({
   },
 
   render() {
+    var eventList = null
+    if (this.pendingQueries().length == 0) {
+      if (this.data.events.length > 0) {
+        eventList = <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} />
+      } else {
+        eventList = <div className="scheduleInfo"><p>登録されているイベントがありません</p></div>
+      }
+    }
     return (
       <div>
         <div className="scheduleInputPopup">
@@ -111,10 +119,7 @@ var Schedule = React.createClass({
             <EventInputForm account={this.props.account} handlers={this.handlers} mode="new" />
           }
           <div>
-          {this.data.events.length > 0
-          ? <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} />
-          : <div className="scheduleInfo"><p>登録されているイベントがありません</p></div>
-          }
+          {eventList}
         </div>
       </div>
     </div>
