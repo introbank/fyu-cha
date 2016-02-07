@@ -1,126 +1,103 @@
 var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
-var AccountInfoLib = require('../lib/AccountInfoLib.js');
+var Contribution = require('./Contribution.react.js');
+var PageType = require('../lib/PageType.js');
 
 var ContributionList = React.createClass({
   mixins: [ParseReact.Mixin],
-
   observe(props, state) {
     var type = props.type;
     var id = props.id;
     var twitterContributionQuery = new Parse.Query('TwitterContribution');
-    if (type == "Dashboard"){
+    var introbankContributionQuery = new Parse.Query('IntrobankContribution');
+    if (PageType.isDashboard(type)){
+      // twitter
       twitterContributionQuery.equalTo("user", Parse.User.current());
       twitterContributionQuery.include("artist");
       twitterContributionQuery.include("group");
       twitterContributionQuery.descending("createdAt");
+      // introbank
+      introbankContributionQuery.equalTo("user", Parse.User.current());
+      introbankContributionQuery.include("artist");
+      introbankContributionQuery.include("group");
+      introbankContributionQuery.descending("createdAt");
     }
-    else if (type == "User"){
+    else if (PageType.isUser(type)){
       var accountQuery = new Parse.Query('User');
       accountQuery.equalTo('username', id);
+      // twitter
       twitterContributionQuery.matchesQuery("user", accountQuery);
       twitterContributionQuery.include("group");
       twitterContributionQuery.include("artist");
       twitterContributionQuery.descending("createdAt");
+      // introbank
+      introbankContributionQuery.matchesQuery("user", accountQuery);
+      introbankContributionQuery.include("artist");
+      introbankContributionQuery.include("group");
+      introbankContributionQuery.descending("createdAt");
     }
     else{
-      console.log("type=" + type);
       var accountQuery = new Parse.Query(type);
       accountQuery.equalTo('twitterUsername', id);
+      // twitter
       twitterContributionQuery.matchesQuery(type.toLowerCase(), accountQuery);
       twitterContributionQuery.include("user");
       twitterContributionQuery.descending("createdAt");
+
+      // introbank
+      introbankContributionQuery.matchesQuery(type.toLowerCase(), accountQuery);
+      introbankContributionQuery.include("artist");
+      introbankContributionQuery.include("group");
+      introbankContributionQuery.descending("createdAt");
     }
     return {
       latestTwitterCbs: twitterContributionQuery.limit(100),
+      latestIntroCbs: introbankContributionQuery.limit(100),
     };
   },
 
-  render() {
+  createFyuchaData(){
+    var fyuchaList = [];
     var totalFyucha = 0;
     this.data.latestTwitterCbs.map(function(twitterCb){
+      totalFyucha += twitterCb.point;
+      fyuchaList.push(twitterCb);
     });
 
-    if (this.props.type == "Dashboard" || this.props.type == "User"){
-      var commits = (
+    this.data.latestIntroCbs.map(function(introCb){
+      totalFyucha += introCb.point;
+      fyuchaList.push(introCb);
+    });
+    fyuchaList.sort(
+      function(a, b){
+        return b.createdAt.getTime() - a.createdAt.getTime();
+      }
+    );
+
+    return {totalFyucha: totalFyucha, fyuchaList: fyuchaList};
+  },
+
+  render() {
+    var data = this.createFyuchaData(); 
+    var fyuchaList = [];
+    data.fyuchaList.map(function(fyucha){
+      fyuchaList.push((<Contribution type={this.props.type} fyucha={fyucha} key={fyucha.className + fyucha.objectId}/>));
+    }, this);
+
+    return (
+      <div>
+        <p className="fyuchaTotal">TOTAL<span className="fyuchaToalNumerals">{data.totalFyucha}</span></p>
+        <h2 className="fyuchaCommitsTitle">最近のコミット</h2>
         <div className="fyuchaCommits">
-          {this.data.latestTwitterCbs.map(function(twitterCb) {
-            var account = null;
-            if (twitterCb.artist != null){
-              account = twitterCb.artist;
-            }
-            else if (twitterCb.group != null){
-              account = twitterCb.group;
-            }
-            if (account == null) {
-              return;
-            }
-            totalFyucha += twitterCb.point;
-            return (
-              <div className="fyuchaCommit" key={twitterCb.objectId}>
-                <a href={AccountInfoLib.getUrl(account)}>
-                  <div className="fyuchaCommitUserArea">
-                    <div className="fyuchaCommitUserThumbnail">
-                      <img src={AccountInfoLib.getImageUrl(account)} alt={AccountInfoLib.getAccountName(account)} />
-                    </div>
-                    <p className="fyuchaCommitUserName">{AccountInfoLib.getAccountName(account)}</p>
-                    <p className="fyuchaCommitUserAccount">@{AccountInfoLib.getUsername(account)}</p>
-                  </div>
-                </a>
-                <div className="fyuchaCommitActionArea">
-                  <p className="fyuchaCommitActionText">{twitterCb.type}</p>
-                  <div className="fyuchaCommitActionNumerals">{twitterCb.point}</div>
-                </div>
-              </div>
-            );
-          })}
+        {data.fyuchaList.map(function(fyucha){
+          return (
+            <Contribution type={this.props.type} fyucha={fyucha} key={fyucha.className + fyucha.objectId}/>)
+          }, this)
+        }
         </div>
-      )
-      return (
-        <div>
-          <p className="fyuchaTotal">TOTAL<span className="fyuchaToalNumerals">{totalFyucha}</span></p>
-          <h2 className="fyuchaCommitsTitle">最近のコミット</h2>
-          {commits}
-        </div>
-      );
-    }
-    else{
-      var commits = (
-        <div className="fyuchaCommits">
-          {this.data.latestTwitterCbs.map(function(twitterCb) {
-            totalFyucha += twitterCb.point;
-            if (!twitterCb.user) {
-              return;
-            }
-            return (
-              <div className="fyuchaCommit" key={twitterCb.objectId}>
-                <a href={AccountInfoLib.getUrl(twitterCb.user)}>
-                  <div className="fyuchaCommitUserArea">
-                    <div className="fyuchaCommitUserThumbnail">
-                      <img src={twitterCb.user.imageUrl} alt={AccountInfoLib.getAccountName(twitterCb.user)} />
-                    </div>
-                    <p className="fyuchaCommitUserName">{AccountInfoLib.getAccountName(twitterCb.user)}</p>
-                    <p className="fyuchaCommitUserAccount">@{AccountInfoLib.getUsername(twitterCb.user)}</p>
-                  </div>
-                </a>
-                <div className="fyuchaCommitActionArea">
-                  <p className="fyuchaCommitActionText">{twitterCb.type}</p>
-                  <div className="fyuchaCommitActionNumerals">{twitterCb.point}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )
-      return (
-        <div>
-          <p className="fyuchaTotal">TOTAL<span className="fyuchaToalNumerals">{totalFyucha}</span></p>
-          <h2 className="fyuchaCommitsTitle">最近のコミット</h2>
-          {commits}
-        </div>
-      );
-    }
+      </div>
+    );
   },
 });
 
