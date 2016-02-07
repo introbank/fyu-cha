@@ -9,6 +9,7 @@ var Schedule   = require('./Schedule.react.js');
 var ContributionList    = require('./ContributionList.react.js');
 var Follow       = require('./Follow.react.js');
 var AccountInfoLib = require('../lib/AccountInfoLib.js');
+var PageType = require('../lib/PageType.js');
 
 var Artist = React.createClass({
   mixins: [ParseReact.Mixin],
@@ -149,17 +150,17 @@ var Artist = React.createClass({
                 </ul>
                 {this.state.showSchedule &&
                 <div id="tab1" className="tab">
-                  <Schedule type="Artist" account={artist} />
+                  <Schedule type={PageType.Artist()} account={artist} />
                 </div>
                 }
                 {this.state.showData &&
                 <div id="tab2" className="tab">
-                  <ContributionList type="Artist" id={this.props.params.id} />
+                  <ContributionList type={PageType.Artist()} id={this.props.params.id} />
                 </div>
                 }
                 {this.state.showMedia &&
                 <div id="images" className="tab">
-                  <MediaList type="Artist" id={this.props.params.id} />
+                  <MediaList type={PageType.Artist()} id={this.props.params.id} />
                 </div>
                 }
                 {this.state.showGroup &&
