@@ -56,6 +56,18 @@ gulp.task('build:artist', function() {
     }));
 });
 
+gulp.task('build:artist-list', function() {
+  gulp.src('app/artist-list.js')
+    .pipe(browserify({
+      debug: true,
+      transform: ["babelify"],
+    }))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(print(function(filepath) {
+      return "built: " + filepath;
+    }));
+});
+
 gulp.task('build:group', function() {
   gulp.src('app/group.js')
     .pipe(browserify({
@@ -98,6 +110,10 @@ gulp.task('watch:top', function() {
 
 gulp.task('watch:artist', function() {
   gulp.watch('./components/*.js', ['build:artist']);
+});
+
+gulp.task('watch:artist-list', function() {
+  gulp.watch('./components/*.js', ['build:artist-list']);
 });
 
 gulp.task('watch:group', function() {

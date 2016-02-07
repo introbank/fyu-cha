@@ -104,7 +104,7 @@ var Schedule = React.createClass({
 
   render() {
     var eventList = null
-    if (this.pendingQueries().length == 0) {
+    if (this.pendingQueries().length === 0) {
       if (this.data.events.length > 0) {
         eventList = <EventList type={this.props.type} account={this.props.account} events={this.data.events} handlers={this.handlers} />
       } else {

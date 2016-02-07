@@ -49,6 +49,9 @@ var GroupList = React.createClass({
               </div>
             </div>
           </div>
+          {this.pendingQueries().length !== 0 &&
+            <div id="loader"></div>
+          }
         </div>
       </div>
     );
