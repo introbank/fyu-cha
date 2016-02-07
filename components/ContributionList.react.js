@@ -2,7 +2,6 @@ var React        = require('react');
 var Parse        = require('../lib/parse');
 var ParseReact   = require('parse-react');
 var Contribution = require('./Contribution.react.js');
-var AccountInfoLib = require('../lib/AccountInfoLib.js');
 var PageType = require('../lib/PageType.js');
 
 var ContributionList = React.createClass({
@@ -75,18 +74,27 @@ var ContributionList = React.createClass({
         return b.createdAt.getTime() - a.createdAt.getTime();
       }
     );
+
     return {totalFyucha: totalFyucha, fyuchaList: fyuchaList};
   },
 
   render() {
     var data = this.createFyuchaData(); 
-    var commits = ();
+    var fyuchaList = [];
+    data.fyuchaList.map(function(fyucha){
+      fyuchaList.push((<Contribution type={this.props.type} fyucha={fyucha} key={fyucha.className + fyucha.objectId}/>));
+    }, this);
+
     return (
       <div>
         <p className="fyuchaTotal">TOTAL<span className="fyuchaToalNumerals">{data.totalFyucha}</span></p>
         <h2 className="fyuchaCommitsTitle">最近のコミット</h2>
         <div className="fyuchaCommits">
-        {commits}
+        {data.fyuchaList.map(function(fyucha){
+          return (
+            <Contribution type={this.props.type} fyucha={fyucha} key={fyucha.className + fyucha.objectId}/>)
+          }, this)
+        }
         </div>
       </div>
     );

@@ -6,6 +6,8 @@ var PageType = require('../lib/PageType.js');
 
 var Contribution = React.createClass({
   mixins: [ParseReact.Mixin],
+  observe(props, state) {
+  },
 
   render() {
     var fyucha = this.props.fyucha;
@@ -18,10 +20,10 @@ var Contribution = React.createClass({
         account = fyucha.group;
       }
       if (account == null) {
-        return;
+        return null;
       }
       return (
-        <div className="fyuchaCommit" key={fyucha.objectId}>
+        <div className="fyuchaCommit" key={this.props.key}>
           <a href={AccountInfoLib.getUrl(account)}>
             <div className="fyuchaCommitUserArea">
               <div className="fyuchaCommitUserThumbnail">
@@ -40,11 +42,11 @@ var Contribution = React.createClass({
     }
     else{
       if (!fyucha.user) {
-        return;
+        return null;
       }
       else{
         return (
-          <div className="fyuchaCommit" key={fyucha.objectId}>
+          <div className="fyuchaCommit" key={this.props.key}>
             <a href={AccountInfoLib.getUrl(fyucha.user)}>
               <div className="fyuchaCommitUserArea">
                 <div className="fyuchaCommitUserThumbnail">
@@ -63,6 +65,7 @@ var Contribution = React.createClass({
       }
     }
   },
+
 });
 
 module.exports = Contribution;
