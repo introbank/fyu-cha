@@ -155,7 +155,7 @@ var Artist = React.createClass({
                 }
                 {this.state.showData &&
                 <div id="tab2" className="tab">
-                  <ContributionList type={PageType.Artist()} id={this.props.params.id} />
+                  <ContributionList type={PageType.Artist()} account={artist} />
                 </div>
                 }
                 {this.state.showMedia &&

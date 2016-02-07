@@ -155,7 +155,7 @@ var Group = React.createClass({
                 }
                 {this.state.showData &&
                 <div id="tab2" className="tab">
-                  <ContributionList type={PageType.Group()} id={this.props.params.id} />
+                  <ContributionList type={PageType.Group()} account={group} />
                 </div>
                 }
                 {this.state.showMedia &&

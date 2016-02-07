@@ -39,9 +39,8 @@ var ContributionList = React.createClass({
     }
     else{
       var accountQuery = new Parse.Query(type);
-      accountQuery.equalTo('twitterUsername', id);
       // twitter
-      twitterContributionQuery.matchesQuery(type.toLowerCase(), accountQuery);
+      twitterContributionQuery.equalTo(type.toLowerCase(), this.props.account);
       twitterContributionQuery.include("user");
       twitterContributionQuery.descending("createdAt");
 
