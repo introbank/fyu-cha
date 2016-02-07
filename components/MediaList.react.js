@@ -17,6 +17,7 @@ var MediaList = React.createClass({
 
     var albumQuery = new Parse.Query('Album');
     albumQuery.equalTo(type.toLowerCase(), this.props.account);
+    albumQuery.notEqualTo("prohibited", true);
 
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);

@@ -18,6 +18,7 @@ var UserMediaList = React.createClass({
     groupAlbumQuery.containedIn('group', groups);
 
     var albumQuery = new Parse.Query.or(artistAlbumQuery, groupAlbumQuery);
+    albumQuery.notEqualTo("prohibited", true);
 
     var mediaMapQuery = new Parse.Query('AlbumMediaMap')
     mediaMapQuery.matchesQuery('album', albumQuery);
