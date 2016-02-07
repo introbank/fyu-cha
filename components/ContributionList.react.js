@@ -14,49 +14,41 @@ var ContributionList = React.createClass({
     if (PageType.isDashboard(type)){
       // twitter
       twitterContributionQuery.equalTo("user", Parse.User.current());
-      twitterContributionQuery.include("artist");
-      twitterContributionQuery.include("group");
-      twitterContributionQuery.descending("createdAt");
       // introbank
       introbankContributionQuery.equalTo("user", Parse.User.current());
-      introbankContributionQuery.include("artist");
-      introbankContributionQuery.include("group");
-      introbankContributionQuery.descending("createdAt");
     }
     else if (PageType.isUser(type)){
       var accountQuery = new Parse.Query('User');
       accountQuery.equalTo('username', id);
       // twitter
       twitterContributionQuery.matchesQuery("user", accountQuery);
-      twitterContributionQuery.include("group");
-      twitterContributionQuery.include("artist");
-      twitterContributionQuery.descending("createdAt");
       // introbank
       introbankContributionQuery.matchesQuery("user", accountQuery);
-      introbankContributionQuery.include("artist");
-      introbankContributionQuery.include("group");
-      introbankContributionQuery.descending("createdAt");
     }
     else{
       var accountQuery = new Parse.Query(type);
       // twitter
       twitterContributionQuery.equalTo(type.toLowerCase(), this.props.account);
-      twitterContributionQuery.include("user");
       twitterContributionQuery.notEqualTo("user", null);
-      twitterContributionQuery.descending("createdAt");
-      twitterContributionQuery.include("group");
-      twitterContributionQuery.include("artist");
+
       // introbank
       introbankContributionQuery.equalTo(type.toLowerCase(), this.props.account);
       introbankContributionQuery.notEqualTo("user", null);
-      introbankContributionQuery.include("artist");
-      introbankContributionQuery.include("group");
-      introbankContributionQuery.descending("createdAt");
     }
+
     return {
-      latestTwitterCbs: twitterContributionQuery.limit(100),
-      latestIntroCbs: introbankContributionQuery.limit(100),
+      latestTwitterCbs: this.setupQuery(twitterContributionQuery),
+      latestIntroCbs: this.setupQuery(introbankContributionQuery),
     };
+  },
+
+  setupQuery(query){
+    query.include("artist");
+    query.include("group");
+    query.include("user");
+    query.descending("createdAt");
+    query.limit(100);
+    return query; 
   },
 
   createFyuchaData(){
