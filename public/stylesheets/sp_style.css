@@ -350,6 +350,10 @@ h1 {
   font-weight: bold;
 }
 
+.tabArea #followList h1 {
+  color: #e4007f;
+}
+
 .tabArea #followList h2 {
   font-weight: bold;
   margin-top: 10px;
