@@ -84,7 +84,33 @@ var EventContent = React.createClass({
       var eventDescription = EventDataLib.getDescription(event);
       var eventUrl = EventDataLib.getUrl(event);
       var eventImageUrl = EventDataLib.getImageUrl(event);
+      var createdUser = EventDataLib.getCreatedBy(event);
+      var updateUser = EventDataLib.getUpdateBy(event);
 
+      var editUsers = null;
+      if(createdUser !== null && updateUser !== null){
+        editUsers = (
+          <p className="scheduleUpdateUser">
+            作成： <a target="_blank" href={AccountInfoLib.getUrl(createdUser)}>@{AccountInfoLib.getUsername(createdUser)}</a>
+            　更新： <a target="_blank" href={AccountInfoLib.getUrl(updateUser)}>@{AccountInfoLib.getUsername(updateUser)}</a>
+          </p>
+        );
+      }
+      else if (createdUser !== null && updateUser === null){
+        editUsers = (
+          <p className="scheduleUpdateUser">
+            作成： <a target="_blank" href={AccountInfoLib.getUrl(createdUser)}>@{AccountInfoLib.getUsername(createdUser)}</a>
+          </p>
+        );
+      }
+      else if (createdUser === null && updateUser !== null){
+        editUsers = (
+          <p className="scheduleUpdateUser">
+            更新： <a target="_blank" href={AccountInfoLib.getUrl(updateUser)}>@{AccountInfoLib.getUsername(updateUser)}</a>
+          </p>
+        );      
+      }
+        
       var accountList = this.getRelatedAccountList();
       var iconImage = null;
       if(accountList.length > 0){
@@ -123,6 +149,9 @@ var EventContent = React.createClass({
                 <p className="scheduleContentImage">
                   <img src={eventImageUrl}/>
                 </p>
+              }
+              {editUsers !== null &&
+                {editUsers}
               }
               {!PageType.isDashboard(this.props.type) && this.data.user &&
                 <div className="scheduleEditButton" onClick={this.popInputForm.bind(this, event)}>編集</div>

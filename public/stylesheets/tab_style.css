@@ -487,6 +487,16 @@ h1 {
   text-decoration: underline;
 }
 
+.scheduleDayWrapper .scheduleContentBox .scheduleUpdateUser {
+  margin: 5px 5px 0px 5px;
+  font-size: 12px;
+  color: #efefef;
+}
+
+.scheduleDayWrapper .scheduleContentBox .scheduleUpdateUser a {
+  color: #efefef;
+  text-decoration: underline;
+}
 .scheduleDayWrapper .scheduleContentBox .scheduleContentImage img {
   width: 100%;
 }
