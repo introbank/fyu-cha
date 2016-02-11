@@ -128,6 +128,7 @@ var EventInputForm = React.createClass({
     var account = this.props.account;
     // add new event
     if(this.state.eventObject === null){
+      data.createdBy = this.data.user;
       event = ParseReact.Mutation.Create('Event', data);
       event.dispatch().then(function(createdEvent){
         var col = account.className.toLowerCase() + "s";
@@ -154,6 +155,7 @@ var EventInputForm = React.createClass({
     }
     // update event
     else{
+      data.updatedBy = this.data.user;
       event = ParseReact.Mutation.Set(this.state.eventObject, data);
       event.dispatch().then(
         function(eventResult){
